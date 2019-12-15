@@ -7,7 +7,7 @@
 {
   imports =
     [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -68,7 +68,6 @@
   fonts.fonts = with pkgs; [
     noto-fonts
     mplus-outline-fonts
-    font-awesome
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
