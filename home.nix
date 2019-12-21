@@ -7,8 +7,9 @@
   home.keyboard.layout = "fr";
   home.keyboard.variant = "bepo";
 
-  home.packages = [
-    pkgs.xcwd
+  home.packages = with pkgs; [
+    xcwd
+    j4-dmenu-desktop
   ];
 
   gtk = {
@@ -30,5 +31,8 @@
 
   xsession.enable = true;
 
-  xsession.windowManager.i3 = import ./home/i3.nix;
+  imports = [
+    ./home/i3.nix
+    ./home/rofi.nix
+  ];
 }

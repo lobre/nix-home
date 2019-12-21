@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  modifier = "Mod4";
+in
 {
   xsession.windowManager.i3 = {
   enable = true;
@@ -8,7 +11,7 @@
   config = {
     modifier = "${modifier}";
     workspaceLayout = "default";
-    fonts = [ "monospace 8" ];
+    fonts = [ "Noto Sans 8" ];
   
     keybindings = {
       # custom switch to workspace
@@ -101,7 +104,8 @@
       "${modifier}+dollar" = "scratchpad show";
   
       # Program launcher
-      "${modifier}+space" = "exec dmenu_run";
+      "${modifier}+space" = "exec j4-dmenu-desktop --dmenu=\"dmenu -i -fn 'Noto Sans:size=8'\"";
+      "${modifier}+Shift+space" = "exec rofi -show drun";
   
       # Start a terminal
       "${modifier}+Return" = "exec urxvt -cd \"`${pkgs.xcwd}`\"";
@@ -207,7 +211,7 @@
         };
       }
     ];
-  
+
   };
   
   extraConfig = ''
