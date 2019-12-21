@@ -1,6 +1,7 @@
-let
-  modifier = "Mod4";
-in {
+{ config, pkgs, ... }:
+
+{
+  xsession.windowManager.i3 = {
   enable = true;
   package = pkgs.i3-gaps;
   
@@ -212,4 +213,6 @@ in {
   extraConfig = ''
   '';
 
-};
+  };
+
+}
