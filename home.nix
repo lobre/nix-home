@@ -9,7 +9,6 @@
 
   home.packages = with pkgs; [
     xcwd
-    j4-dmenu-desktop
   ];
 
   gtk = {

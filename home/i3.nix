@@ -104,8 +104,7 @@ in
       "${modifier}+dollar" = "scratchpad show";
   
       # Program launcher
-      "${modifier}+space" = "exec j4-dmenu-desktop --dmenu=\"dmenu -i -fn 'Noto Sans:size=8'\"";
-      "${modifier}+Shift+space" = "exec rofi -show drun";
+      "${modifier}+space" = "exec rofi -show drun";
   
       # Start a terminal
       "${modifier}+Return" = "exec urxvt -cd \"`${pkgs.xcwd}`\"";
