@@ -107,7 +107,7 @@ in
       "${modifier}+space" = "exec rofi -show drun";
   
       # Start a terminal
-      "${modifier}+Return" = "exec urxvt -cd \"`${pkgs.xcwd}`\"";
+      "${modifier}+Return" = "exec urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
       "${modifier}+Shift+Return" = "exec urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
   
       # Enable modes

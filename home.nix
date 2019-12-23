@@ -33,5 +33,7 @@
   imports = [
     ./home/i3.nix
     ./home/rofi.nix
+    ./home/urxvt.nix
+    ./home/xresources.nix
   ];
 }
