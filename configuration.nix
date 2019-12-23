@@ -56,6 +56,7 @@
     acpilight
     firefox 
     arc-theme
+    gnome3.eog
     arc-icon-theme
     htop 
     rxvt_unicode 
@@ -82,6 +83,11 @@
   programs.dconf.enable = true;
 
   # List services that you want to enable:
+
+  services.pantheon.files.enable = true;
+  programs.file-roller.enable = true;
+  programs.evince.enable = true;
+  services.gnome3.sushi.enable = true;
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

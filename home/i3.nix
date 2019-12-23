@@ -116,12 +116,12 @@ in
     };
   
     colors = {
-      background = "#ffffff";
-      focused = { background = "#285577"; border = "#4c7899"; childBorder = "#285577"; indicator = "#2e9ef4"; text = "#ffffff"; };
-      focusedInactive = { background = "#5f676a"; border = "#333333"; childBorder = "#5f676a"; indicator = "#484e50"; text = "#ffffff"; };
-      placeholder = { background = "#0c0c0c"; border = "#000000"; childBorder = "#0c0c0c"; indicator = "#000000"; text = "#ffffff"; };
-      unfocused = { background = "#222222"; border = "#333333"; childBorder = "#222222"; indicator = "#292d2e"; text = "#888888"; };
-      urgent = { background = "#900000"; border = "#2f343a"; childBorder = "#900000"; indicator = "#900000"; text = "#ffffff"; };
+      focused = { border = "#bf616a"; background = "#2f343f"; text = "#d8dee8"; indicator = "#bf616a"; childBorder = "#d8dee8"; };
+      focusedInactive = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; indicator = "#2f343f"; childBorder = "#2f343f"; };
+      unfocused = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; indicator = "#2f343f"; childBorder = "#2f343f"; };
+      urgent = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; indicator = "#2f343f"; childBorder = "#2f343f"; };
+      placeholder = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; indicator = "#2f343f"; childBorder = "#2f343f"; };
+      background = "#2f343f";
     };
   
     startup = [
@@ -136,7 +136,6 @@ in
       # Make keyboard stop faster
       { command = "sleep 2 && xset r rate 200 25"; notification = false; }
   
-      { command = "compton -b"; notification = false; always = true; }
       { command = "nm-applet"; notification = false; }
     ];
   
@@ -199,14 +198,14 @@ in
         hiddenState = "hide";
   
         colors = {
-          background = "#000000";
-          activeWorkspace = { background = "#5f676a"; border = "#333333"; text = "#ffffff"; };
-          inactiveWorkspace = { background = "#222222"; border = "#333333"; text = "#888888"; };
-          focusedWorkspace = { background = "#285577"; border = "#4c7899"; text = "#ffffff"; };
-          urgentWorkspace = { background = "#900000"; border = "#2f343a"; text = "#ffffff"; };
-          bindingMode = { background = "#900000"; border = "#2f343a"; text = "#ffffff"; }; 
-          separator = "#666666";
-          statusline = "#ffffff";
+          background = "#2f343f";
+          statusline = "#2f343f";
+          separator = "#4b5262";
+
+          focusedWorkspace = { border = "#2f343f"; background = "#bf616a"; text = "#d8dee8"; };
+          activeWorkspace = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; };
+          inactiveWorkspace = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; };
+          urgentWorkspace = { border = "#2f343f"; background = "#ebcb8b"; text = "#2f343f"; };
         };
       }
     ];

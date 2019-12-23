@@ -28,6 +28,19 @@
     platformTheme = "gtk";
   };
 
+  services.random-background = {
+    enable = true;
+    enableXinerama = true;
+    display = "fill";
+    imageDirectory = "%h/Pictures/Wallpapers";
+    interval = "20min";
+  };
+
+  xdg.enable = true;
+
+  fonts.fontconfig.enable = true;
+  xdg.dataFile."fonts".source = ./fonts;
+
   xsession.enable = true;
 
   imports = [
@@ -35,5 +48,6 @@
     ./home/rofi.nix
     ./home/urxvt.nix
     ./home/xresources.nix
+    ./home/compton.nix
   ];
 }
