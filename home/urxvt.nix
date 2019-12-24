@@ -3,7 +3,7 @@
 {
   programs.urxvt = {
     enable = true;
-    fonts = [ "xft:M+ 1mn:regular:size=8" ];
+    fonts = [ "xft:M+ 1mn:regular:size=12" ];
     iso14755 = false;
     scroll = {
       bar.enable = false;
@@ -30,9 +30,9 @@
       cursorBlink = true;
       urgentOnBell = true;
       visualBell = false;
-      boldFont = "xft:M+ 1mn:bold:size=8";
-      italicFont = "xft:M+ 1mn:italic:size=8";
-      boldItalicFont = "xft:M+ 1mn:bold italic:size=8";
+      boldFont = "xft:M+ 1mn:bold:size=12";
+      italicFont = "xft:M+ 1mn:italic:size=12";
+      boldItalicFont = "xft:M+ 1mn:bold italic:size=12";
     };
   };
 

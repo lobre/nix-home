@@ -4,7 +4,7 @@
   programs.rofi = {
     enable = true;
     borderWidth = null;
-    font = "Noto Sans 8";
+    font = "M+ 1mn 12";
     lines = 12;
     padding = 18;
     width = 60;

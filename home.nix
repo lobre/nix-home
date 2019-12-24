@@ -13,6 +13,11 @@
 
   gtk = {
     enable = true;
+    font = {
+      name = "M+ 1mn 12";
+      package = pkgs.mplus-outline-fonts;
+    };
+
     theme = {
       package = pkgs.arc-theme;
       name = "Arc-Darker";
@@ -45,6 +50,7 @@
 
   imports = [
     ./home/i3.nix
+    ./home/i3status.nix
     ./home/rofi.nix
     ./home/urxvt.nix
     ./home/xresources.nix

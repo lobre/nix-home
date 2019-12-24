@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
@@ -14,23 +10,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # networking.hostName = "nixos"; # Define your hostname.
-  # Enables wireless support via wpa_supplicant.
-  # Configure wireless networks using:
-  # wpa_passphrase ESSID PSK > /etc/wpa_supplicant.conf
-  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
-
-  # The global useDHCP flag is deprecated, therefore explicitly set to false here.
-  # Per-interface useDHCP will be mandatory in the future, so this generated config
-  # replicates the default behaviour.
-  networking.useDHCP = false;
-  #networking.interfaces.wlo1.useDHCP = true;
-  #networking.interfaces.enp0s20f0u4.useDHCP = true;
-
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  # No need for predictable names as I usually only have one ethernet and one wireless interfaces
+  networking.usePredictableInterfaceNames = false;
 
   # Select internationalisation properties.
   i18n = {
@@ -42,8 +24,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Paris";
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+  # List packages installed in system profile
   environment.systemPackages = with pkgs; [
     wget 
     unzip
@@ -67,39 +48,18 @@
 
   # Fonts
   fonts.fonts = with pkgs; [
-    noto-fonts
     mplus-outline-fonts
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  #   pinentryFlavor = "gnome3";
-  # };
+  # Programs
   programs.zsh.enable = true;
   programs.dconf.enable = true;
-
-  # List services that you want to enable:
-
-  services.pantheon.files.enable = true;
   programs.file-roller.enable = true;
   programs.evince.enable = true;
+
+  # Services
+  services.pantheon.files.enable = true;
   services.gnome3.sushi.enable = true;
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
 
   # Enable sound.
   sound.enable = true;
@@ -111,13 +71,18 @@
   # Allow brightness control
   hardware.brightnessctl.enable = true;
 
+  # Enable touchpad support.
+  services.xserver.libinput.enable = true;
+
+  # Optimize battery life
+  services.tlp.enable = true;
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
     layout = "fr";
     xkbVariant = "bepo";
     xkbOptions = "caps:escape";
-    #autorun = false;
 
     desktopManager = {
       default = "none";
@@ -139,6 +104,9 @@
           "~session"
           "~power"
         ];
+        extraConfig = ''
+        font-name=M+ 1mn 12
+        '';
       };
     };
 
@@ -147,20 +115,13 @@
       package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
         i3status
-        i3lock
+        i3lock-fancy
         i3blocks
       ];
     };
 
   };
 
-  # Enable touchpad support.
-  services.xserver.libinput.enable = true;
-
-  # Optimize battery life
-  services.tlp.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users = {
     mutableUsers = false;
 
@@ -171,7 +132,7 @@
       description = "Loric Brevet";
       uid = 1000;
       shell = pkgs.zsh;
-      extraGroups = [ "wheel" "networkmanager" "audio" "video" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "networkmanager" "audio" "video" ];
       # Generated with:
       # mkpasswd -m sha-512 > /etc/nixos/secrets/lobre-password.txt
       passwordFile = "/etc/nixos/secrets/lobre-password.txt";
