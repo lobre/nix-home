@@ -26,24 +26,26 @@
 
   # List packages installed in system profile
   environment.systemPackages = with pkgs; [
-    wget 
-    unzip
-    curl
-    git
-    lxappearance
-    vim_configurable 
-    pavucontrol
-    networkmanagerapplet 
     acpilight
-    firefox 
-    arc-theme
-    gnome3.eog
     arc-icon-theme
-    htop 
-    rxvt_unicode 
-    google-chrome
+    arc-theme
     compton
+    curl
+    firefox 
+    git
+    gnome3.eog
+    gnome3.gucharmap
+    google-chrome
+    htop 
+    libnotify
+    lxappearance
+    networkmanagerapplet 
+    pavucontrol
+    rxvt_unicode 
     spotify
+    unzip
+    vim_configurable 
+    wget 
   ];
 
   # Fonts

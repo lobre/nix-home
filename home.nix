@@ -55,5 +55,6 @@
     ./home/urxvt.nix
     ./home/xresources.nix
     ./home/compton.nix
+    ./home/dunst.nix
   ];
 }

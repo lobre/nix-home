@@ -41,8 +41,8 @@
   }
 
   volume master {
-          format = "<span background='#ebcb8b'> 奔 %volume </span>"
-          format_muted = "<span background='#ebcb8b'> ﱝ Muted </span>"
+          format = "<span background='#ebcb8b'> 蓼 %volume </span>"
+          format_muted = "<span background='#ebcb8b'> 遼 muted </span>"
           device = "default"
           mixer = "Master"
           mixer_idx = 0
