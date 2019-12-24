@@ -130,8 +130,8 @@ in
         { command = "xset dpms 0 0 300"; notification = false; }
         { command = "xset s off"; notification = false; }
 
-        # Autolock after 10 min
-        { command = "xautolock -time 10 -locker \"i3lock-fancy --text 'Enter Laboratory' --font 'M+-1mn' --greyscale\""; notification = false; }
+        # Autolock after 10 min except if mouse in bottom right corner
+        { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"i3lock-fancy -n --text 'Enter Laboratory' --font 'M+-1mn' --greyscale\""; notification = false; }
     
         # Change mouse speed
         { command = "xset m 5 1"; notification = false; }
