@@ -136,7 +136,11 @@ in
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
     
+        # Start applets
         { command = "nm-applet"; notification = false; }
+
+        # Select first workspace
+        { command = "i3-msg workspace 1:T"; notification = false; }
       ];
     
       window = {
