@@ -129,6 +129,9 @@ in
         { command = "xset +dpms"; notification = false; }
         { command = "xset dpms 0 0 300"; notification = false; }
         { command = "xset s off"; notification = false; }
+
+        # Autolock after 10 min
+        { command = "xautolock -time 10 -locker \"i3lock-fancy --text 'Enter Laboratory' --font 'M+-1mn' --greyscale\""; notification = false; }
     
         # Change mouse speed
         { command = "xset m 5 1"; notification = false; }
@@ -175,7 +178,7 @@ in
         }; 
     
         power = {
-          l = "mode default, exec --no-startup-id ${pkgs.i3lock-fancy}/bin/i3lock-fancy --text 'Enter Laboratory' --font 'M+-1mn' --greyscale";
+          l = "mode default, exec --no-startup-id i3lock-fancy --text 'Enter Laboratory' --font 'M+-1mn' --greyscale";
           e = "mode default, exec --no-startup-id i3-msg exit";
           r = "mode default, exec --no-startup-id systemctl reboot";
           p = "mode default, exec --no-startup-id systemctl poweroff -i";

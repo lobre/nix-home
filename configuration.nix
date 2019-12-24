@@ -46,6 +46,7 @@
     unzip
     vim_configurable 
     wget 
+    xautolock
   ];
 
   # Fonts
