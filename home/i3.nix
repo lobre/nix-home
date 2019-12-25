@@ -103,12 +103,19 @@ in
         "${modifier}+Shift+dollar" = "move scratchpad";
         "${modifier}+dollar" = "scratchpad show";
     
-        # Program launcher
-        "${modifier}+space" = "exec rofi -show drun";
+        # Rofi
+        "${modifier}+space" = "exec --no-startup-id rofi -show drun";
+        "${modifier}+g" = "exec --no-startup-id rofi -show window";
+        "${modifier}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
+        "${modifier}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
+        "${modifier}+Shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
     
         # Start a terminal
         "${modifier}+Return" = "exec urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
         "${modifier}+Shift+Return" = "exec urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
+
+        # Screenshot
+        "Print" = "exec --no-startup-id shutter --select --disable_systray";
     
         # Enable modes
         "${modifier}+h" = "mode resize";
@@ -141,6 +148,9 @@ in
     
         # Start applets
         { command = "nm-applet"; notification = false; }
+
+        # Clipboard manager
+        { command = "greenclip daemon"; notification = false; }
 
         # Select first workspace
         { command = "i3-msg workspace 1:T"; notification = false; }

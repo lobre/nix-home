@@ -43,6 +43,7 @@
     pavucontrol
     rxvt_unicode 
     spotify
+    tree
     unzip
     vim_configurable 
     wget 

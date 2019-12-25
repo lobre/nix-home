@@ -8,8 +8,17 @@
   home.keyboard.variant = "bepo";
 
   home.packages = with pkgs; [
+    arandr
     xcwd
+    shutter
+    haskellPackages.greenclip
   ];
+
+  # Allow XDG linking
+  xdg.enable = true;
+
+  # Enable xsession
+  xsession.enable = true;
 
   gtk = {
     enable = true;
@@ -41,12 +50,12 @@
     interval = "20min";
   };
 
-  xdg.enable = true;
-
+  # Fonts
   fonts.fontconfig.enable = true;
-  xdg.dataFile."fonts".source = ./fonts;
+  xdg.dataFile."fonts".source = ./home/fonts;
 
-  xsession.enable = true;
+  # Link scripts
+  home.file."bin".source = ./home/bin;
 
   imports = [
     ./home/i3.nix

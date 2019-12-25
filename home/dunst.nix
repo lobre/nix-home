@@ -38,10 +38,10 @@
         startup_notification = false;
         dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst:";
         browser = "xdg-open";
-        icon_position = false;
+        icon_position = "left";
+        max_icon_size = 32;
         stack_duplicates = false;
         hide_duplicate_count = true;
-
       };
 
       frame = {
@@ -51,7 +51,6 @@
 
       shortcuts = {
         close = "mod4+d";
-        context = "mod4+shift+d";
       };
 
       urgency_low = {
