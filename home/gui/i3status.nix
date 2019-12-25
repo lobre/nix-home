@@ -5,7 +5,7 @@
 
   general {
           output_format = "i3bar"
-          colors = false
+          colors = true
           markup = pango
           interval = 5
           color_good = '#2f343f'
