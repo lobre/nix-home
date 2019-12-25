@@ -1,11 +1,11 @@
-# NixOS
+# nix-config
 
 NixOS and Home Manager configurations.
 
 Clone this repository in `.config/nixpkgs`.
 
     mv $HOME/.config/nixpkgs $HOME/.config/nixpkgs.old
-    git clone https://github.com/lobre/nixos.git $HOME/.config/nixpkgs
+    git clone https://github.com/lobre/nix-config.git $HOME/.config/nixpkgs
 
 Then link the main NixOS configuration file.
 
