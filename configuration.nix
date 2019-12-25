@@ -14,40 +14,25 @@
   # No need for predictable names as I usually only have one ethernet and one wireless interfaces
   networking.usePredictableInterfaceNames = false;
 
-  # Select internationalisation properties.
+  # Internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
     consoleKeyMap = "fr-bepo";
     defaultLocale = "en_GB.UTF-8";
   };
 
-  # Set your time zone.
+  # Timezone
   time.timeZone = "Europe/Paris";
 
-  # List packages installed in system profile
+  # Packages installed in system profile
   environment.systemPackages = with pkgs; [
     acpilight
-    arc-icon-theme
-    arc-theme
-    compton
     curl
     firefox 
-    git
-    gnome3.eog
-    gnome3.gucharmap
-    google-chrome
-    htop 
-    libnotify
-    lxappearance
-    networkmanagerapplet 
     pavucontrol
-    rxvt_unicode 
-    spotify
-    tree
     unzip
     vim_configurable 
     wget 
-    xautolock
   ];
 
   # Fonts
@@ -56,32 +41,32 @@
   ];
 
   # Programs
-  programs.zsh.enable = true;
   programs.dconf.enable = true;
-  programs.file-roller.enable = true;
   programs.evince.enable = true;
+  programs.file-roller.enable = true;
+  programs.zsh.enable = true;
 
   # Services
-  services.pantheon.files.enable = true;
   services.gnome3.sushi.enable = true;
+  services.pantheon.files.enable = true;
 
-  # Enable sound.
+  # Sound
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
   # Video drivers
   hardware.bumblebee.enable = true;
 
-  # Allow brightness control
+  # Brightness control
   hardware.brightnessctl.enable = true;
 
-  # Enable touchpad support.
+  # Touchpad support
   services.xserver.libinput.enable = true;
 
   # Optimize battery life
   services.tlp.enable = true;
 
-  # Enable the X11 windowing system.
+  # X11 windowing system.
   services.xserver = {
     enable = true;
     layout = "fr";
@@ -118,9 +103,13 @@
       enable = true;
       package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
-        i3status
-        i3lock-fancy
+        compton
         i3blocks
+        i3lock-fancy
+        i3status
+        libnotify
+        lxappearance
+        networkmanagerapplet 
       ];
     };
 
@@ -145,6 +134,7 @@
 
   security.sudo.wheelNeedsPassword = false;
 
+  # Allow packages from unfree channels
   nixpkgs.config.allowUnfree = true;
 
   # This value determines the NixOS release with which your system is to be

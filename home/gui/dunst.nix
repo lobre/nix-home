@@ -21,7 +21,7 @@
         show_age_threshold = 60;
         word_wrap = true;
         ignore_newline = false;
-        geometry = "250x50-24+24";
+        geometry = "300x5-5+35";
         shrink = true;
         transparency = 5;
         idle_threshold = 120;
