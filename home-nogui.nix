@@ -9,6 +9,5 @@
 
   imports = [
     ./home/term.nix
-    ./home/gui.nix
   ];
 }

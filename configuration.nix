@@ -4,6 +4,8 @@
   imports =
     [ # Include the results of the hardware scan.
       /etc/nixos/hardware-configuration.nix
+      ./system/users.nix
+      ./system/x11.nix
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -35,11 +37,6 @@
     wget 
   ];
 
-  # Fonts
-  fonts.fonts = with pkgs; [
-    mplus-outline-fonts
-  ];
-
   # Programs
   programs.dconf.enable = true;
   programs.evince.enable = true;
@@ -65,74 +62,6 @@
 
   # Optimize battery life
   services.tlp.enable = true;
-
-  # X11 windowing system.
-  services.xserver = {
-    enable = true;
-    layout = "fr";
-    xkbVariant = "bepo";
-    xkbOptions = "caps:escape";
-
-    desktopManager = {
-      default = "none";
-      xterm.enable = false;
-    };
-
-    displayManager.lightdm = {
-      enable = true;
-      greeters.gtk = {
-        theme.name = "Arc-Darker";
-        theme.package = pkgs.arc-theme;
-        iconTheme.name = "Arc";
-        iconTheme.package = pkgs.arc-icon-theme;
-        indicators = [
-          "~host"
-          "~spacer"
-          "~clock"
-          "~spacer"
-          "~session"
-          "~power"
-        ];
-        extraConfig = ''
-        font-name=M+ 1mn 12
-        '';
-      };
-    };
-
-    windowManager.i3 = {
-      enable = true;
-      package = pkgs.i3-gaps;
-      extraPackages = with pkgs; [
-        compton
-        i3blocks
-        i3lock-fancy
-        i3status
-        libnotify
-        lxappearance
-        networkmanagerapplet 
-      ];
-    };
-
-  };
-
-  users = {
-    mutableUsers = false;
-
-    users.lobre = {
-      isNormalUser = true;
-      home = "/home/lobre";
-      createHome = true;
-      description = "Loric Brevet";
-      uid = 1000;
-      shell = pkgs.zsh;
-      extraGroups = [ "wheel" "networkmanager" "audio" "video" ];
-      # Generated with:
-      # mkpasswd -m sha-512 > /etc/nixos/secrets/lobre-password.txt
-      passwordFile = "/etc/nixos/secrets/lobre-password.txt";
-    };
-  };
-
-  security.sudo.wheelNeedsPassword = false;
 
   # Allow packages from unfree channels
   nixpkgs.config.allowUnfree = true;
