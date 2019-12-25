@@ -14,8 +14,8 @@ Symlink NixOS configuration.
 
 Symlink home configuration.
 
-    sudo ln -sf $HOME/Lab/nix-config/home.nix $HOME/.config/nixpkgs/home.nix
-    sudo ln -sf $HOME/Lab/nix-config/home/config.nix $HOME/.config/nixpkgs/config.nix
+    ln -sf $HOME/Lab/nix-config/home.nix $HOME/.config/nixpkgs/home.nix
+    ln -sf $HOME/Lab/nix-config/home/config.nix $HOME/.config/nixpkgs/config.nix
 
 Apply configurations.
 
