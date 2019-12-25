@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./home/main.nix
+    ./home/term.nix
     ./home/gui.nix
   ];
 }
