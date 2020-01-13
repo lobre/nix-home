@@ -26,6 +26,7 @@
     pavucontrol
     shutter
     xautolock
+    xclip
     xcwd
 
     # apps
@@ -72,8 +73,9 @@
   xdg.dataFile."fonts".source = ./gui/fonts;
 
   # Link scripts
-  home.file."bin" = {
+  home.file."bin-gui" = {
     source = ./gui/bin;
+    target = "bin";
     recursive = true;
   };
 

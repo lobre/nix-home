@@ -16,6 +16,9 @@
   # No need for predictable names as I usually only have one ethernet and one wireless interfaces
   networking.usePredictableInterfaceNames = false;
 
+  # Enable docker
+  virtualisation.docker.enable = true;
+
   # Internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -58,7 +61,10 @@
   hardware.brightnessctl.enable = true;
 
   # Touchpad support
-  services.xserver.libinput.enable = true;
+  services.xserver.libinput = {
+    enable = true;
+    naturalScrolling = true;
+  };
 
   # Optimize battery life
   services.tlp.enable = true;
