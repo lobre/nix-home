@@ -1,4 +1,4 @@
-# nix-config
+# nix-home
 
 NixOS and Home Manager configurations.
 
@@ -6,16 +6,16 @@ NixOS and Home Manager configurations.
 
 Make sure you have Home Manager installed: https://github.com/rycee/home-manager#installation.
 
-Clone this repository in `$HOME/Lab/nix-config`.
+Clone this repository.
 
 Symlink NixOS configuration.
 
-    sudo ln -sf $HOME/Lab/nix-config/configuration.nix /etc/nixos/configuration.nix
+    sudo ln -sf configuration.nix /etc/nixos/configuration.nix
 
 Symlink home configuration.
 
-    ln -sf $HOME/Lab/nix-config/home.nix $HOME/.config/nixpkgs/home.nix
-    ln -sf $HOME/Lab/nix-config/home/config.nix $HOME/.config/nixpkgs/config.nix
+    ln -sf home.nix $HOME/.config/nixpkgs/home.nix
+    ln -sf home/config.nix $HOME/.config/nixpkgs/config.nix
 
 Apply configurations.
 
