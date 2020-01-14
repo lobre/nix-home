@@ -26,12 +26,12 @@
     shadowOpacity = "0.95";
 
     extraOptions = ''
-    mark-wmwin-focused = true;
-    mark-ovredir-focused = true;
-    detect-rounded-corners = true;
-    detect-client-opacity = true;
-    detect-transient = true;
-    detect-client-leader = true;
+      mark-wmwin-focused = true;
+      mark-ovredir-focused = true;
+      detect-rounded-corners = true;
+      detect-client-opacity = true;
+      detect-transient = true;
+      detect-client-leader = true;
     '';
   };
 }

@@ -28,7 +28,7 @@
           "~power"
         ];
         extraConfig = ''
-        font-name=M+ 1mn 12
+          font-name=M+ 1mn 12
         '';
       };
     };

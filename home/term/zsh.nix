@@ -11,10 +11,6 @@
       COMPLETION_WAITING_DOTS = "true";
     };
 
-    initExtra = config.programs.bash.initExtra + ''
-    compdef shally=ssh
-    '';
-
     sessionVariables = config.programs.bash.sessionVariables;
     shellAliases = config.programs.bash.shellAliases;
 

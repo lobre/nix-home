@@ -12,11 +12,6 @@ function error() {
 starttmux() {
     local sshcmd="ssh"
 
-    # Check if use shally
-    if command -v shally >/dev/null && [ -z "$SSHHOME" ]; then
-        sshcmd="shally"
-    fi
-    
     local hosts=( $HOSTS )
 
     first="$sshcmd ${hosts[0]}"

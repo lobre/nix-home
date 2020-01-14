@@ -33,6 +33,7 @@
     firefox 
     gnome3.eog
     gnome3.gucharmap
+    gnome3.meld
     google-chrome
     rxvt_unicode 
     spotify

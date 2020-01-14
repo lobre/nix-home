@@ -3,15 +3,14 @@
 {
   home.packages = with pkgs; [
     curl
+    ctags
     docker
     docker_compose
-    git
     htop 
     ranger
     ripgrep
     tree
     unzip
-    vim_configurable 
     wget 
   ];
 
@@ -22,10 +21,18 @@
     recursive = true;
   };
 
+  # Set ranger configuration
+  xdg.configFile."ranger/rc.conf".source = ./term/ranger/rc.conf;
+
+  # Set lesskey config
+  home.file.".lesskey".source = ./term/less/lesskey;
+
   imports = [
     ./term/bash.nix
     ./term/zsh.nix
     ./term/go.nix
     ./term/tmux.nix
+    ./term/vim.nix
+    ./term/git.nix
   ];
 }
