@@ -6,9 +6,16 @@
     ctags
     docker
     docker_compose
+    dos2unix
     htop 
+    httpie
+    jq
+    ncdu
+    pv
     ranger
     ripgrep
+    tcpdump
+    traceroute
     tree
     unzip
     wget 
@@ -34,5 +41,6 @@
     ./term/tmux.nix
     ./term/vim.nix
     ./term/git.nix
+    ./term/fzf.nix
   ];
 }

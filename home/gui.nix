@@ -30,12 +30,20 @@
     xcwd
 
     # apps
+    discord
+    filezilla
     firefox 
     gnome3.eog
     gnome3.gucharmap
     gnome3.meld
     google-chrome
+    mattermost
+    peek
+    remmina
     rxvt_unicode 
+    shutter
+    skype
+    slack-dark
     spotify
   ];
 

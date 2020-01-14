@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-if [ -z $@ ]
-then
+if [ -z $@ ]; then
     echo "mute"
     echo "unmute"
 else

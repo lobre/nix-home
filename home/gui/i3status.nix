@@ -8,7 +8,7 @@
             markup = pango
             interval = 5
             color_good = '#2f343f'
-            color_degraded = '#ebcb8b'
+            color_degraded = '#2f343f'
             color_bad = '#ba5e57'
             separator = ""
     }
