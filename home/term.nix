@@ -22,11 +22,11 @@
   ];
 
   # Link scripts
-  home.file."bin-term" = {
-    source = ./term/bin;
-    target = "bin";
-    recursive = true;
-  };
+  #home.file."bin-term" = {
+  #  source = ./term/bin;
+  #  target = "bin";
+  #  recursive = true;
+  #};
 
   # Set ranger configuration
   xdg.configFile."ranger/rc.conf".source = ./term/ranger/rc.conf;

@@ -20,5 +20,5 @@ Symlink home configuration.
 Apply configurations.
 
     sudo nixos-rebuild switch
-    home-manager switch
+    home-manager switch -b bak
 
