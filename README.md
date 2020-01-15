@@ -10,12 +10,12 @@ Clone this repository.
 
 Symlink NixOS configuration.
 
-    sudo ln -sf configuration.nix /etc/nixos/configuration.nix
+    sudo ln -sf $(pwd)/configuration.nix /etc/nixos/configuration.nix
 
 Symlink home configuration.
 
-    ln -sf home.nix $HOME/.config/nixpkgs/home.nix
-    ln -sf home/config.nix $HOME/.config/nixpkgs/config.nix
+    ln -sf $(pwd)/home.nix $HOME/.config/nixpkgs/home.nix
+    ln -sf $(pwd)/home/config.nix $HOME/.config/nixpkgs/config.nix
 
 Apply configurations.
 
