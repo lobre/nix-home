@@ -13,6 +13,7 @@
 
     sessionVariables = config.programs.bash.sessionVariables;
     shellAliases = config.programs.bash.shellAliases;
+    initExtra = config.programs.bash.initExtra;
 
     oh-my-zsh = {
       enable = true;
