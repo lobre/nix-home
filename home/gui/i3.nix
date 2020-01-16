@@ -154,6 +154,9 @@ in
 
         # Select first workspace
         { command = "i3-msg workspace 1:T"; notification = false; }
+
+        # Enable vmware guests if installed
+        { command = "vmware-user"; notification = false; }
       ];
     
       window = {
