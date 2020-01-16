@@ -11,31 +11,36 @@
     };
 
     shellAliases = {
-      "ll"     = "ls -lh";                                                                                 
-      "llt"    = "ll -rt";                                                                                 
-      "lla"    = "ll -a";                                                                                  
-      ".."     = "cd ..";                                                                                  
-      "..."    = "cd ../..";                                                                               
-      "extip"  = "wget http://ipinfo.io/ip -qO -";                                                         
-      "dl"     = "cd $HOME/Downloads && llt";                                                              
-      "doc"    = "cd $HOME/Documents";                                                                     
-      "copy"   = "xclip -selection clipboard";                                                             
-      "server" = "\ssh docker@lobr.fr";                                                                    
-      "goroot" = "cd $GOROOT/src";                                                                         
-      "gopath" = "cd $GOPATH/src";                                                                         
-      "sshh"   = "sed -rn 's/^\s*Host\s+(.*)\s*/\1/ip' ~/.ssh/config";                                     
-      "rg"     = "rg --no-ignore-vcs --smart-case";                                                        
-                                                                                                           
+      "ll"     = "ls -lh";
+      "llt"    = "ll -rt";
+      "lla"    = "ll -a";
+      ".."     = "cd ..";
+      "..."    = "cd ../..";
+      "extip"  = "wget http://ipinfo.io/ip -qO -";
+      "dl"     = "cd $HOME/Downloads && llt";
+      "doc"    = "cd $HOME/Documents";
+      "copy"   = "xclip -selection clipboard";
+      "server" = "\ssh docker@lobr.fr";
+      "goroot" = "cd $GOROOT/src";
+      "gopath" = "cd $GOPATH/src";
+      "sshh"   = "sed -rn 's/^\s*Host\s+(.*)\s*/\1/ip' ~/.ssh/config";
+      "rg"     = "rg --no-ignore-vcs --smart-case";
+
       # Docker aliases
-      "dip"    = "docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'";     
-      "dex"    = "docker exec -it";                                                                        
-      "drun"   = "docker run -it --rm";                                                                    
-      "dup"    = "docker-compose up -d";                                                                   
+      "dip"    = "docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}'";
+      "dex"    = "docker exec -it";
+      "drun"   = "docker run -it --rm";
+      "dup"    = "docker-compose up -d";
       "dps"    = "docker ps --format 'table {{.ID}}\\t{{.Names}}\\t{{.Image}}\\t{{.Status}}\\t{{.Ports}}'";
-      "dcps"   = "docker-compose ps";                                                                      
+      "dcps"   = "docker-compose ps";
     };
 
     initExtra = ''
+      # Load nix if not already loaded
+      if [ -z $NIX_PROFILES ]; then
+          source $HOME/.nix-profile/etc/profile.d/nix.sh
+      fi
+
       # Use xterm terminal colors
       export TERM='xterm-256color'
 
