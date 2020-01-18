@@ -154,18 +154,18 @@ The original specification supported only 8 colors but terminal emulators rapidl
 
 As I am also using graphical tools like i3, i3bar, rofi, urxvt and so on, theming is however a much broader scope than just the terminal palette. Colors should be consistent across the whole graphical environment. In order to achieve a successful theming, I like to restrict myself to only use 16 colors, staying close to the 16-terminal-colors concept defined in the above table. However, I don't want to be restricted to the named colors black, red, green, yellow, blue, magento, cyan and white. So here is the reference I will use instead.
 
-| Normal        | Bright             |
-| ------------- |--------------------|
-| foreground    |                    |
-| background    |                    |
-| color dark    | color dark bright  |
-| color 1       | color 1 bright     |
-| color 2       | color 2 bright     |
-| color 3       | color 3 bright     |
-| color 4       | color 4 bright     |
-| color 5       | color 5 bright     |
-| color 6       | color 6 bright     |
-| color light   | color light bright |
+| Normal        | Alt             |
+| ------------- |-----------------|
+| foreground    |                 |
+| background    |                 |
+| color dark    | color dark alt  |
+| color 1       | color 1 alt     |
+| color 2       | color 2 alt     |
+| color 3       | color 3 alt     |
+| color 4       | color 4 alt     |
+| color 5       | color 5 alt     |
+| color 6       | color 6 alt     |
+| color light   | color light alt |
 
 It is pretty much the same except that I have replaced the color names by numbers from 1 to 6, and I have added two specific colors called "dark" and "light".
 The goal is to define the theme and then use these color names in all the configuration files instead of directly putting the color code.
@@ -176,7 +176,7 @@ All the different utilites have different configuration files and configuration 
 
 I have decided to use a home-manager module to do so. This module defines the colors that are then referenced in all necessary configuration files using regular nix variables fetched from the theme module.
 
-You can check the implementation in `home/gui/theme.nix`. 
+You can check the implementation in `home/gui/theme.nix`. It also references fonts and a special urgent color.
 
 To help discovering and applying new themes, I like using the `terminal.sexy` web utility. I just need to translate the generated theme to my `theme.nix` file, which is a simple operation. Then, I execute `home-manager switch -b bak` and my desktop suddenly repaints.
 
