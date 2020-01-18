@@ -58,15 +58,15 @@ To finish the preparation, go edit the main `configuration.nix` file and include
     { config, pkgs, ... }:
 
     {
-      imports =
-        [ # Include the results of the hardware scan.
-          ./hardware-configuration.nix
-          ./system.nix
-          ./system/x11.nix
-          ./system/users.nix
-        ];
+      imports = [
+        ./hardware-configuration.nix
+        ./system.nix
+        ./system/hardware.nix
+        ./system/x11.nix
+        ./system/users.nix
+      ];
 
-      system.stateVersion = "20.03"; # Did you read the comment?
+      system.stateVersion = "20.03";
     }
 
 The last step you have to do is to generate a password for the `lobre` user.
