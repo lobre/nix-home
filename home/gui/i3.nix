@@ -111,8 +111,8 @@ in
         "${modifier}+Shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
     
         # Start a terminal
-        "${modifier}+Return" = "exec urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
-        "${modifier}+Shift+Return" = "exec urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
+        "${modifier}+Return" = "exec --no-startup-id urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
+        "${modifier}+Shift+Return" = "exec --no-startup-id urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
 
         # Screenshot
         "Print" = "exec --no-startup-id shutter --select --disable_systray";
