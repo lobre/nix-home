@@ -1,13 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      /etc/nixos/hardware-configuration.nix
-      ./system/users.nix
-      ./system/x11.nix
-    ];
-
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -34,6 +27,7 @@
     acpilight
     curl
     firefox 
+    git
     pavucontrol
     unzip
     vim_configurable 
@@ -50,33 +44,7 @@
   services.gnome3.sushi.enable = true;
   services.pantheon.files.enable = true;
 
-  # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
-  # Video drivers
-  hardware.bumblebee.enable = true;
-
-  # Brightness control
-  hardware.brightnessctl.enable = true;
-
-  # Touchpad support
-  services.xserver.libinput = {
-    enable = true;
-    naturalScrolling = true;
-  };
-
-  # Optimize battery life
-  services.tlp.enable = true;
-
   # Allow packages from unfree channels
   nixpkgs.config.allowUnfree = true;
-
-  # This value determines the NixOS release with which your system is to be
-  # compatible, in order to avoid breaking some software such as database
-  # servers. You should change this only after NixOS release notes say you
-  # should.
-  system.stateVersion = "20.03"; # Did you read the comment?
-
 }
 
