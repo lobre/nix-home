@@ -140,9 +140,6 @@ in
         # Autolock after 10 min except if mouse in bottom right corner
         { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"i3lock-fancy -n --text 'Enter Laboratory' --font 'M+-1mn' --greyscale\""; notification = false; }
     
-        # Change mouse speed
-        { command = "xset m 5 1"; notification = false; }
-    
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
     

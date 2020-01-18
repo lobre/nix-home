@@ -28,6 +28,7 @@
     curl
     firefox 
     git
+    open-vm-tools
     pavucontrol
     unzip
     vim_configurable 
@@ -43,6 +44,10 @@
   # Services
   services.gnome3.sushi.enable = true;
   services.pantheon.files.enable = true;
+
+  # Sound
+  sound.enable = true;
+  hardware.pulseaudio.enable = true;
 
   # Allow packages from unfree channels
   nixpkgs.config.allowUnfree = true;

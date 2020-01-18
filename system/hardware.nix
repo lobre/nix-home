@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
   # Brightness control
   hardware.brightnessctl.enable = true;
 
