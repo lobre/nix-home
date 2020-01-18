@@ -220,7 +220,7 @@ in
           colors = {
             background = "#2f343f";
             statusline = "#2f343f";
-            separator = "#4b5262";
+            separator = "#2f343f";
 
             focusedWorkspace = { border = "#2f343f"; background = "#bf616a"; text = "#d8dee8"; };
             activeWorkspace = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; };

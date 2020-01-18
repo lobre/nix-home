@@ -32,7 +32,7 @@
     "*.color13" = "#a6809f";
     
     # cyan
-    "*.color6" = "#89d0bA";
+    "*.color6" = "#89d0ba";
     "*.color14" = "#7dbba8";
     
     # white

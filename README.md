@@ -143,3 +143,41 @@ You can finally apply the configuration.
 At the end of the process, reboot the machine.
 
 If you want to add custom wallpapers, download them into `~/Pictures/Wallpapers` and they will be randomly applied every 20 minutes.
+
+## Theming
+
+Colors in terminal emulators were first standardized using some ANSI escape sequences. See https://en.wikipedia.org/wiki/ANSI_escape_code.
+
+The original specification supported only 8 colors but terminal emulators rapidly started to support 16, 256 and even the complete range of colors (called "true colors"). However, most terminal utilities use only the main 16 colors defined as shown in the following table.
+
+![Screenshot](https://github.com/lobre/nix-config/raw/master/terminal-colors.png)
+
+As I am also using graphical tools like i3, i3bar, rofi, urxvt and so on, theming is however a much broader scope than just the terminal palette. Colors should be consistent across the whole graphical environment. In order to achieve a successful theming, I like to restrict myself to only use 16 colors, staying close to the 16-terminal-colors concept defined in the above table. However, I don't want to be restricted to the named colors black, red, green, yellow, blue, magento, cyan and white. So here is the reference I will use instead.
+
+| Normal        | Bright             |
+| ------------- |--------------------|
+| foreground    |                    |
+| background    |                    |
+| color dark    | color dark bright  |
+| color 1       | color 1 bright     |
+| color 2       | color 2 bright     |
+| color 3       | color 3 bright     |
+| color 4       | color 4 bright     |
+| color 5       | color 5 bright     |
+| color 6       | color 6 bright     |
+| color light   | color light bright |
+
+It is pretty much the same except that I have replaced the color names by numbers from 1 to 6, and I have added two specific colors called "dark" and "light".
+The goal is to define the theme and then use these color names in all the configuration files instead of directly putting the color code.
+
+### Implementation
+
+All the different utilites have different configuration files and configuration formats. That's why it is difficult to establish a central global theme. In normal circumstances, that would require using something like a template preprocessor that would replace colors in each configuration file by colors defined in a global theme. I am however lucky because I use nix and home-manager here. It will enable to have this theming behavior with a simple implementation.
+
+I have decided to use a home-manager module to do so. This module defines the colors that are then referenced in all necessary configuration files using regular nix variables fetched from the theme module.
+
+You can check the implementation in `home/gui/theme.nix`. 
+
+To help discovering and applying new themes, I like using the `terminal.sexy` web utility. I just need to translate the generated theme to my `theme.nix` file, which is a simple operation. Then, I execute `home-manager switch -b bak` and my desktop suddenly repaints.
+
+https://terminal.sexy/
