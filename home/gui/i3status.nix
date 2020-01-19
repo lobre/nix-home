@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  theme = config.theme;
+in
+
 {
   xdg.configFile."i3status/config".text = ''
     general {
@@ -22,26 +26,26 @@
     order += "tztime local"
 
     load {
-            format = "<span background='#f59335'>  %5min Load </span>"
+            format = "<span background='${theme.colors.color1}'>  %5min Load </span>"
     }
 
     disk "/" {
-            format = "<span background='#fec7cd'>  %free Free </span>"
+            format = "<span background='${theme.colors.color2}'>  %free Free </span>"
     }
 
     ethernet _first_ {
-            format_up = "<span background='#88c0d0'>  %ip </span>"
+            format_up = "<span background='${theme.colors.color3}'>  %ip </span>"
             format_down = ""
     }
 
     wireless _first_ {
-            format_up = "<span background='#b48ead'>  %essid </span>"
+            format_up = "<span background='${theme.colors.color3}'>  %essid </span>"
             format_down = ""
     }
 
     volume master {
-            format = "<span background='#ebcb8b'> 蓼 %volume </span>"
-            format_muted = "<span background='#ebcb8b'> 遼 muted </span>"
+            format = "<span background='${theme.colors.color4}'> 蓼 %volume </span>"
+            format_muted = "<span background='${theme.colors.color4}'> 遼 muted </span>"
             device = "default"
             mixer = "Master"
             mixer_idx = 0
@@ -50,7 +54,7 @@
     battery all {
             last_full_capacity = true
             integer_battery_capacity = true
-            format = "<span background='#a3be8c'> %status %percentage </span>"
+            format = "<span background='${theme.colors.color5}'> %status %percentage </span>"
             format_down = ""
             status_chr = ""
             status_bat = ""
@@ -62,7 +66,7 @@
     }
 
     tztime local {
-            format = "<span background='#81a1c1'> %time </span>"
+            format = "<span background='${theme.colors.color6}'> %time </span>"
             format_time = " %a %-d %b %H:%M"
     }
   '';

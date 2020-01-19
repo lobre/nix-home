@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  theme = config.theme;
+in
+
 {
   xresources.properties = {
     # special 

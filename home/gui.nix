@@ -92,6 +92,7 @@
   };
 
   imports = [
+    ./gui/theme.nix
     ./gui/i3.nix
     ./gui/i3status.nix
     ./gui/rofi.nix

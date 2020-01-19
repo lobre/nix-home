@@ -2,7 +2,9 @@
 
 let
   modifier = "Mod4";
+  theme = config.theme;
 in
+
 {
   xsession.windowManager.i3 = {
     enable = true;
@@ -11,7 +13,7 @@ in
     config = {
       modifier = "${modifier}";
       workspaceLayout = "default";
-      fonts = [ "M+ 1mn 12" ];
+      fonts = [ "${theme.font} 12" ];
     
       keybindings = {
         # custom switch to workspace
@@ -138,7 +140,7 @@ in
         { command = "xset s off"; notification = false; }
 
         # Autolock after 10 min except if mouse in bottom right corner
-        { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"i3lock-fancy -n --text 'Enter Laboratory' --font 'M+-1mn' --greyscale\""; notification = false; }
+        { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"i3lock-fancy -n --text 'Enter Laboratory' --font '${theme.font}' --greyscale\""; notification = false; }
     
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
@@ -188,7 +190,7 @@ in
         }; 
     
         power = {
-          l = "mode default, exec --no-startup-id i3lock-fancy --text 'Enter Laboratory' --font 'M+-1mn' --greyscale";
+          l = "mode default, exec --no-startup-id i3lock-fancy --text 'Enter Laboratory' --font '${theme.font}' --greyscale";
           e = "mode default, exec --no-startup-id i3-msg exit";
           r = "mode default, exec --no-startup-id systemctl reboot";
           p = "mode default, exec --no-startup-id systemctl poweroff -i";
@@ -214,7 +216,7 @@ in
           workspaceButtons = true;
           workspaceNumbers = false;
           command = "i3bar";
-          fonts = [ "M+ 1mn 12" ];
+          fonts = [ "${theme.font} 12" ];
           hiddenState = "hide";
     
           colors = {

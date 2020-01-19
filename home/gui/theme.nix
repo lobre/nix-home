@@ -2,8 +2,21 @@
 
 with lib;
 
+let
+  cfg = config.theme;
+in
+
 {
   options.theme = {
+
+    mode = mkOption {
+      type = types.enum [ "dark" "light" ];
+      default = "dark";
+      description = ''
+        Mode to use: <literal>dark</literal> or <literal>light</literal>.
+      '';
+    };
+
     font = mkOption {
       type = types.str;
       default = "DejaVu Sans";
@@ -160,6 +173,7 @@ with lib;
 
   config = {
     theme = {
+      mode = "dark";
       font = "M+ 1mn";
 
       colors = {
