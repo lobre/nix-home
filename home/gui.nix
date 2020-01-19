@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  theme = config.theme;
+in
+
 {
   # Enable xsession
   xsession.enable = true;
@@ -53,7 +57,7 @@
   gtk = {
     enable = true;
     font = {
-      name = "M+ 1mn 12";
+      name = "${theme.font} 12";
       package = pkgs.mplus-outline-fonts;
     };
 

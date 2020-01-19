@@ -1,5 +1,9 @@
 { config, pkgs, ... }:
 
+let
+  theme = config.theme;
+in
+
 {
   services.dunst = {
     enable = true;
@@ -11,7 +15,7 @@
 
     settings = {
       global = {
-        font = "M+ 1mn 12";
+        font = "${theme.font} 12";
         allow_markup = true;
         format = " <b>%s</b>\n%b";
         sort = true;
@@ -46,7 +50,7 @@
 
       frame = {
         width = 2;
-        color = "#2f343f";
+        color = "${theme.colors.background}";
       };
 
       shortcuts = {
@@ -55,21 +59,21 @@
 
       urgency_low = {
         timeout = 2;
-        background = "#2f343f";
-        foreground = "#d8dee8";
+        background = "${theme.colors.background}";
+        foreground = "${theme.colors.foreground}";
       };
 
       urgency_normal = {
         timeout = 4;
-        background = "#2f343f";
-        foreground = "#d8dee8";
+        background = "${theme.colors.background}";
+        foreground = "${theme.colors.foreground}";
       };
 
       urgency_critical = {
         timeout = 0;
-        background = "#2f343f";
-        foreground = "#d8dee8";
-        frame_color = "#bf616a";
+        background = "${theme.colors.urgent}";
+        foreground = "${theme.colors.background}";
+        frame_color = "${theme.colors.urgent}";
       };
     };
   };

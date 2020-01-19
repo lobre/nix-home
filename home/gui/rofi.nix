@@ -1,10 +1,14 @@
 { config, pkgs, ... }:
 
+let
+  theme = config.theme;
+in
+
 {
   programs.rofi = {
     enable = true;
     borderWidth = null;
-    font = "M+ 1mn 12";
+    font = "${theme.font} 12";
     lines = 12;
     padding = 18;
     width = 60;
@@ -14,39 +18,39 @@
 
     colors = {
       window = {
-        background = "#2e3440";
-        border = "#2e3440";
-        separator = "#2e3440";
+        background = "${theme.colors.background}";
+        border = "${theme.colors.background}";
+        separator = "${theme.colors.background}";
       };
 
       rows = {
         normal = {
-          background = "#2e3440";
-          foreground = "#d8dee9";
-          backgroundAlt = "#2e3440";
+          background = "${theme.colors.background}";
+          foreground = "${theme.colors.foreground}";
+          backgroundAlt = "${theme.colors.background}";
           highlight = {
-            background = "#2e3440";
-            foreground = "#bf616a";
+            background = "${theme.colors.background}";
+            foreground = "${theme.colors.color4}";
           };
         };
 
         active = {
-          background = "#2e3440";
-          foreground = "#b48ead";
-          backgroundAlt = "#2e3440";
+          background = "${theme.colors.background}";
+          foreground = "${theme.colors.color4}";
+          backgroundAlt = "${theme.colors.background}";
           highlight = {
-            background = "#2e3440";
-            foreground = "#93e5cc";
+            background = "${theme.colors.background}";
+            foreground = "${theme.colors.color4}";
           };
         };
 
         urgent = {
-          background = "#2e3440";
-          foreground = "#ebcb8b";
-          backgroundAlt = "#2e3440";
+          background = "${theme.colors.background}";
+          foreground = "${theme.colors.urgent}";
+          backgroundAlt = "${theme.colors.background}";
           highlight = {
-            background = "#2e3440";
-            foreground = "#ebcb8b";
+            background = "${theme.colors.background}";
+            foreground = "${theme.colors.urgent}";
           };
         };
       };

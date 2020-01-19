@@ -1,9 +1,13 @@
 { config, pkgs, ... }:
 
+let
+  theme = config.theme;
+in
+
 {
   programs.urxvt = {
     enable = true;
-    fonts = [ "xft:M+ 1mn:regular:size=12" ];
+    fonts = [ "xft:${theme.font}:regular:size=12" ];
     iso14755 = false;
     scroll = {
       bar.enable = false;
@@ -30,9 +34,9 @@
       cursorBlink = true;
       urgentOnBell = true;
       visualBell = false;
-      boldFont = "xft:M+ 1mn:bold:size=12";
-      italicFont = "xft:M+ 1mn:italic:size=12";
-      boldItalicFont = "xft:M+ 1mn:bold italic:size=12";
+      boldFont = "xft:${theme.font}:bold:size=12";
+      italicFont = "xft:${theme.font}:italic:size=12";
+      boldItalicFont = "xft:${theme.font}:bold italic:size=12";
     };
   };
 

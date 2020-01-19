@@ -9,12 +9,12 @@ in
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
-    
+
     config = {
       modifier = "${modifier}";
       workspaceLayout = "default";
       fonts = [ "${theme.font} 12" ];
-    
+
       keybindings = {
         # custom switch to workspace
         "${modifier}+mod1+t" = "workspace 1:T";
@@ -25,13 +25,13 @@ in
         "${modifier}+mod1+d" = "workspace 6:D";
         "${modifier}+mod1+l" = "workspace 7:L";
         "${modifier}+mod1+j" = "workspace 8:J";
-    
+
         # switching between workspace
         "${modifier}+p" = "workspace prev_on_output";
         "${modifier}+n" = "workspace next_on_output";
         "mod1+Shift+Tab" = "workspace prev_on_output";
         "mod1+Tab" = "workspace next_on_output";
-    
+
         # custom move focused container to workspace
         "${modifier}+mod1+Shift+t" = "move container to workspace 1:T";
         "${modifier}+mod1+Shift+s" = "move container to workspace 2:S";
@@ -41,98 +41,105 @@ in
         "${modifier}+mod1+Shift+d" = "move container to workspace 6:D";
         "${modifier}+mod1+Shift+l" = "move container to workspace 7:L";
         "${modifier}+mod1+Shift+j" = "move container to workspace 8:J";
-    
+
         # move focused container to next/previous workspace
         "${modifier}+Shift+n" = "move container to workspace next";
         "${modifier}+Shift+p" = "move container to workspace prev";
-    
+
         # move current workspace to next/previous output
         "${modifier}+control+c" = "move workspace to output left";
         "${modifier}+control+t" = "move workspace to output down";
         "${modifier}+control+s" = "move workspace to output up";
         "${modifier}+control+r" = "move workspace to output right";
-    
+
         # change focus
         "${modifier}+c" = "focus left";
         "${modifier}+t" = "focus down";
         "${modifier}+s" = "focus up";
         "${modifier}+r" = "focus right";
-    
+
         # move focused window
         "${modifier}+Shift+c" = "move left";
         "${modifier}+Shift+t" = "move down";
         "${modifier}+Shift+s" = "move up";
         "${modifier}+Shift+r" = "move right";
-    
+
         # kill focused window
         "${modifier}+q" = "kill";
-    
+
         # split in honizontal/vertical orientation
         "${modifier}+slash" = "split h";
         "${modifier}+minus" = "split v";
-    
+
         # enter fullscreen mode for the focused container
         "${modifier}+z" = "fullscreen";
-    
+
         # change container layout (stacked, tabbed, toggle split)
         "${modifier}+k" = "layout stacking";
         "${modifier}+w" = "layout tabbed";
         "${modifier}+e" = "layout toggle split";
-    
+
         # Toggle between stacking/tabbed/split:
         "${modifier}+x" = "layout toggle";
-    
+
         # toggle tiling / floating
         "${modifier}+f" = "floating toggle";
-    
+
         # Change focus between tiling / floating windows
         "${modifier}+Shift+f" = "focus mode_toggle";
-    
+
         # focus the parent/child container
         "${modifier}+a" = "focus parent";
         "${modifier}+u" = "focus child";
-    
+
         # Sound shortcuts
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%";
         "XF86AudioLowerVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10%";
         "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
-    
+
         # Sreen brightness controls
         "XF86MonBrightnessUp" = "exec xbacklight -inc 20 # increase screen brightness";
         "XF86MonBrightnessDown" = "exec xbacklight -dec 20 # decrease screen brightness";
-    
+
         # Scratchpad
         "${modifier}+Shift+dollar" = "move scratchpad";
         "${modifier}+dollar" = "scratchpad show";
-    
+
         # Rofi
         "${modifier}+space" = "exec --no-startup-id rofi -show drun";
         "${modifier}+g" = "exec --no-startup-id rofi -show window";
         "${modifier}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
         "${modifier}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
         "${modifier}+Shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
-    
+
         # Start a terminal
         "${modifier}+Return" = "exec --no-startup-id urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
         "${modifier}+Shift+Return" = "exec --no-startup-id urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
 
         # Screenshot
         "Print" = "exec --no-startup-id shutter --select --disable_systray";
-    
+
         # Enable modes
         "${modifier}+h" = "mode resize";
         "${modifier}+Delete" = "mode power";
       };
-    
+
+      # Colors for windows.
+      #
+      # border, background and text: will be visible in the titlebar for tabbed or stacked modes.
+      # indicator: will be visible in split mode and will show where the next window will open.
+      # childBorder: is the actual window border around the child window.
+      # background: is used to paint the background of the client window. Only clients which do not cover
+      # the whole area of this window expose the color.
       colors = {
-        focused = { border = "#bf616a"; background = "#2f343f"; text = "#d8dee8"; indicator = "#bf616a"; childBorder = "#d8dee8"; };
-        focusedInactive = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; indicator = "#2f343f"; childBorder = "#2f343f"; };
-        unfocused = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; indicator = "#2f343f"; childBorder = "#2f343f"; };
-        urgent = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; indicator = "#2f343f"; childBorder = "#2f343f"; };
-        placeholder = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; indicator = "#2f343f"; childBorder = "#2f343f"; };
-        background = "#2f343f";
+        focused         = { border = "${theme.colors.color4}";     background = "${theme.colors.color4}";     text = "${theme.colors.background}"; indicator = "${theme.colors.foreground}"; childBorder = "${theme.colors.color4}"; };
+        focusedInactive = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
+        unfocused       = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
+        urgent          = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
+        placeholder     = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
+        background      = "${theme.colors.background}";
       };
-    
+
       startup = [
         # Remove screensaver and turn off screen after 5 min
         { command = "xset +dpms"; notification = false; }
@@ -141,10 +148,10 @@ in
 
         # Autolock after 10 min except if mouse in bottom right corner
         { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"i3lock-fancy -n --text 'Enter Laboratory' --font '${theme.font}' --greyscale\""; notification = false; }
-    
+
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
-    
+
         # Start applets
         { command = "nm-applet"; notification = false; }
 
@@ -157,38 +164,39 @@ in
         # Enable vmware guests if installed
         { command = "vmware-user"; notification = false; }
       ];
-    
-      window = {
-        border = 3;
-        hideEdgeBorders = "smart";
-      };
-    
+
       floating = {
         border = 3;
-    
+
         criteria = [
           { class = "URxvt"; instance = "floating"; }
         ];
       };
-    
+
+      window = {
+        hideEdgeBorders = "smart";
+        border = 3;
+        titlebar = false;
+      };
+
       focus = {
         followMouse = true;
         forceWrapping = false;
         mouseWarping = true;
         newWindow = "smart";
       };
-      
+
       modes = { 
         resize = { 
           c = "resize grow width 5 px or 5 ppt";
           t = "resize grow height 5 px or 5 ppt";
           s = "resize shrink height 5 px or 5 ppt";
           r = "resize shrink width 5 px or 5 ppt";
-    
+
           Return = "mode default";
           Escape = "mode default";
         }; 
-    
+
         power = {
           l = "mode default, exec --no-startup-id i3lock-fancy --text 'Enter Laboratory' --font '${theme.font}' --greyscale";
           e = "mode default, exec --no-startup-id i3-msg exit";
@@ -200,14 +208,14 @@ in
           Escape = "mode default";
         };
       };
-    
+
       gaps = {
         outer = 8;
         inner = 8;
         smartBorders = "off";
         smartGaps = false;
       };
-    
+
       bars = [
         {
           mode = "dock";
@@ -218,17 +226,17 @@ in
           command = "i3bar";
           fonts = [ "${theme.font} 12" ];
           hiddenState = "hide";
-    
-          colors = {
-            background = "#2f343f";
-            statusline = "#2f343f";
-            separator = "#2f343f";
 
-            focusedWorkspace = { border = "#2f343f"; background = "#bf616a"; text = "#d8dee8"; };
-            activeWorkspace = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; };
-            inactiveWorkspace = { border = "#2f343f"; background = "#2f343f"; text = "#d8dee8"; };
-            urgentWorkspace = { border = "#2f343f"; background = "#ebcb8b"; text = "#2f343f"; };
-            bindingMode = { border = "#2f343f"; background = "#b48ead"; text = "#2f343f"; };
+          colors = {
+            background = "${theme.colors.background}";
+            statusline = "${theme.colors.background}";
+            separator = "${theme.colors.background}";
+
+            focusedWorkspace  = { border = "${theme.colors.color4}";     background = "${theme.colors.color4}";     text = "${theme.colors.background}"; };
+            activeWorkspace   = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; };
+            inactiveWorkspace = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; };
+            urgentWorkspace   = { border = "${theme.colors.urgent}";     background = "${theme.colors.urgent}";     text = "${theme.colors.background}"; };
+            bindingMode       = { border = "${theme.colors.color5}";     background = "${theme.colors.color5}";     text = "${theme.colors.background}"; };
           };
         }
       ];

@@ -24,6 +24,7 @@
     shadow = true;
     shadowOffsets = [ (-12) (-12) ];
     shadowOpacity = "0.95";
+    shadowExclude = [ "class_g = 'i3-frame'" ];
 
     extraOptions = ''
       mark-wmwin-focused = true;

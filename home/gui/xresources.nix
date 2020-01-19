@@ -7,41 +7,41 @@ in
 {
   xresources.properties = {
     # special 
-    "*.foreground" = "#d8dee8";
-    "*.background" = "#2f343f";
-    "*.cursorColor" = "#b48ead";
+    "*.foreground" = "${theme.colors.foreground}";
+    "*.background" = "${theme.colors.background}";
+    "*.cursorColor" = "${theme.colors.foreground}";
 
     # black
-    "*.color0" = "#4b5262";
-    "*.color8" = "#434a5a";
+    "*.color0" = "${theme.colors.dark}";
+    "*.color8" = "${theme.colors.darkAlt}";
 
     # red
-    "*.color1" = "#bf616a";
-    "*.color9" = "#b3555e";
+    "*.color1" = "${theme.colors.color1}";
+    "*.color9" = "${theme.colors.color1Alt}";
     
     # green
-    "*.color2" = "#a3be8c";
-    "*.color10" = "#93ae7c";
+    "*.color2" = "${theme.colors.color2}";
+    "*.color10" = "${theme.colors.color2Alt}";
     
     # yellow
-    "*.color3" = "#ebcb8b";
-    "*.color11" = "#dbbb7b";
+    "*.color3" = "${theme.colors.color3}";
+    "*.color11" = "${theme.colors.color3Alt}";
     
     # blue
-    "*.color4" = "#81a1c1";
-    "*.color12" = "#7191b1";
+    "*.color4" = "${theme.colors.color4}";
+    "*.color12" = "${theme.colors.color4Alt}";
     
     # magenta
-    "*.color5" = "#b48ead";
-    "*.color13" = "#a6809f";
+    "*.color5" = "${theme.colors.color5}";
+    "*.color13" = "${theme.colors.color5Alt}";
     
     # cyan
-    "*.color6" = "#89d0ba";
-    "*.color14" = "#7dbba8";
+    "*.color6" = "${theme.colors.color6}";
+    "*.color14" = "${theme.colors.color6Alt}";
     
     # white
-    "*.color7" = "#e5e9f0";
-    "*.color15" = "#d1d5dc";
+    "*.color7" = "${theme.colors.light}";
+    "*.color15" = "${theme.colors.lightAlt}";
     
     # xft font configuration
     "Xft.autohint" = 0;

@@ -173,7 +173,6 @@ in
 
   config = {
     theme = {
-      mode = "dark";
       font = "M+ 1mn";
 
       colors = {

@@ -11,9 +11,9 @@ in
             colors = true
             markup = pango
             interval = 5
-            color_good = '#2f343f'
-            color_degraded = '#2f343f'
-            color_bad = '#ba5e57'
+            color_good = '${theme.colors.background}'
+            color_degraded = '${theme.colors.background}'
+            color_bad = '${theme.colors.urgent}'
             separator = ""
     }
 
