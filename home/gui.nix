@@ -81,7 +81,8 @@ in
     enableXinerama = true;
     display = "fill";
     imageDirectory = "%h/Pictures/Wallpapers";
-    interval = "20min";
+    # could set something like "1h" or "30min"
+    interval = null;
   };
 
   # Fonts
