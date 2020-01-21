@@ -1,19 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # To correct missing behaviors on non NixOS systems
-  programs.bash.profileExtra = ''
-      # Load nix if not already loaded
-      if [ -z "$NIX_PROFILES" ]; then
-          source $HOME/.nix-profile/etc/profile.d/nix.sh
-      fi
-
-      # Set xdg path that is normally set in NixOS with /etc/profile
-      if [ -z "$XDG_DATA_DIRS" ]; then
-          export XDG_DATA_DIRS=$HOME/.nix-profile/share
-      fi
-  '';
-
   home.packages = with pkgs; [
     curl
     ctags
