@@ -10,6 +10,7 @@
     htop 
     httpie
     jq
+    ltrace
     ncdu
     pv
     ranger
