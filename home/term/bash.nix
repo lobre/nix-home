@@ -37,7 +37,7 @@
 
     initExtra = ''
       # Load nix if not already loaded
-      if [ -z $NIX_PROFILES ]; then
+      if [ -z "$NIX_PROFILES" ]; then
           source $HOME/.nix-profile/etc/profile.d/nix.sh
       fi
 
@@ -45,7 +45,7 @@
       export TERM='xterm-256color'
 
       # Include unversioned files
-      if [ -f $HOME/.bashrc.local ]; then
+      if [ -f "$HOME/.bashrc.local" ]; then
          . $HOME/.bashrc.local
       fi
 
@@ -84,7 +84,7 @@
       # Parents ls
       function llp() {
           local file=$(pwd)
-          if [[ -n $1 ]]; then
+          if [[ -n "$1" ]]; then
               file=$1
           fi
           until [ "$file" = "/" ] || [ "$file" = "." ]; do
@@ -94,7 +94,7 @@
       }
 
       function printFlask() {
-          if [[ -n $@ ]]; then
+          if [[ -n "$@" ]]; then
               echo "Entering $@..."
           else
               echo "Entering lab..."
@@ -165,7 +165,7 @@
       # Tcpdump clean
       function httpdump() {
           export port=80
-          if [[ -n $1 ]]; then
+          if [[ -n "$1" ]]; then
               export port=$1
           fi
           sudo -E stdbuf -oL -eL /usr/sbin/tcpdump -A -s 10240 "tcp port $port and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)" | egrep -a --line-buffered ".+(GET |HTTP\/|POST )|^[A-Za-z0-9-]+: " | perl -nle "BEGIN{$|=1} { s/.*?(GET |HTTP\/[0-9.]* |POST )/\n$port/g; print }"
@@ -188,7 +188,7 @@
       # certgen maindomain.local DNS:othername.local,IP:127.0.0.1
       function certgen() {
           local san=""
-          if [[ -n $2 ]]; then
+          if [[ -n "$2" ]]; then
               san=",$2"
           fi
           openssl req \
@@ -207,7 +207,7 @@
       # Strip comments
       function nocomments() {
           local char=#
-          if [[ -n $1 ]]; then
+          if [[ -n "$1" ]]; then
               char=$1
           fi
           sed "/^\s*$/d;/^$char/d"
