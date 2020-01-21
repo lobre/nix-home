@@ -233,7 +233,7 @@ in
             separator = "${theme.colors.background}";
 
             focusedWorkspace  = { border = "${theme.colors.color4}";     background = "${theme.colors.color4}";     text = "${theme.colors.background}"; };
-            activeWorkspace   = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; };
+            activeWorkspace   = { border = "${theme.colors.darkAlt}";     background = "${theme.colors.darkAlt}";     text = "${theme.colors.foreground}"; };
             inactiveWorkspace = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; };
             urgentWorkspace   = { border = "${theme.colors.urgent}";     background = "${theme.colors.urgent}";     text = "${theme.colors.background}"; };
             bindingMode       = { border = "${theme.colors.color5}";     background = "${theme.colors.color5}";     text = "${theme.colors.background}"; };
