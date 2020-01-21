@@ -36,11 +36,6 @@
     };
 
     initExtra = ''
-      # Load nix if not already loaded
-      if [ -z "$NIX_PROFILES" ]; then
-          source $HOME/.nix-profile/etc/profile.d/nix.sh
-      fi
-
       # Use xterm terminal colors
       export TERM='xterm-256color'
 
