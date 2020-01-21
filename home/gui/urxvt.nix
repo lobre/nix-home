@@ -9,6 +9,7 @@ in
     enable = true;
     fonts = [ "xft:${theme.font}:regular:size=12" ];
     iso14755 = false;
+
     scroll = {
       bar.enable = false;
       lines = 50000;
@@ -16,27 +17,30 @@ in
       scrollOnKeystroke = true;
       scrollOnOutput = false;
     };
+
     shading = 100;
     transparent = false;
     keybindings = {
       "M-g" = "perl:keyboard-select:activate";
     };
+
     extraConfig = {
-      termName = "rxvt-256color";
-      url-launcher = "${pkgs.google-chrome}/bin/google-chrome-stable";
-      underlineURLs = true;
-      internalBorder = 24;
+      boldFont = "xft:${theme.font}:bold:size=12";
+      boldItalicFont = "xft:${theme.font}:bold italic:size=12";
+      cursorBlink = true;
       externalBorder = 0;
-      perl-ext-common = "keyboard-select,matcher,resize-font";
       fading = 5;
       intensityStyles = false;
-      mouseWheelScrollPage = false;
-      cursorBlink = true;
-      urgentOnBell = true;
-      visualBell = false;
-      boldFont = "xft:${theme.font}:bold:size=12";
+      internalBorder = 24;
       italicFont = "xft:${theme.font}:italic:size=12";
-      boldItalicFont = "xft:${theme.font}:bold italic:size=12";
+      "keyboard-select.clipboard" = true;
+      mouseWheelScrollPage = false;
+      perl-ext-common = "keyboard-select,matcher,resize-font";
+      termName = "rxvt-256color";
+      underlineURLs = true;
+      urgentOnBell = true;
+      url-launcher = "${pkgs.google-chrome}/bin/google-chrome-stable";
+      visualBell = false;
     };
   };
 
