@@ -144,6 +144,18 @@ At the end of the process, reboot the machine.
 
 If you want to add custom wallpapers, download them into `~/Pictures/Wallpapers` and they will be randomly applied every 20 minutes.
 
+## Non NixOS setup
+
+If you want to apply the user configurations without having NixOS as the operating system, you just have to follow the previous section with home-manager. That means it will work on any operating system that support the Nix package manager.
+
+In the user configuration, i3 is launched using the ~/.xsession user file. That means the display manager should have an option to run the default user session for this ~/.xsession file to be taken into account. Here is an example of configuration to create a default user session entry. You need to create a file `/usr/share/xsessions/default.desktop` as follows.
+
+    [Desktop Entry]
+    Name=Default
+    Comment=This runs the default user session
+    Exec=default
+    Icon=
+
 ## Theming
 
 Colors in terminal emulators were first standardized using some ANSI escape sequences. See https://en.wikipedia.org/wiki/ANSI_escape_code.
