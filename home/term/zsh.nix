@@ -13,11 +13,14 @@
 
     sessionVariables = config.programs.bash.sessionVariables;
     shellAliases = config.programs.bash.shellAliases;
-    initExtra = config.programs.bash.initExtra;
+    initExtra = config.programs.bash.initExtra + ''
+      bindkey -M emacs '^P' history-substring-search-up
+      bindkey -M emacs '^N' history-substring-search-down
+    '';
 
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "sudo" ];
+      plugins = [ "git" "sudo" "history-substring-search" ];
       theme = "fishy";
     };
 
