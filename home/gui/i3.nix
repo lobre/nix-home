@@ -66,6 +66,8 @@ in
 
         # kill focused window
         "${modifier}+q" = "kill";
+        "--release button2" = "kill";
+        "--whole-window ${modifier}+button2" = "kill";
 
         # split in honizontal/vertical orientation
         "${modifier}+slash" = "split h";
