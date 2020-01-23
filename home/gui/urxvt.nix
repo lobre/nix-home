@@ -25,6 +25,7 @@ in
     };
 
     extraConfig = {
+      "keyboard-select.clipboard" = true;
       boldFont = "xft:${theme.font}:bold:size=12";
       boldItalicFont = "xft:${theme.font}:bold italic:size=12";
       cursorBlink = true;
@@ -33,7 +34,7 @@ in
       intensityStyles = false;
       internalBorder = 24;
       italicFont = "xft:${theme.font}:italic:size=12";
-      "keyboard-select.clipboard" = true;
+      letterSpace = 1;
       mouseWheelScrollPage = false;
       perl-ext-common = "keyboard-select,matcher,resize-font";
       termName = "rxvt-256color";
