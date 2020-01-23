@@ -60,7 +60,7 @@ To finish the preparation, go edit the main `configuration.nix` file and include
     {
       imports = [
         ./hardware-configuration.nix
-        ./system.nix
+        ./system/configuration.nix
         ./system/hardware.nix
         ./system/x11.nix
         ./system/users.nix
@@ -126,7 +126,8 @@ Once installed, home-manager will have created the initial configuration under `
       programs.home-manager.enable = true;
 
       imports = [
-        /home/lobre/Lab/nix-home/home.nix
+        /home/lobre/Lab/nix-home/home/term.nix
+        /home/lobre/Lab/nix-home/home/gui.nix
       ];
 
       home.stateVersion = "19.09";

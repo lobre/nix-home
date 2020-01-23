@@ -3,6 +3,7 @@
 let
   modifier = "Mod4";
   theme = config.theme;
+  lockFont = builtins.replaceStrings [" "] ["-"] "${theme.font}";
 in
 
 {
@@ -149,7 +150,7 @@ in
         { command = "xset s off"; notification = false; }
 
         # Autolock after 10 min except if mouse in bottom right corner
-        { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"i3lock-fancy -n --text 'Enter Laboratory' --font '${theme.font}' --greyscale\""; notification = false; }
+        { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"i3lock-fancy -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale\""; notification = false; }
 
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
@@ -200,7 +201,7 @@ in
         }; 
 
         power = {
-          l = "mode default, exec --no-startup-id i3lock-fancy --text 'Enter Laboratory' --font '${theme.font}' --greyscale";
+          l = "mode default, exec --no-startup-id i3lock-fancy --text 'Enter Laboratory' --font '${lockFont}' --greyscale";
           e = "mode default, exec --no-startup-id i3-msg exit";
           r = "mode default, exec --no-startup-id systemctl reboot";
           p = "mode default, exec --no-startup-id systemctl poweroff -i";

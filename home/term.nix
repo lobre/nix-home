@@ -29,6 +29,9 @@
     recursive = true;
   };
 
+  # Allow XDG linking
+  xdg.enable = true;
+
   # Set ranger configuration
   xdg.configFile."ranger/rc.conf".source = ./term/ranger/rc.conf;
 

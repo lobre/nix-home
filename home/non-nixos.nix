@@ -4,9 +4,7 @@
   # To correct missing behaviors on non NixOS systems
   programs.bash.profileExtra = ''
       # Load nix if not already loaded
-      if [ -z "$NIX_PROFILES" ]; then
-          source $HOME/.nix-profile/etc/profile.d/nix.sh
-      fi
+      [[ ":$PATH:" != *":$HOME/.nix-profile/bin:"* ]] && source $HOME/.nix-profile/etc/profile.d/nix.sh
 
       # Add bin in PATH if not already existing
       [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
