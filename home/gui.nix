@@ -12,8 +12,13 @@ in
   home.sessionVariables.LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
 
   # Used to configure xsession user service
-  home.keyboard.layout = "fr";
-  home.keyboard.variant = "bepo";
+  home.keyboard = {
+    layout = "fr";
+    variant = "bepo";
+
+    # Use caps lock as escape
+    options = [ "caps:escape" ];
+  };
 
   home.packages = with pkgs; [
     # theme
