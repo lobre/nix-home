@@ -10,6 +10,7 @@
     htop 
     httpie
     jq
+    killall
     ltrace
     ncdu
     pv
