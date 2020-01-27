@@ -46,10 +46,10 @@ in
     gnome3.gucharmap
     gnome3.meld
     google-chrome
+    kitty
     mattermost
     peek
     remmina
-    rxvt_unicode 
     shutter
     skype
     slack-dark
@@ -106,7 +106,7 @@ in
     ./gui/i3.nix
     ./gui/i3status.nix
     ./gui/rofi.nix
-    ./gui/urxvt.nix
+    ./gui/kitty.nix
     ./gui/xresources.nix
     ./gui/compton.nix
     ./gui/dunst.nix

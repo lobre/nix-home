@@ -119,8 +119,7 @@ in
         "${modifier}+shift+m" = "exec --no-startup-id systemctl --user restart setxkbmap.service";
 
         # Start a terminal
-        "${modifier}+Return" = "exec --no-startup-id urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
-        "${modifier}+shift+Return" = "exec --no-startup-id urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
+        "${modifier}+Return" = "exec --no-startup-id kitty --directory \"`${pkgs.xcwd}/bin/xcwd`\"";
 
         # Screenshot
         "Print" = "exec --no-startup-id shutter --select --disable_systray";
@@ -173,10 +172,6 @@ in
 
       floating = {
         border = 3;
-
-        criteria = [
-          { class = "URxvt"; instance = "floating"; }
-        ];
       };
 
       window = {
