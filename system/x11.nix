@@ -28,7 +28,7 @@
           "~power"
         ];
         extraConfig = ''
-          font-name=M+ 1mn 12
+          font-name=Fira Code 12
         '';
       };
     };
@@ -50,6 +50,6 @@
 
   # Fonts
   fonts.fonts = with pkgs; [
-    mplus-outline-fonts
+    fira-code
   ];
 }

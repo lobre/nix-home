@@ -173,7 +173,7 @@ in
 
   config = {
     theme = {
-      font = "M+ 1mn";
+      font = "FiraCode Nerd Font";
 
       colors = {
         background = "#2F343F";

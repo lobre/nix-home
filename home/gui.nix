@@ -60,7 +60,7 @@ in
     enable = true;
     font = {
       name = "${theme.font} 12";
-      package = pkgs.mplus-outline-fonts;
+      package = pkgs.fira-code;
     };
 
     theme = {
