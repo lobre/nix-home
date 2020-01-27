@@ -30,22 +30,22 @@ in
         # switching between workspace
         "${modifier}+p" = "workspace prev_on_output";
         "${modifier}+n" = "workspace next_on_output";
-        "mod1+Shift+Tab" = "workspace prev_on_output";
-        "mod1+Tab" = "workspace next_on_output";
+        "mod1+shift+tab" = "workspace prev_on_output";
+        "mod1+tab" = "workspace next_on_output";
 
         # custom move focused container to workspace
-        "${modifier}+mod1+Shift+t" = "move container to workspace 1:T";
-        "${modifier}+mod1+Shift+s" = "move container to workspace 2:S";
-        "${modifier}+mod1+Shift+r" = "move container to workspace 3:R";
-        "${modifier}+mod1+Shift+n" = "move container to workspace 4:N";
-        "${modifier}+mod1+Shift+v" = "move container to workspace 5:V";
-        "${modifier}+mod1+Shift+d" = "move container to workspace 6:D";
-        "${modifier}+mod1+Shift+l" = "move container to workspace 7:L";
-        "${modifier}+mod1+Shift+j" = "move container to workspace 8:J";
+        "${modifier}+mod1+shift+t" = "move container to workspace 1:T";
+        "${modifier}+mod1+shift+s" = "move container to workspace 2:S";
+        "${modifier}+mod1+shift+r" = "move container to workspace 3:R";
+        "${modifier}+mod1+shift+n" = "move container to workspace 4:N";
+        "${modifier}+mod1+shift+v" = "move container to workspace 5:V";
+        "${modifier}+mod1+shift+d" = "move container to workspace 6:D";
+        "${modifier}+mod1+shift+l" = "move container to workspace 7:L";
+        "${modifier}+mod1+shift+j" = "move container to workspace 8:J";
 
         # move focused container to next/previous workspace
-        "${modifier}+Shift+n" = "move container to workspace next";
-        "${modifier}+Shift+p" = "move container to workspace prev";
+        "${modifier}+shift+n" = "move container to workspace next";
+        "${modifier}+shift+p" = "move container to workspace prev";
 
         # move current workspace to next/previous output
         "${modifier}+control+c" = "move workspace to output left";
@@ -60,10 +60,10 @@ in
         "${modifier}+r" = "focus right";
 
         # move focused window
-        "${modifier}+Shift+c" = "move left";
-        "${modifier}+Shift+t" = "move down";
-        "${modifier}+Shift+s" = "move up";
-        "${modifier}+Shift+r" = "move right";
+        "${modifier}+shift+c" = "move left";
+        "${modifier}+shift+t" = "move down";
+        "${modifier}+shift+s" = "move up";
+        "${modifier}+shift+r" = "move right";
 
         # kill focused window
         "${modifier}+q" = "kill";
@@ -113,18 +113,21 @@ in
         "${modifier}+g" = "exec --no-startup-id rofi -show window";
         "${modifier}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
         "${modifier}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
-        "${modifier}+Shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
+        "${modifier}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
+
+        # Reload setxkbmap service
+        "${modifier}+shift+m" = "systemctl --user restart setxkbmap.service";
 
         # Start a terminal
         "${modifier}+Return" = "exec --no-startup-id urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
-        "${modifier}+Shift+Return" = "exec --no-startup-id urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
+        "${modifier}+shift+return" = "exec --no-startup-id urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
 
         # Screenshot
         "Print" = "exec --no-startup-id shutter --select --disable_systray";
 
         # Enable modes
         "${modifier}+h" = "mode resize";
-        "${modifier}+Delete" = "mode power";
+        "${modifier}+delete" = "mode power";
       };
 
       # Colors for windows.
