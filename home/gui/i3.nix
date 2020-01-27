@@ -3,7 +3,7 @@
 let
   modifier = "Mod4";
   theme = config.theme;
-  lockFont = builtins.replaceStrings [" "] ["-"] "${theme.font}";
+  lockFont = builtins.replaceStrings [" "] ["-"] "${theme.fonts.fullname}";
 in
 
 {
@@ -14,7 +14,7 @@ in
     config = {
       modifier = "${modifier}";
       workspaceLayout = "default";
-      fonts = [ "${theme.font} 12" ];
+      fonts = [ "${theme.fonts.nerd-family} 12" ];
 
       keybindings = {
         # custom switch to workspace
@@ -120,7 +120,7 @@ in
 
         # Start a terminal
         "${modifier}+Return" = "exec --no-startup-id urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
-        "${modifier}+shift+return" = "exec --no-startup-id urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
+        "${modifier}+shift+Return" = "exec --no-startup-id urxvt -name floating -cd \"`${pkgs.xcwd}`\"";
 
         # Screenshot
         "Print" = "exec --no-startup-id shutter --select --disable_systray";
@@ -230,7 +230,7 @@ in
           workspaceButtons = true;
           workspaceNumbers = false;
           command = "i3bar";
-          fonts = [ "${theme.font} 12" ];
+          fonts = [ "${theme.fonts.nerd-family} 12" ];
           hiddenState = "hide";
 
           colors = {

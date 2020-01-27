@@ -7,7 +7,7 @@ in
 {
   programs.urxvt = {
     enable = true;
-    fonts = [ "xft:${theme.font}:regular:size=12" ];
+    fonts = [ "xft:${theme.fonts.nerd-family}:regular:size=12" ];
     iso14755 = false;
 
     scroll = {
@@ -26,14 +26,14 @@ in
 
     extraConfig = {
       "keyboard-select.clipboard" = true;
-      boldFont = "xft:${theme.font}:bold:size=12";
-      boldItalicFont = "xft:${theme.font}:bold italic:size=12";
+      boldFont = "xft:${theme.fonts.nerd-family}:bold:size=12";
+      boldItalicFont = "xft:${theme.fonts.nerd-family}:bold italic:size=12";
       cursorBlink = true;
       externalBorder = 0;
       fading = 5;
       intensityStyles = false;
       internalBorder = 24;
-      italicFont = "xft:${theme.font}:italic:size=12";
+      italicFont = "xft:${theme.fonts.nerd-family}:italic:size=12";
       letterSpace = 1;
       mouseWheelScrollPage = false;
       perl-ext-common = "keyboard-select,matcher,resize-font";

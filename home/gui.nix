@@ -59,8 +59,8 @@ in
   gtk = {
     enable = true;
     font = {
-      name = "${theme.font} 12";
-      package = pkgs.fira-code;
+      name = "${theme.fonts.family} 12";
+      package = theme.fonts.package;
     };
 
     theme = {

@@ -17,12 +17,41 @@ in
       '';
     };
 
-    font = mkOption {
-      type = types.str;
-      default = "DejaVu Sans";
-      description = ''
-        The main font used in all terminal and graphical applications.
-      '';
+    fonts = {
+      family = mkOption {
+        type = types.str;
+        default = "DejaVu Sans";
+        description = ''
+          Family of the main font.
+        '';
+      };
+
+      fullname = mkOption {
+        type = types.str;
+        default = "DejaVu Sans";
+        description = ''
+          Fullname of the main font.
+        '';
+      };
+
+      nerd-family = mkOption {
+        type = types.str;
+        default = "DejaVu Sans Nerd Font";
+        description = ''
+          Family of alternate font from Nerd Fonts containing icons.
+        '';
+      };
+
+      package = mkOption {
+        type = types.nullOr types.package;
+        default = null;
+        example = literalExample "pkgs.dejavu_fonts";
+        description = ''
+          Package providing the font. This package will be installed
+          to your profile. If <literal>null</literal> then the font
+          is assumed to already be available in your profile.
+        '';
+      };
     };
 
     colors = {
@@ -173,7 +202,12 @@ in
 
   config = {
     theme = {
-      font = "FiraCode Nerd Font";
+      fonts = {
+        family = "Fira Code";
+        fullname = "Fira Code Regular";
+        nerd-family = "FiraCode Nerd Font";
+        package = pkgs.fira-code;
+      };
 
       colors = {
         background = "#2F343F";

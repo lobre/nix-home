@@ -8,7 +8,7 @@ in
   programs.rofi = {
     enable = true;
     borderWidth = null;
-    font = "${theme.font} 12";
+    font = "${theme.fonts.family} 12";
     lines = 12;
     padding = 18;
     width = 60;
