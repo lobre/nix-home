@@ -127,7 +127,7 @@ in
 
         # Enable modes
         "${modifier}+h" = "mode resize";
-        "${modifier}+delete" = "mode power";
+        "${modifier}+Delete" = "mode power";
       };
 
       # Colors for windows.
