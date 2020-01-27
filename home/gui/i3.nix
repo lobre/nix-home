@@ -116,7 +116,7 @@ in
         "${modifier}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
 
         # Reload setxkbmap service
-        "${modifier}+shift+m" = "systemctl --user restart setxkbmap.service";
+        "${modifier}+shift+m" = "exec --no-startup-id systemctl --user restart setxkbmap.service";
 
         # Start a terminal
         "${modifier}+Return" = "exec --no-startup-id urxvt -cd \"`${pkgs.xcwd}/bin/xcwd`\"";
