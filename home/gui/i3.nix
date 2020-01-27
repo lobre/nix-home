@@ -30,8 +30,8 @@ in
         # switching between workspace
         "${modifier}+p" = "workspace prev_on_output";
         "${modifier}+n" = "workspace next_on_output";
-        "mod1+shift+tab" = "workspace prev_on_output";
-        "mod1+tab" = "workspace next_on_output";
+        "mod1+shift+Tab" = "workspace prev_on_output";
+        "mod1+Tab" = "workspace next_on_output";
 
         # custom move focused container to workspace
         "${modifier}+mod1+shift+t" = "move container to workspace 1:T";
