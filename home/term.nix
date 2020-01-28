@@ -7,11 +7,13 @@
   '';
 
   home.packages = with pkgs; [
+    binutils-unwrapped
     curl
     ctags
     docker
     docker_compose
     dos2unix
+    file
     htop 
     httpie
     jq
