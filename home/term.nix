@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  programs.bash.profileExtra = ''
+      # Add bin in PATH if not already existing
+      [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
+  '';
+
   home.packages = with pkgs; [
     curl
     ctags

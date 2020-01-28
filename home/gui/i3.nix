@@ -118,6 +118,9 @@ in
         # Reload setxkbmap service
         "${modifier}+shift+m" = "exec --no-startup-id systemctl --user restart setxkbmap.service";
 
+        # Reload background service
+        "${modifier}+b" = "exec --no-startup-id systemctl --user restart random-background.service";
+
         # Start a terminal
         "${modifier}+Return" = "exec --no-startup-id kitty --directory \"`${pkgs.xcwd}/bin/xcwd`\"";
 
