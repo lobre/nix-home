@@ -59,8 +59,8 @@ in
   gtk = {
     enable = true;
     font = {
-      name = "${theme.fonts.family} 12";
-      package = theme.fonts.package;
+      name = "${theme.font.family} 12";
+      package = theme.font.package;
     };
 
     theme = {

@@ -11,7 +11,7 @@ in
     
     # Fonts
     
-    font_family      ${theme.fonts.nerd-family}
+    font_family      ${theme.font.nerd-family}
     bold_font        auto
     italic_font      auto
     bold_italic_font auto

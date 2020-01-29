@@ -15,7 +15,7 @@ in
 
     settings = {
       global = {
-        font = "${theme.fonts.family} 10";
+        font = "${theme.font.family} 10";
         allow_markup = true;
         format = " <b>%s</b>\n%b";
         sort = true;

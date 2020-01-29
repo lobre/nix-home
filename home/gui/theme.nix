@@ -17,7 +17,7 @@ in
       '';
     };
 
-    fonts = {
+    font = {
       family = mkOption {
         type = types.str;
         default = "DejaVu Sans";
@@ -202,7 +202,7 @@ in
 
   config = {
     theme = {
-      fonts = {
+      font = {
         family = "Fira Code";
         fullname = "Fira Code Regular";
         nerd-family = "FiraCode Nerd Font";

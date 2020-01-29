@@ -3,7 +3,7 @@
 let
   modifier = "Mod4";
   theme = config.theme;
-  lockFont = builtins.replaceStrings [" "] ["-"] "${theme.fonts.fullname}";
+  lockFont = builtins.replaceStrings [" "] ["-"] "${theme.font.fullname}";
 in
 
 {
@@ -14,7 +14,7 @@ in
     config = {
       modifier = "${modifier}";
       workspaceLayout = "default";
-      fonts = [ "${theme.fonts.nerd-family} 12" ];
+      fonts = [ "${theme.font.nerd-family} 12" ];
 
       keybindings = {
         # custom switch to workspace
@@ -228,7 +228,7 @@ in
           workspaceButtons = true;
           workspaceNumbers = false;
           command = "i3bar";
-          fonts = [ "${theme.fonts.nerd-family} 12" ];
+          fonts = [ "${theme.font.nerd-family} 12" ];
           hiddenState = "hide";
 
           colors = {
