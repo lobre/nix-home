@@ -205,7 +205,7 @@ in
       font = {
         family = "Fira Code";
         fullname = "Fira Code Regular";
-        nerd-family = "FiraCode Nerd Font";
+        nerd-family = "FiraCode Nerd Font Mono";
         package = pkgs.fira-code;
       };
 
