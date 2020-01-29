@@ -42,6 +42,7 @@ in
     discord
     filezilla
     firefox 
+    gnome3.gnome-control-center
     gnome3.eog
     gnome3.gucharmap
     gnome3.meld
