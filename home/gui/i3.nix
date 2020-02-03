@@ -113,6 +113,7 @@ in
         "${modifier}+g" = "exec --no-startup-id rofi -show window";
         "${modifier}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
         "${modifier}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
+        "${modifier}+l" = "exec --no-startup-id rofi -modi 'layouts:rofi-setxkbmap.sh' -show layouts";
         "${modifier}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
 
         # Reload setxkbmap service
@@ -126,6 +127,9 @@ in
 
         # Screenshot
         "Print" = "exec --no-startup-id shutter --select --disable_systray";
+
+        # Gnome settings
+        "${modifier}+F1" = "exec --no-startup-id env XDG_CURRENT_DESKTOP=GNOME gnome-control-center";
 
         # Enable modes
         "${modifier}+h" = "mode resize";

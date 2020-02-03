@@ -8,6 +8,9 @@ in
   # Enable xsession
   xsession.enable = true;
 
+  # Enable numlock
+  xsession.numlock.enable = true;
+
   # Used to configure xsession user service
   home.keyboard = {
     layout = "fr";
