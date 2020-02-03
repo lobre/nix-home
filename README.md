@@ -126,16 +126,13 @@ Once installed, home-manager will have created the initial configuration under `
       programs.home-manager.enable = true;
 
       imports = [
+        /home/lobre/Lab/nix-home/home/config.nix
         /home/lobre/Lab/nix-home/home/term.nix
         /home/lobre/Lab/nix-home/home/gui.nix
       ];
 
       home.stateVersion = "19.09";
     }
-
-You also want to symlink the `config.nix` file to allow unfree packages to be installed.
-
-    ln -sf /home/lobre/Lab/nix-home/home/config.nix $HOME/.config/nixpkgs/config.nix
 
 You can finally apply the configuration.
 

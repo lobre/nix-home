@@ -14,4 +14,28 @@
   # To fix glibc locale bug (https://github.com/NixOS/nixpkgs/issues/38991)
   home.sessionVariables.LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
 
+  # Fix Open GL issues
+  nixpkgs.overlays = [
+    (
+      self: super: {
+        kitty = super.writeScriptBin "kitty" ''
+          #!${super.stdenv.shell}
+          export LIBGL_DRIVERS_PATH=${mesa_drivers}/lib/dri
+          export LD_LIBRARY_PATH=${mesa_drivers}/lib:\$LD_LIBRARY_PATH
+          exec ${super.kitty}/bin/kitty "$@"
+        '';
+      };
+    )
+    (
+      self: super: {
+        compton = super.writeScriptBin "compton" ''
+          #!${super.stdenv.shell}
+          export LIBGL_DRIVERS_PATH=${mesa_drivers}/lib/dri
+          export LD_LIBRARY_PATH=${mesa_drivers}/lib:\$LD_LIBRARY_PATH
+          exec ${super.compton}/bin/compton "$@"
+        '';
+      };
+    )
+  ];
+
 }
