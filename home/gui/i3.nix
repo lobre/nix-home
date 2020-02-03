@@ -179,6 +179,10 @@ in
 
       floating = {
         border = 3;
+
+        criteria = [ 
+          { title = "Microsoft Teams Notification"; }
+        ];
       };
 
       window = {
