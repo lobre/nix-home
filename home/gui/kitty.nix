@@ -577,10 +577,10 @@ in
     
     map kitty_mod+enter new_window
 
-    map kitty_mod+r     next_window
-    map kitty_mod+c     previous_window
-    map kitty_mod+alt+r move_window_forward
-    map kitty_mod+alt+c move_window_backward
+    map kitty_mod+f     next_window
+    map kitty_mod+b     previous_window
+    map kitty_mod+alt+f move_window_forward
+    map kitty_mod+alt+b move_window_backward
     map kitty_mod+h     start_resizing_window
     map kitty_mod+1     first_window
     map kitty_mod+2     second_window
