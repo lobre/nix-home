@@ -6,6 +6,6 @@
     goPath = "${config.home.homeDirectory}/Lab/go";
   };
 
-  home.sessionVariables.GOROOT = "${pkgs.go}/share/go/src";
+  home.sessionVariables.GOROOT = "${pkgs.go}/share/go";
 }
 
