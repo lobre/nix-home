@@ -48,6 +48,7 @@
       };
       diff = {
         tool = "meld";
+        submodule = "log";
       };
       difftool = {
         cmd = ''meld "$LOCAL" "$REMOTE" --label "DIFF"'';
