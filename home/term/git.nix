@@ -53,6 +53,9 @@
         cmd = ''meld "$LOCAL" "$REMOTE" --label "DIFF"'';
         prompt = false;
       };
+      status = {
+        submoduleSummary = true;
+      };
     };
 
     lfs.enable = true;
