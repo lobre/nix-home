@@ -51,7 +51,7 @@ in
     gnome3.meld
     google-chrome
     kitty
-    mattermost
+    mattermost-desktop
     peek
     remmina
     shutter
