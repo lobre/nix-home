@@ -216,7 +216,7 @@ in
         }; 
 
         power = {
-          l = "mode default, exec --no-startup-id ${lockScript}/bin/i3lock-no-notif --text 'Enter Laboratory' --font '${lockFont}' --greyscale";
+          l = "mode default, exec --no-startup-id ${lockScript}/bin/i3lock-no-notif -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale";
           e = "mode default, exec --no-startup-id i3-msg exit";
           r = "mode default, exec --no-startup-id systemctl reboot";
           p = "mode default, exec --no-startup-id systemctl poweroff -i";
