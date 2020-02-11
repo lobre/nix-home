@@ -84,7 +84,8 @@ in
 
   services.random-background = {
     enable = true;
-    enableXinerama = true;
+    # Same background on all monitors
+    enableXinerama = false;
     display = "fill";
     imageDirectory = "%h/Pictures/Wallpapers";
     # could set something like "1h" or "30min"
