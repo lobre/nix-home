@@ -8,7 +8,7 @@ let
     #!${pkgs.stdenv.shell}
     notify-send "DUNST_COMMAND_PAUSE"
     exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy "$@"
-    #notify-send "DUNST_COMMAND_RESUME"
+    notify-send "DUNST_COMMAND_RESUME"
   '';
 in
 
