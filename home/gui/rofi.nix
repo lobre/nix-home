@@ -14,7 +14,7 @@ in
     width = 60;
     location = "center";
     scrollbar = false;
-    terminal = "\${pkgs.rxvt_unicode}/bin/urxvt";
+    terminal = "${pkgs.rxvt_unicode}/bin/urxvt";
 
     colors = {
       window = {

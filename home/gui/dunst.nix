@@ -58,7 +58,7 @@ in
       };
 
       urgency_low = {
-        timeout = 2;
+        timeout = 4;
         background = "${theme.colors.background}";
         foreground = "${theme.colors.foreground}";
       };
