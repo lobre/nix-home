@@ -7,7 +7,7 @@ let
   lockScript = pkgs.writeScriptBin "i3lock-no-notif" ''
     #!${pkgs.stdenv.shell}
     notify-send "DUNST_COMMAND_PAUSE"
-    exec ${pkgs.i3lock-fancy}/bin/i3lock-fancy "$@"
+    ${pkgs.i3lock-fancy}/bin/i3lock-fancy "$@"
     notify-send "DUNST_COMMAND_RESUME"
   '';
 in
