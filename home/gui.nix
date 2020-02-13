@@ -114,5 +114,6 @@ in
     ./gui/xresources.nix
     ./gui/compton.nix
     ./gui/dunst.nix
+    ./gui/oni.nix
   ];
 }
