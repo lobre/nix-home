@@ -3,7 +3,7 @@
 {
   programs.go = {
     enable = true;
-    goPath = "${config.home.homeDirectory}/Lab/go";
+    goPath = "Lab/go";
   };
 
   home.sessionVariables.GOROOT = "${pkgs.go}/share/go";
