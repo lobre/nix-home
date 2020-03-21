@@ -7,7 +7,7 @@
     goPath = "Lab/go";
   };
 
-  home.sessionVariables.GOROOT = "${pkgs.go}/share/go";
+  home.sessionVariables.GOROOT = "${pkgs.go_1_13}/share/go";
 
   programs.bash.profileExtra = ''
       # Add go bin in PATH if not already existing
