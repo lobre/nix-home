@@ -146,6 +146,23 @@ If you want to add custom wallpapers, download them into `~/Pictures/Wallpapers`
 
 If you want to apply the user configurations without having NixOS as the operating system, you just have to follow the previous section with home-manager. That means it will work on any operating system that support the Nix package manager.
 
+However, you will still have to make sure to import `/home/lobre/Lab/nix-home/non-nixos.nix` in your home-manager configuration.
+
+As well, if you want `zsh` to be your default login shell, you will have to add the Nix zsh to the authorised shells.
+
+    $ cat /etc/shells
+    # /etc/shells: valid login shells
+    /bin/sh
+    /bin/dash
+    /bin/bash
+    /bin/rbash
+    /usr/bin/screen
+
+    # Add zsh from home manager install
+    /home/lobre/.nix-profile/bin/zsh
+
+    $ chsh -s /home/lobre/.nix-profile/bin/zsh
+
 In the user configuration, i3 is launched using the ~/.xsession user file. That means the display manager should have an option to run the default user session for this ~/.xsession file to be taken into account. Here is an example of configuration to create a default user session entry. You need to create a file `/usr/share/xsessions/default.desktop` as follows.
 
     [Desktop Entry]
