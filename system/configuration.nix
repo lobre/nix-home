@@ -30,6 +30,7 @@
     git
     open-vm-tools
     pavucontrol
+    tailscale
     unzip
     vim_configurable 
     wget 
@@ -44,6 +45,7 @@
   # Services
   services.gnome3.sushi.enable = true;
   services.pantheon.files.enable = true;
+  services.tailscale.enable = true;
 
   # Sound
   sound.enable = true;
