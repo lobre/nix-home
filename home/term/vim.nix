@@ -98,6 +98,6 @@
           autocmd FileType go nmap <C-t> <Plug>(go-def)
           autocmd FileType go nmap g<C-t> <Plug>(go-def-pop)
       endif
-    '' + import ./vim/bepo.nix;
+    '';
   };
 }

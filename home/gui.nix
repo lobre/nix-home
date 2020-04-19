@@ -50,7 +50,6 @@ in
     gnome3.gucharmap
     gnome3.meld
     google-chrome
-    kitty
     mattermost-desktop
     peek
     remmina
@@ -110,7 +109,7 @@ in
     ./gui/i3.nix
     ./gui/i3status.nix
     ./gui/rofi.nix
-    ./gui/kitty.nix
+    ./gui/alacritty.nix
     ./gui/xresources.nix
     ./gui/compton.nix
     ./gui/dunst.nix

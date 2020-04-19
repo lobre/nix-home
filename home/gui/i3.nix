@@ -54,22 +54,22 @@ in
         "${modifier}+shift+p" = "move container to workspace prev";
 
         # move current workspace to next/previous output
-        "${modifier}+control+c" = "move workspace to output left";
-        "${modifier}+control+t" = "move workspace to output down";
-        "${modifier}+control+s" = "move workspace to output up";
-        "${modifier}+control+r" = "move workspace to output right";
+        "${modifier}+control+h" = "move workspace to output left";
+        "${modifier}+control+j" = "move workspace to output down";
+        "${modifier}+control+k" = "move workspace to output up";
+        "${modifier}+control+l" = "move workspace to output right";
 
         # change focus
-        "${modifier}+c" = "focus left";
-        "${modifier}+t" = "focus down";
-        "${modifier}+s" = "focus up";
-        "${modifier}+r" = "focus right";
+        "${modifier}+h" = "focus left";
+        "${modifier}+j" = "focus down";
+        "${modifier}+k" = "focus up";
+        "${modifier}+l" = "focus right";
 
         # move focused window
-        "${modifier}+shift+c" = "move left";
-        "${modifier}+shift+t" = "move down";
-        "${modifier}+shift+s" = "move up";
-        "${modifier}+shift+r" = "move right";
+        "${modifier}+shift+h" = "move left";
+        "${modifier}+shift+j" = "move down";
+        "${modifier}+shift+k" = "move up";
+        "${modifier}+shift+l" = "move right";
 
         # kill focused window
         "${modifier}+q" = "kill";
@@ -84,9 +84,9 @@ in
         "${modifier}+z" = "fullscreen";
 
         # change container layout (stacked, tabbed, toggle split)
-        "${modifier}+k" = "layout stacking";
-        "${modifier}+w" = "layout tabbed";
-        "${modifier}+e" = "layout toggle split";
+        "${modifier}+s" = "layout stacking";
+        "${modifier}+t" = "layout tabbed";
+        "${modifier}+plus" = "layout toggle split";
 
         # Toggle between stacking/tabbed/split:
         "${modifier}+x" = "layout toggle";
@@ -116,10 +116,10 @@ in
 
         # Rofi
         "${modifier}+space" = "exec --no-startup-id rofi -show drun";
-        "${modifier}+g" = "exec --no-startup-id rofi -show window";
+        "${modifier}+w" = "exec --no-startup-id rofi -show window";
         "${modifier}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
         "${modifier}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
-        "${modifier}+l" = "exec --no-startup-id rofi -modi 'layouts:rofi-setxkbmap.sh' -show layouts";
+        "${modifier}+c" = "exec --no-startup-id rofi -modi 'layouts:rofi-setxkbmap.sh' -show layouts";
         "${modifier}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
 
         # Reload setxkbmap service
@@ -129,7 +129,7 @@ in
         "${modifier}+b" = "exec --no-startup-id systemctl --user restart random-background.service";
 
         # Start a terminal
-        "${modifier}+Return" = "exec --no-startup-id kitty --directory \"`${pkgs.xcwd}/bin/xcwd`\"";
+        "${modifier}+Return" = "exec --no-startup-id alacritty --working-directory \"`${pkgs.xcwd}/bin/xcwd`\"";
 
         # Screenshot
         "Print" = "exec --no-startup-id shutter --select --disable_systray";
@@ -138,7 +138,7 @@ in
         "${modifier}+F1" = "exec --no-startup-id env XDG_CURRENT_DESKTOP=GNOME gnome-control-center";
 
         # Enable modes
-        "${modifier}+h" = "mode resize";
+        "${modifier}+r" = "mode resize";
         "${modifier}+Delete" = "mode power";
       };
 
@@ -206,10 +206,10 @@ in
 
       modes = { 
         resize = { 
-          c = "resize grow width 5 px or 5 ppt";
-          t = "resize grow height 5 px or 5 ppt";
-          s = "resize shrink height 5 px or 5 ppt";
-          r = "resize shrink width 5 px or 5 ppt";
+          h = "resize grow width 5 px or 5 ppt";
+          j = "resize grow height 5 px or 5 ppt";
+          k = "resize shrink height 5 px or 5 ppt";
+          l = "resize shrink width 5 px or 5 ppt";
 
           Return = "mode default";
           Escape = "mode default";
