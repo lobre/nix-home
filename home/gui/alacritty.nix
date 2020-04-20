@@ -22,7 +22,7 @@ in
 
       font = {
         normal.family = "${theme.font.nerd-family}";
-        size = 7; 
+        size = 8; 
       };
 
       colors = {
