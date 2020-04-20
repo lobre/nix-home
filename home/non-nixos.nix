@@ -19,6 +19,16 @@
   nixpkgs.overlays = [
     (
       self: super: {
+        alacritty = super.writeScriptBin "alacritty" ''
+          #!${super.stdenv.shell}
+          export LIBGL_DRIVERS_PATH=${super.mesa_drivers}/lib/dri
+          export LD_LIBRARY_PATH=${super.mesa_drivers}/lib:$LD_LIBRARY_PATH
+          exec ${super.alacritty}/bin/alacritty "$@"
+        '';
+      }
+    )
+    (
+      self: super: {
         compton = super.writeScriptBin "compton" ''
           #!${super.stdenv.shell}
           export LIBGL_DRIVERS_PATH=${super.mesa_drivers}/lib/dri
