@@ -27,7 +27,7 @@ in
 
     # i3
     arandr
-    compton
+    picom
     haskellPackages.greenclip
     i3blocks
     i3lock-fancy
@@ -111,7 +111,7 @@ in
     ./gui/rofi.nix
     ./gui/alacritty.nix
     ./gui/xresources.nix
-    ./gui/compton.nix
+    ./gui/picom.nix
     ./gui/dunst.nix
     ./gui/oni.nix
   ];

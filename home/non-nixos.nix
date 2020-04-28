@@ -29,11 +29,11 @@
     )
     (
       self: super: {
-        compton = super.writeScriptBin "compton" ''
+        picom = super.writeScriptBin "picom" ''
           #!${super.stdenv.shell}
           export LIBGL_DRIVERS_PATH=${super.mesa_drivers}/lib/dri
           export LD_LIBRARY_PATH=${super.mesa_drivers}/lib:$LD_LIBRARY_PATH
-          exec ${super.compton}/bin/compton "$@"
+          exec ${super.picom}/bin/picom "$@"
         '';
       }
     )

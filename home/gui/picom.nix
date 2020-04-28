@@ -1,14 +1,14 @@
 { config, pkgs, ... }:
 
 {
-  services.compton = {
+  services.picom = {
     enable = true;
     backend = "xrender";
     blur = false;
     noDNDShadow = true;
     noDockShadow = true;
     refreshRate = 0;
-    vSync = "none";
+    vSync = false;
 
     # opacity
     activeOpacity = "1.0";

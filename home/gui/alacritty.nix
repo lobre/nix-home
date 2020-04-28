@@ -60,4 +60,7 @@ in
       background_opacity = 1;
     };
   };
+
+  # Set static DPI for consistent font size on different monitors
+  home.sessionVariables.WINIT_X11_SCALE_FACTOR = "1.5";
 }

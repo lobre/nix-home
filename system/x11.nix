@@ -37,7 +37,7 @@
       enable = true;
       package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
-        compton
+        picom
         i3blocks
         i3lock-fancy
         i3status
