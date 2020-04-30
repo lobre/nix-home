@@ -23,41 +23,11 @@ in
       fonts = [ "${theme.font.nerd-family} 12" ];
 
       keybindings = {
-        # custom switch to workspace
-        "${modifier}+mod1+t" = "workspace 1:T";
-        "${modifier}+mod1+s" = "workspace 2:S";
-        "${modifier}+mod1+r" = "workspace 3:R";
-        "${modifier}+mod1+n" = "workspace 4:N";
-        "${modifier}+mod1+v" = "workspace 5:V";
-        "${modifier}+mod1+d" = "workspace 6:D";
-        "${modifier}+mod1+l" = "workspace 7:L";
-        "${modifier}+mod1+j" = "workspace 8:J";
-
         # switching between workspace
         "${modifier}+p" = "workspace prev_on_output";
         "${modifier}+n" = "workspace next_on_output";
         "mod1+shift+Tab" = "workspace prev_on_output";
         "mod1+Tab" = "workspace next_on_output";
-
-        # custom move focused container to workspace
-        "${modifier}+mod1+shift+t" = "move container to workspace 1:T";
-        "${modifier}+mod1+shift+s" = "move container to workspace 2:S";
-        "${modifier}+mod1+shift+r" = "move container to workspace 3:R";
-        "${modifier}+mod1+shift+n" = "move container to workspace 4:N";
-        "${modifier}+mod1+shift+v" = "move container to workspace 5:V";
-        "${modifier}+mod1+shift+d" = "move container to workspace 6:D";
-        "${modifier}+mod1+shift+l" = "move container to workspace 7:L";
-        "${modifier}+mod1+shift+j" = "move container to workspace 8:J";
-
-        # move focused container to next/previous workspace
-        "${modifier}+shift+n" = "move container to workspace next";
-        "${modifier}+shift+p" = "move container to workspace prev";
-
-        # move current workspace to next/previous output
-        "${modifier}+control+h" = "move workspace to output left";
-        "${modifier}+control+j" = "move workspace to output down";
-        "${modifier}+control+k" = "move workspace to output up";
-        "${modifier}+control+l" = "move workspace to output right";
 
         # change focus
         "${modifier}+h" = "focus left";
@@ -65,28 +35,22 @@ in
         "${modifier}+k" = "focus up";
         "${modifier}+l" = "focus right";
 
-        # move focused window
-        "${modifier}+shift+h" = "move left";
-        "${modifier}+shift+j" = "move down";
-        "${modifier}+shift+k" = "move up";
-        "${modifier}+shift+l" = "move right";
-
         # kill focused window
         "${modifier}+q" = "kill";
         "--release button2" = "kill";
         "--whole-window ${modifier}+button2" = "kill";
 
-        # split in honizontal/vertical orientation
-        "${modifier}+slash" = "split h";
-        "${modifier}+minus" = "split v";
-
         # enter fullscreen mode for the focused container
         "${modifier}+z" = "fullscreen";
 
         # change container layout (stacked, tabbed, toggle split)
-        "${modifier}+s" = "layout stacking";
-        "${modifier}+t" = "layout tabbed";
+        "${modifier}+equal" = "layout stacking";
+        "${modifier}+asterisk" = "layout tabbed";
         "${modifier}+plus" = "layout toggle split";
+
+        # split in honizontal/vertical orientation
+        "${modifier}+slash" = "split h";
+        "${modifier}+minus" = "split v";
 
         # Toggle between stacking/tabbed/split:
         "${modifier}+x" = "layout toggle";
@@ -140,6 +104,9 @@ in
         # Enable modes
         "${modifier}+r" = "mode resize";
         "${modifier}+Delete" = "mode power";
+        "${modifier}+t" = "mode workspace";
+        "${modifier}+s" = "mode switch";
+        "${modifier}+o" = "mode output";
       };
 
       # Colors for windows.
@@ -200,7 +167,7 @@ in
       focus = {
         followMouse = true;
         forceWrapping = false;
-        mouseWarping = true;
+        mouseWarping = false;
         newWindow = "smart";
       };
 
@@ -225,6 +192,44 @@ in
           Return = "mode default";
           Escape = "mode default";
         };
+
+        workspace = {
+          t = "mode default, workspace 1:T";
+          s = "mode default, workspace 2:S";
+          r = "mode default, workspace 3:R";
+          n = "mode default, workspace 4:N";
+          v = "mode default, workspace 5:V";
+          d = "mode default, workspace 6:D";
+          l = "mode default, workspace 7:L";
+          j = "mode default, workspace 8:J";
+        };
+
+        switch = {
+          h = "move left";
+          j = "move down";
+          k = "move up";
+          l = "move right";
+
+          "shift+t" = "mode default, move container to workspace 1:T";
+          "shift+s" = "mode default, move container to workspace 2:S";
+          "shift+r" = "mode default, move container to workspace 3:R";
+          "shift+n" = "mode default, move container to workspace 4:N";
+          "shift+v" = "mode default, move container to workspace 5:V";
+          "shift+d" = "mode default, move container to workspace 6:D";
+          "shift+l" = "mode default, move container to workspace 7:L";
+          "shift+j" = "mode default, move container to workspace 8:J";
+
+          Return = "mode default";
+          Escape = "mode default";
+        };
+
+        output = {
+          h = "mode default, move workspace to output left";
+          j = "mode default, move workspace to output down";
+          k = "mode default, move workspace to output up";
+          l = "mode default, move workspace to output right";
+        };
+
       };
 
       gaps = {
