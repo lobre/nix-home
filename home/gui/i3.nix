@@ -104,7 +104,7 @@ in
         # Enable modes
         "${modifier}+r" = "mode resize";
         "${modifier}+Delete" = "mode power";
-        "${modifier}+t" = "mode workspace";
+        "${modifier}+t" = "mode ws";
         "${modifier}+s" = "mode switch";
         "${modifier}+o" = "mode output";
       };
@@ -193,7 +193,7 @@ in
           Escape = "mode default";
         };
 
-        workspace = {
+        ws = {
           t = "mode default, workspace 1:T";
           s = "mode default, workspace 2:S";
           r = "mode default, workspace 3:R";
@@ -202,6 +202,9 @@ in
           d = "mode default, workspace 6:D";
           l = "mode default, workspace 7:L";
           j = "mode default, workspace 8:J";
+
+          Return = "mode default";
+          Escape = "mode default";
         };
 
         switch = {
@@ -228,6 +231,9 @@ in
           j = "mode default, move workspace to output down";
           k = "mode default, move workspace to output up";
           l = "mode default, move workspace to output right";
+
+          Return = "mode default";
+          Escape = "mode default";
         };
 
       };
