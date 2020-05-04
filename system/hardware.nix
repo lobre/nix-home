@@ -1,9 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Brightness control
-  hardware.brightnessctl.enable = true;
-
   # Touchpad support
   services.xserver.libinput = {
     enable = true;

@@ -7,11 +7,6 @@
     xkbVariant = "bepo";
     xkbOptions = "caps:escape";
 
-    desktopManager = {
-      default = "none";
-      xterm.enable = false;
-    };
-
     displayManager.lightdm = {
       enable = true;
       greeters.gtk = {
