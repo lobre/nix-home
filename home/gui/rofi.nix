@@ -59,6 +59,7 @@ in
     extraConfig = ''
       rofi.kb-row-up: Up,Control+p
       rofi.kb-row-down: Down,Control+n
+      rofi.monitor: -4
     '';
   };
 }
