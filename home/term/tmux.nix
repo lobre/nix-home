@@ -50,8 +50,8 @@
       bind -r L resize-pane -R 5
 
       # window splitting
-      bind / split-window -h
-      bind - split-window -v
+      bind v split-window -h
+      bind s split-window -v
 
       # toggle synchronize mode
       bind a set-window-option synchronize-panes \; display "Synchronize mode changed"

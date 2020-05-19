@@ -13,13 +13,11 @@
   virtualisation.docker.enable = true;
 
   # Internationalisation properties.
-  i18n = {
-    console = {
-      font = "Lat2-Terminus16";
-      keyMap = "fr-bepo";
-    };
-    defaultLocale = "en_GB.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "fr-bepo";
   };
+  i18n.defaultLocale = "en_GB.UTF-8";
 
   # Timezone
   time.timeZone = "Europe/Paris";

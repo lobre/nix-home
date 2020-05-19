@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  modifier = "Mod4";
+  mod = "Mod4";
   theme = config.theme;
   lockFont = builtins.replaceStrings [" "] ["-"] "${theme.font.fullname}";
   lockScript = pkgs.writeScriptBin "i3lock-no-notif" ''
@@ -18,52 +18,79 @@ in
     package = pkgs.i3-gaps;
 
     config = {
-      modifier = "${modifier}";
+      modifier = "${mod}";
       workspaceLayout = "default";
       fonts = [ "${theme.font.nerd-family} 12" ];
 
       keybindings = {
         # switching between workspace
-        "${modifier}+p" = "workspace prev_on_output";
-        "${modifier}+n" = "workspace next_on_output";
-        "mod1+shift+Tab" = "workspace prev_on_output";
+        "mod1+Shift+Tab" = "workspace prev_on_output";
         "mod1+Tab" = "workspace next_on_output";
 
         # change focus
-        "${modifier}+h" = "focus left";
-        "${modifier}+j" = "focus down";
-        "${modifier}+k" = "focus up";
-        "${modifier}+l" = "focus right";
+        "${mod}+h" = "focus left";
+        "${mod}+j" = "focus down";
+        "${mod}+k" = "focus up";
+        "${mod}+l" = "focus right";
+
+        # move focused window
+        "${mod}+Shift+h" = "move left";
+        "${mod}+Shift+j" = "move down";
+        "${mod}+Shift+k" = "move up";
+        "${mod}+Shift+l" = "move right";
+
+        # switch to workspace
+        "${mod}+1" = "workspace number 1";
+        "${mod}+2" = "workspace number 2";
+        "${mod}+3" = "workspace number 3";
+        "${mod}+4" = "workspace number 4";
+        "${mod}+5" = "workspace number 5";
+        "${mod}+6" = "workspace number 6";
+        "${mod}+7" = "workspace number 7";
+        "${mod}+8" = "workspace number 8";
+        "${mod}+9" = "workspace number 9";
+        "${mod}+0" = "workspace number 10";
+
+        # move focused container to workspace
+        "${mod}+Shift+1" = "move container to workspace number 1";
+        "${mod}+Shift+2" = "move container to workspace number 2";
+        "${mod}+Shift+3" = "move container to workspace number 3";
+        "${mod}+Shift+4" = "move container to workspace number 4";
+        "${mod}+Shift+5" = "move container to workspace number 5";
+        "${mod}+Shift+6" = "move container to workspace number 6";
+        "${mod}+Shift+7" = "move container to workspace number 7";
+        "${mod}+Shift+8" = "move container to workspace number 8";
+        "${mod}+Shift+9" = "move container to workspace number 9";
+        "${mod}+Shift+0" = "move container to workspace number 10";
 
         # kill focused window
-        "${modifier}+q" = "kill";
+        "${mod}+Shift+q" = "kill";
         "--release button2" = "kill";
-        "--whole-window ${modifier}+button2" = "kill";
+        "--whole-window ${mod}+button2" = "kill";
 
         # enter fullscreen mode for the focused container
-        "${modifier}+z" = "fullscreen";
+        "${mod}+z" = "fullscreen";
 
-        # change container layout (stacked, tabbed, toggle split)
-        "${modifier}+equal" = "layout stacking";
-        "${modifier}+asterisk" = "layout tabbed";
-        "${modifier}+plus" = "layout toggle split";
+        # change container layout
+        "${mod}+s" = "layout stacking";
+        "${mod}+w" = "layout tabbed";
+        "${mod}+e" = "layout toggle split";
 
-        # split in honizontal/vertical orientation
-        "${modifier}+slash" = "split h";
-        "${modifier}+minus" = "split v";
-
-        # Toggle between stacking/tabbed/split:
-        "${modifier}+x" = "layout toggle";
+        # split in horizontal/vertical orientation
+        # the default h and v are already used
+        # instead using Shift as modifier and same as vim splits
+        "${mod}+Shift+v" = "split h";
+        "${mod}+Shift+s" = "split v";
 
         # toggle tiling / floating
-        "${modifier}+f" = "floating toggle";
+        "${mod}+f" = "floating toggle";
 
         # Change focus between tiling / floating windows
-        "${modifier}+Shift+f" = "focus mode_toggle";
+        "${mod}+Shift+f" = "focus mode_toggle";
 
-        # focus the parent/child container
-        "${modifier}+a" = "focus parent";
-        "${modifier}+u" = "focus child";
+        # focus the parent container
+        # never had the need to focus child
+        "${mod}+a" = "focus parent";
 
         # Sound shortcuts
         "XF86AudioRaiseVolume" = "exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10%";
@@ -75,38 +102,36 @@ in
         "XF86MonBrightnessDown" = "exec xbacklight -dec 20 # decrease screen brightness";
 
         # Scratchpad
-        "${modifier}+Shift+dollar" = "move scratchpad";
-        "${modifier}+dollar" = "scratchpad show";
+        "${mod}+Shift+dollar" = "move scratchpad";
+        "${mod}+dollar" = "scratchpad show";
 
         # Rofi
-        "${modifier}+space" = "exec --no-startup-id rofi -show drun";
-        "${modifier}+w" = "exec --no-startup-id rofi -show window";
-        "${modifier}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
-        "${modifier}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
-        "${modifier}+c" = "exec --no-startup-id rofi -modi 'layouts:rofi-setxkbmap.sh' -show layouts";
-        "${modifier}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
+        "${mod}+space" = "exec --no-startup-id rofi -show drun";
+        "${mod}+Shift+space" = "exec --no-startup-id rofi -show window";
+        "${mod}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
+        "${mod}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
+        "${mod}+c" = "exec --no-startup-id rofi -modi 'layouts:rofi-setxkbmap.sh' -show layouts";
+        "${mod}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
 
         # Reload setxkbmap service
-        "${modifier}+shift+m" = "exec --no-startup-id systemctl --user restart setxkbmap.service";
+        "${mod}+shift+m" = "exec --no-startup-id systemctl --user restart setxkbmap.service";
 
         # Reload background service
-        "${modifier}+b" = "exec --no-startup-id systemctl --user restart random-background.service";
+        "${mod}+b" = "exec --no-startup-id systemctl --user restart random-background.service";
 
         # Start a terminal
-        "${modifier}+Return" = "exec --no-startup-id alacritty --working-directory \"`${pkgs.xcwd}/bin/xcwd`\"";
+        "${mod}+Return" = "exec --no-startup-id alacritty --working-directory \"`${pkgs.xcwd}/bin/xcwd`\"";
 
         # Screenshot
         "Print" = "exec --no-startup-id shutter --select --disable_systray";
 
         # Gnome settings
-        "${modifier}+F1" = "exec --no-startup-id env XDG_CURRENT_DESKTOP=GNOME gnome-control-center";
+        "${mod}+F1" = "exec --no-startup-id env XDG_CURRENT_DESKTOP=GNOME gnome-control-center";
 
         # Enable modes
-        "${modifier}+r" = "mode resize";
-        "${modifier}+Delete" = "mode power";
-        "${modifier}+t" = "mode ws";
-        "${modifier}+s" = "mode switch";
-        "${modifier}+o" = "mode output";
+        "${mod}+r" = "mode resize";
+        "${mod}+Delete" = "mode power";
+        "${mod}+o" = "mode output";
       };
 
       # Colors for windows.
@@ -188,39 +213,6 @@ in
           r = "mode default, exec --no-startup-id systemctl reboot";
           p = "mode default, exec --no-startup-id systemctl poweroff -i";
           c = "mode default, restart";
-
-          Return = "mode default";
-          Escape = "mode default";
-        };
-
-        ws = {
-          t = "mode default, workspace 1:T";
-          s = "mode default, workspace 2:S";
-          r = "mode default, workspace 3:R";
-          n = "mode default, workspace 4:N";
-          v = "mode default, workspace 5:V";
-          d = "mode default, workspace 6:D";
-          l = "mode default, workspace 7:L";
-          j = "mode default, workspace 8:J";
-
-          Return = "mode default";
-          Escape = "mode default";
-        };
-
-        switch = {
-          h = "move left";
-          j = "move down";
-          k = "move up";
-          l = "move right";
-
-          "shift+t" = "mode default, move container to workspace 1:T";
-          "shift+s" = "mode default, move container to workspace 2:S";
-          "shift+r" = "mode default, move container to workspace 3:R";
-          "shift+n" = "mode default, move container to workspace 4:N";
-          "shift+v" = "mode default, move container to workspace 5:V";
-          "shift+d" = "mode default, move container to workspace 6:D";
-          "shift+l" = "mode default, move container to workspace 7:L";
-          "shift+j" = "mode default, move container to workspace 8:J";
 
           Return = "mode default";
           Escape = "mode default";
