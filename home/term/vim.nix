@@ -96,6 +96,9 @@
           autocmd FileChangedShellPost *
             \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
       endif
+
+      " Vim-go settings
+      let g:go_fmt_command = "goimports"
     '';
   };
 }
