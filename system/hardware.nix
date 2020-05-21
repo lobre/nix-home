@@ -5,6 +5,8 @@
   services.xserver.libinput = {
     enable = true;
     naturalScrolling = true;
+    # to only affect touchpad and not all input devices
+    additionalOptions = ''MatchIsTouchpad "on"'';
   };
 
   # Optimize battery life
