@@ -132,6 +132,9 @@ in
         "${mod}+r" = "mode resize";
         "${mod}+Delete" = "mode power";
         "${mod}+o" = "mode output";
+
+        # Rename workspace
+        "${mod}+comma" = "exec i3-input -F 'rename workspace to \"%s\"' -P 'New name for this workspace: '";
       };
 
       # Colors for windows.
@@ -240,7 +243,7 @@ in
           position = "top";
           trayOutput = "primary";
           workspaceButtons = true;
-          workspaceNumbers = false;
+          workspaceNumbers = true;
           command = "i3bar";
           fonts = [ "${theme.font.nerd-family} 12" ];
           hiddenState = "hide";
