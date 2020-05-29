@@ -14,4 +14,8 @@
 
   # Video drivers
   hardware.bumblebee.enable = true;
+
+  # Use local time instead of UTC to
+  # stay in sync with Windows
+  time.hardwareClockInLocalTime = true;
 }
