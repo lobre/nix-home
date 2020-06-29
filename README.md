@@ -15,7 +15,8 @@ Then you can insert it in your machine and boot. You will land on a simple deskt
 
 For convenience, start by changing the keyboard layout.
 
-    setxkbmap fr -variant bepo
+    setxkbmap fr -variant bepo # or
+    sudo loadkeys fr-bepo
 
 ### Partitioning
 
