@@ -57,10 +57,9 @@ in
     };
 
     extraConfig = ''
-      rofi.kb-row-up: Up,Control+p,Control+s
-      rofi.kb-row-down: Down,Control+n,Control+t
-      rofi.kb-row-left: Control+c
-      rofi.kb-row-right: Control+r
+      rofi.kb-row-up: Up,Control+p
+      rofi.kb-row-down: Down,Control+n
+      rofi.monitor: -4
     '';
   };
 }

@@ -13,11 +13,11 @@
   virtualisation.docker.enable = true;
 
   # Internationalisation properties.
-  i18n = {
-    consoleFont = "Lat2-Terminus16";
-    consoleKeyMap = "fr-bepo";
-    defaultLocale = "en_GB.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "fr-bepo";
   };
+  i18n.defaultLocale = "en_GB.UTF-8";
 
   # Timezone
   time.timeZone = "Europe/Paris";
@@ -25,10 +25,12 @@
   # Packages installed in system profile
   environment.systemPackages = with pkgs; [
     acpilight
+    brightnessctl
     curl
     firefox 
     git
     open-vm-tools
+    pantheon.elementary-files
     pavucontrol
     tailscale
     unzip
@@ -44,7 +46,6 @@
 
   # Services
   services.gnome3.sushi.enable = true;
-  services.pantheon.files.enable = true;
   services.tailscale.enable = true;
 
   # Sound

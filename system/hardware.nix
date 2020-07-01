@@ -1,13 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  # Brightness control
-  hardware.brightnessctl.enable = true;
-
   # Touchpad support
   services.xserver.libinput = {
     enable = true;
     naturalScrolling = true;
+    # to only affect touchpad and not all input devices
+    additionalOptions = ''MatchIsTouchpad "on"'';
   };
 
   # Optimize battery life
@@ -15,4 +14,8 @@
 
   # Video drivers
   hardware.bumblebee.enable = true;
+
+  # Use local time instead of UTC to
+  # stay in sync with Windows
+  time.hardwareClockInLocalTime = true;
 }

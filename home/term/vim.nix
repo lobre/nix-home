@@ -12,6 +12,7 @@
 
       " Explorer settings
       let g:netrw_liststyle=3
+      let g:netrw_winsize = 25
       let g:netrw_localrmdir='rm -r'
 
       " Search options
@@ -81,6 +82,9 @@
       highlight Todo ctermbg=none ctermfg=red
       highlight Pmenu ctermbg=white
       highlight PmenuSel ctermbg=gray ctermfg=black
+      highlight TabLineFill cterm=bold,reverse
+      highlight TabLineSel cterm=bold,reverse
+      highlight TabLine ctermbg=none ctermfg=none cterm=reverse
 
       " Autoread file if changes
       set autoread
@@ -93,11 +97,8 @@
             \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
       endif
 
-      " vim-go
-      if has("autocmd")
-          autocmd FileType go nmap <C-t> <Plug>(go-def)
-          autocmd FileType go nmap g<C-t> <Plug>(go-def-pop)
-      endif
-    '' + import ./vim/bepo.nix;
+      " Vim-go settings
+      let g:go_fmt_command = "goimports"
+    '';
   };
 }

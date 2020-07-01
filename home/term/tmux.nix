@@ -38,20 +38,20 @@
       bind q kill-pane
 
       # Default pane switching
-      bind c select-pane -L
-      bind t select-pane -D
-      bind s select-pane -U
-      bind r select-pane -R
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
 
       # Pane resize
-      bind -r C resize-pane -L 5
-      bind -r T resize-pane -D 5
-      bind -r S resize-pane -U 5
-      bind -r R resize-pane -R 5
+      bind -r H resize-pane -L 5
+      bind -r J resize-pane -D 5
+      bind -r K resize-pane -U 5
+      bind -r L resize-pane -R 5
 
       # window splitting
-      bind / split-window -h
-      bind - split-window -v
+      bind v split-window -h
+      bind s split-window -v
 
       # toggle synchronize mode
       bind a set-window-option synchronize-panes \; display "Synchronize mode changed"
@@ -63,7 +63,7 @@
       bind W choose-window
 
       unbind [
-      bind g copy-mode
+      bind c copy-mode
 
       unbind P
       bind P paste-buffer
@@ -80,14 +80,14 @@
       bind -T copy-mode-vi d send -X halfpage-down
       bind -T copy-mode-vi u send -X halfpage-up
 
-      bind -T copy-mode-vi c send -X cursor-left
-      bind -T copy-mode-vi t send -X cursor-down
-      bind -T copy-mode-vi s send -X cursor-up
-      bind -T copy-mode-vi r send -X cursor-right
-      bind -T copy-mode-vi C send -X top-line
-      bind -T copy-mode-vi R send -X bottom-line
-      bind -T copy-mode-vi T send -X scroll-down
-      bind -T copy-mode-vi S send -X scroll-up
+      bind -T copy-mode-vi h send -X cursor-left
+      bind -T copy-mode-vi j send -X cursor-down
+      bind -T copy-mode-vi k send -X cursor-up
+      bind -T copy-mode-vi l send -X cursor-right
+      bind -T copy-mode-vi H send -X top-line
+      bind -T copy-mode-vi L send -X bottom-line
+      bind -T copy-mode-vi J send -X scroll-down
+      bind -T copy-mode-vi K send -X scroll-up
 
       # Prevent garbage characters everywhere after copy
       set-option -s set-clipboard off

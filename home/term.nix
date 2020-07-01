@@ -21,7 +21,6 @@
     ltrace
     ncdu
     pv
-    ranger
     ripgrep
     tcpdump
     traceroute
@@ -39,12 +38,6 @@
 
   # Allow XDG linking
   xdg.enable = true;
-
-  # Set ranger configuration
-  xdg.configFile."ranger/rc.conf".source = ./term/ranger/rc.conf;
-
-  # Set lesskey config
-  home.file.".lesskey".source = ./term/less/lesskey;
 
   imports = [
     ./term/bash.nix

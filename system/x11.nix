@@ -7,11 +7,6 @@
     xkbVariant = "bepo";
     xkbOptions = "caps:escape";
 
-    desktopManager = {
-      default = "none";
-      xterm.enable = false;
-    };
-
     displayManager.lightdm = {
       enable = true;
       greeters.gtk = {
@@ -37,7 +32,7 @@
       enable = true;
       package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
-        compton
+        picom
         i3blocks
         i3lock-fancy
         i3status
