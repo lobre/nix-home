@@ -3,7 +3,7 @@
 {
   xdg.configFile."greenclip.cfg".text = ''
     Config {
-     maxHistoryLength = 50,
+     maxHistoryLength = 500,
      historyPath = "~/.cache/greenclip.history",
      staticHistoryPath = "~/.cache/greenclip.staticHistory",
      imageCachePath = "/tmp/",

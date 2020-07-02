@@ -4,18 +4,79 @@ with lib;
 
 let
   cfg = config.theme;
+
+  ansiColors = ''
+    #!${pkgs.stdenv.shell}
+
+    echo -e "\e[40mDark ${cfg.colors.dark}"
+    echo -e "\e[100mDarkAlt ${cfg.colors.darkAlt}"
+
+    echo -e "\e[41mColor1 ${cfg.colors.color1}"
+    echo -e "\e[101mColor1Alt ${cfg.colors.color1Alt}"
+
+    echo -e "\e[42mColor2 ${cfg.colors.color2}"
+    echo -e "\e[102mColor2Alt ${cfg.colors.color2Alt}"
+
+    echo -e "\e[43mColor3 ${cfg.colors.color3}"
+    echo -e "\e[103mColor3Alt ${cfg.colors.color3Alt}"
+
+    echo -e "\e[44mColor4 ${cfg.colors.color4}"
+    echo -e "\e[104mColor4Alt ${cfg.colors.color4Alt}"
+
+    echo -e "\e[45mColor5 ${cfg.colors.color5}"
+    echo -e "\e[105mColor5Alt ${cfg.colors.color5Alt}"
+
+    echo -e "\e[46mColor6 ${cfg.colors.color6}"
+    echo -e "\e[106mColor6Alt ${cfg.colors.color6Alt}"
+
+    echo -e "\e[47mLight ${cfg.colors.light}"
+    echo -e "\e[107mlightAlt ${cfg.colors.lightAlt}"
+  '';
+
+  xresourcesDump = ''
+    ! To help importing the current theme into 
+    ! https://terminal.sexy/
+    
+    ! special
+    *.foreground:   ${cfg.colors.foreground}
+    *.background:   ${cfg.colors.background}
+
+    ! black
+    *.color0:       ${cfg.colors.dark}
+    *.color8:       ${cfg.colors.darkAlt}
+
+    ! red
+    *.color1:       ${cfg.colors.color1}
+    *.color9:       ${cfg.colors.color1Alt}
+
+    ! green
+    *.color2:       ${cfg.colors.color2}
+    *.color10:      ${cfg.colors.color2Alt}
+
+    ! yellow
+    *.color3:       ${cfg.colors.color3}
+    *.color11:      ${cfg.colors.color3Alt}
+
+    ! blue
+    *.color4:       ${cfg.colors.color4}
+    *.color12:      ${cfg.colors.color4Alt}
+
+    ! magenta
+    *.color5:       ${cfg.colors.color5}
+    *.color13:      ${cfg.colors.color5Alt}
+
+    ! cyan
+    *.color6:       ${cfg.colors.color6}
+    *.color14:      ${cfg.colors.color6Alt}
+
+    ! white
+    *.color7:       ${cfg.colors.light}
+    *.color15:      ${cfg.colors.lightAlt}
+  '';
 in
 
 {
   options.theme = {
-
-    mode = mkOption {
-      type = types.enum [ "dark" "light" ];
-      default = "dark";
-      description = ''
-        Mode to use: <literal>dark</literal> or <literal>light</literal>.
-      '';
-    };
 
     font = {
       family = mkOption {
@@ -201,6 +262,12 @@ in
   };
 
   config = {
+    home.file.".theme.xresources".text = xresourcesDump;
+    home.file."bin/ansi-colors" = {
+      text = ansiColors;
+      executable = true;
+    };
+
     theme = {
       font = {
         family = "Fira Code";
