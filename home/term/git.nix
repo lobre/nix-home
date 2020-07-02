@@ -6,18 +6,6 @@
     userEmail = "loric.brevet@gmail.com";
     userName = "Loric Brevet";
 
-    delta = {
-      enable = true;
-      options = [
-        "--theme=none"
-        "--24-bit-color=never"
-        "--minus-color=red"
-        "--minus-emph-color=bright-red"
-        "--plus-color=green"
-        "--plus-emph-color=bright-green"
-      ];
-    };
-
     aliases = {
       "lo" = "log -i --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
       "authors" = "shortlog -e -s -n";
