@@ -1,10 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
   # No need for predictable names as I usually only have one ethernet and one wireless interfaces
   networking.usePredictableInterfaceNames = false;
 
@@ -26,8 +22,10 @@
     curl
     git
     mkpasswd
+    pciutils
     tailscale
     unzip
+    usbutils
     vim_configurable
     wget
   ];

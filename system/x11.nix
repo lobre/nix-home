@@ -44,7 +44,8 @@
         i3status
         libnotify
         lxappearance
-        networkmanagerapplet 
+        networkmanagerapplet
+        dmenu
       ];
     };
   };
