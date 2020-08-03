@@ -52,6 +52,12 @@
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  # Garbage collection
+  nix.gc = {
+    automatic = true;
+    options = "--delete-older-than 15d";
+  };
+
   # Allow packages from unfree channels
   nixpkgs.config.allowUnfree = true;
 }

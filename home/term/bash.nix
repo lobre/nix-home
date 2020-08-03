@@ -12,16 +12,10 @@
 
     shellAliases = {
       "ll"     = "ls -lh";
-      "llt"    = "ll -rt";
-      "lla"    = "ll -a";
       ".."     = "cd ..";
       "..."    = "cd ../..";
       "extip"  = "wget http://ipinfo.io/ip -qO -";
-      "dl"     = "cd $HOME/Downloads && llt";
-      "doc"    = "cd $HOME/Documents";
-      "lab"    = "cd $HOME/Lab";
       "copy"   = "xclip -selection clipboard";
-      "sshh"   = "sed -rn 's/^\s*Host\s+(.*)\s*/\1/ip' ~/.ssh/config";
       "rg"     = "rg --no-ignore-vcs --smart-case";
     };
 
