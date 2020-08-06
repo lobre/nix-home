@@ -60,6 +60,9 @@
       status = {
         submoduleSummary = true;
       };
+      submodule = {
+        recurse = true;
+      };
     };
 
     lfs.enable = true;
