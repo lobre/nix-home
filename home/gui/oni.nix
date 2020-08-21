@@ -22,6 +22,7 @@
       "editor.zenMode.hideTabs": true,
       "editor.zenMode.singleFile": true,
       "files.exclude": [ "_esy", "node_modules" ],
+      "go.useLanguageServer": true,
       "workbench.activityBar.visible": true,
       "workbench.editor.showTabs": true,
       "workbench.iconTheme": "vs-seti",

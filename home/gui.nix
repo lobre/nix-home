@@ -51,6 +51,7 @@ in
     gnome3.meld
     google-chrome
     mattermost-desktop
+    obsidian
     peek
     remmina
     shutter

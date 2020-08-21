@@ -1,5 +1,13 @@
 { config, pkgs, ... }:
 
+let
+  nixGL = fetchTarball "https://github.com/guibou/nixGL/archive/master.tar.gz";
+
+  myNixGL = (import "${nixGL}/default.nix" {
+      pkgs = pkgs;
+  }).nixGLDefault;
+in
+
 {
   # To correct missing behaviors on non NixOS systems
   programs.bash.profileExtra = ''
@@ -21,9 +29,7 @@
       self: super: {
         alacritty = super.writeScriptBin "alacritty" ''
           #!${super.stdenv.shell}
-          export LIBGL_DRIVERS_PATH=${super.mesa_drivers}/lib/dri
-          export LD_LIBRARY_PATH=${super.mesa_drivers}/lib:$LD_LIBRARY_PATH
-          exec ${super.alacritty}/bin/alacritty "$@"
+          exec ${myNixGL}/bin/nixGL ${super.alacritty}/bin/alacritty "$@"
         '';
       }
     )
@@ -31,9 +37,7 @@
       self: super: {
         picom = super.writeScriptBin "picom" ''
           #!${super.stdenv.shell}
-          export LIBGL_DRIVERS_PATH=${super.mesa_drivers}/lib/dri
-          export LD_LIBRARY_PATH=${super.mesa_drivers}/lib:$LD_LIBRARY_PATH
-          exec ${super.picom}/bin/picom "$@"
+          exec ${myNixGL}/bin/nixGL ${super.picom}/bin/picom "$@"
         '';
       }
     )
