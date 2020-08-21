@@ -5,7 +5,6 @@
     {
       "workbench.colorTheme": "One Dark Pro",
       "editor.detectIndentation": true,
-      "editor.fontFamily": "FiraCode-Regular.ttf",
       "editor.fontSize": 14,
       "editor.largeFileOptimizations": true,
       "editor.highlightActiveIndentGuide": true,
