@@ -20,6 +20,7 @@
     killall
     ltrace
     ncdu
+    nodejs
     pv
     ripgrep
     tcpdump
