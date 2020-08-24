@@ -219,10 +219,10 @@ in
         };
 
         output = {
-          h = "mode default, move workspace to output left";
-          j = "mode default, move workspace to output down";
-          k = "mode default, move workspace to output up";
-          l = "mode default, move workspace to output right";
+          h = "move workspace to output left";
+          j = "move workspace to output down";
+          k = "move workspace to output up";
+          l = "move workspace to output right";
 
           Return = "mode default";
           Escape = "mode default";
