@@ -98,8 +98,8 @@ in
         "XF86AudioMute" = "exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle";
 
         # Sreen brightness controls
-        "XF86MonBrightnessUp" = "exec xbacklight -inc 20 # increase screen brightness";
-        "XF86MonBrightnessDown" = "exec xbacklight -dec 20 # decrease screen brightness";
+        "XF86MonBrightnessUp" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -inc 20 # increase screen brightness";
+        "XF86MonBrightnessDown" = "exec ${pkgs.xorg.xbacklight}/bin/xbacklight -dec 20 # decrease screen brightness";
 
         # Scratchpad
         "${mod}+Shift+dollar" = "move scratchpad";
