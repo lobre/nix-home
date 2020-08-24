@@ -30,7 +30,6 @@ in
     picom
     haskellPackages.greenclip
     i3blocks
-    i3lock-fancy
     i3status
     libnotify
     lxappearance

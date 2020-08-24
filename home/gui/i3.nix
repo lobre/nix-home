@@ -4,10 +4,15 @@ let
   mod = "Mod4";
   theme = config.theme;
   lockFont = builtins.replaceStrings [" "] ["-"] "${theme.font.fullname}";
-  lockScript = pkgs.writeScriptBin "i3lock-no-notif" ''
+
+  # Allow to fallback to native i3lock if on non-nixos
+  # if binary exists at /usr/bin/i3lock-fancy
+  # This is proposed due to pam incompatibilities.
+  # See https://gist.github.com/rossabaker/f6e5e89fd7423e1c0730fcd950c0cd33
+  lockScript = pkgs.writeScriptBin "i3lock" ''
     #!${pkgs.stdenv.shell}
     notify-send "DUNST_COMMAND_PAUSE"
-    ${pkgs.i3lock-fancy}/bin/i3lock-fancy "$@"
+    PATH=$PATH:/usr/bin:${pkgs.i3lock-fancy}/bin i3lock-fancy "$@"
     notify-send "DUNST_COMMAND_RESUME"
   '';
 in
@@ -160,7 +165,7 @@ in
         { command = "xset s off"; notification = false; }
 
         # Autolock after 10 min except if mouse in bottom right corner
-        { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"${lockScript}/bin/i3lock-no-notif -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale\""; notification = false; }
+        { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale\""; notification = false; }
 
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
@@ -208,7 +213,7 @@ in
         }; 
 
         power = {
-          l = "mode default, exec --no-startup-id ${lockScript}/bin/i3lock-no-notif -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale";
+          l = "mode default, exec --no-startup-id ${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale";
           e = "mode default, exec --no-startup-id i3-msg exit";
           r = "mode default, exec --no-startup-id systemctl reboot";
           p = "mode default, exec --no-startup-id systemctl poweroff -i";
