@@ -167,6 +167,9 @@ in
         # Autolock after 10 min except if mouse in bottom right corner
         { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale\""; notification = false; }
 
+        # Hide mouse after 5 seconds
+        { command = "${pkgs.unclutter-xfixes}/bin/unclutter -idle 5"; notification = false; }
+
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
 
