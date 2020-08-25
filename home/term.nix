@@ -21,6 +21,7 @@
     ltrace
     ncdu
     nodejs
+    perl
     pv
     ripgrep
     tcpdump
