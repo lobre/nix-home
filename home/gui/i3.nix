@@ -111,18 +111,12 @@ in
         "${mod}+dollar" = "scratchpad show";
 
         # Rofi
-        #
-        # It reveals by default on the monitor that shows the mouse pointer, 
-        # so we use option -m -1 to force showing on focused monitor instead
-        # (mouse pointer does not follow focus when changed by keyboard)
-        #
-        # see https://github.com/davatorium/rofi/wiki/WindowPosition#monitor
-        "${mod}+space" = "exec --no-startup-id rofi -m -1 -show drun";
-        "${mod}+Shift+space" = "exec --no-startup-id rofi -m -1 -show window";
-        "${mod}+v" = "exec --no-startup-id rofi -m -1 -modi 'clipboard:greenclip print' -show clipboard";
-        "${mod}+m" = "exec --no-startup-id rofi -m -1 -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
-        "${mod}+c" = "exec --no-startup-id rofi -m -1 -modi 'layouts:rofi-setxkbmap.sh' -show layouts";
-        "${mod}+shift+d" = "exec --no-startup-id rofi -m -1 -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
+        "${mod}+space" = "exec --no-startup-id rofi -show drun";
+        "${mod}+Shift+space" = "exec --no-startup-id rofi -show window";
+        "${mod}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
+        "${mod}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
+        "${mod}+c" = "exec --no-startup-id rofi -modi 'layouts:rofi-setxkbmap.sh' -show layouts";
+        "${mod}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
 
         # Reload setxkbmap service
         "${mod}+shift+m" = "exec --no-startup-id systemctl --user restart setxkbmap.service";
@@ -201,12 +195,12 @@ in
       };
 
       focus = {
-        # focus follows mouse
+        # does focus follows mouse
         followMouse = true;
+        # does mouse reset to focused container
+        mouseWarping = true;
         # disable cycle focus back to opposite window in containers when reaching the edge
         forceWrapping = false;
-        # mouse does not follow keyboard focus
-        mouseWarping = false;
         newWindow = "smart";
       };
 
