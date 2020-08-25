@@ -5,6 +5,16 @@ with lib;
 let
   cfg = config.theme;
 
+  wallpaper = pkgs.stdenv.mkDerivation {
+    pname = "wallpaper";
+    version = "0.0.1";
+    src = ./.;
+    installPhase = ''
+      mkdir -p $out
+      cp wallpaper.jpg $out/wallpaper.jpg
+    '';
+  };
+
   ansiColors = ''
     #!${pkgs.stdenv.shell}
 
@@ -77,6 +87,13 @@ in
 
 {
   options.theme = {
+    wallpaper = mkOption {
+      type = types.str;
+      default = "$HOME/Pictures/wallpaper.jpg";
+      description = ''
+        Path of wallpaper.
+      '';
+    };
 
     font = {
       family = mkOption {
@@ -269,6 +286,8 @@ in
     };
 
     theme = {
+      wallpaper = "${wallpaper}/wallpaper.jpg";
+
       font = {
         family = "Fira Code";
         fullname = "Fira Code Regular";

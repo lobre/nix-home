@@ -31,6 +31,8 @@ in
         # switching between workspace
         "mod1+Shift+Tab" = "workspace prev_on_output";
         "mod1+Tab" = "workspace next_on_output";
+        "${mod}+p" = "workspace prev_on_output";
+        "${mod}+n" = "workspace next_on_output";
 
         # change focus
         "${mod}+h" = "focus left";
@@ -172,6 +174,9 @@ in
 
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
+
+        # Restore wallpaper
+        { command = "${pkgs.feh}/bin/feh --bg-fill ${theme.wallpaper}"; notification = false; }
 
         # Start applets
         { command = "nm-applet"; notification = false; }

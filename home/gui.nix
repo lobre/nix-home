@@ -81,15 +81,6 @@ in
     platformTheme = "gtk";
   };
 
-  services.random-background = {
-    enable = true;
-    enableXinerama = true;
-    display = "fill";
-    imageDirectory = "%h/Pictures/Wallpapers";
-    # could set something like "1h" or "30min"
-    interval = null;
-  };
-
   # Allow XDG linking
   xdg.enable = true;
 
