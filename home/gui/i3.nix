@@ -167,10 +167,10 @@ in
         { command = "xset s off"; notification = false; }
 
         # Autolock after 10 min except if mouse in bottom right corner
-        { command = "xautolock -corners 000- -detectsleep -time 10 -locker \"${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale\""; notification = false; }
+        { command = "${pkgs.xautolock}/bin/xautolock -corners 000- -detectsleep -time 10 -locker \"${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale\""; notification = false; }
 
-        # Hide mouse after 5 seconds
-        { command = "${pkgs.unclutter-xfixes}/bin/unclutter -idle 5"; notification = false; }
+        # Hide mouse after 10 seconds
+        { command = "${pkgs.unclutter-xfixes}/bin/unclutter -idle 10"; notification = false; }
 
         # Make keyboard stop faster
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
@@ -179,10 +179,10 @@ in
         { command = "${pkgs.feh}/bin/feh --bg-fill ${theme.wallpaper}"; notification = false; }
 
         # Start applets
-        { command = "nm-applet"; notification = false; }
+        { command = "${pkgs.networkmanagerapplet}/bin/nm-applet"; notification = false; }
 
         # Clipboard manager
-        { command = "greenclip daemon"; notification = false; }
+        { command = "${pkgs.haskellPackages.greenclip}/bin/greenclip daemon"; notification = false; }
 
         # Enable vmware guests if installed
         { command = "vmware-user"; notification = false; }

@@ -15,7 +15,7 @@
       ".."     = "cd ..";
       "..."    = "cd ../..";
       "extip"  = "wget http://ipinfo.io/ip -qO -";
-      "copy"   = "xclip -selection clipboard";
+      "copy"   = "${pkgs.xclip}/bin/xclip -selection clipboard";
       "rg"     = "rg --no-ignore-vcs --smart-case";
     };
 

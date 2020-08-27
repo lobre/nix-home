@@ -27,18 +27,12 @@ in
 
     # i3
     arandr
-    picom
-    haskellPackages.greenclip
     i3blocks
     i3status
     libnotify
     lxappearance
-    networkmanagerapplet 
     pavucontrol
     shutter
-    xautolock
-    xclip
-    xcwd
 
     # apps
     discord
