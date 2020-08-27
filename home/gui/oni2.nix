@@ -1,6 +1,51 @@
 { config, pkgs, ... }:
 
+let
+  dl-helper = pkgs.writeScriptBin "oni-dl-to" ''
+    #!${pkgs.stdenv.shell}
+
+    dest=''\${1%/}
+    if [[ -z "$dest" ]]; then
+      echo "Missing destination folder as first argument"
+      exit 1
+    elif [[ ! -d "$dest" ]]; then
+      echo "Argument is not a directory"
+      exit 1
+    fi
+
+    # appending filename
+    dest="$dest/Onivim2-x86_64-master.AppImage"
+
+    # open browser to the DL page
+    xdg-open https://v2.onivim.io/early-access-portal 2>/dev/null
+
+    read -p "When file is downloaded, press enter"
+
+    dl=$(xdg-user-dir DOWNLOAD)
+    from="$dl/$(ls -rt $dl | tail -n1)"
+
+    read -p "Found $from, press enter to move it to destination"
+
+    echo "Moving $from to $dest"
+    mv "$from" "$dest"
+    echo "New version in place, please build oni2 now"
+  '';
+
+  oni2 = pkgs.appimageTools.wrapType2 rec {
+    name = "oni2-0.5-0";
+
+    # The file needs to be downloaded and placed
+    # at this location as it currently needs a token.
+    src = ./oni2/Onivim2-x86_64-master.AppImage;
+
+    # Change binary name to oni
+    extraInstallCommands = "mv $out/bin/{${name},oni}";
+  };
+in
+
 {
+  home.packages = [ oni2 dl-helper];
+
   xdg.configFile."oni2/configuration.json".text = ''
     {
       "workbench.colorTheme": "One Dark Pro",

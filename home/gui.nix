@@ -98,6 +98,6 @@ in
     ./gui/xresources.nix
     ./gui/picom.nix
     ./gui/dunst.nix
-    ./gui/oni.nix
+    ./gui/oni2.nix
   ];
 }
