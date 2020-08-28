@@ -1,6 +1,41 @@
 { config, pkgs, ... }:
 
 let
+  pname = "oni2";
+  version = "0.5.0";
+  description = "Native, lightweight modal code editor";
+
+  # warning: desktop entry is currently not working
+  desktopItem = pkgs.makeDesktopItem {
+     name = "Onivim2";
+     desktopName = "Onivim2";
+     exec = pname;
+     comment = "${description}";
+     type = "Application";
+  };
+
+  oni2 = pkgs.appimageTools.wrapType2 rec {
+    name = "${pname}-${version}";
+
+    # The file needs to be downloaded and placed
+    # at this location as it currently needs a token.
+    src = ./oni2/Onivim2-x86_64-master.AppImage;
+
+    extraInstallCommands = ''
+      mkdir -p $out/share/applications
+      ln -s ${desktopItem}/share/applications/* $out/share/applications
+
+      # change binary name
+      mv $out/bin/{${name},${pname}}
+    '';
+
+    meta = {
+      description = "${description}";
+      homepage = "https://onivim.github.io/";
+      platforms = [ "x86_64-linux" ];
+    };
+  };
+
   dl-helper = pkgs.writeScriptBin "oni-dl-to" ''
     #!${pkgs.stdenv.shell}
 
@@ -30,17 +65,6 @@ let
     mv "$from" "$dest"
     echo "New version in place, please build oni2 now"
   '';
-
-  oni2 = pkgs.appimageTools.wrapType2 rec {
-    name = "oni2-0.5-0";
-
-    # The file needs to be downloaded and placed
-    # at this location as it currently needs a token.
-    src = ./oni2/Onivim2-x86_64-master.AppImage;
-
-    # Change binary name to oni
-    extraInstallCommands = "mv $out/bin/{${name},oni}";
-  };
 in
 
 {
