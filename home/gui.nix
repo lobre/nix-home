@@ -82,13 +82,6 @@ in
   fonts.fontconfig.enable = true;
   xdg.dataFile."fonts".source = ./gui/fonts;
 
-  # Link scripts
-  home.file."bin-gui" = {
-    source = ./gui/bin;
-    target = "bin";
-    recursive = true;
-  };
-
   imports = [
     ./gui/theme.nix
     ./gui/i3.nix

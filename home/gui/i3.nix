@@ -11,9 +11,67 @@ let
   # See https://gist.github.com/rossabaker/f6e5e89fd7423e1c0730fcd950c0cd33
   lockScript = pkgs.writeScriptBin "i3lock" ''
     #!${pkgs.stdenv.shell}
+
     notify-send "DUNST_COMMAND_PAUSE"
     PATH=$PATH:/usr/bin:${pkgs.i3lock-fancy}/bin i3lock-fancy "$@"
     notify-send "DUNST_COMMAND_RESUME"
+  '';
+
+  # Switch between bepo/azerty
+  rofiKbLayout = pkgs.writeScriptBin "rofi-kb-layout" ''
+    #!${pkgs.stdenv.shell}
+
+    if [ -z $@ ]; then
+        echo "bepo"
+        echo "azerty"
+    else
+        if [[ "$@" == "bepo" ]]; then
+            ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr -variant bepo
+        elif [[ "$@" == "azerty" ]]; then
+            ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr
+        fi
+    fi
+  '';
+
+  # Mute/unmute dunst notifications
+  rofiMuteNotif = pkgs.writeScriptBin "rofi-mute-notif" ''
+    #!${pkgs.stdenv.shell}
+
+    if [ -z $@ ]; then
+        echo "mute"
+        echo "unmute"
+    else
+        if [[ "$@" == "mute" ]]; then
+            notify-send DUNST_COMMAND_PAUSE
+        elif [[ "$@" == "unmute" ]]; then
+            notify-send DUNST_COMMAND_RESUME
+        fi
+    fi
+  '';
+
+  # Change position of monitors 
+  rofiMonitors = pkgs.writeScriptBin "rofi-monitors" ''
+    #!${pkgs.stdenv.shell}
+
+    DIR="$HOME/.screenlayout"
+
+    if [ -z $@ ]; then
+        function gen_layouts() {
+            for file in $DIR/*
+            do
+                if [[ -f $file ]]; then
+                    file="$(basename -- $file)"
+                    echo "$file" | cut -f 1 -d '.'
+                fi
+            done
+        }
+        gen_layouts
+    else
+        layout="$DIR/$@.sh"
+        if [[ -f $layout ]]; then
+            sh "$layout"
+        fi
+    fi
   '';
 in
 
@@ -113,27 +171,18 @@ in
         "${mod}+dollar" = "scratchpad show";
 
         # Rofi
-        "${mod}+space" = "exec --no-startup-id rofi -show drun";
-        "${mod}+Shift+space" = "exec --no-startup-id rofi -show window";
-        "${mod}+v" = "exec --no-startup-id rofi -modi 'clipboard:greenclip print' -show clipboard";
-        "${mod}+m" = "exec --no-startup-id rofi -modi 'monitors:rofi-arandr-monitors.sh' -show monitors";
-        "${mod}+c" = "exec --no-startup-id rofi -modi 'layouts:rofi-setxkbmap.sh' -show layouts";
-        "${mod}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:rofi-dunst-mute.sh' -show dunst";
-
-        # Reload setxkbmap service
-        "${mod}+shift+m" = "exec --no-startup-id systemctl --user restart setxkbmap.service";
-
-        # Reload background service
-        "${mod}+b" = "exec --no-startup-id systemctl --user restart random-background.service";
+        "${mod}+space" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -show drun";
+        "${mod}+Shift+space" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -show window";
+        "${mod}+v" = "exec --no-startup-id rofi -modi 'clipboard:${pkgs.haskellPackages.greenclip}/bin/greenclip print' -show clipboard";
+        "${mod}+m" = "exec --no-startup-id rofi -modi 'monitors:${rofiMonitors}/bin/rofi-monitors' -show monitors";
+        "${mod}+c" = "exec --no-startup-id rofi -modi 'layouts:${rofiKbLayout}/bin/rofi-kb-layout' -show layouts";
+        "${mod}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:${rofiMuteNotif}/bin/rofi-mute-notif' -show dunst";
 
         # Start a terminal
         "${mod}+Return" = "exec --no-startup-id alacritty --working-directory \"`${pkgs.xcwd}/bin/xcwd`\"";
 
         # Screenshot
-        "Print" = "exec --no-startup-id shutter --select --disable_systray";
-
-        # Gnome settings
-        "${mod}+F1" = "exec --no-startup-id env XDG_CURRENT_DESKTOP=GNOME gnome-control-center";
+        "Print" = "exec --no-startup-id ${pkgs.shutter}/bin/shutter --select --disable_systray";
 
         # Enable modes
         "${mod}+r" = "mode resize";

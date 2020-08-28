@@ -31,13 +31,6 @@
     wget 
   ];
 
-  # Link scripts
-  home.file."bin-term" = {
-    source = ./term/bin;
-    target = "bin";
-    recursive = true;
-  };
-
   # Allow XDG linking
   xdg.enable = true;
 

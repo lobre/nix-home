@@ -5,7 +5,6 @@
     enable = true;
     layout = "fr";
     xkbVariant = "bepo";
-    xkbOptions = "caps:escape";
 
     displayManager.lightdm = {
       enable = true;
