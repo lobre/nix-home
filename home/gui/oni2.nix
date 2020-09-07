@@ -19,7 +19,7 @@ let
 
     # The file needs to be downloaded and placed
     # at this location as it currently needs a token.
-    src = ./oni2/Onivim2-x86_64-master.AppImage;
+    src = ./oni2/Onivim2.AppImage;
 
     extraInstallCommands = ''
       mkdir -p $out/share/applications
@@ -49,7 +49,7 @@ let
     fi
 
     # appending filename
-    dest="$dest/Onivim2-x86_64-master.AppImage"
+    dest="$dest/Onivim2.AppImage"
 
     # open browser to the DL page
     xdg-open https://v2.onivim.io/early-access-portal 2>/dev/null
@@ -60,15 +60,15 @@ let
     from="$dl/$(ls -rt $dl | tail -n1)"
 
     read -p "Found $from, press enter to move it to destination"
-
     echo "Moving $from to $dest"
     mv "$from" "$dest"
+
     echo "New version in place, please build oni2 now"
   '';
 in
 
 {
-  home.packages = [ oni2 dl-helper];
+  home.packages = [ oni2 dl-helper ];
 
   xdg.configFile."oni2/configuration.json".text = ''
     {
