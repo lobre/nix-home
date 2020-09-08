@@ -164,8 +164,9 @@ in
 
         # Sreen brightness controls
         # make sure your user belong to the "video" group to have permissions (sudo usermod -a -G video $USER)
-        "XF86MonBrightnessUp" = "exec ${pkgs.acpilight}/bin/xbacklight -inc 20 # increase screen brightness";
-        "XF86MonBrightnessDown" = "exec ${pkgs.acpilight}/bin/xbacklight -dec 20 # decrease screen brightness";
+        # make also sure you have the correct udev rules in place (https://github.com/haikarainen/light/blob/master/90-backlight.rules)
+        "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 30 # increase screen brightness";
+        "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 30 # decrease screen brightness";
 
         # Scratchpad
         "${mod}+Shift+dollar" = "move scratchpad";

@@ -49,7 +49,6 @@
 
   # Graphical apps
   environment.systemPackages = with pkgs; [
-    acpilight
     firefox
     pantheon.elementary-files
     pavucontrol
@@ -69,6 +68,9 @@
     # to only affect touchpad and not all input devices
     additionalOptions = ''MatchIsTouchpad "on"'';
   };
+
+  # Brightness
+  programs.light.enable = true;
 
   # Optimize battery life
   services.tlp.enable = true;
