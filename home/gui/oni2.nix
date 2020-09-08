@@ -33,7 +33,7 @@ let
     args="$@"
     if [ $# -ne 0 ]; then
         lastArg=''${@:$#}
-        if [[ -d "$lastArg" ]] || [[ -f "$lastArg" ]]; then
+        if [[ ''${lastArg:0:1} != "-" ]]; then
             dir=$(readlink -m $lastArg)
             args="''${*%''${!#}} $dir"
         fi
