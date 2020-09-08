@@ -35,7 +35,6 @@ in
     shutter
 
     # apps
-    acpilight
     discord
     filezilla
     firefox 
