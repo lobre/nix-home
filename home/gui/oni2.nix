@@ -36,6 +36,24 @@ let
     };
   };
 
+  oni2wrapper = pkgs.writeScriptBin "oni2" ''
+    #!${pkgs.stdenv.shell}
+
+    # if last argument is a path, transform it to an
+    # absolute one so it works as expected in the FHS
+    # environment
+    args="$@"
+    if [ $# -ne 0 ]; then
+        lastArg=''${@:$#}
+        if [[ -d "$lastArg" ]] || [[ -f "$lastArg" ]]; then
+            dir=$(readlink -m $lastArg)
+            args="''${*%''${!#}} $dir"
+        fi
+    fi
+
+    ${oni2}/bin/oni2 -- -f $args > /dev/null 2>&1 &
+  '';
+
   dl-helper = pkgs.writeScriptBin "oni-dl-to" ''
     #!${pkgs.stdenv.shell}
 
@@ -68,7 +86,7 @@ let
 in
 
 {
-  home.packages = [ oni2 dl-helper ];
+  home.packages = [ oni2wrapper dl-helper ];
 
   xdg.configFile."oni2/configuration.json".text = ''
     {
