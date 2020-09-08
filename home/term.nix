@@ -24,6 +24,7 @@
     perl
     pv
     ripgrep
+    strace
     tcpdump
     traceroute
     tree
