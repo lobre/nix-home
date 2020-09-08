@@ -5,15 +5,6 @@ let
   version = "0.5.0";
   description = "Native, lightweight modal code editor";
 
-  # warning: desktop entry is currently not working
-  desktopItem = pkgs.makeDesktopItem {
-     name = "Onivim2";
-     desktopName = "Onivim2";
-     exec = pname;
-     comment = "${description}";
-     type = "Application";
-  };
-
   oni2 = pkgs.appimageTools.wrapType2 rec {
     name = "${pname}-${version}";
 
@@ -22,9 +13,6 @@ let
     src = ./oni2/Onivim2.AppImage;
 
     extraInstallCommands = ''
-      mkdir -p $out/share/applications
-      ln -s ${desktopItem}/share/applications/* $out/share/applications
-
       # change binary name
       mv $out/bin/{${name},${pname}}
     '';
@@ -51,6 +39,8 @@ let
         fi
     fi
 
+    # As oni is executed inside a FHS, it will exit if the main process quit.
+    # So we force oni to launch in foreground mode but detach from the process
     ${oni2}/bin/oni2 -- -f $args > /dev/null 2>&1 &
   '';
 
