@@ -35,6 +35,7 @@ in
     shutter
 
     # apps
+    acpilight
     discord
     filezilla
     firefox 
@@ -45,6 +46,8 @@ in
     google-chrome
     mattermost-desktop
     obsidian
+    pantheon.elementary-files
+    pavucontrol
     peek
     remmina
     shutter

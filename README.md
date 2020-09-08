@@ -61,7 +61,6 @@ To finish the preparation, go edit the main `configuration.nix` file and include
       imports = [
         ./hardware-configuration.nix
         ./system/configuration.nix
-        ./system/hardware.nix
         ./system/x11.nix
         ./system/users.nix
       ];

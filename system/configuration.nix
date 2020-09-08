@@ -24,14 +24,8 @@
 
   # Packages installed in system profile
   environment.systemPackages = with pkgs; [
-    acpilight
-    brightnessctl
     curl
-    firefox 
     git
-    open-vm-tools
-    pantheon.elementary-files
-    pavucontrol
     tailscale
     unzip
     vim_configurable 
@@ -45,12 +39,7 @@
   programs.zsh.enable = true;
 
   # Services
-  services.gnome3.sushi.enable = true;
   services.tailscale.enable = true;
-
-  # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
 
   # Garbage collection
   nix.gc = {
