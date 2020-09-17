@@ -175,10 +175,10 @@ in
         # Rofi
         "${mod}+space" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -show drun";
         "${mod}+Shift+space" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -show window";
-        "${mod}+v" = "exec --no-startup-id rofi -modi 'clipboard:${pkgs.haskellPackages.greenclip}/bin/greenclip print' -show clipboard";
-        "${mod}+m" = "exec --no-startup-id rofi -modi 'monitors:${rofiMonitors}/bin/rofi-monitors' -show monitors";
-        "${mod}+c" = "exec --no-startup-id rofi -modi 'layouts:${rofiKbLayout}/bin/rofi-kb-layout' -show layouts";
-        "${mod}+shift+d" = "exec --no-startup-id rofi -modi 'dunst:${rofiMuteNotif}/bin/rofi-mute-notif' -show dunst";
+        "${mod}+v" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -modi 'clipboard:${pkgs.haskellPackages.greenclip}/bin/greenclip print' -show clipboard";
+        "${mod}+m" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -modi 'monitors:${rofiMonitors}/bin/rofi-monitors' -show monitors";
+        "${mod}+c" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -modi 'layouts:${rofiKbLayout}/bin/rofi-kb-layout' -show layouts";
+        "${mod}+shift+d" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -modi 'dunst:${rofiMuteNotif}/bin/rofi-mute-notif' -show dunst";
 
         # Start a terminal
         "${mod}+Return" = "exec --no-startup-id alacritty --working-directory \"`${pkgs.xcwd}/bin/xcwd`\"";
@@ -237,6 +237,10 @@ in
 
         # Enable vmware guests if installed
         { command = "vmware-user"; notification = false; }
+
+        # Force restart picom as the service does not start anymore automatically...
+        # https://github.com/nix-community/home-manager/issues/1217
+        { command = "systemctl --user restart picom.service"; notification = false; }
       ];
 
       floating = {

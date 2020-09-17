@@ -53,6 +53,7 @@ in
     skype
     slack-dark
     spotify
+    teams
   ];
 
   gtk = {
