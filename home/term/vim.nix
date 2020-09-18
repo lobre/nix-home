@@ -15,13 +15,10 @@
       let g:netrw_winsize = 25
       let g:netrw_localrmdir='rm -r'
 
-      " Search options
-      let &grepprg="grep -RIin --exclude=tags $* 2>/dev/null"
-
       " Search with rg if available
       if executable('rg')
-          let &grepprg="rg --vimgrep --smart-case --no-ignore-vcs --glob '!tags' --no-heading $* 2>/dev/null"
-          set grepformat=%f:%l:%c:%m
+          set grepprg=rg\ --vimgrep\ --no-heading
+          set grepformat=%f:%l:%c:%m,%f:%l:%m
       endif
 
       set dir=/tmp
