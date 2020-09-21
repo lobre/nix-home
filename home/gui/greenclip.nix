@@ -8,7 +8,8 @@
      staticHistoryPath = "~/.cache/greenclip.staticHistory",
      imageCachePath = "/tmp/",
      usePrimarySelectionAsInput = True,
-     blacklistedApps = []
+     blacklistedApps = [],
+     trimSpaceFromSelection = True
     }
   '';
 }

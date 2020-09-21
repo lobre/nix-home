@@ -90,6 +90,7 @@ in
     ./gui/i3.nix
     ./gui/i3status.nix
     ./gui/rofi.nix
+    ./gui/greenclip.nix
     ./gui/alacritty.nix
     ./gui/xresources.nix
     ./gui/picom.nix
