@@ -13,7 +13,7 @@ in
     font = "${theme.font.family} 12";
     lines = 12;
     padding = 18;
-    width = 60;
+    width = 50;
     location = "center";
     scrollbar = false;
     terminal = "${pkgs.rxvt_unicode}/bin/urxvt";
