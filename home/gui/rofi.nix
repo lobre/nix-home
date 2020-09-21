@@ -18,38 +18,38 @@ in
 
     colors = {
       window = {
-        background = "${theme.colors.foreground}";
-        border = "${theme.colors.foreground}";
-        separator = "${theme.colors.foreground}";
+        background = "${theme.colors.background}";
+        border = "${theme.colors.background}";
+        separator = "${theme.colors.background}";
       };
 
       rows = {
         normal = {
-          background = "${theme.colors.foreground}";
+          background = "${theme.colors.background}";
           foreground = "${theme.colors.foreground}";
-          backgroundAlt = "${theme.colors.foreground}";
+          backgroundAlt = "${theme.colors.background}";
           highlight = {
-            background = "${theme.colors.foreground}";
+            background = "${theme.colors.background}";
             foreground = "${theme.colors.color4}";
           };
         };
 
         active = {
-          background = "${theme.colors.foreground}";
+          background = "${theme.colors.background}";
           foreground = "${theme.colors.color4}";
-          backgroundAlt = "${theme.colors.foreground}";
+          backgroundAlt = "${theme.colors.background}";
           highlight = {
-            background = "${theme.colors.foreground}";
+            background = "${theme.colors.background}";
             foreground = "${theme.colors.color4}";
           };
         };
 
         urgent = {
-          background = "${theme.colors.foreground}";
+          background = "${theme.colors.background}";
           foreground = "${theme.colors.urgent}";
-          backgroundAlt = "${theme.colors.foreground}";
+          backgroundAlt = "${theme.colors.background}";
           highlight = {
-            background = "${theme.colors.foreground}";
+            background = "${theme.colors.background}";
             foreground = "${theme.colors.urgent}";
           };
         };
