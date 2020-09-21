@@ -7,6 +7,8 @@ in
 {
   programs.rofi = {
     enable = true;
+    package = pkgs.rofi.override { plugins = [ pkgs.rofi-calc pkgs.rofi-file-browser ]; };
+
     borderWidth = null;
     font = "${theme.font.family} 12";
     lines = 12;
@@ -60,6 +62,15 @@ in
       rofi.kb-row-up: Up,Control+p
       rofi.kb-row-down: Down,Control+n
       rofi.monitor: -1
+      rofi.show-icons: true
     '';
   };
+
+  # file browser configuration
+  xdg.configFile."rofi/file-browser".text = ''
+    oc-cmd '${pkgs.pantheon.elementary-files}/bin/io.elementary.files;name:explorer;icon:system-file-manager'
+    oc-cmd '${config.programs.alacritty.package}/bin/alacritty --working-directory;name:terminal;icon:utilities-terminal'
+    oc-cmd '${config.programs.alacritty.package}/bin/alacritty -e ${config.programs.vim.package}/bin/vim;name:vim;icon:accessories-text-editor'
+    oc-cmd '${pkgs.google-chrome}/bin/google-chrome-stable;name:browser;icon:applications-internet'
+  '';
 }

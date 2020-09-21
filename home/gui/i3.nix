@@ -50,7 +50,7 @@ let
   '';
 
   # Change position of monitors 
-  rofiMonitors = pkgs.writeScriptBin "rofi-monitors" ''
+  rofiMonitor = pkgs.writeScriptBin "rofi-monitor" ''
     #!${pkgs.stdenv.shell}
 
     DIR="$HOME/.screenlayout"
@@ -173,15 +173,28 @@ in
         "${mod}+dollar" = "scratchpad show";
 
         # Rofi
-        "${mod}+space" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -show drun";
-        "${mod}+Shift+space" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -show window";
-        "${mod}+v" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -modi 'clipboard:${pkgs.haskellPackages.greenclip}/bin/greenclip print' -show clipboard";
-        "${mod}+m" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -modi 'monitors:${rofiMonitors}/bin/rofi-monitors' -show monitors";
-        "${mod}+c" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -modi 'layouts:${rofiKbLayout}/bin/rofi-kb-layout' -show layouts";
-        "${mod}+shift+d" = "exec --no-startup-id ${config.programs.rofi.package}/bin/rofi -modi 'dunst:${rofiMuteNotif}/bin/rofi-mute-notif' -show dunst";
+        "${mod}+space" = ''
+          exec --no-startup-id "${config.programs.rofi.package}/bin/rofi \
+            -combi-modi 'drun#window' \
+            -modi 'combi#calc#file-browser' \
+            -display-combi run \
+            -sidebar-mode \
+            -show combi"
+        '';
+        "${mod}+Shift+space" = ''
+          exec --no-startup-id ${config.programs.rofi.package}/bin/rofi \
+            -modi 'monitor:${rofiMonitor}/bin/rofi-monitor#layout:${rofiKbLayout}/bin/rofi-kb-layout#dunst:${rofiMuteNotif}/bin/rofi-mute-notif' \
+            -sidebar-mode \
+            -show monitor
+        '';
+        "${mod}+v" = ''
+          exec --no-startup-id ${config.programs.rofi.package}/bin/rofi \
+            -modi 'clipboard:${pkgs.haskellPackages.greenclip}/bin/greenclip print' \
+            -show clipboard
+        '';
 
         # Start a terminal
-        "${mod}+Return" = "exec --no-startup-id alacritty --working-directory \"`${pkgs.xcwd}/bin/xcwd`\"";
+        "${mod}+Return" = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty --working-directory \"`${pkgs.xcwd}/bin/xcwd`\"";
 
         # Screenshot
         "Print" = "exec --no-startup-id ${pkgs.shutter}/bin/shutter --select --disable_systray";
