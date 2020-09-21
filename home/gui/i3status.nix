@@ -26,7 +26,7 @@ in
     order += "tztime local"
 
     load {
-            format = "<span background='${theme.colors.color1}'>  %5min Load </span>"
+            format = "<span background='${theme.colors.color1}'>  %1min Load </span>"
     }
 
     disk "/" {
