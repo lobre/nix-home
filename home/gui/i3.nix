@@ -16,63 +16,6 @@ let
     PATH=$PATH:/usr/bin:${pkgs.i3lock-fancy}/bin i3lock-fancy "$@"
     notify-send "DUNST_COMMAND_RESUME"
   '';
-
-  # Switch between bepo/azerty
-  rofiKbLayout = pkgs.writeScriptBin "rofi-kb-layout" ''
-    #!${pkgs.stdenv.shell}
-
-    if [ -z $@ ]; then
-        echo "bepo"
-        echo "azerty"
-    else
-        if [[ "$@" == "bepo" ]]; then
-            ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr -variant bepo
-        elif [[ "$@" == "azerty" ]]; then
-            ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr
-        fi
-    fi
-  '';
-
-  # Mute/unmute dunst notifications
-  rofiMuteNotif = pkgs.writeScriptBin "rofi-mute-notif" ''
-    #!${pkgs.stdenv.shell}
-
-    if [ -z $@ ]; then
-        echo "mute"
-        echo "unmute"
-    else
-        if [[ "$@" == "mute" ]]; then
-            notify-send DUNST_COMMAND_PAUSE
-        elif [[ "$@" == "unmute" ]]; then
-            notify-send DUNST_COMMAND_RESUME
-        fi
-    fi
-  '';
-
-  # Change position of monitors 
-  rofiMonitor = pkgs.writeScriptBin "rofi-monitor" ''
-    #!${pkgs.stdenv.shell}
-
-    DIR="$HOME/.screenlayout"
-
-    if [ -z $@ ]; then
-        function gen_layouts() {
-            for file in $DIR/*
-            do
-                if [[ -f $file ]]; then
-                    file="$(basename -- $file)"
-                    echo "$file" | cut -f 1 -d '.'
-                fi
-            done
-        }
-        gen_layouts
-    else
-        layout="$DIR/$@.sh"
-        if [[ -f $layout ]]; then
-            sh "$layout"
-        fi
-    fi
-  '';
 in
 
 {
@@ -173,25 +116,9 @@ in
         "${mod}+dollar" = "scratchpad show";
 
         # Rofi
-        "${mod}+space" = ''
-          exec --no-startup-id "${config.programs.rofi.package}/bin/rofi \
-            -combi-modi 'drun#window' \
-            -modi 'combi#calc#file-browser' \
-            -display-combi run \
-            -sidebar-mode \
-            -show combi"
-        '';
-        "${mod}+Shift+space" = ''
-          exec --no-startup-id ${config.programs.rofi.package}/bin/rofi \
-            -modi 'monitor:${rofiMonitor}/bin/rofi-monitor#layout:${rofiKbLayout}/bin/rofi-kb-layout#dunst:${rofiMuteNotif}/bin/rofi-mute-notif' \
-            -sidebar-mode \
-            -show monitor
-        '';
-        "${mod}+v" = ''
-          exec --no-startup-id ${config.programs.rofi.package}/bin/rofi \
-            -modi 'clipboard:${pkgs.haskellPackages.greenclip}/bin/greenclip print' \
-            -show clipboard
-        '';
+        "${mod}+space" = "exec --no-startup-id rofi-run";
+        "${mod}+Shift+space" = "exec --no-startup-id rofi-config";
+        "${mod}+v" = "exec --no-startup-id rofi-clipboard";
 
         # Start a terminal
         "${mod}+Return" = "exec --no-startup-id ${config.programs.alacritty.package}/bin/alacritty --working-directory \"`${pkgs.xcwd}/bin/xcwd`\"";

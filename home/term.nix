@@ -14,6 +14,7 @@
     docker_compose
     dos2unix
     file
+    fd
     htop 
     httpie
     jq
