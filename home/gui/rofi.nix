@@ -64,12 +64,21 @@ let
   mainWrapper = pkgs.writeScriptBin "rofi-run" ''
     #!${pkgs.stdenv.shell}
 
-    ${pkgs.fd}/bin/fd . $HOME | ${config.programs.rofi.package}/bin/rofi \
+    ${config.programs.rofi.package}/bin/rofi \
       -combi-modi 'drun#window' \
-      -modi 'calc#combi#file-browser' \
+      -modi 'combi#calc' \
       -display-combi run \
       -sidebar-mode \
       -show combi
+  '';
+
+  # Rofi wrapper for searching files and directories
+  fileBrowserWrapper = pkgs.writeScriptBin "rofi-file-browser" ''
+    #!${pkgs.stdenv.shell}
+
+    ${pkgs.fd}/bin/fd . $HOME | ${config.programs.rofi.package}/bin/rofi \
+      -modi 'file-browser' \
+      -show file-browser
   '';
 
   # Main rofi wrapper for running application
@@ -93,7 +102,7 @@ let
 in
 
 {
-  home.packages = [ mainWrapper configWrapper clipboardWrapper ];
+  home.packages = [ mainWrapper fileBrowserWrapper configWrapper clipboardWrapper ];
 
   programs.rofi = {
     enable = true;
