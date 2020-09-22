@@ -29,7 +29,8 @@
       " No delay when exiting visual mode
       set timeoutlen=1000 ttimeoutlen=0
 
-      set listchars=tab:>-,nbsp:.,trail:.,extends:>,precedes:<,eol:$
+      set showbreak=↪\
+      set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
       set ignorecase     " Case insensitive
       set wildignorecase " Autocomplete case insensitive
