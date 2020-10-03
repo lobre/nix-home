@@ -10,11 +10,14 @@ let
     if [ -z $@ ]; then
         echo "bepo"
         echo "azerty"
+        echo "qwerty"
     else
         if [[ "$@" == "bepo" ]]; then
             ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr -variant bepo
         elif [[ "$@" == "azerty" ]]; then
             ${pkgs.xorg.setxkbmap}/bin/setxkbmap fr
+        elif [[ "$@" == "qwerty" ]]; then
+            ${pkgs.xorg.setxkbmap}/bin/setxkbmap us
         fi
     fi
   '';
