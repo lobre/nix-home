@@ -1,10 +1,11 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   programs.vim = {
     enable = true;
 
-    plugins = [ pkgs.vimPlugins.vim-go ];
+    " Override so vim-sensible does not get installed
+    plugins = lib.mkOverride 10 [ pkgs.vimPlugins.vim-go ];
 
     extraConfig = ''
       set nowritebackup
