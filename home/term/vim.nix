@@ -4,7 +4,7 @@
   programs.vim = {
     enable = true;
 
-    " Override so vim-sensible does not get installed
+    # Override so vim-sensible does not get installed
     plugins = lib.mkOverride 10 [ pkgs.vimPlugins.vim-go ];
 
     extraConfig = ''
