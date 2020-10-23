@@ -8,17 +8,19 @@
 
   home.packages = with pkgs; [
     binutils-unwrapped
-    curl
+    clojure
     ctags
+    curl
     docker
     docker_compose
     dos2unix
-    file
     fd
+    file
     htop 
     httpie
     jq
     killall
+    leiningen
     ltrace
     ncdu
     nodejs
@@ -31,6 +33,7 @@
     tree
     unzip
     wget 
+    yarn
   ];
 
   # Allow XDG linking

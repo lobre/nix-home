@@ -173,7 +173,7 @@ in
   xdg.configFile."rofi/file-browser".text = ''
     stdin
     oc-cmd '${config.programs.alacritty.package}/bin/alacritty --working-directory;name:terminal;icon:utilities-terminal'
-    oc-cmd '${config.programs.alacritty.package}/bin/alacritty -e ${config.programs.vim.package}/bin/vim;name:vim;icon:accessories-text-editor'
+    oc-cmd '${config.programs.alacritty.package}/bin/alacritty -e ${config.programs.neovim.package}/bin/nvim;name:vim;icon:accessories-text-editor'
     oc-cmd '${pkgs.pantheon.elementary-files}/bin/io.elementary.files;name:explorer;icon:system-file-manager'
     oc-cmd '${pkgs.google-chrome}/bin/google-chrome-stable;name:browser;icon:applications-internet'
   '';
