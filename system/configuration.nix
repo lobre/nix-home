@@ -26,10 +26,11 @@
   environment.systemPackages = with pkgs; [
     curl
     git
+    mkpasswd
     tailscale
     unzip
-    vim_configurable 
-    wget 
+    vim_configurable
+    wget
   ];
 
   # Programs

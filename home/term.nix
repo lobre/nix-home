@@ -1,5 +1,16 @@
 { config, pkgs, ... }:
 
+let
+  nixSwitch = pkgs.writeScriptBin "nix-switch" ''
+    #!${pkgs.stdenv.shell}
+    user="$USER"
+    if [[ -n "$SUDO_USER" ]]; then
+        user="$SUDO_USER"
+    fi
+    exec "/home/$user/Lab/nix-home/nix-switch.sh" "$@"
+  '';
+in
+
 {
   programs.bash.profileExtra = ''
       # Add bin in PATH if not already existing
@@ -7,6 +18,9 @@
   '';
 
   home.packages = with pkgs; [
+    # custom script to easily switch configuration
+    nixSwitch
+
     binutils-unwrapped
     clojure
     ctags

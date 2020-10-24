@@ -3,8 +3,8 @@
 let
   theme = config.theme;
 
-  # Switch between bepo/azerty
-  layoutScript = pkgs.writeScriptBin "rofi-script-layout" ''
+  # Switch between keyboard layouts
+  kb = pkgs.writeScriptBin "rofi-kb" ''
     #!${pkgs.stdenv.shell}
 
     if [ -z $@ ]; then
@@ -22,24 +22,24 @@ let
     fi
   '';
 
-  # Mute/unmute dunst notifications
-  dunstScript = pkgs.writeScriptBin "rofi-script-dunst" ''
+  # Do not disturb mode to mute dunst notifications
+  dnd = pkgs.writeScriptBin "rofi-dnd" ''
     #!${pkgs.stdenv.shell}
 
     if [ -z $@ ]; then
-        echo "mute"
-        echo "unmute"
+        echo "enable"
+        echo "disable"
     else
-        if [[ "$@" == "mute" ]]; then
+        if [[ "$@" == "enable" ]]; then
             notify-send DUNST_COMMAND_PAUSE
-        elif [[ "$@" == "unmute" ]]; then
+        elif [[ "$@" == "disable" ]]; then
             notify-send DUNST_COMMAND_RESUME
         fi
     fi
   '';
 
-  # Change position of monitors 
-  monitorScript = pkgs.writeScriptBin "rofi-script-monitor" ''
+  # Change display of monitors 
+  display = pkgs.writeScriptBin "rofi-display" ''
     #!${pkgs.stdenv.shell}
 
     DIR="$HOME/.screenlayout"
@@ -63,39 +63,20 @@ let
     fi
   '';
 
-  # Main rofi wrapper for running application
-  mainWrapper = pkgs.writeScriptBin "rofi-run" ''
+  # Command to reveal rofi
+  run = pkgs.writeScriptBin "rofi-run" ''
     #!${pkgs.stdenv.shell}
 
     ${config.programs.rofi.package}/bin/rofi \
+      -modi 'keyboard:${kb}/bin/rofi-kb#display:${display}/bin/rofi-display#combi#calc#do not disturb:${dnd}/bin/rofi-dnd' \
       -combi-modi 'drun#window' \
-      -modi 'combi#calc' \
       -display-combi run \
       -sidebar-mode \
       -show combi
   '';
 
-  # Rofi wrapper for searching files and directories
-  fileBrowserWrapper = pkgs.writeScriptBin "rofi-file-browser" ''
-    #!${pkgs.stdenv.shell}
-
-    ${pkgs.fd}/bin/fd . $HOME | ${config.programs.rofi.package}/bin/rofi \
-      -modi 'file-browser' \
-      -show file-browser
-  '';
-
-  # Main rofi wrapper for running application
-  configWrapper = pkgs.writeScriptBin "rofi-config" ''
-    #!${pkgs.stdenv.shell}
-
-    ${config.programs.rofi.package}/bin/rofi \
-      -modi 'layout:${layoutScript}/bin/rofi-script-layout#monitor:${monitorScript}/bin/rofi-script-monitor#dunst:${dunstScript}/bin/rofi-script-dunst' \
-      -sidebar-mode \
-      -show monitor
-  '';
-
-  # Rofi wrapper for clipboard manager
-  clipboardWrapper = pkgs.writeScriptBin "rofi-clipboard" ''
+  # Rofi clipboard manager command
+  clipboard = pkgs.writeScriptBin "rofi-clipboard" ''
     #!${pkgs.stdenv.shell}
 
     ${config.programs.rofi.package}/bin/rofi \
@@ -105,11 +86,11 @@ let
 in
 
 {
-  home.packages = [ mainWrapper fileBrowserWrapper configWrapper clipboardWrapper ];
+  home.packages = [ run ];
 
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi.override { plugins = [ pkgs.rofi-calc pkgs.rofi-file-browser ]; };
+    package = pkgs.rofi.override { plugins = [ pkgs.rofi-calc ]; };
 
     borderWidth = null;
     font = "${theme.font.family} 12";

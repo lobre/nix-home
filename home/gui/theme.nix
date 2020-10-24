@@ -15,7 +15,7 @@ let
     '';
   };
 
-  scriptAnsi = pkgs.writeScriptBin "theme-ansi" ''
+  themeAnsi = pkgs.writeScriptBin "theme-ansi" ''
     #!${pkgs.stdenv.shell}
 
     echo -e "
@@ -45,7 +45,7 @@ let
     "
   '';
 
-  scriptXresources = pkgs.writeScriptBin "theme-xresources" ''
+  themeXresources = pkgs.writeScriptBin "theme-xresources" ''
     #!${pkgs.stdenv.shell}
 
     cat << EOF
@@ -286,7 +286,7 @@ in
   };
 
   config = {
-    home.packages = [ scriptAnsi scriptXresources ];
+    home.packages = [ themeAnsi themeXresources ];
 
     theme = {
       wallpaper = "${wallpaper}/wallpaper.jpg";

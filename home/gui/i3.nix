@@ -117,8 +117,6 @@ in
 
         # Rofi
         "${mod}+space" = "exec --no-startup-id rofi-run";
-        "${mod}+Shift+space" = "exec --no-startup-id rofi-file-browser";
-        "${mod}+Escape" = "exec --no-startup-id rofi-config";
         "${mod}+v" = "exec --no-startup-id rofi-clipboard";
 
         # Start a terminal
