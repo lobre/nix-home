@@ -25,7 +25,9 @@
   environment.systemPackages = with pkgs; [
     curl
     git
+    gptfdisk
     mkpasswd
+    parted
     tailscale
     unzip
     vim_configurable
