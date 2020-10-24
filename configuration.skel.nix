@@ -10,11 +10,12 @@
       ./hardware-configuration.nix
 
       # personal configuration
-      ./system/main.nix)
-      ./system/users.nix)
-      #./system/zfs.nix)
-      #./system/x11.nix)
-      #./system/vmware.nix)
+      ./system/main.nix
+      ./system/users.nix
+      #./system/zfs.nix
+      #./system/x11.nix
+      #./system/drivers.nix
+      #./system/vmware.nix
     ];
 
   # for efi
