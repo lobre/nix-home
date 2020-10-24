@@ -86,7 +86,7 @@ let
 in
 
 {
-  home.packages = [ run ];
+  home.packages = [ run clipboard ];
 
   programs.rofi = {
     enable = true;

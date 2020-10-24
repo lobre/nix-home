@@ -11,7 +11,7 @@ function switch_home() {
     fi
 
     echo "switching home configuration..."
-    exec home-manager switch -f "$conf" -b bak
+    exec home-manager switch -f "$conf" -b bak "$@"
 }
 
 function switch_system() {
@@ -27,15 +27,15 @@ function switch_system() {
     fi
 
     echo "switching system configuration..."
-    exec env NIXOS_CONFIG="$conf" nixos-rebuild switch
+    exec env NIXOS_CONFIG="$conf" nixos-rebuild switch "$@"
 }
 
 case "$mode" in
 "home")
-    switch_home
+    switch_home "${@:2}"
     ;;
 "system")
-    switch_system
+    switch_system "${@:2}"
     ;;
 *)
     echo "error: first parameter should be home or system"
