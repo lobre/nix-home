@@ -25,14 +25,14 @@
   # For bios (replace with disk where grub installed)
   #boot.loader.grub.device = "/dev/disk/by-id/wwn-0x500001234567890a";
 
-  # Networking id needed by zfs (head -c 8 /etc/machine-id)
-  #networking.hostId = "238330f5";
-  
   # To enable networking during initrd (for OpenSSH server for instance),
   # find the module name and add it to the list of modules to load.
   # lspci -v | grep -iA8 'network\|ethernet'
   #boot.initrd.availableKernelModules = [ "e1000" ];
 
+  # Networking id needed by zfs (head -c 8 /etc/machine-id)
+  #networking.hostId = "238330f5";
+  
   # Hashed passwords of users
   # :r! mkpasswd -m sha-512
   # or :term on neovim
