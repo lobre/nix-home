@@ -10,7 +10,7 @@
       ./hardware-configuration.nix
 
       # personal configuration
-      ./system/configuration.nix)
+      ./system/main.nix)
       ./system/users.nix)
       #./system/zfs.nix)
       #./system/x11.nix)

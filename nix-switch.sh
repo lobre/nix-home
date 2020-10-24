@@ -20,7 +20,7 @@ function switch_system() {
         exit 1
     fi
 
-    conf="$dir/system.nix"
+    conf="$dir/configuration.nix"
     if [ ! -f "$conf" ]; then
         echo "error: $conf does not exist."
         exit 1
