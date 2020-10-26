@@ -25,31 +25,18 @@ nix-shell '<home-manager>' -A install
 
 ## Prepare and apply the configurations
 
-Once installed, home-manager will have created the initial configuration under `~/.config/nixpkgs/home.nix`. Go edit this file to include our user configurations. The file will look like something like this.
+We need to create an initial configuration file `home.nix` that will serve as the entrypoint to home-manager. We can start from `home.skel.nix`.
 
 ```
-{ config, pkgs, ... }:
-
-{
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-
-  imports = [
-    /home/lobre/Lab/nix-home/home/config.nix
-    /home/lobre/Lab/nix-home/home/term.nix
-    /home/lobre/Lab/nix-home/home/gui.nix
-  ];
-
-  home.stateVersion = "20.03";
-}
+cp home.skel.nix home.nix
 ```
 
-You can finally apply the configuration.
+Then, you can start to edit this file, uncomment and fill in the missing configurations.
+
+You can finally apply the configuration. For that, use the following script that will tell home-manager where to find our configuration file.
 
 ```
-home-manager switch -b back
+./nix-switch home
 ```
 
 At the end of the process, reboot the machine.
-
-If you want to add custom wallpapers, download them into `~/Pictures/Wallpapers`.
