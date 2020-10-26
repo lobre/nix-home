@@ -10,8 +10,6 @@ https://grahamc.com/blog/erase-your-darlings
 
 That means having an "opting out" strategy by rollbacking the root partition at every boot using a blank snapshot. That brings a new computer smell at every reboot and almost no state is persisted by default (immutable infrastructure).
 
-Note that we won’t configure any swap partition (this might be controversial so feel free to configure one if you wish).
-
 ## Overview of the ZFS datasets
 
 ```
@@ -166,7 +164,8 @@ Apply the following commands.
 
 ```
 sgdisk -n 0:0:+1GiB -t 0:ef00 -c 0:boot $DISK // EFI boot partition
-sgdisk -n 0:0:0 -t 0:bf01 -c 0:zfs $DISK // Rest of the disk for the ZFS filesystem
+sgdisk -n 0:0:-8GiB -t 0:bf01 -c 0:zfs $DISK // Main partition for the ZFS filesystem (all space except 8GiB at the end)
+sgdisk -n 0:0:0 -t 0:8200 -c 0:swap $DISK // 8GiB of swap
 ```
 
 You can check the output with `sgdisk --print $DISK`.
@@ -178,6 +177,7 @@ Then define these environment variables that will be used in the next sections.
 ```
 BOOT=$DISK-part1
 ZFS=$DISK-part2
+SWAP=$DISK-part3
 ```
 
 Define the filesystem for the boot partition. We need to use "vfat" as the filesystem because the boot partition is also the EFI system partition. And according to the UEFI specification, this partition should be formatted with a FAT filesystem (https://en.wikipedia.org/wiki/EFI_system_partition).
@@ -188,6 +188,12 @@ mkfs.vfat -n boot $BOOT
 
 Note that the NixOS manual recommends that you assign a unique symbolic label to the filesystem using the option `-n label` since this makes the file system configuration independent from device changes.
 
+To finish, create the swap filesystem.
+
+```
+mkswap $SWAP 
+```
+
 #### BIOS
 
 Apply the following commands. Note that as we are using a GPT table on a BIOS firmware, we need to create a "BIOS boot partition" (https://en.wikipedia.org/wiki/BIOS_boot_partition).
@@ -195,7 +201,8 @@ Apply the following commands. Note that as we are using a GPT table on a BIOS fi
 ```
 sgdisk -n 0:0:+1MiB -t 0:ef02 -c 0:grub $DISK // BIOS boot partition
 sgdisk -n 0:0:+1GiB -t 0:ea00 -c 0:boot $DISK // Actual boot partition that will be mounted to /boot
-sgdisk -n 0:0:0 -t 0:bf01 -c 0:zfs $DISK // Rest of the disk for the ZFS filesystem
+sgdisk -n 0:0:-8GiB -t 0:bf01 -c 0:zfs $DISK // Main partition for the ZFS filesystem (all space except 8GiB at the end)
+sgdisk -n 0:0:0 -t 0:8200 -c 0:swap $DISK // 8GiB of swap
 ```
 
 You can check the output with `sgdisk --print $DISK`.
@@ -205,6 +212,7 @@ Then, create the following environment variables.
 ```
 BOOT=$DISK-part2
 ZFS=$DISK-part3
+SWAP=$DISK-part4
 ```
 
 Define the filesystem for the boot partition. We don’t have the same constraints than EFI here so we can use the filesystem we want. For convenience, we will use `ext4`.
@@ -214,6 +222,12 @@ mkfs.ext4 -L boot $BOOT
 ```
 
 Note that the NixOS manual recommends that you assign a unique symbolic label to the filesystem using the option `-L label` since this makes the file system configuration independent from device changes.
+
+To finish, create the swap filesystem.
+
+```
+mkswap $SWAP 
+```
 
 ## Configuration of ZFS
 
