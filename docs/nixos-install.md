@@ -86,7 +86,7 @@ You can have a look to blocks using the `lsblk` command. It will give you an ove
 This is a physical implementation. If running EFI, the following directory should exist on your machine. Otherwise, you are running BIOS.
 
 ```
-ls -l /sys/firmware/esi/
+ls -l /sys/firmware/efi/
 ```
 
 For VMWare Player, the firmware is emulated so you can decide which one to use. Go edit the vmx file of your VM (`C:\Users\<user>\Documents\Virtual Machines\<vm>.vmx` for Windows) and choose one or another.
