@@ -124,9 +124,41 @@ echo $SDA
 echo $DISK
 ```
 
-### Create GPT partition table
+### Create the GPT partition table
 
-Choose one of the two following sections according to your firmware.
+We will now use the `sgdisk` to setup the GPT partition table. Instructions given in this documentation are for a single disk and it will take the whole disk space.
+
+In case you want to achieve a different setup (dual boot or multiple disks), here are a few tips on how to use `sgdisk`.
+
+```
+# print gpt table information
+sgdisk --print $DISK
+
+# print detailed info about a specific partition
+sgdisk -i 2 $DISK
+
+# list the available partition type codes
+sgdisk --list-types
+
+# change the name of a partition
+sgdisk -c 1:grub $DISK
+
+# change the type of a partition
+sgdisk -t 1:ef02 $DISK
+
+# delete a partition
+sgdisk -d 1 $DISK
+
+# delete all partitions
+sgdisk --zap-all $DISK
+
+# sort partitions to have successive partition numbers
+sgdisk -s $DISK
+```
+
+To note that you can also make use of other utilities to format partitions to specific filesystems (`mkfs.ext4`, `mkfs.vfat`, ...).
+
+To continue, choose one of the two following sections according to your firmware.
 
 #### EFI
 
