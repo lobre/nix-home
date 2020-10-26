@@ -12,7 +12,7 @@ We first need to know which channel of Nix we are running. Check using `sudo nix
 # master / unstable
 nix-channel --add https://github.com/rycee/home-manager/archive/master.tar.gz home-manager
 # or specific channel
-nix-channel --add https://github.com/rycee/home-manager/archive/release-19.09.tar.gz home-manager
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-20.03.tar.gz home-manager
 
 nix-channel --update
 ```
