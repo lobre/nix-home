@@ -156,6 +156,8 @@ sgdisk -s $DISK
 
 To note that you can also make use of other utilities to format partitions to specific filesystems (`mkfs.ext4`, `mkfs.vfat`, ...).
 
+If at the opposite you want to clear a filesystem (by removing labels), you can use `wipefs --all /dev/sdx` on your specific partition.
+
 To continue, choose one of the two following sections according to your firmware.
 
 #### EFI
