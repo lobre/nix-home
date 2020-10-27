@@ -7,7 +7,7 @@ in
 {
   # Enable xsession
   xsession.enable = true;
-
+ 
   # Enable numlock
   xsession.numlock.enable = true;
 
@@ -42,6 +42,7 @@ in
     gnome3.eog
     gnome3.gucharmap
     gnome3.meld
+    gnome3.sushi
     google-chrome
     mattermost-desktop
     obsidian

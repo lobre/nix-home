@@ -18,6 +18,9 @@
   time.timeZone = "Europe/Paris";
 
   # Packages installed in system profile
+  # It should only contain packages that
+  # will be used during install. User packages
+  # can be installed by users themselves.
   environment.systemPackages = with pkgs; [
     curl
     git
