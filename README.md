@@ -13,13 +13,29 @@ NixOS and Home Manager configurations and instructions.
 
 If you want to apply the user configurations without having NixOS as the operating system, you will also have to follow the [home-manager documentation](docs/home-manager.md).
 
+### i3
+
 In the user configuration, i3 is launched using the `~/.xsession` user file. That means the display manager should have an option to run the default user session for this `~/.xsession` file to be taken into account. Here is an example of configuration to create a default user session entry. You need to create a file `/usr/share/xsessions/default.desktop` as follows.
 
 ```
 [Desktop Entry]
-Name=Default
+Name=Xsession
 Comment=This runs the default user session
 Exec=default
+Icon=
+```
+
+### Sway
+
+Wayland does not have an external server (such as X) that should be started. Wayland is directly part of the Sway compositor. So we need to start Sway directly from the display manager.
+
+So to use it, create a file `/usr/share/wayland-sessions/sway.desktop` as follows.
+
+```
+[Desktop Entry]
+Name=Sway
+Comment=This runs Sway vm
+Exec=sway
 Icon=
 ```
 

@@ -14,40 +14,23 @@
     xkbVariant = "bepo";
 
     displayManager = {
-      lightdm = {
-        enable = true;
-        greeters.gtk = {
-          theme.name = "Arc-Darker";
-          theme.package = pkgs.arc-theme;
-          iconTheme.name = "Arc";
-          iconTheme.package = pkgs.arc-icon-theme;
-          indicators = [
-            "~host"
-            "~spacer"
-            "~clock"
-            "~spacer"
-            "~session"
-            "~power"
-          ];
-          extraConfig = ''
-            font-name=Fira Code 12
-          '';
-        };
-      };
+      gdm.enable = true;
 
-      # Launch user defined session from ~/.xsession
+      # Default X session that will defer to ~/.xsession
       session = [
          {
            manage = "desktop";
-           name = "xsession";
+           name = "Xsession";
            start = "";
          }
       ];
+
+      # Use X session by default instead of sway
+      defaultSession = "Xsession";
     };
   };
 
-  # Fonts
-  fonts.fonts = with pkgs; [
-    fira-code
-  ];
+  # This will add a wayland desktop entry
+  # that will be available to the login manager
+  programs.sway.enable = true;
 }

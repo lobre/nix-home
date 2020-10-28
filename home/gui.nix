@@ -97,5 +97,6 @@ in
     ./gui/picom.nix
     ./gui/dunst.nix
     ./gui/oni2.nix
+    ./gui/sway.nix
   ];
 }
