@@ -3,7 +3,6 @@
 {
   programs.git = {
     enable = true;
-    package = pkgs.gitAndTools.gitFull;
     userEmail = "loric.brevet@gmail.com";
     userName = "Loric Brevet";
 
@@ -39,7 +38,10 @@
         askpass = "";
       };
       credential = {
-        helper = "libsecret";
+        # It stores passwords in the plain ~/.git-credentials file
+        # but for a single user, there is no other simple method
+        # (libsecret requires X for example)
+        helper = "store";
       };
       merge = {
         tool = "meld";
