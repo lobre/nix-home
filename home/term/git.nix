@@ -3,6 +3,7 @@
 {
   programs.git = {
     enable = true;
+    package = pkgs.gitAndTools.gitFull;
     userEmail = "loric.brevet@gmail.com";
     userName = "Loric Brevet";
 
@@ -38,7 +39,7 @@
         askpass = "";
       };
       credential = {
-        helper = "store";
+        helper = "libsecret";
       };
       merge = {
         tool = "meld";
