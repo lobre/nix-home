@@ -22,7 +22,7 @@ in
 
       font = {
         normal.family = "${theme.font.nerd-family}";
-        size = 8; 
+        size = 12; 
       };
 
       colors = {
@@ -62,5 +62,5 @@ in
   };
 
   # Set static DPI for consistent font size on different monitors
-  home.sessionVariables.WINIT_X11_SCALE_FACTOR = "1.5";
+  home.sessionVariables.WINIT_X11_SCALE_FACTOR = "1";
 }

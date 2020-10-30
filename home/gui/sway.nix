@@ -91,6 +91,16 @@ in
         "${mod}+r" = "mode resize";
         "${mod}+o" = "mode output";
         "${mod}+Delete" = "mode power";
+
+        "XF86AudioRaiseVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ +10%";
+        "XF86AudioLowerVolume" = "exec pactl set-sink-volume @DEFAULT_SINK@ -10%";
+        "XF86AudioMute" = "exec pactl set-sink-mute @DEFAULT_SINK@ toggle";
+
+        # Sreen brightness controls
+        # make sure your user belong to the "video" group to have permissions (sudo usermod -a -G video $USER)
+        # make also sure you have the correct udev rules in place (https://github.com/haikarainen/light/blob/master/90-backlight.rules)
+        "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 30 # increase screen brightness";
+        "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 30 # decrease screen brightness";
       };
 
       # Colors for windows.
@@ -112,6 +122,8 @@ in
       startup = [
         # Enable vmware guests if installed
         { command = "vmware-user"; }
+
+        { command = "systemctl --user restart pulseaudio.service"; }
       ];
 
       floating = {
@@ -160,7 +172,7 @@ in
         };
 
         power = {
-          e = "mode default, exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
+          e = "mode default, exec swaymsg exit";
           r = "mode default, exec --no-startup-id systemctl reboot";
           p = "mode default, exec --no-startup-id systemctl poweroff -i";
           c = "mode default, restart";
