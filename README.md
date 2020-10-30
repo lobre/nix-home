@@ -27,16 +27,10 @@ Icon=
 
 ### Sway
 
-Wayland does not have an external server (such as X) that should be started. Wayland is directly part of the Sway compositor. So we need to start Sway directly from the display manager.
-
-So to use it, create a file `/usr/share/wayland-sessions/sway.desktop` as follows.
+The only easy way to start sway is unfortunaty to call it from tty. On top of that, `nixGL` is needed on non NixOS.
 
 ```
-[Desktop Entry]
-Name=Sway
-Comment=This runs Sway vm
-Exec=sway
-Icon=
+nixGL sway
 ```
 
 ## Theming

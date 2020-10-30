@@ -1,9 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  nixGL = fetchTarball "https://github.com/guibou/nixGL/archive/master.tar.gz";
+  nixGLExpr = fetchTarball "https://github.com/guibou/nixGL/archive/master.tar.gz";
 
-  myNixGL = (import "${nixGL}/default.nix" {
+  nixGL = (import "${nixGLExpr}/default.nix" {
       pkgs = pkgs;
   }).nixGLDefault;
 in
@@ -15,13 +15,18 @@ in
   # To fix glibc locale bug (https://github.com/NixOS/nixpkgs/issues/38991)
   home.sessionVariables.LOCALE_ARCHIVE_2_27 = "${pkgs.glibcLocales}/lib/locale/locale-archive";
 
+  # Add nixGL to packages
+  home.packages = [
+    nixGL
+  ];
+
   # Fix Open GL issues by forcing mesa drivers
   nixpkgs.overlays = [
     (
       self: super: {
         alacritty = super.writeScriptBin "alacritty" ''
           #!${super.stdenv.shell}
-          exec ${myNixGL}/bin/nixGL ${super.alacritty}/bin/alacritty "$@"
+          exec ${nixGL}/bin/nixGL ${super.alacritty}/bin/alacritty "$@"
         '';
       }
     )
@@ -29,7 +34,7 @@ in
       self: super: {
         picom = super.writeScriptBin "picom" ''
           #!${super.stdenv.shell}
-          exec ${myNixGL}/bin/nixGL ${super.picom}/bin/picom "$@"
+          exec ${nixGL}/bin/nixGL ${super.picom}/bin/picom "$@"
         '';
       }
     )
