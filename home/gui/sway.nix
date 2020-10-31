@@ -184,8 +184,9 @@ in
 
       input = {
         "*" = { 
-          xkb_layout = "fr";
-          xkb_variant = "bepo";
+          xkb_layout = "fr,fr";
+          xkb_variant = "bepo,";
+          xkb_options = "grp:alt_shift_toggle";
           tap = "enabled";
         };
       };

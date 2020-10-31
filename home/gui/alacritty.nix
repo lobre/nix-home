@@ -11,8 +11,8 @@ in
     settings = {
       window = {
         padding = {
-          x = 20;
-          y = 20;
+          x = 30;
+          y = 30;
         };  
 
         title = "Alacritty";
