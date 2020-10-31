@@ -33,40 +33,18 @@ The only easy way to start sway is unfortunaty to call it from tty. On top of th
 nixGL sway
 ```
 
-## Theming
+## Colors
 
 Colors in terminal emulators were first standardized using some ANSI escape sequences. See https://en.wikipedia.org/wiki/ANSI_escape_code.
 
-The original specification supported only 8 colors but terminal emulators rapidly started to support 16, 256 and even the complete range of colors (called "true colors"). However, most terminal utilities use only the main 16 colors defined as shown in the following table.
+The original specification supported only 8 colors but terminal emulators rapidly started to support 16, 256 and even the complete range of colors (called "true colors"). However, most terminal utilities use only the main 16 colors.
 
-![Screenshot](terminal-colors.png)
+However, in my setup, I don't deal only with terminal emulators. I also have proper graphical applications that don't have such restrictions.
 
-As I am also using graphical tools like i3, i3bar, rofi, urxvt and so on, theming is however a much broader scope than just the terminal palette. Colors should be consistent across the whole graphical environment. In order to achieve a successful theming, I like to restrict myself to only use 16 colors, staying close to the 16-terminal-colors concept defined in the above table. However, I don't want to be restricted to the named colors black, red, green, yellow, blue, magento, cyan and white. So here is the reference I will use instead.
+To have a consistent theming accross all apps, I was looking for a proper color palette. Because of the 16 colors restrictions of terminal emulators, I first thought it was a good idea to restrict myself to only use those 16 colors in all my apps (whether they were terminals or not). But that was a mistake. Terminal colors are for, well, terminals. They will help to colorize code. But for a full desktop environment, I actually needed more colors. More specifically, I needed many different shades for a single color.
 
-| Normal        | Alt             |
-| ------------- |-----------------|
-| foreground    |                 |
-| background    |                 |
-| color dark    | color dark alt  |
-| color 1       | color 1 alt     |
-| color 2       | color 2 alt     |
-| color 3       | color 3 alt     |
-| color 4       | color 4 alt     |
-| color 5       | color 5 alt     |
-| color 6       | color 6 alt     |
-| color light   | color light alt |
+So I changed my system to have something that looks like the color palette of [tailwindcss](https://tailwindcss.com/docs/customizing-colors#default-color-palette).
 
-It is pretty much the same except that I have replaced the color names by numbers from 1 to 6, and I have added two specific colors called "dark" and "light".
-The goal is to define the theme and then use these color names in all the configuration files instead of directly putting the color code.
+This is much more convenient. Wherever I need colors, I just import `home/gui/colors.nix` and use whatever I need. The 16 colors of my terminal are also drawn from this palette.
 
-### Implementation
-
-All softwares have different configuration files and configuration formats. That's why it is difficult to establish a central global theme. In normal circumstances, that would require using something like a template preprocessor that would replace colors in each configuration file by colors defined in a global theme.
-
-Using Nix and home-manager however makes it way easier. It will enable to have this theming behavior with a simple implementation.
-
-I have decided to create a home-manager module to do so. This module defines the colors that are then referenced in all necessary configuration files using regular nix variables fetched from the theme module.
-
-You can check the implementation in `home/gui/theme.nix`. It also references fonts and a special urgent color.
-
-When building the theme, a `~/.theme.xresources` is generated in the Xresources format so it can be easily imported in tools like https://terminal.sexy/.
+In the end, I have a set of color to keep things consistent, but not as many as "truecolors", and not as few as terminal ANSI colors.

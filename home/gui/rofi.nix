@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  theme = config.theme;
+  colors = import ./colors.nix;
 
   # Switch between keyboard layouts
   kb = pkgs.writeScriptBin "rofi-kb" ''
@@ -93,49 +93,49 @@ in
     package = pkgs.rofi.override { plugins = [ pkgs.rofi-calc ]; };
 
     borderWidth = null;
-    font = "${theme.font.family} 12";
+    font = "monospace 10";
     lines = 12;
     padding = 18;
     width = 50;
     location = "center";
     scrollbar = false;
-    terminal = "${pkgs.rxvt_unicode}/bin/urxvt";
+    terminal = "${config.programs.alacritty.package}/bin/alacritty";
 
     colors = {
       window = {
-        background = "${theme.colors.background}";
-        border = "${theme.colors.background}";
-        separator = "${theme.colors.background}";
+        background = "${colors.gray-800}";
+        border = "${colors.gray-700}";
+        separator = "${colors.gray-700}";
       };
 
       rows = {
         normal = {
-          background = "${theme.colors.background}";
-          foreground = "${theme.colors.foreground}";
-          backgroundAlt = "${theme.colors.background}";
+          background = "${colors.gray-800}";
+          foreground = "${colors.gray-100}";
+          backgroundAlt = "${colors.gray-800}";
           highlight = {
-            background = "${theme.colors.background}";
-            foreground = "${theme.colors.color4}";
+            background = "${colors.gray-800}";
+            foreground = "${colors.blue-300}";
           };
         };
 
         active = {
-          background = "${theme.colors.background}";
-          foreground = "${theme.colors.color4}";
-          backgroundAlt = "${theme.colors.background}";
+          background = "${colors.gray-800}";
+          foreground = "${colors.blue-300}";
+          backgroundAlt = "${colors.gray-800}";
           highlight = {
-            background = "${theme.colors.background}";
-            foreground = "${theme.colors.color4}";
+            background = "${colors.gray-800}";
+            foreground = "${colors.blue-300}";
           };
         };
 
         urgent = {
-          background = "${theme.colors.background}";
-          foreground = "${theme.colors.urgent}";
-          backgroundAlt = "${theme.colors.background}";
+          background = "${colors.gray-800}";
+          foreground = "${colors.red-800}";
+          backgroundAlt = "${colors.gray-800}";
           highlight = {
-            background = "${theme.colors.background}";
-            foreground = "${theme.colors.urgent}";
+            background = "${colors.gray-800}";
+            foreground = "${colors.red-800}";
           };
         };
       };

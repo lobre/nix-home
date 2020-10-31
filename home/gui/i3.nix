@@ -1,9 +1,18 @@
 { config, pkgs, ... }:
 
 let
+  colors = import ./colors.nix;
   mod = "Mod4";
-  theme = config.theme;
-  lockFont = builtins.replaceStrings [" "] ["-"] "${theme.font.fullname}";
+
+  wallpaper = pkgs.stdenv.mkDerivation {
+    pname = "wallpaper";
+    version = "0.0.1";
+    src = ./.;
+    installPhase = ''
+      mkdir -p $out
+      cp wallpaper.jpg $out/wallpaper.jpg
+    '';
+  };
 
   # Allow to fallback to native i3lock if on non-nixos
   # if binary exists at /usr/bin/i3lock-fancy
@@ -26,7 +35,7 @@ in
     config = {
       modifier = "${mod}";
       workspaceLayout = "default";
-      fonts = [ "${theme.font.nerd-family} 12" ];
+      fonts = [ "monospace 10" ];
 
       keybindings = {
         # switching between workspace
@@ -142,12 +151,12 @@ in
       # background: is used to paint the background of the client window. Only clients which do not cover
       # the whole area of this window expose the color.
       colors = {
-        focused         = { border = "${theme.colors.color4}";     background = "${theme.colors.color4}";     text = "${theme.colors.background}"; indicator = "${theme.colors.foreground}"; childBorder = "${theme.colors.color4}"; };
-        focusedInactive = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
-        unfocused       = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
-        urgent          = { border = "${theme.colors.urgent}";     background = "${theme.colors.urgent}";     text = "${theme.colors.background}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.urgent}"; };
-        placeholder     = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
-        background      = "${theme.colors.background}";
+        focused         = { border = "${colors.blue-800}"; background = "${colors.blue-800}"; text = "${colors.gray-100}"; indicator = "${colors.gray-100}"; childBorder = "${colors.blue-700}"; };
+        focusedInactive = { border = "${colors.blue-800}"; background = "${colors.blue-800}"; text = "${colors.gray-100}"; indicator = "${colors.gray-800}"; childBorder = "${colors.gray-700}"; };
+        unfocused       = { border = "${colors.gray-700}"; background = "${colors.gray-800}"; text = "${colors.gray-100}"; indicator = "${colors.gray-800}"; childBorder = "${colors.gray-700}"; };
+        urgent          = { border = "${colors.red-800}";  background = "${colors.red-800}";  text = "${colors.gray-100}"; indicator = "${colors.gray-800}"; childBorder = "${colors.red-800}"; };
+        placeholder     = { border = "${colors.gray-700}"; background = "${colors.gray-800}"; text = "${colors.gray-100}"; indicator = "${colors.gray-800}"; childBorder = "${colors.gray-700}"; };
+        background      = "${colors.gray-800}";
       };
 
       startup = [
@@ -157,7 +166,7 @@ in
         { command = "xset s off"; notification = false; }
 
         # Autolock after 10 min except if mouse in bottom right corner
-        { command = "${pkgs.xautolock}/bin/xautolock -corners 000- -detectsleep -time 10 -locker \"${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale\""; notification = false; }
+        { command = "${pkgs.xautolock}/bin/xautolock -corners 000- -detectsleep -time 10 -locker \"${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font 'monospace' --greyscale\""; notification = false; }
 
         # Hide mouse after 10 seconds
         { command = "${pkgs.unclutter-xfixes}/bin/unclutter -idle 10"; notification = false; }
@@ -166,7 +175,7 @@ in
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
 
         # Restore wallpaper
-        { command = "${pkgs.feh}/bin/feh --bg-fill ${theme.wallpaper}"; notification = false; }
+        { command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}/wallpaper.jpg"; notification = false; }
 
         # Start applets
         { command = "${pkgs.networkmanagerapplet}/bin/nm-applet"; notification = false; }
@@ -218,7 +227,7 @@ in
         }; 
 
         power = {
-          l = "mode default, exec --no-startup-id ${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font '${lockFont}' --greyscale";
+          l = "mode default, exec --no-startup-id ${lockScript}/bin/i3lock -n --text 'Enter Laboratory' --font 'monospace' --greyscale";
           e = "mode default, exec --no-startup-id i3-msg exit";
           r = "mode default, exec --no-startup-id systemctl reboot";
           p = "mode default, exec --no-startup-id systemctl poweroff -i";
@@ -255,19 +264,19 @@ in
           workspaceButtons = true;
           workspaceNumbers = true;
           command = "i3bar";
-          fonts = [ "${theme.font.nerd-family} 12" ];
+          fonts = [ "monospace 10" ];
           hiddenState = "hide";
 
           colors = {
-            background = "${theme.colors.background}";
-            statusline = "${theme.colors.background}";
-            separator = "${theme.colors.background}";
+            background = "${colors.gray-800}";
+            statusline = "${colors.gray-800}";
+            separator = "${colors.gray-800}";
 
-            focusedWorkspace  = { border = "${theme.colors.color4}";     background = "${theme.colors.color4}";     text = "${theme.colors.background}"; };
-            activeWorkspace   = { border = "${theme.colors.darkAlt}";     background = "${theme.colors.darkAlt}";     text = "${theme.colors.foreground}"; };
-            inactiveWorkspace = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; };
-            urgentWorkspace   = { border = "${theme.colors.urgent}";     background = "${theme.colors.urgent}";     text = "${theme.colors.background}"; };
-            bindingMode       = { border = "${theme.colors.color5}";     background = "${theme.colors.color5}";     text = "${theme.colors.background}"; };
+            focusedWorkspace  = { border = "${colors.blue-800}";   background = "${colors.blue-800}";   text = "${colors.gray-100}"; };
+            activeWorkspace   = { border = "${colors.blue-800}";   background = "${colors.blue-800}";   text = "${colors.gray-100}"; };
+            inactiveWorkspace = { border = "${colors.gray-700}";   background = "${colors.gray-800}";   text = "${colors.gray-100}"; };
+            urgentWorkspace   = { border = "${colors.red-800}";    background = "${colors.red-800}";    text = "${colors.gray-100}"; };
+            bindingMode       = { border = "${colors.purple-500}"; background = "${colors.purple-500}"; text = "${colors.gray-800}"; };
           };
         }
       ];

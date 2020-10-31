@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  theme = config.theme;
+  colors = import ./colors.nix;
 in
 
 {
@@ -15,7 +15,7 @@ in
 
     settings = {
       global = {
-        font = "${theme.font.family} 10";
+        font = "monospace 10";
         allow_markup = true;
         format = " <b>%s</b>\n%b";
         sort = true;
@@ -35,10 +35,10 @@ in
         history_length = 20;
         show_indicators = false;
         line_height = 4;
-        separator_height = 0;
+        separator_height = 1;
         padding = 8;
         horizontal_padding = 8;
-        separator_color = "auto";
+        separator_color = "${colors.gray-700}";
         startup_notification = false;
         dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst:";
         browser = "xdg-open";
@@ -49,8 +49,8 @@ in
       };
 
       frame = {
-        width = 2;
-        color = "${theme.colors.background}";
+        width = 1;
+        color = "${colors.gray-700}";
       };
 
       shortcuts = {
@@ -59,21 +59,21 @@ in
 
       urgency_low = {
         timeout = 4;
-        background = "${theme.colors.background}";
-        foreground = "${theme.colors.foreground}";
+        background = "${colors.gray-800}";
+        foreground = "${colors.gray-100}";
       };
 
       urgency_normal = {
         timeout = 4;
-        background = "${theme.colors.background}";
-        foreground = "${theme.colors.foreground}";
+        background = "${colors.gray-800}";
+        foreground = "${colors.gray-100}";
       };
 
       urgency_critical = {
         timeout = 0;
-        background = "${theme.colors.urgent}";
-        foreground = "${theme.colors.background}";
-        frame_color = "${theme.colors.urgent}";
+        background = "${colors.red-800}";
+        foreground = "${colors.gray-100}";
+        frame_color = "${colors.red-800}";
       };
     };
   };

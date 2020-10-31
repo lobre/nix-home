@@ -1,8 +1,18 @@
 { config, pkgs, ... }:
 
 let
-  theme = config.theme;
+  colors = import ./colors.nix;
   mod = "Mod4";
+
+  wallpaper = pkgs.stdenv.mkDerivation {
+    pname = "wallpaper";
+    version = "0.0.1";
+    src = ./.;
+    installPhase = ''
+      mkdir -p $out
+      cp wallpaper.jpg $out/wallpaper.jpg
+    '';
+  };
 in
 
 {
@@ -12,7 +22,7 @@ in
     config = {
       modifier = "${mod}";
       workspaceLayout = "default";
-      fonts = [ "${theme.font.nerd-family} 12" ];
+      fonts = [ "monospace 10" ];
 
       terminal = "${config.programs.alacritty.package}/bin/alacritty";
 
@@ -84,10 +94,6 @@ in
         "${mod}+Shift+dollar" = "move scratchpad";
         "${mod}+dollar" = "scratchpad show";
 
-        "${mod}+Shift+c" = "reload";
-        "${mod}+Shift+e" =
-          "exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'";
-
         "${mod}+r" = "mode resize";
         "${mod}+o" = "mode output";
         "${mod}+Delete" = "mode power";
@@ -111,12 +117,12 @@ in
       # background: is used to paint the background of the client window. Only clients which do not cover
       # the whole area of this window expose the color.
       colors = {
-        focused         = { border = "${theme.colors.color4}";     background = "${theme.colors.color4}";     text = "${theme.colors.background}"; indicator = "${theme.colors.foreground}"; childBorder = "${theme.colors.color4}"; };
-        focusedInactive = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
-        unfocused       = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
-        urgent          = { border = "${theme.colors.urgent}";     background = "${theme.colors.urgent}";     text = "${theme.colors.background}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.urgent}"; };
-        placeholder     = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; indicator = "${theme.colors.background}"; childBorder = "${theme.colors.background}"; };
-        background      = "${theme.colors.background}";
+        focused         = { border = "${colors.blue-800}"; background = "${colors.blue-800}"; text = "${colors.gray-100}"; indicator = "${colors.gray-100}"; childBorder = "${colors.blue-700}"; };
+        focusedInactive = { border = "${colors.blue-800}"; background = "${colors.blue-800}"; text = "${colors.gray-100}"; indicator = "${colors.gray-800}"; childBorder = "${colors.gray-700}"; };
+        unfocused       = { border = "${colors.gray-700}"; background = "${colors.gray-800}"; text = "${colors.gray-100}"; indicator = "${colors.gray-800}"; childBorder = "${colors.gray-700}"; };
+        urgent          = { border = "${colors.red-800}";  background = "${colors.red-800}";  text = "${colors.gray-100}"; indicator = "${colors.gray-800}"; childBorder = "${colors.red-800}"; };
+        placeholder     = { border = "${colors.gray-700}"; background = "${colors.gray-800}"; text = "${colors.gray-100}"; indicator = "${colors.gray-800}"; childBorder = "${colors.gray-700}"; };
+        background      = "${colors.gray-800}";
       };
 
       startup = [
@@ -127,7 +133,7 @@ in
       ];
 
       floating = {
-        border = 3;
+        border = 1;
 
         criteria = [ 
           { title = "Microsoft Teams Notification"; }
@@ -136,7 +142,7 @@ in
 
       window = {
         hideEdgeBorders = "smart";
-        border = 3;
+        border = 1;
         titlebar = false;
       };
 
@@ -152,10 +158,10 @@ in
 
       modes = { 
         resize = { 
-          h = "resize grow width 5 px or 5 ppt";
-          j = "resize grow height 5 px or 5 ppt";
-          k = "resize shrink height 5 px or 5 ppt";
-          l = "resize shrink width 5 px or 5 ppt";
+          h = "resize grow width 10 px or 10 ppt";
+          j = "resize grow height 10 px or 10 ppt";
+          k = "resize shrink height 10 px or 10 ppt";
+          l = "resize shrink width 10 px or 10 ppt";
 
           Return = "mode default";
           Escape = "mode default";
@@ -173,9 +179,9 @@ in
 
         power = {
           e = "mode default, exec swaymsg exit";
-          r = "mode default, exec --no-startup-id systemctl reboot";
-          p = "mode default, exec --no-startup-id systemctl poweroff -i";
-          c = "mode default, restart";
+          r = "mode default, exec systemctl reboot";
+          p = "mode default, exec systemctl poweroff -i";
+          c = "mode default, reload";
 
           Return = "mode default";
           Escape = "mode default";
@@ -193,7 +199,7 @@ in
 
       output = {
         "*" = {
-          bg = "${theme.wallpaper} stretch";
+          bg = "${wallpaper}/wallpaper.jpg stretch";
         };
       };
 
@@ -211,19 +217,19 @@ in
           trayOutput = "primary";
           workspaceButtons = true;
           workspaceNumbers = true;
-          fonts = [ "${theme.font.nerd-family} 12" ];
+          fonts = [ "monospace 10" ];
           hiddenState = "hide";
 
           colors = {
-            background = "${theme.colors.background}";
-            statusline = "${theme.colors.background}";
-            separator = "${theme.colors.background}";
+            background = "${colors.gray-800}";
+            statusline = "${colors.gray-800}";
+            separator = "${colors.gray-800}";
 
-            focusedWorkspace  = { border = "${theme.colors.color4}";     background = "${theme.colors.color4}";     text = "${theme.colors.background}"; };
-            activeWorkspace   = { border = "${theme.colors.darkAlt}";    background = "${theme.colors.darkAlt}";     text = "${theme.colors.foreground}"; };
-            inactiveWorkspace = { border = "${theme.colors.background}"; background = "${theme.colors.background}"; text = "${theme.colors.foreground}"; };
-            urgentWorkspace   = { border = "${theme.colors.urgent}";     background = "${theme.colors.urgent}";     text = "${theme.colors.background}"; };
-            bindingMode       = { border = "${theme.colors.color5}";     background = "${theme.colors.color5}";     text = "${theme.colors.background}"; };
+            focusedWorkspace  = { border = "${colors.blue-800}";   background = "${colors.blue-800}";   text = "${colors.gray-100}"; };
+            activeWorkspace   = { border = "${colors.blue-800}";   background = "${colors.blue-800}";   text = "${colors.gray-100}"; };
+            inactiveWorkspace = { border = "${colors.gray-700}";   background = "${colors.gray-800}";   text = "${colors.gray-100}"; };
+            urgentWorkspace   = { border = "${colors.red-800}";    background = "${colors.red-800}";    text = "${colors.gray-100}"; };
+            bindingMode       = { border = "${colors.purple-500}"; background = "${colors.purple-500}"; text = "${colors.gray-800}"; };
           };
         }
       ];

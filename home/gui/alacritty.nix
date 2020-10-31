@@ -1,10 +1,58 @@
 { config, pkgs, ... }:
 
 let
-  theme = config.theme;
+  colors = import ./colors.nix;
+
+  themeXresources = pkgs.writeScriptBin "theme-xresources" ''
+    #!${pkgs.stdenv.shell}
+
+    cat << EOF
+    ! To help importing the current theme into
+    ! https://terminal.sexy/
+    
+    ! special"
+    *.foreground: ${config.programs.alacritty.settings.colors.primary.foreground}
+    *.background: ${config.programs.alacritty.settings.colors.primary.background}
+
+    ! black
+    *.color0:     ${config.programs.alacritty.settings.colors.normal.black}
+    *.color8:     ${config.programs.alacritty.settings.colors.bright.black}
+
+    ! red
+    *.color1:     ${config.programs.alacritty.settings.colors.normal.red}
+    *.color9:     ${config.programs.alacritty.settings.colors.bright.red}
+
+    ! green
+    *.color2:     ${config.programs.alacritty.settings.colors.normal.green}
+    *.color10:    ${config.programs.alacritty.settings.colors.bright.green}
+
+    ! yellow
+    *.color3:     ${config.programs.alacritty.settings.colors.normal.yellow}
+    *.color11:    ${config.programs.alacritty.settings.colors.bright.yellow}
+
+    ! blue
+    *.color4:     ${config.programs.alacritty.settings.colors.normal.blue}
+    *.color12:    ${config.programs.alacritty.settings.colors.bright.blue}
+
+    ! magenta
+    *.color5:     ${config.programs.alacritty.settings.colors.normal.magenta}
+    *.color13:    ${config.programs.alacritty.settings.colors.bright.magenta}
+
+    ! cyan
+    *.color6:     ${config.programs.alacritty.settings.colors.normal.cyan}
+    *.color14:    ${config.programs.alacritty.settings.colors.bright.cyan}
+
+    ! white
+    *.color7:     ${config.programs.alacritty.settings.colors.normal.white}
+    *.color15:    ${config.programs.alacritty.settings.colors.bright.white}
+    EOF
+
+  '';
 in
 
 {
+  home.packages = [ themeXresources ];
+
   programs.alacritty = {
     enable = true;
 
@@ -20,41 +68,36 @@ in
 
       scrolling.history = 10000;
 
-      font = {
-        normal.family = "${theme.font.nerd-family}";
-        size = 12; 
-      };
-
       colors = {
         primary = {
-          background = "${theme.colors.background}";
-          foreground = "${theme.colors.foreground}";
+          background = "${colors.gray-800}";
+          foreground = "${colors.gray-100}";
         };
 
         normal = {
-          black = "${theme.colors.dark}";
-          red = "${theme.colors.color1}";
-          green = "${theme.colors.color2}";
-          yellow = "${theme.colors.color3}";
-          blue = "${theme.colors.color4}";
-          magenta = "${theme.colors.color5}";
-          cyan = "${theme.colors.color6}";
-          white = "${theme.colors.light}";
+          black = "${colors.gray-600}";
+          red = "${colors.red-400}";
+          green = "${colors.green-300}";
+          yellow = "${colors.yellow-300}";
+          blue = "${colors.blue-300}";
+          magenta = "${colors.purple-300}";
+          cyan = "${colors.teal-300}";
+          white = "${colors.gray-200}";
         };
 
         bright = {
-          black = "${theme.colors.darkAlt}";
-          red = "${theme.colors.color1Alt}";
-          green = "${theme.colors.color2Alt}";
-          yellow = "${theme.colors.color3Alt}";
-          blue = "${theme.colors.color4Alt}";
-          magenta = "${theme.colors.color5Alt}";
-          cyan = "${theme.colors.color6Alt}";
-          white = "${theme.colors.lightAlt}";
+          black = "${colors.gray-700}";
+          red = "${colors.red-500}";
+          green = "${colors.green-400}";
+          yellow = "${colors.yellow-400}";
+          blue = "${colors.blue-400}";
+          magenta = "${colors.purple-400}";
+          cyan = "${colors.teal-400}";
+          white = "${colors.gray-300}";
         };
 
-        cursor.cursor = "${theme.colors.foreground}";
-        vi_mode_cursor.cursor = "${theme.colors.foreground}";
+        cursor.cursor = "${colors.gray-100}";
+        vi_mode_cursor.cursor = "${colors.gray-100}";
       };
 
       background_opacity = 1;

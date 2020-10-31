@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  theme = config.theme;
+  colors = import ./colors.nix;
 in
 
 {
@@ -11,9 +11,9 @@ in
             colors = true
             markup = pango
             interval = 5
-            color_good = '${theme.colors.background}'
-            color_degraded = '${theme.colors.background}'
-            color_bad = '${theme.colors.urgent}'
+            color_good = '${colors.gray-800}'
+            color_degraded = '${colors.gray-800}'
+            color_bad = '${colors.red-800}'
             separator = ""
     }
 
@@ -26,26 +26,26 @@ in
     order += "tztime local"
 
     load {
-            format = "<span background='${theme.colors.color1}'>  %1min Load </span>"
+            format = "<span background='${colors.red-600}'>  %1min Load </span>"
     }
 
     disk "/" {
-            format = "<span background='${theme.colors.color2}'>  %free Free </span>"
+            format = "<span background='${colors.green-400}'>  %free Free </span>"
     }
 
     ethernet _first_ {
-            format_up = "<span background='${theme.colors.color3}'>  %ip </span>"
+            format_up = "<span background='${colors.yellow-300}'>  %ip </span>"
             format_down = ""
     }
 
     wireless _first_ {
-            format_up = "<span background='${theme.colors.color3}'>  %essid </span>"
+            format_up = "<span background='${colors.yellow-300}'>  %essid </span>"
             format_down = ""
     }
 
     volume master {
-            format = "<span background='${theme.colors.color4}'> 蓼 %volume </span>"
-            format_muted = "<span background='${theme.colors.color4}'> 遼 muted </span>"
+            format = "<span background='${colors.blue-300}'>  %volume </span>"
+            format_muted = "<span background='${colors.blue-300}'>  muted </span>"
             device = "default"
             mixer = "Master"
             mixer_idx = 0
@@ -54,7 +54,7 @@ in
     battery all {
             last_full_capacity = true
             integer_battery_capacity = true
-            format = "<span background='${theme.colors.color5}'> %status %percentage </span>"
+            format = "<span background='${colors.purple-300}'> %status %percentage </span>"
             format_down = ""
             status_chr = ""
             status_bat = ""
@@ -66,7 +66,7 @@ in
     }
 
     tztime local {
-            format = "<span background='${theme.colors.color6}'> %time </span>"
+            format = "<span background='${colors.teal-300}'> %time </span>"
             format_time = " %a %-d %b %H:%M"
     }
   '';

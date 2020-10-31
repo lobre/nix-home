@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 
-let
-  theme = config.theme;
-in
-
 {
   # Enable xsession
   xsession.enable = true;
@@ -59,15 +55,12 @@ in
 
   gtk = {
     enable = true;
-    font = {
-      name = "${theme.font.family} 12";
-      package = theme.font.package;
-    };
 
     theme = {
       package = pkgs.arc-theme;
       name = "Arc-Darker";
     };
+
     iconTheme = {
       package = pkgs.arc-icon-theme;
       name = "Arc";
@@ -87,7 +80,6 @@ in
   xdg.dataFile."fonts".source = ./gui/fonts;
 
   imports = [
-    ./gui/theme.nix
     ./gui/i3.nix
     ./gui/i3status.nix
     ./gui/rofi.nix
@@ -98,5 +90,6 @@ in
     ./gui/dunst.nix
     ./gui/oni2.nix
     ./gui/sway.nix
+    ./gui/mako.nix
   ];
 }
