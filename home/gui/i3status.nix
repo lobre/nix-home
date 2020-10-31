@@ -26,26 +26,26 @@ in
     order += "tztime local"
 
     load {
-            format = "<span background='${colors.red-600}'>  %1min Load </span>"
+            format = "<span background='${colors.red-600}'> ☢ %1min Load </span>"
     }
 
     disk "/" {
-            format = "<span background='${colors.green-400}'>  %free Free </span>"
+            format = "<span background='${colors.green-400}'> ☉ %free Free </span>"
     }
 
     ethernet _first_ {
-            format_up = "<span background='${colors.yellow-300}'>  %ip </span>"
+            format_up = "<span background='${colors.yellow-300}'> ⇵ %ip </span>"
             format_down = ""
     }
 
     wireless _first_ {
-            format_up = "<span background='${colors.yellow-300}'>  %essid </span>"
+            format_up = "<span background='${colors.yellow-300}'> ⇵ %essid </span>"
             format_down = ""
     }
 
     volume master {
-            format = "<span background='${colors.blue-300}'>  %volume </span>"
-            format_muted = "<span background='${colors.blue-300}'>  muted </span>"
+            format = "<span background='${colors.blue-300}'> ♩ %volume </span>"
+            format_muted = "<span background='${colors.blue-300}'> ♩ muted </span>"
             device = "default"
             mixer = "Master"
             mixer_idx = 0
@@ -54,12 +54,8 @@ in
     battery all {
             last_full_capacity = true
             integer_battery_capacity = true
-            format = "<span background='${colors.purple-300}'> %status %percentage </span>"
+            format = "<span background='${colors.purple-300}'> ⌁ %percentage </span>"
             format_down = ""
-            status_chr = ""
-            status_bat = ""
-            status_unk = ""
-            status_full = ""
             path = "/sys/class/power_supply/BAT%d/uevent"
             threshold_type = "percentage"
             low_threshold = 10
@@ -67,7 +63,7 @@ in
 
     tztime local {
             format = "<span background='${colors.teal-300}'> %time </span>"
-            format_time = " %a %-d %b %H:%M"
+            format_time = "☀ %a %-d %b %H:%M"
     }
   '';
 }

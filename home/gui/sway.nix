@@ -192,7 +192,7 @@ in
         "*" = { 
           xkb_layout = "fr,fr";
           xkb_variant = "bepo,";
-          xkb_options = "grp:alt_shift_toggle";
+          xkb_options = "grp:alt_space_toggle";
           tap = "enabled";
         };
       };

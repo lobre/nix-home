@@ -75,10 +75,6 @@
   # Allow XDG linking
   xdg.enable = true;
 
-  # Fonts
-  fonts.fontconfig.enable = true;
-  xdg.dataFile."fonts".source = ./gui/fonts;
-
   imports = [
     ./gui/i3.nix
     ./gui/i3status.nix
