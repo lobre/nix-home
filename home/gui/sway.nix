@@ -17,6 +17,7 @@ in
 
 {
   home.packages = with pkgs; [
+    wofi
     wev
   ];
 
@@ -39,6 +40,7 @@ in
         "${mod}+Return" = "exec ${config.programs.alacritty.package}/bin/alacritty";
         "${mod}+Shift+q" = "kill";
         "${mod}+space" = "exec ${pkgs.wofi}/bin/wofi";
+        "${mod}+v" = "exec ${pkgs.clipman}/bin/clipman pick -t wofi";
 
         "${mod}+h" = "focus left";
         "${mod}+j" = "focus down";
@@ -142,6 +144,9 @@ in
 
         # Autolock after 10 minutes of inactivity
         { command = "${pkgs.swayidle}/bin/swayidle -w timeout 600 ${lockScript}/bin/swaylock"; }
+
+        # Launch clipboard manager
+        { command = "${pkgs.wl-clipboard}/bin/wl-paste -t text --watch ${pkgs.clipman}/bin/clipman store"; }
       ];
 
       floating = {
