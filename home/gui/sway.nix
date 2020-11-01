@@ -210,7 +210,9 @@ in
         "*" = { 
           xkb_layout = "fr,fr";
           xkb_variant = "bepo,";
-          xkb_options = "grp:alt_space_toggle";
+          # to switch keyboard layout
+          # see https://github.com/swaywm/sway/issues/1242#issuecomment-556096337
+          xkb_options = "grp:alt_caps_toggle";
           xkb_numlock = "enabled";
           tap = "enabled";
         };
