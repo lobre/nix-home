@@ -16,6 +16,10 @@ let
 in
 
 {
+  home.packages = with pkgs; [
+    wev
+  ];
+
   wayland.windowManager.sway = {
     enable = true;
 
@@ -132,6 +136,12 @@ in
         { command = "systemctl --user restart pulseaudio.service"; }
 
         { command = "systemctl --user stop dunst.service && mako"; }
+
+        # Turn off screen after 5 minutes of inactivity
+        { command = "${pkgs.swayidle}/bin/swayidle -w timeout 300 'swaymsg \"output * dpms off\"' resume 'swaymsg \"output * dpms on\"'"; }
+
+        # Autolock after 10 minutes of inactivity
+        { command = "${pkgs.swayidle}/bin/swayidle -w timeout 600 ${lockScript}/bin/swaylock"; }
       ];
 
       floating = {
@@ -248,9 +258,4 @@ in
 
     wrapperFeatures.gtk = true;
   };
-
-  home.packages = with pkgs; [
-    swayidle
-    wev
-  ];
 }
