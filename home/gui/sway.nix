@@ -4,15 +4,15 @@ let
   colors = import ./colors.nix;
   mod = "Mod4";
 
-  wallpaper = pkgs.stdenv.mkDerivation {
-    pname = "wallpaper";
-    version = "0.0.1";
-    src = ./.;
-    installPhase = ''
-      mkdir -p $out
-      cp wallpaper.jpg $out/wallpaper.jpg
-    '';
-  };
+  wallpaper = "$HOME/${config.xdg.dataFile."wallpaper.jpg".target}";
+
+  # Allow to fallback to native swaylock if on non-nixos
+  # This is proposed due to pam incompatibilities.
+  # See https://gist.github.com/rossabaker/f6e5e89fd7423e1c0730fcd950c0cd33
+  lockScript = pkgs.writeScriptBin "swaylock" ''
+    #!${pkgs.stdenv.shell}
+    PATH=$PATH:/usr/bin:/usr/local/bin:${pkgs.swaylock}/bin swaylock "$@"
+  '';
 in
 
 {
@@ -180,6 +180,7 @@ in
         };
 
         power = {
+          l = "mode default, exec ${lockScript}/bin/swaylock"; 
           e = "mode default, exec swaymsg exit";
           r = "mode default, exec systemctl reboot";
           p = "mode default, exec systemctl poweroff -i";
@@ -195,13 +196,14 @@ in
           xkb_layout = "fr,fr";
           xkb_variant = "bepo,";
           xkb_options = "grp:alt_space_toggle";
+          xkb_numlock = "enabled";
           tap = "enabled";
         };
       };
 
       output = {
         "*" = {
-          bg = "${wallpaper}/wallpaper.jpg stretch";
+          bg = "${wallpaper} stretch";
         };
       };
 
@@ -249,7 +251,6 @@ in
 
   home.packages = with pkgs; [
     swayidle
-    swaylock
     wev
   ];
 }

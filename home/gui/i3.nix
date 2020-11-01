@@ -4,15 +4,7 @@ let
   colors = import ./colors.nix;
   mod = "Mod4";
 
-  wallpaper = pkgs.stdenv.mkDerivation {
-    pname = "wallpaper";
-    version = "0.0.1";
-    src = ./.;
-    installPhase = ''
-      mkdir -p $out
-      cp wallpaper.jpg $out/wallpaper.jpg
-    '';
-  };
+  wallpaper = "$HOME/${config.xdg.dataFile."wallpaper.jpg".target}";
 
   # Allow to fallback to native i3lock if on non-nixos
   # if binary exists at /usr/bin/i3lock-fancy
@@ -28,6 +20,27 @@ let
 in
 
 {
+  # Enable xsession
+  xsession.enable = true;
+ 
+  # Enable numlock
+  xsession.numlock.enable = true;
+
+  # Used to configure xsession user service
+  home.keyboard = {
+    layout = "fr";
+    variant = "bepo";
+
+    # Use caps lock as escape
+    options = [ "caps:escape" ];
+  };
+
+  home.packages = with pkgs; [
+    arandr
+    i3blocks
+    shutter
+  ];
+
   xsession.windowManager.i3 = {
     enable = true;
     package = pkgs.i3-gaps;
@@ -175,7 +188,7 @@ in
         { command = "sleep 2 && xset r rate 200 25"; notification = false; }
 
         # Restore wallpaper
-        { command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}/wallpaper.jpg"; notification = false; }
+        { command = "${pkgs.feh}/bin/feh --bg-fill ${wallpaper}"; notification = false; }
 
         # Start applets
         { command = "${pkgs.networkmanagerapplet}/bin/nm-applet"; notification = false; }

@@ -5,6 +5,8 @@ let
 in
 
 {
+  home.packages = [ pkgs.i3status ];
+
   xdg.configFile."i3status/config".text = ''
     general {
             output_format = "i3bar"
