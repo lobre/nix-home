@@ -192,7 +192,7 @@ in
       ];
 
       floating = {
-        border = 3;
+        border = 2;
 
         criteria = [ 
           { title = "Microsoft Teams Notification"; }
@@ -201,7 +201,7 @@ in
 
       window = {
         hideEdgeBorders = "smart";
-        border = 3;
+        border = 2;
         titlebar = false;
       };
 

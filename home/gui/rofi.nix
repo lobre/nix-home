@@ -92,7 +92,7 @@ in
     enable = true;
     package = pkgs.rofi.override { plugins = [ pkgs.rofi-calc ]; };
 
-    borderWidth = null;
+    borderWidth = 2;
     font = "monospace 10";
     lines = 12;
     padding = 18;
@@ -103,38 +103,38 @@ in
 
     colors = {
       window = {
-        background = "${colors.gray-800}";
-        border = "${colors.gray-700}";
-        separator = "${colors.gray-700}";
+        background = "${colors.gray-900}";
+        border = "${colors.gray-800}";
+        separator = "${colors.gray-800}";
       };
 
       rows = {
         normal = {
-          background = "${colors.gray-800}";
+          background = "${colors.gray-900}";
           foreground = "${colors.gray-100}";
-          backgroundAlt = "${colors.gray-800}";
+          backgroundAlt = "${colors.gray-900}";
           highlight = {
-            background = "${colors.gray-800}";
-            foreground = "${colors.blue-300}";
+            background = "${colors.blue-800}";
+            foreground = "${colors.gray-100}";
           };
         };
 
         active = {
-          background = "${colors.gray-800}";
-          foreground = "${colors.blue-300}";
-          backgroundAlt = "${colors.gray-800}";
+          background = "${colors.blue-800}";
+          foreground = "${colors.gray-100}";
+          backgroundAlt = "${colors.gray-900}";
           highlight = {
-            background = "${colors.gray-800}";
-            foreground = "${colors.blue-300}";
+            background = "${colors.blue-800}";
+            foreground = "${colors.gray-100}";
           };
         };
 
         urgent = {
-          background = "${colors.gray-800}";
+          background = "${colors.gray-900}";
           foreground = "${colors.red-800}";
-          backgroundAlt = "${colors.gray-800}";
+          backgroundAlt = "${colors.gray-900}";
           highlight = {
-            background = "${colors.gray-800}";
+            background = "${colors.gray-900}";
             foreground = "${colors.red-800}";
           };
         };

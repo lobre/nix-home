@@ -41,6 +41,7 @@
     gnome3.sushi
     google-chrome
     mattermost-desktop
+    networkmanager
     obsidian
     pantheon.elementary-files
     pavucontrol
@@ -87,5 +88,6 @@
     ./gui/oni2.nix
     ./gui/sway.nix
     ./gui/mako.nix
+    ./gui/wofi.nix
   ];
 }

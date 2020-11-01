@@ -38,7 +38,7 @@ in
         separator_height = 1;
         padding = 8;
         horizontal_padding = 8;
-        separator_color = "${colors.gray-700}";
+        separator_color = "${colors.gray-800}";
         startup_notification = false;
         dmenu = "${pkgs.rofi}/bin/rofi -dmenu -p dunst:";
         browser = "xdg-open";
@@ -46,11 +46,12 @@ in
         max_icon_size = 32;
         stack_duplicates = false;
         hide_duplicate_count = true;
+        timeout = 4;
       };
 
       frame = {
         width = 1;
-        color = "${colors.gray-700}";
+        color = "${colors.gray-800}";
       };
 
       shortcuts = {
@@ -59,13 +60,13 @@ in
 
       urgency_low = {
         timeout = 4;
-        background = "${colors.gray-800}";
+        background = "${colors.gray-900}";
         foreground = "${colors.gray-100}";
       };
 
       urgency_normal = {
         timeout = 4;
-        background = "${colors.gray-800}";
+        background = "${colors.gray-900}";
         foreground = "${colors.gray-100}";
       };
 

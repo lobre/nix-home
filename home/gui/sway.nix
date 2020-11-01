@@ -34,7 +34,7 @@ in
 
         "${mod}+Return" = "exec ${config.programs.alacritty.package}/bin/alacritty";
         "${mod}+Shift+q" = "kill";
-        "${mod}+space" = "exec ${pkgs.dmenu}/bin/dmenu_path | ${pkgs.dmenu}/bin/dmenu | ${pkgs.findutils}/bin/xargs swaymsg exec --";
+        "${mod}+space" = "exec ${pkgs.wofi}/bin/wofi";
 
         "${mod}+h" = "focus left";
         "${mod}+j" = "focus down";
@@ -130,10 +130,12 @@ in
         { command = "vmware-user"; }
 
         { command = "systemctl --user restart pulseaudio.service"; }
+
+        { command = "systemctl --user stop dunst.service && mako"; }
       ];
 
       floating = {
-        border = 1;
+        border = 2;
 
         criteria = [ 
           { title = "Microsoft Teams Notification"; }
@@ -142,7 +144,7 @@ in
 
       window = {
         hideEdgeBorders = "smart";
-        border = 1;
+        border = 2;
         titlebar = false;
       };
 
@@ -241,10 +243,11 @@ in
       export QT_WAYLAND_DISABLE_WINDOWDECORATION="1"
       export _JAVA_AWT_WM_NONREPARENTING=1
     '';
+
+    wrapperFeatures.gtk = true;
   };
 
   home.packages = with pkgs; [
-    dmenu
     swayidle
     swaylock
     wev
