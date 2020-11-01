@@ -17,6 +17,7 @@ in
 
 {
   home.packages = with pkgs; [
+    wdisplays
     wofi
     wev
   ];
