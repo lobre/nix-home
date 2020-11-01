@@ -101,6 +101,30 @@ in
       };
 
       background_opacity = 1;
+
+      # To help find keys, use "alacritty --print-events"
+      key_bindings = [
+        {
+          key = "N";
+          mods = "Control|Shift";
+          action = "SpawnNewInstance";
+        }
+        {
+          key = "Equals";
+          mods = "Control";
+          action = "ResetFontSize";
+        }
+        {
+          key = "Key7";
+          mods = "Control";
+          action = "IncreaseFontSize";
+        }
+        {
+          key = "Key8";
+          mods = "Control";
+          action = "DecreaseFontSize";
+        }
+      ];
     };
   };
 
