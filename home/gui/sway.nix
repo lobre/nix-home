@@ -113,6 +113,10 @@ in
         # make also sure you have the correct udev rules in place (https://github.com/haikarainen/light/blob/master/90-backlight.rules)
         "XF86MonBrightnessUp" = "exec ${pkgs.light}/bin/light -A 30 # increase screen brightness";
         "XF86MonBrightnessDown" = "exec ${pkgs.light}/bin/light -U 30 # decrease screen brightness";
+
+        # Screenshots
+        "${mod}+g" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" - | ${pkgs.wl-clipboard}/bin/wl-copy";
+        "${mod}+Shift+g" = "exec ${pkgs.grim}/bin/grim -g \"$(${pkgs.slurp}/bin/slurp -d)\" $(xdg-user-dir PICTURES)/$(date +'%s_grim.png')";
       };
 
       # Colors for windows.
