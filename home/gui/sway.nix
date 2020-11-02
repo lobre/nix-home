@@ -18,8 +18,9 @@ in
 {
   home.packages = with pkgs; [
     wdisplays
-    wofi
     wev
+    wl-clipboard # needed for vim clipboard
+    wofi
   ];
 
   wayland.windowManager.sway = {
