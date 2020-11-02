@@ -51,8 +51,8 @@
       set noerrorbells   " Prevent bell
 
       " Default tabs count parameters
-      set tabstop=4
-      set shiftwidth=4
+      set tabstop=2
+      set shiftwidth=2
       set expandtab
 
       " Split on the right
