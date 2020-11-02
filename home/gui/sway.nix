@@ -40,9 +40,12 @@ in
         "${mod}+n" = "workspace next_on_output";
 
         "${mod}+Return" = "exec ${config.programs.alacritty.package}/bin/alacritty";
-        "${mod}+Shift+q" = "kill";
         "${mod}+space" = "exec ${pkgs.wofi}/bin/wofi";
         "${mod}+v" = "exec ${pkgs.clipman}/bin/clipman pick -t wofi";
+
+        "${mod}+Shift+q" = "kill";
+        "--release button2" = "kill";
+        "--whole-window ${mod}+button2" = "kill";
 
         "${mod}+h" = "focus left";
         "${mod}+j" = "focus down";
