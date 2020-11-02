@@ -19,11 +19,6 @@ in
   xdg.dataFile."wallpaper.jpg".source = "${wallpaper}/wallpaper.jpg";
   
   home.packages = with pkgs; [
-    # theme
-    arc-icon-theme
-    arc-theme
-
-    # apps
     discord
     filezilla
     firefox 
