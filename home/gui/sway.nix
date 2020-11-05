@@ -6,6 +6,14 @@ let
 
   wallpaper = "$HOME/${config.xdg.dataFile."wallpaper.jpg".target}";
 
+  # Custom script to start sway from tty.
+  # It will make sure ~/.xprofile is loaded.
+  startw = pkgs.writeScriptBin "startw" ''
+    #!${pkgs.stdenv.shell}
+    source ~/.xprofile
+    ${config.wayland.windowManager.sway.package}/bin/sway
+  '';
+
   # Allow to fallback to native swaylock if on non-nixos
   # This is proposed due to pam incompatibilities.
   # See https://gist.github.com/rossabaker/f6e5e89fd7423e1c0730fcd950c0cd33
@@ -17,6 +25,8 @@ in
 
 {
   home.packages = with pkgs; [
+    startw
+
     wdisplays
     wev
     wl-clipboard # needed for vim clipboard
@@ -144,6 +154,7 @@ in
         # Enable vmware guests if installed
         { command = "vmware-user"; }
 
+        # Pulse does not get started automatically, so using this hack
         { command = "systemctl --user restart pulseaudio.service"; }
 
         { command = "systemctl --user stop dunst.service && mako"; }
