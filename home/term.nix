@@ -41,6 +41,7 @@ in
     perl
     pv
     ripgrep
+    sqlite
     strace
     tcpdump
     traceroute
