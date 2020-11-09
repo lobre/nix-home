@@ -106,7 +106,7 @@ in
   };
 
   programs.starship = {
-    enable = true;
+    enable = false;
 
     enableBashIntegration = true;
     enableZshIntegration = true;

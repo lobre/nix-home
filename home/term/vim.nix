@@ -92,15 +92,19 @@
       set autoread
       set updatetime=500
 
+      " Vim-go settings
+      let g:go_fmt_command = "goimports"
+
       if has("autocmd")
           " Trigger autoread when files changes on disk
           autocmd FocusGained, BufEnter, CursorHold, CursorHoldI * if mode() != 'c' | checktime | endif
           autocmd FileChangedShellPost *
             \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-      endif
 
-      " Vim-go settings
-      let g:go_fmt_command = "goimports"
+          " Language specific indentation settings
+          autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
+          autocmd FileType sh setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+      endif
     '';
   };
 }
