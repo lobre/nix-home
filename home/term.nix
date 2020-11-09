@@ -63,12 +63,10 @@ in
   };
 
   imports = [
-    ./term/bash.nix
-    ./term/zsh.nix
-    ./term/go.nix
+    ./term/shell.nix
     ./term/tmux.nix
+    ./term/go.nix
     ./term/vim.nix
     ./term/git.nix
-    ./term/fzf.nix
   ];
 }
