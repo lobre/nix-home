@@ -86,10 +86,28 @@ in
 
     sessionVariables = sessionVariables;
     shellAliases = shellAliases;
-    initExtra = initExtra;
+    initExtra = initExtra + ''
+      bindkey -M emacs '^P' history-substring-search-up
+      bindkey -M emacs '^N' history-substring-search-down
+    '';
 
     prezto = {
       enable = true;
+      pmodules = [ 
+        # default ones
+        "environment"
+        "terminal"
+        "editor"
+        "history"
+        "directory"
+        "spectrum"
+        "utility"
+        "completion"
+        "prompt"
+
+        # fish like history search from part of string
+        "history-substring-search"
+      ];
     };
   };
 
