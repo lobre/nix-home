@@ -13,10 +13,8 @@ let
 in
 
 {
-  # Allow XDG linking
   xdg.enable = true;
-
-  xdg.dataFile."wallpaper.jpg".source = "${wallpaper}/wallpaper.jpg";
+  home.file."Pictures/Wallpapers/wallpaper.jpg".source = "${wallpaper}/wallpaper.jpg";
   
   home.packages = with pkgs; [
     discord
@@ -42,8 +40,8 @@ in
     };
 
     iconTheme = {
-      package = pkgs.arc-icon-theme;
-      name = "Arc";
+      package = pkgs.papirus-icon-theme;
+      name = "ePapirus";
     };
   };
 

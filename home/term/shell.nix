@@ -8,6 +8,7 @@ let
   };
 
   shellAliases = {
+    "ls"     = "ls --color";
     "ll"     = "ls -lh";
     ".."     = "cd ..";
     "..."    = "cd ../..";
@@ -79,36 +80,9 @@ in
     initExtra = initExtra;
   };
 
-  programs.zsh = {
+  programs.readline = {
     enable = true;
-
-    enableAutosuggestions = true;
-
-    sessionVariables = sessionVariables;
-    shellAliases = shellAliases;
-    initExtra = initExtra + ''
-      bindkey -M emacs '^P' history-substring-search-up
-      bindkey -M emacs '^N' history-substring-search-down
-    '';
-
-    prezto = {
-      enable = true;
-      pmodules = [ 
-        # default ones
-        "environment"
-        "terminal"
-        "editor"
-        "history"
-        "directory"
-        "spectrum"
-        "utility"
-        "completion"
-        "prompt"
-
-        # fish like history search from part of string
-        "history-substring-search"
-      ];
-    };
+    extraConfig = "set completion-ignore-case on";
   };
 
   programs.fzf = {
@@ -121,18 +95,6 @@ in
 
     fileWidgetCommand = config.programs.fzf.defaultCommand;
     changeDirWidgetCommand = config.programs.fzf.defaultCommand;
-  };
-
-  programs.starship = {
-    enable = false;
-
-    enableBashIntegration = true;
-    enableZshIntegration = true;
-
-    settings = {
-      add_newline = false;
-      character.symbol = "➜";
-    };
   };
 }
 

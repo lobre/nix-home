@@ -1,14 +1,11 @@
 { config, pkgs, lib, ... }:
 
 {
-  programs.neovim = {
+  programs.vim = {
     enable = true;
 
-    plugins = [ pkgs.vimPlugins.vim-go pkgs.vimPlugins.conjure ];
-
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+    #plugins = lib.mkOverride 10 [ pkgs.vimPlugins.vim-go ];
+    plugins = [ pkgs.vimPlugins.vim-go ];
 
     extraConfig = ''
       set nowritebackup
