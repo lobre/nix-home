@@ -23,6 +23,8 @@ let
        . $HOME/.bashrc.local
     fi
 
+    PS1="[ '\[\e[32m\]\W\[\033[00m\]' ]; "
+
     # Tcpdump clean
     function httpdump() {
         export port=80
