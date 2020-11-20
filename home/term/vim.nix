@@ -66,8 +66,8 @@
       " Improve completion
       set completeopt=longest,menuone
 
-      " Disable syntax color
-      syntax off
+      " Enable syntax color
+      syntax on
 
       " Common behavior for backspace
       set backspace=indent,eol,start
