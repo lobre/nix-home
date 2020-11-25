@@ -13,6 +13,12 @@ NixOS and Home Manager configurations and instructions.
 
 If you want to apply the user configurations without having NixOS as the operating system, you will also have to follow the [home-manager documentation](docs/home-manager.md).
 
+If you want to update your system, prefer the following command.
+
+```
+nix-channel --update; nix-env -iA nixpkgs.nix
+```
+
 ### i3
 
 In the user configuration, i3 is launched using the `~/.xsession` user file. That means the display manager should have an option to run the default user session for this `~/.xsession` file to be taken into account. Here is an example of configuration to create a default user session entry. You need to create a file `/usr/share/xsessions/default.desktop` as follows.
