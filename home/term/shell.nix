@@ -23,7 +23,9 @@ let
        . $HOME/.bashrc.local
     fi
 
-    PS1="[ '\[\e[32m\]\W\[\033[00m\]' ]; "
+    # Simple prompt with git branch
+    git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'; }
+    PS1="\[\033[32m\]\W\[\033[33m\]\$(git_branch)\[\033[00m\]\$ "
 
     # Tcpdump clean
     function httpdump() {
