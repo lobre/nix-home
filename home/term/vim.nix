@@ -72,6 +72,10 @@
       " Common behavior for backspace
       set backspace=indent,eol,start
 
+      " Disable modifyOtherKeys because xfce-terminal
+      " sets TERM to xterm and that causes problems
+      set t_TI= t_TE=
+
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
