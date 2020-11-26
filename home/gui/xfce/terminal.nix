@@ -1,0 +1,36 @@
+{
+  xdg.configFile."xfce4/terminal/terminalrc".text = ''
+    [Configuration]
+    MiscAlwaysShowTabs=FALSE
+    MiscBell=FALSE
+    MiscBellUrgent=FALSE
+    MiscBordersDefault=TRUE
+    MiscCursorBlinks=FALSE
+    MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
+    MiscDefaultGeometry=125x40
+    MiscInheritGeometry=FALSE
+    MiscMenubarDefault=FALSE
+    MiscMouseAutohide=FALSE
+    MiscMouseWheelZoom=TRUE
+    MiscToolbarDefault=FALSE
+    MiscConfirmClose=TRUE
+    MiscCycleTabs=TRUE
+    MiscTabCloseButtons=TRUE
+    MiscTabCloseMiddleClick=TRUE
+    MiscTabPosition=GTK_POS_TOP
+    MiscHighlightUrls=TRUE
+    MiscMiddleClickOpensUri=FALSE
+    MiscCopyOnSelect=FALSE
+    MiscShowRelaunchDialog=TRUE
+    MiscRewrapOnResize=TRUE
+    MiscUseShiftArrowsToScroll=FALSE
+    MiscSlimTabs=FALSE
+    MiscNewTabAdjacent=FALSE
+    ScrollingBar=TERMINAL_SCROLLBAR_NONE
+    FontUseSystem=TRUE
+    ColorPalette=rgb(75,82,98);rgb(191,97,106);rgb(163,190,140);rgb(235,203,139);rgb(129,161,193);rgb(180,142,173);rgb(137,208,186);rgb(229,233,240);rgb(67,74,90);rgb(179,85,94);rgb(147,174,124);rgb(219,187,123);rgb(113,145,177);rgb(166,128,159);rgb(125,187,168);rgb(209,213,220)
+    TabActivityColor=#ffffffffffff
+    ColorBackground=#2f2f34343f3f
+    ColorForeground=#d8d8dedde8e8
+  '';
+}
