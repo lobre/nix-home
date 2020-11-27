@@ -4,7 +4,6 @@
   programs.vim = {
     enable = true;
 
-    #plugins = lib.mkOverride 10 [ pkgs.vimPlugins.vim-go ];
     plugins = [ pkgs.vimPlugins.vim-go ];
 
     extraConfig = ''

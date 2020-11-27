@@ -19,6 +19,26 @@ If you want to update your system, prefer the following command.
 nix-channel --update; nix-env -iA nixpkgs.nix
 ```
 
+### Elementary OS
+
+If you are running Ubuntu, you should install Elementary's pantheon desktop.
+
+```
+sudo add-apt-repository ppa:elementary-os/stable
+sudo add-apt-repository ppa:elementary-os/os-patches
+sudo add-apt-repository ppa:philip.scott/elementary-tweaks
+sudo apt install elementary-desktop elementary-tweaks
+```
+
+It will install all the desktop, and all the required apps and packages.
+
+It is also recommended to use LightDM as the login manager because it plays nicer with pantheon.
+
+```
+sudo apt-get install lightdm
+sudo dpkg-reconfigure lightdm
+```
+
 ### i3
 
 In the user configuration, i3 is launched using the `~/.xsession` user file. That means the display manager should have an option to run the default user session for this `~/.xsession` file to be taken into account. Here is an example of configuration to create a default user session entry. You need to create a file `/usr/share/xsessions/default.desktop` as follows.
