@@ -13,24 +13,7 @@
     layout = "fr";
     xkbVariant = "bepo";
 
-    displayManager = {
-      gdm.enable = true;
-
-      # Default X session that will defer to ~/.xsession
-      session = [
-         {
-           manage = "desktop";
-           name = "Xsession";
-           start = "";
-         }
-      ];
-
-      # Use X session by default instead of sway
-      defaultSession = "Xsession";
-    };
+    desktopManager.mate.enable = true;
+    displayManager.lightdm.enable = true;
   };
-
-  # This will add a wayland desktop entry
-  # that will be available to the login manager
-  programs.sway.enable = true;
 }
