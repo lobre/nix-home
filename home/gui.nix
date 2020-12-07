@@ -9,6 +9,7 @@
     gnome3.dconf-editor
     gnome3.meld
     google-chrome
+    pavucontrol
     peek
     remmina
     slack
