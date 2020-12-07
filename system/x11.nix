@@ -16,4 +16,8 @@
     desktopManager.mate.enable = true;
     displayManager.lightdm.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    #mate.mate-tweak
+  ];
 }
