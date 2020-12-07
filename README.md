@@ -29,7 +29,8 @@ If you are running Ubuntu, you should install Mate destkop.
 sudo add-apt-repository ppa:spvkgn/mate-bionic
 
 sudo apt update
-sudo apt install mate-desktop-environment
+sudo apt install mate-desktop-environment-extras ubuntu-mate-themes
+
 ```
 
 It is also recommended to use lightdm instead of gdm because it is simpler.

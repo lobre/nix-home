@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  xdg.enable = true;
+
   home.packages = with pkgs; [
     discord
     filezilla
@@ -12,10 +14,15 @@
     slack
     spotify
     teams
+
+    arc-theme
+    papirus-icon-theme
   ];
 
   imports = [
-    ./gui/pantheon.nix
-    ./gui/copyq.nix
+    ./gui/mate.nix
+    ./gui/parcellite.nix
+    #./gui/pantheon.nix
+    #./gui/copyq.nix
   ];
 }
