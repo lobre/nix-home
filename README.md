@@ -19,6 +19,26 @@ If you want to update your system, prefer the following command.
 nix-channel --update; nix-env -iA nixpkgs.nix
 ```
 
+### Mate
+
+If you are running Ubuntu, you should install Mate destkop.
+
+```
+# for bionic (ubuntu 18), first add this PPA to be
+# able to download mate 1.24
+sudo add-apt-repository ppa:spvkgn/mate-bionic
+
+sudo apt update
+sudo apt install mate-desktop-environment
+```
+
+It is also recommended to use lightdm instead of gdm because it is simpler.
+
+```
+sudo apt-get install lightdm
+sudo dpkg-reconfigure lightdm
+```
+
 ### Elementary OS
 
 If you are running Ubuntu, you should install Elementary's pantheon desktop.
