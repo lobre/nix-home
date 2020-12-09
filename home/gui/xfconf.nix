@@ -21,17 +21,22 @@ let
     };
   };
 
-  config = {
-    "xfce4-panel" = {
-      "/toto" = 2;
-    };
-  };
+  xfconfDump = pkgs.writeScriptBin "xfconf-dump" ''
+    #!${pkgs.stdenv.shell}
+
+    for channel in $(${pkgs.xfce.xfconf}/bin/xfconf-query -l | grep -v ':' | tr -d "[:blank:]")
+    do
+        ${pkgs.xfce.xfconf}/bin/xfconf-query -c $channel -lv | while read line; do echo -e "$channel\t$line"; done
+    done
+  '';
+
+  config = {};
 
   configFile = pkgs.writeText "xfconf.json" (builtins.toJSON config);
 in
 
 {
-  home.packages = with pkgs; [];
+  home.packages = with pkgs; [ xfconfDump ];
 
   home.activation.xfconfSettings = lib.hm.dag.entryAfter ["installPackages"] ''
     if [[ -v DRY_RUN ]]; then

@@ -13,7 +13,6 @@
     layout = "fr";
     xkbVariant = "bepo";
 
-    desktopManager.mate.enable = true;
     desktopManager.xfce.enable = true;
 
     displayManager.lightdm = {

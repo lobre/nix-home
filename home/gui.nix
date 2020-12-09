@@ -22,10 +22,6 @@
   ];
 
   imports = [
-    ./gui/mate.nix
-    ./gui/parcellite.nix
     ./gui/xfconf.nix
-    #./gui/pantheon.nix
-    #./gui/copyq.nix
   ];
 }
