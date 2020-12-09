@@ -14,10 +14,24 @@
     xkbVariant = "bepo";
 
     desktopManager.mate.enable = true;
-    displayManager.lightdm.enable = true;
+    desktopManager.xfce.enable = true;
+
+    displayManager.lightdm = {
+      enable = true;
+
+      greeters.gtk.indicators = [
+        "~host"
+        "~spacer"
+        "~clock"
+        "~spacer"
+        "~session"
+        "~power"
+      ];
+    };
   };
 
   environment.systemPackages = with pkgs; [
     #mate.mate-tweak
+    xfce.xfce4-whiskermenu-plugin
   ];
 }
