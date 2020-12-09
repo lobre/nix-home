@@ -24,7 +24,7 @@
   imports = [
     ./gui/mate.nix
     ./gui/parcellite.nix
-    ./gui/xfce.nix
+    ./gui/xfconf.nix
     #./gui/pantheon.nix
     #./gui/copyq.nix
   ];

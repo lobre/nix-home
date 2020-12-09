@@ -35,9 +35,9 @@ in
 
   home.activation.xfconfSettings = lib.hm.dag.entryAfter ["installPackages"] ''
     if [[ -v DRY_RUN ]]; then
-      ${xfconfJson}/bin/xfconf-json -bash -file ${configFile}
+      ${xfconfJson}/bin/xfconf-json -bin ${pkgs.xfce.xfconf}/bin/xfconf-query -file ${configFile} -bash
     else
-      ${xfconfJson}/bin/xfconf-json -file ${configFile}
+      ${xfconfJson}/bin/xfconf-json -bin ${pkgs.xfce.xfconf}/bin/xfconf-query -file ${configFile}
     fi
   '';
 }
