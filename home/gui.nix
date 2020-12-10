@@ -23,6 +23,6 @@
   imports = [
     ./gui/xfconf.nix
     ./gui/terminal.nix
-    ./gui/menu.nix
+    ./gui/panel.nix
   ];
 }
