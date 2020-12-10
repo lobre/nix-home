@@ -19,6 +19,18 @@ If you want to update your system, prefer the following command.
 nix-channel --update; nix-env -iA nixpkgs.nix
 ```
 
+### Xfce
+
+If you are running Ubuntu, you should install Xfce.
+
+```
+# for oldest Ubuntu versions, use this PPA to have an up to date version.
+sudo add-apt-repository ppa:xubuntu-dev/staging
+
+sudo apt update
+sudo apt install xfce4 xfce4-goodies
+```
+
 ### Mate
 
 If you are running Ubuntu, you should install Mate destkop.
