@@ -31,6 +31,13 @@ sudo apt update
 sudo apt install xfce4 xfce4-goodies
 ```
 
+I also usually prefer using lightdm instead of gdm because it is simpler.
+
+```
+sudo apt-get install lightdm
+sudo dpkg-reconfigure lightdm
+```
+
 ### Mate
 
 If you are running Ubuntu, you should install Mate destkop.
