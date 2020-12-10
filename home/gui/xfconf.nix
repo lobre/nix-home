@@ -34,6 +34,9 @@ let
     "xfce4-session" = {
       "/general/LockCommand" = "light-locker-command --lock";
     };
+    "xsettings" = {
+      "/Net/ThemeName" = "Arc-Darker";
+    };
   };
 
   configFile = pkgs.writeText "xfconf.json" (builtins.toJSON config);
