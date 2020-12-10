@@ -30,9 +30,23 @@ let
     done
   '';
 
+  wallpaper = pkgs.stdenv.mkDerivation {
+    pname = "wallpaper";
+    version = "0.0.1";
+    src = ./.;
+    installPhase = ''
+      mkdir -p $out
+      cp wallpaper.jpg $out/wallpaper.jpg
+    '';
+  };
+
   config = {
     "xfce4-session" = {
       "/general/LockCommand" = "light-locker-command --lock";
+    };
+    "xfce4-desktop" = {
+      "/backdrop/screen0/monitoreDP-1/workspace0/last-image" = "${wallpaper}/wallpaper.jpg";
+      "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 4; # scaled
     };
     "xsettings" = {
       "/Net/ThemeName" = "Arc-Darker";
