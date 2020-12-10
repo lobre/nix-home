@@ -36,6 +36,10 @@ let
     };
     "xsettings" = {
       "/Net/ThemeName" = "Arc-Darker";
+      "/Net/IconThemeName" = "ePapirus";
+    };
+    "xfww4" = {
+      "/general/theme" = "Arc-Darker";
     };
   };
 
