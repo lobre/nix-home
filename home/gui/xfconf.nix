@@ -30,7 +30,11 @@ let
     done
   '';
 
-  config = {};
+  config = {
+    "xfce4-session" = {
+      "/general/LockCommand" = "light-locker-command --lock";
+    };
+  };
 
   configFile = pkgs.writeText "xfconf.json" (builtins.toJSON config);
 in
@@ -46,5 +50,3 @@ in
     fi
   '';
 }
-
-

@@ -38,6 +38,7 @@
 
   # additional xfce packages
   environment.systemPackages = with pkgs; [
+    lightlocker
     xfce.orage
     xfce.xfburn
     xfce.xfce4-battery-plugin
