@@ -38,7 +38,7 @@ let
       "/Net/ThemeName" = "Arc-Darker";
       "/Net/IconThemeName" = "ePapirus";
     };
-    "xfww4" = {
+    "xfwm4" = {
       "/general/theme" = "Arc-Darker";
     };
   };
