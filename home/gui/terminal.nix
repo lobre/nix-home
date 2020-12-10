@@ -41,7 +41,7 @@ in
     MiscBordersDefault=TRUE
     MiscCursorBlinks=FALSE
     MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
-    MiscDefaultGeometry=150x40
+    MiscDefaultGeometry=120x30
     MiscInheritGeometry=FALSE
     MiscMenubarDefault=FALSE
     MiscMouseAutohide=FALSE

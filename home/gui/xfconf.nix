@@ -47,6 +47,7 @@ let
     "xfce4-desktop" = {
       "/backdrop/screen0/monitoreDP-1/workspace0/last-image" = "${wallpaper}/wallpaper.jpg";
       "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 4; # scaled
+      "/desktop-icons/style" = 0;
     };
     "xsettings" = {
       "/Net/ThemeName" = "Arc-Darker";
@@ -54,6 +55,16 @@ let
     };
     "xfwm4" = {
       "/general/theme" = "Arc-Darker";
+      "/general/vblank_mode" = "glx"; # seems to better work with external monitors
+      "/general/workspace_count" = 4;
+      "/general/easy_click" = "Super"; # key used to grab and move windows
+    };
+    "xfce4-keyboard-shortcuts" = {
+      "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
+      "/commands/custom/<Super>g" = "xfce4-screenshooter";
+      "/commands/custom/<Super>l" = "xflock4";
+      "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
+      "/commands/custom/<Super>v" = "xfce4-popup-clipman";
     };
   };
 
