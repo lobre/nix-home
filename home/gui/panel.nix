@@ -2,7 +2,7 @@
 
 {
   # whisker menu
-  xdg.configFile."xfce4/panel/whiskermenu-7.rc".text = ''
+  xdg.configFile."xfce4/panel/whiskermenu-1.rc".text = ''
     favorites=
     recent=
     button-icon=xfce4-whiskermenu
@@ -55,7 +55,7 @@
   '';
 
   # battery plugin
-  xdg.configFile."xfce4/panel/battery-1.rc".text = ''
+  xdg.configFile."xfce4/panel/battery-9.rc".text = ''
     display_label=false
     display_icon=true
     display_power=false
@@ -76,20 +76,9 @@
     command_on_low=
     command_on_critical=
   '';
-
-  # screenshot plugin
-  xdg.configFile."xfce4/panel/screenshooter-32.rc".text = ''
-    app=none
-    last_user=
-    screenshot_dir=
-    action=1
-    delay=0
-    region=3
-    show_mouse=1
-  '';
-
+  
   # disk space plugin
-  xdg.configFile."xfce4/panel/fsguard-24.rc".text = ''
+  xdg.configFile."xfce4/panel/fsguard-10.rc".text = ''
     yellow=8
     red=2
     lab_size_visible=false
@@ -98,5 +87,16 @@
     label=
     label_visible=false
     mnt=/
+  '';
+
+  # screenshot plugin
+  xdg.configFile."xfce4/panel/screenshooter-12.rc".text = ''
+    app=none
+    last_user=
+    screenshot_dir=
+    action=1
+    delay=0
+    region=3
+    show_mouse=1
   '';
 }

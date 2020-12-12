@@ -44,27 +44,101 @@ let
     "xfce4-session" = {
       "/general/LockCommand" = "light-locker-command --lock";
     };
+
     "xfce4-desktop" = {
       "/backdrop/screen0/monitoreDP-1/workspace0/last-image" = "${wallpaper}/wallpaper.jpg";
       "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 4; # scaled
       "/desktop-icons/style" = 0;
     };
+
     "xsettings" = {
       "/Net/ThemeName" = "Arc-Darker";
       "/Net/IconThemeName" = "ePapirus";
     };
+    
     "xfwm4" = {
       "/general/theme" = "Arc-Darker";
       "/general/vblank_mode" = "glx"; # seems to better work with external monitors
       "/general/workspace_count" = 4;
       "/general/easy_click" = "Super"; # key used to grab and move windows
     };
+
     "xfce4-keyboard-shortcuts" = {
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
       "/commands/custom/<Super>g" = "xfce4-screenshooter";
       "/commands/custom/<Super>l" = "xflock4";
       "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
+    };
+
+    "xfcfe4-panel" = {
+      "/panels" = [ 1 2 ];
+
+      # top panel
+      "/panels/panel-1/icon-size" = 16;
+      "/panels/panel-1/length" = 100;
+      "/panels/panel-1/position" = "p=6;x=0;y=0";
+      "/panels/panel-1/position-locked" = true;
+      "/panels/panel-1/size" = 26;
+      "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ];
+
+      # bottom panel (let dynamically add plugins)
+      "/panels/panel-2/autohide-behavior" = 1;
+      "/panels/panel-2/position" = "p=10;x=0;y=0";
+      "/panels/panel-2/position-locked" = true;
+      "/panels/panel-2/size" = 48;
+
+      # menu
+      "/plugins/plugin-1" = "whiskermenu";
+
+      # windows
+      "/plugins/plugin-2" = "tasklist";
+      "/plugins/plugin-2/grouping" = 1;
+
+      # sep
+      "/plugins/plugin-3" = "separator";
+      "/plugins/plugin-3/expand" = true;
+      "/plugins/plugin-3/style" = 0;
+
+      # workspaces
+      "/plugins/plugin-4" = "pager";
+      "/plugins/plugin-4/rows" = 1;
+
+      # sep
+      "/plugins/plugin-5" = "separator";
+      "/plugins/plugin-5/style" = 0;
+
+      # systray 
+      "/plugins/plugin-6" = "systray";
+      "/plugins/plugin-6/show-frame" = false;
+      "/plugins/plugin-6/square-icons" = true;
+
+      # audio
+      "/plugins/plugin-7" = "pulseaudio";
+      "/plugins/plugin-7/enable-key-shortcuts" = true;
+      "/plugins/plugin-7/show-notifications" = true;
+
+      # notifications
+      "/plugins/plugin-8" = "notification-plugin";
+
+      # battery
+      "/plugins/plugin-9" = "battery";
+
+      # disk
+      "/plugins/plugin-10" = "fsguard";
+
+      # clipboard
+      "/plugins/plugin-11" = "xfce4-clipman-plugin";
+
+      # screenshot
+      "/plugins/plugin-12" = "screenshooter";
+
+      # sep
+      "/plugins/plugin-13" = "separator";
+      "/plugins/plugin-13/style" = 0;
+
+      # clock
+      "/plugins/plugin-14" = "clock";
     };
   };
 
