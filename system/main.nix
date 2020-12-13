@@ -25,6 +25,7 @@
     curl
     git
     gptfdisk
+    htop
     mkpasswd
     parted
     pciutils
@@ -34,12 +35,6 @@
     vim_configurable
     wget
   ];
-
-  # Programs
-  programs.dconf.enable = true;
-  programs.evince.enable = true;
-  programs.file-roller.enable = true;
-  programs.zsh.enable = true;
 
   # Services
   services.tailscale.enable = true;
