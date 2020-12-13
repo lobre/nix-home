@@ -66,11 +66,32 @@ let
 
     "xfce4-keyboard-shortcuts" = {
       # apps
+      "/commands/custom/override" = true; # allow custom commands
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
       "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
       "/commands/custom/<Super>g" = "xfce4-screenshooter";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
+
+      # allow custom wm keybindings
+      "/xfwm4/custom/override" = true;
+
+      # directions
+      "/xfwm4/custom/h" = "left_key";
+      "/xfwm4/custom/j" = "down_key";
+      "/xfwm4/custom/k" = "up_key";
+      "/xfwm4/custom/l" = "right_key";
+
+      # windows
+      "/xfwm4/custom/<Alt>Tab" = "cycle_windows_key";
+      "/xfwm4/custom/<Alt><Shift>Tab" = "cycle_reverse_windows_key";
+      "/xfwm4/custom/<Super>Tab" = "switch_window_key";
+      "/xfwm4/custom/Escape" = "cancel_key";
+      "/xfwm4/custom/<Super>z" = "maximize_window_key";
+      "/xfwm4/custom/<Shift><Super>z" = "hide_window_key";
+      "/xfwm4/custom/<Super>d" = "show_desktop_key";
+      "/xfwm4/custom/<Super>q" = "close_window_key";
+      "/xfwm4/custom/<Super>r" = "resize_window_key";
 
       # windows tiling
       "/xfwm4/custom/<Super>h" = "tile_left_key";
@@ -81,12 +102,6 @@ let
       "/xfwm4/custom/<Alt><Super>j" = "tile_down_right_key";
       "/xfwm4/custom/<Alt><Super>k" = "tile_down_left_key";
       "/xfwm4/custom/<Alt><Super>l" = "tile_up_right_key";
-
-      # directions
-      "/xfwm4/custom/h" = "left_key";
-      "/xfwm4/custom/j" = "down_key";
-      "/xfwm4/custom/k" = "up_key";
-      "/xfwm4/custom/l" = "right_key";
 
       # workspaces
       "/xfwm4/custom/<Super>plus" = "workspace_1_key";
@@ -101,20 +116,9 @@ let
       "/xfwm4/custom/<Shift><Super>0" = "move_window_workspace_4_key";
       "/xfwm4/custom/<Shift><Super>n" = "move_window_next_workspace_key";
       "/xfwm4/custom/<Shift><Super>p" = "move_window_prev_workspace_key";
-
-      # windows
-      "/xfwm4/custom/<Alt>Tab" = "cycle_windows_key";
-      "/xfwm4/custom/<Alt><Shift>Tab" = "cycle_reverse_windows_key";
-      "/xfwm4/custom/<Super>Tab" = "switch_window_key";
-      "/xfwm4/custom/Escape" = "cancel_key";
-      "/xfwm4/custom/<Super>z" = "maximize_window_key";
-      "/xfwm4/custom/<Shift><Super>z" = "hide_window_key";
-      "/xfwm4/custom/<Super>d" = "show_desktop_key";
-      "/xfwm4/custom/<Super>q" = "close_window_key";
-      "/xfwm4/custom/<Super>r" = "resize_window_key";
     };
 
-    "xfcfe4-panel" = {
+    "xfce4-panel" = {
       "/panels" = [ 1 2 ];
 
       # top panel
