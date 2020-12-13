@@ -52,14 +52,6 @@ in
   # Allow XDG linking
   xdg.enable = true;
 
-  # cat clone with wings
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "ansi-dark";
-    };
-  };
-
   imports = [
     ./term/shell.nix
     ./term/tmux.nix
