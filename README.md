@@ -6,14 +6,14 @@ NixOS and Home Manager configurations and instructions.
 
 ## Table of contents
 
-- Check [this page](docs/nixos-install.md) to know how to install NixOS with a ZFS filesystem.
+- Check [this page](docs/nixos-install.md) to know how to install NixOS.
 - Check [this page](docs/home-manager.md) for using home-manager to apply user configurations.
 
 ## Non NixOS setup
 
-If you want to apply the user configurations without having NixOS as the operating system, you will also have to follow the [home-manager documentation](docs/home-manager.md).
+If you want to apply the user configurations without having NixOS as the operating system, you can also follow the [home-manager documentation](docs/home-manager.md).
 
-If you want to update your system, prefer the following command.
+Note that if you want to update your system, you should prefer the following command.
 
 ```
 nix-channel --update; nix-env -iA nixpkgs.nix
