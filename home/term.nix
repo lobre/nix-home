@@ -22,7 +22,6 @@ in
     nixSwitch
 
     binutils-unwrapped
-    clojure
     ctags
     curl
     docker
@@ -34,7 +33,6 @@ in
     httpie
     jq
     killall
-    leiningen
     ltrace
     ncdu
     nodejs

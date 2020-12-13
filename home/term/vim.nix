@@ -1,14 +1,10 @@
 { config, pkgs, lib, ... }:
 
 {
-  programs.neovim = {
+  programs.vim = {
     enable = true;
 
-    plugins = [ pkgs.vimPlugins.vim-go pkgs.vimPlugins.conjure ];
-
-    viAlias = true;
-    vimAlias = true;
-    vimdiffAlias = true;
+    plugins = [ pkgs.vimPlugins.vim-go ];
 
     extraConfig = ''
       set nowritebackup
@@ -69,11 +65,15 @@
       " Improve completion
       set completeopt=longest,menuone
 
-      " Disable syntax color
-      syntax off
+      " Enable syntax color
+      syntax on
 
       " Common behavior for backspace
       set backspace=indent,eol,start
+
+      " Disable modifyOtherKeys because xfce-terminal
+      " sets TERM to xterm and that causes problems
+      set t_TI= t_TE=
 
       " Save with sudo
       command! W w !sudo tee % > /dev/null

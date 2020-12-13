@@ -10,7 +10,7 @@
       createHome = true;
       description = "Loric Brevet";
       uid = 1000;
-      shell = pkgs.zsh;
+      shell = pkgs.bash;
       extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" ];
     };
   };
