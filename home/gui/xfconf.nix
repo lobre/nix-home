@@ -47,7 +47,7 @@ let
 
     "xfce4-desktop" = {
       "/backdrop/screen0/monitoreDP-1/workspace0/last-image" = "${wallpaper}/wallpaper.jpg";
-      "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 4; # scaled
+      "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 5; # zoomed
       "/desktop-icons/style" = 0;
     };
 
