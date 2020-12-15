@@ -58,7 +58,6 @@ let
     
     "xfwm4" = {
       "/general/theme" = "Arc-Darker";
-      "/general/vblank_mode" = "glx"; # seems to better work with external monitors
       "/general/workspace_count" = 4;
       "/general/easy_click" = "Super"; # key used to grab and move windows
       "/general/snap_to_windows" = true;

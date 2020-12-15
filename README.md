@@ -47,3 +47,11 @@ xfconf-query -c xfce4-keyboard-shortcuts --reset --recursive  --property "/comma
 xfconf-query -c xfce4-keyboard-shortcuts --reset --recursive  --property "/xfwm4/custom"
 xfconf-query -c xfce4-panel --reset --recursive  --property "/plugins"
 ```
+
+#### Troubleshooting
+
+There is a bug in Ubuntu 18.04 preventing from using the xpresent vblank mode of the compositor. Problem has been fixed but not yet backported to bionic. So manually install the `libxpresent1` package from `eoan`.
+
+https://bugs.launchpad.net/ubuntu/+source/libxpresent/+bug/1801071
+
+Then make sure you don't have any problems related to the window manager after login in `~/.xsession-errors`.
