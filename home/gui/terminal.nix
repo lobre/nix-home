@@ -66,6 +66,7 @@ in
     ScrollingUnlimited=TRUE
     FontUseSystem=TRUE
     ShortcutsNoMnemonics=TRUE
+    TitleMode=TERMINAL_TITLE_REPLACE
     ColorForeground=${foreground}
     ColorBackground=${background}
     ColorPalette=${palette}
