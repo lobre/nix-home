@@ -6,7 +6,8 @@ NixOS and Home Manager configurations and instructions.
 
 ## Table of contents
 
-- Check [this page](docs/nixos-install.md) to know how to install NixOS.
+- Check [this page](docs/nixos-install.md) to know how to install NixOS on your laptop.
+- Check [this page](docs/kimsufi.md) to know how to install NixOS on your Kimsufi server.
 - Check [this page](docs/home-manager.md) for using home-manager to apply user configurations.
 
 ## Non NixOS setup
