@@ -36,7 +36,7 @@ Then, you can start to edit this file, uncomment and fill in the missing configu
 You can finally apply the configuration. For that, use the following script that will tell home-manager where to find our configuration file.
 
 ```
-./nix-switch home
+./nix-switch.sh home
 ```
 
 At the end of the process, reboot the machine.
