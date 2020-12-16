@@ -34,5 +34,8 @@
     #openssh.authorizedKeys.keys = [ "ssh-rsa AAAA... loric" ];
   };
 
+  # hostname of machine
+  #networking.hostName = "nixos";
+
   system.stateVersion = "20.03";
 }

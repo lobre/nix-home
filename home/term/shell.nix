@@ -23,9 +23,9 @@ let
        . $HOME/.bashrc.local
     fi
 
-    # Simple prompt with git branch
+    # Simple prompt with git branch and without user
     git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'; }
-    PS1="\[\033[32m\]\W\[\033[33m\]\$(git_branch)\[\033[00m\]\$ "
+    PS1="\[\033[01;32m\]\[\033[0m\033[0;32m\]\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\[\033[33m\]\$(git_branch)\[\033[00m\]\$ "
   '';
 in
 
