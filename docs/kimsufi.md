@@ -101,3 +101,19 @@ Then configure the desired nix channel if you don't want to stay on "unstable".
 nix-channel --add https://nixos.org/channels/nixos-20.09 nixpkgs
 nix-channel --update
 ```
+
+## Configure and install NixOS
+
+You are now ready to start the configuration and installation of NixOS.
+
+Please refer to [this page](install.md) to know how to do that.
+
+## Reboot server to disk
+
+To be able to boot the normal system instead of rescue mode, you will need to revert the "NetBoot" from your Kimsufi dashboard and select "Hard Drive". Then restart your server to apply.
+
+You can also re-enable monitoring.
+
+## After installation
+
+To easily manage your NixOS configurations from userspace, make sure to follow what's writter on [this page](after-install.md).
