@@ -102,6 +102,12 @@ nix-channel --add https://nixos.org/channels/nixos-20.09 nixpkgs
 nix-channel --update
 ```
 
+We also need the NixOS installation tools.
+
+```
+nix-env -f '<nixpkgs/nixos>' --arg configuration {} -iA config.system.build.{nixos-generate-config,nixos-install,nixos-enter,manual.manpages}
+```
+
 ## Configure and install NixOS
 
 You are now ready to start the configuration and installation of NixOS.
