@@ -1,4 +1,4 @@
-# How to install NixOS with ZFS
+# Install NixOS on your laptop
 
 Here is a quick tutorial that will help installing NixOS on a regular ext4 partition. This tutorial covers a physical installation or a virtual machine installation (instructions for VMWare Player).
 
@@ -203,66 +203,6 @@ mkdir /mnt/boot
 mount $BOOT /mnt/boot
 ```
 
-## Configure NixOS before installation
+## Configure and install NixOS
 
-### Import configuration from GitHub
-
-All my configurations are stored in this GitHub repository. So we will have to download them before launching the installation process. Here is how I do it.
-
-We need `git` installed and then, we clone the repository in `/mnt/etc/nixos`, where the installer expects them.
-
-```
-nix-env -iA nixos.git
-git clone https://github.com/lobre/nix-home /mnt/etc/nixos
-```
-
-### Create configuration.nix
-
-In the repository, `configuration.nix` and `hardware-configuration.nix` are excluded in the `.gitignore`. So these files don’t exist yet.
-
-In this step, we will create `configuration.nix` starting from the skeleton `configuration.skel.nix` available at the root of the repository.
-
-```
-cp /mnt/etc/nixos/{configuration.skel,configuration}.nix
-```
-
-Then, you can start to edit this file, uncomment and fill in the missing configurations.
-
-### Generate hardware-configuration.nix
-
-NixOS installer is able to detect our configuration and generate a `hardware-configuration.nix` for us.
-
-Use the following command to execute the generation. Note that as `configuration.nix` already exists, it won’t get overriden.
-
-```
-nixos-generate-config --root /mnt
-```
-
-You can throw a look at the generated hardware configuration in `/mnt/etc/nixos/hardware-configuration.nix`.
-
-## Installation
-
-Once ready, simply launch the installation command and reboot once it is finished.
-
-Note that we decide to not set the root password as our configuration will create a user with root permissions.
-
-```
-nixos-install --no-root-passwd
-reboot
-```
-
-## After installation
-
-Now that the system is installed and booted, you will want to re-clone this project in `~/Lab/nix-home` and copy our `configuration.nix` and `hardware-configuration.nix` files.
-
-```
-git clone https://github.com/lobre/nix-home ~/Lab/nix-home
-sudo chown ${USER}:users /etc/nixos/{hardware-,}configuration.nix
-sudo mv /etc/nixos/{hardware-,}configuration.nix ~/Lab/nix-home/
-```
-
-Then, make sure to re-apply the configurations to see if everything works as expected. To note that we use a custom script aware of the location of our configurations.
-
-```
-sudo ~/Lab/nix-home/nix-switch system
-```
+To finish the installation, refer to [this page](docs/install.md)
