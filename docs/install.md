@@ -9,7 +9,7 @@ All my configurations are stored in this GitHub repository. So we will have to d
 We need `git` installed and then, we clone the repository in `/mnt/etc/nixos`, where the installer expects them.
 
 ```
-nix-env -iA nixos.git
+nix-env -iA nixos.git # or nix-env -iA nixpkgs.git
 git clone https://github.com/lobre/nix-home /mnt/etc/nixos
 ```
 
