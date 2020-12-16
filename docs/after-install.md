@@ -11,5 +11,5 @@ sudo mv /etc/nixos/{hardware-,}configuration.nix ~/Lab/nix-home/
 Then, make sure to re-apply the configurations to see if everything works as expected. To note that we use a custom script aware of the location of our configurations.
 
 ```
-sudo ~/Lab/nix-home/nix-switch system
+sudo ~/Lab/nix-home/nix-switch.sh system
 ```
