@@ -75,20 +75,20 @@ mkdir /mnt/boot
 mount $BOOT /mnt/boot
 ```
 
-## Create a non-root user
+## Allow nix to install as root
 
-Nix will refuse to install as root. We need a non-root user with sudo permissions instead.
+Nix normally refuses to install as root. But as we want to add it only in the rescue mode, we decide to force the installation as root. It will simplify the rest of the script, and will allow to share the same installation steps as if NixOS was installed using a regular iso image.
+
+To do so, we create the `nixbld` group.
 
 ```
-apt install sudo
-useradd -m -G sudo setupuser
-passwd setupuser
-su setupuser
+groupadd -g 30000 nixbld
+useradd -u 30000 -g nixbld -G nixbld nixbld
 ```
 
 ## Install nix
 
-It is now time to install the nix cli and make it available to our `setupuser`. This will give us all the necessary tools to install NixOS instance. We can simply install the "single-user" method.
+It is now time to install the nix cli. This will give us all the necessary tools to install NixOS. To note that simply use the "single-user" installation method.
 
 ```
 curl -L https://nixos.org/nix/install | sh
