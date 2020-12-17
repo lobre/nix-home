@@ -69,7 +69,7 @@ let
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
       "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
-      "/commands/custom/<Super>g" = "xfce4-screenshooter";
+      "/commands/custom/<Super>g" = "xfce4-screenshooter --region --clipboard";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
 
       # allow custom wm keybindings
