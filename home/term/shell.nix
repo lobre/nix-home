@@ -2,7 +2,6 @@
 
 let
   sessionVariables = {
-    LAB = "$HOME/Lab";
     VISUAL = "vim";
     EDITOR = "vim";
   };

@@ -7,7 +7,7 @@ let
     if [[ -n "$SUDO_USER" ]]; then
         user="$SUDO_USER"
     fi
-    exec "/home/$user/Lab/nix-home/nix-switch.sh" "$@"
+    exec "/home/$user/lab/github.com/lobre/nix-home/nix-switch.sh" "$@"
   '';
 in
 

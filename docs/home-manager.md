@@ -1,6 +1,6 @@
 # Home Manager
 
-To install user configurations, we are using home-manager. So we first need to install it. In this section, we work on the assumption that this `nix-home` repo is cloned under `~/Lab/nix-home`.
+To install user configurations, we are using home-manager. So we first need to install it. In this section, we work on the assumption that this `nix-home` repo is cloned under `~/lab/github.com/lobre/nix-home`.
 
 ## Installation of home-manager
 

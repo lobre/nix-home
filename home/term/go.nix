@@ -4,7 +4,6 @@
   programs.go = {
     enable = true;
     package = pkgs.go;
-    goPath = "Lab/go";
   };
 
   home.sessionVariables.GOROOT = "${pkgs.go}/share/go";
