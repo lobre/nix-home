@@ -36,6 +36,7 @@
       set wildignorecase " Autocomplete case insensitive
       set smartcase      " Enable case sensitivity if search contains upper letter
       set hidden         " Enable caching on buffer switch
+      set hlsearch       " Highlight search results
 
       " Autocompletion
       set wildmenu
