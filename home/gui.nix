@@ -4,7 +4,6 @@
   xdg.enable = true;
 
   home.packages = with pkgs; [
-    discord
     filezilla
     gnome3.meld
     google-chrome
