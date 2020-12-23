@@ -4,6 +4,7 @@ let
   sessionVariables = {
     VISUAL = "vim";
     EDITOR = "vim";
+    PAGER = "less";
   };
 
   shellAliases = {
