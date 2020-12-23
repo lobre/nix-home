@@ -17,6 +17,10 @@ let
   };
 
   initExtra = ''
+    # Completion is not yet added my home manager
+    # see https://github.com/nix-community/home-manager/issues/1464
+    . ${pkgs.bash-completion}/share/bash-completion/bash_completion
+
     # Include unversioned files
     if [ -f "$HOME/.bashrc.local" ]; then
        . $HOME/.bashrc.local
