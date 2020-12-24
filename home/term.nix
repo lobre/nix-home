@@ -30,6 +30,7 @@ in
     fd
     file
     gopass
+    gnupg
     htop 
     httpie
     jq
