@@ -53,7 +53,12 @@ in
   # Allow XDG linking
   xdg.enable = true;
 
+  # Enable gnupg agent and program
   programs.gpg.enable = true;
+  services.gpg-agent = {
+    enable = true;
+    enableSshSupport = true;
+  };
 
   imports = [
     ./term/shell.nix
