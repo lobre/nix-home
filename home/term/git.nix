@@ -28,10 +28,7 @@
         askpass = "";
       };
       credential = {
-        # It stores passwords in the plain ~/.git-credentials file
-        # but for a single user, there is no other simple method
-        # (libsecret requires X for example)
-        helper = "store";
+        helper = "!gopass-git-credentials $@";
       };
       merge = {
         tool = "meld";

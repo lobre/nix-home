@@ -29,6 +29,7 @@ in
     dos2unix
     fd
     file
+    gopass
     htop 
     httpie
     jq
