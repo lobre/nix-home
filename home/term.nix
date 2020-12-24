@@ -30,7 +30,6 @@ in
     fd
     file
     gopass
-    gnupg
     htop 
     httpie
     jq
@@ -53,6 +52,8 @@ in
 
   # Allow XDG linking
   xdg.enable = true;
+
+  programs.gpg.enable = true;
 
   imports = [
     ./term/shell.nix
