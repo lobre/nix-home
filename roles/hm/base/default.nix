@@ -48,6 +48,11 @@ in
     unzip
     wget 
     yarn
+
+    # for gpg key
+    paperkey
+    qrencode
+    zbar
   ];
 
   # Allow XDG linking
