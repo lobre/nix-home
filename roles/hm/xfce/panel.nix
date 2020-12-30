@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 {
   # whisker menu
   xdg.configFile."xfce4/panel/whiskermenu-1.rc".text = ''

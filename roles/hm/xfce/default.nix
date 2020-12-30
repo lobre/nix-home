@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   xdg.enable = true;
@@ -20,8 +20,9 @@
   ];
 
   imports = [
-    ./gui/xfconf.nix
-    ./gui/terminal.nix
-    ./gui/panel.nix
+    ./xfconf.nix
+    ./terminal.nix
+    ./panel.nix
   ];
 }
+

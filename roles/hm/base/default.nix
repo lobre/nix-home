@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, secrets, ... }:
 
 let
   nixSwitch = pkgs.writeScriptBin "nix-switch" ''
@@ -61,10 +61,11 @@ in
   };
 
   imports = [
-    ./term/shell.nix
-    ./term/tmux.nix
-    ./term/go.nix
-    ./term/vim.nix
-    ./term/git.nix
+    ./shell.nix
+    ./tmux.nix
+    ./go.nix
+    ./vim.nix
+    ./git.nix
   ];
 }
+

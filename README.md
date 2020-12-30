@@ -10,6 +10,12 @@ NixOS and Home Manager configurations and instructions.
 - Check [this page](docs/kimsufi.md) to know how to install NixOS on your Kimsufi server.
 - Check [this page](docs/home-manager.md) for using home-manager to apply user configurations.
 
+## Secrets
+
+```
+gopass show nix/secrets > secrets.nix
+```
+
 ## Non NixOS setup
 
 If you want to apply the user configurations without having NixOS as the operating system, you can also follow the [home-manager documentation](docs/home-manager.md).

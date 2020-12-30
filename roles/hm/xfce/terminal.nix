@@ -1,5 +1,3 @@
-{ config, pkgs, ... }:
-
 let
   black="#4B5262";
   red="#BF616A";

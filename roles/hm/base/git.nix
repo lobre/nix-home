@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ secrets, ... }:
 
 {
   programs.git = {
     enable = true;
-    userEmail = "loric.brevet@gmail.com";
-    userName = "Loric Brevet";
+    userEmail = secrets.email;
+    userName = secrets.name;
 
     aliases = {
       "ls" = "log -i --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
