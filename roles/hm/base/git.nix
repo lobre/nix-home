@@ -3,8 +3,13 @@
 {
   programs.git = {
     enable = true;
-    userEmail = secrets.email;
-    userName = secrets.name;
+    userEmail = secrets.git.email;
+    userName = secrets.git.name;
+
+    signing = {
+      key = secrets.git.key;
+      signByDefault = true;
+    };
 
     aliases = {
       "ls" = "log -i --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
