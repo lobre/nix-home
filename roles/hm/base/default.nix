@@ -37,6 +37,7 @@ in
     ltrace
     ncdu
     nodejs
+    openssh
     perl
     pv
     ripgrep
@@ -48,25 +49,13 @@ in
     unzip
     wget 
     yarn
-
-    # for gpg key
-    paperkey
-    qrencode
-    zbar
   ];
 
-  # Allow XDG linking
   xdg.enable = true;
-
-  # Enable gnupg agent and program
-  programs.gpg.enable = true;
-  services.gpg-agent = {
-    enable = true;
-    enableSshSupport = true;
-  };
 
   imports = [
     ./shell.nix
+    ./gpg.nix
     ./tmux.nix
     ./go.nix
     ./vim.nix

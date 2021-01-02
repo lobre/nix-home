@@ -43,6 +43,8 @@ let
   config = {
     "xfce4-session" = {
       "/general/LockCommand" = "light-locker-command --lock";
+      "/startup/ssh-agent/enabled" = false;
+      "/startup/gpg-agent/enabled" = false;
     };
 
     "xfce4-desktop" = {
