@@ -14,7 +14,7 @@
       extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" ];
 
       hashedPassword = secrets.hashedPassword;
-      openssh.authorizedKeys.keys = [ secrets.ssh.publicKeys ];
+      openssh.authorizedKeys.keys = secrets.ssh.publicKeys;
     };
   };
 
