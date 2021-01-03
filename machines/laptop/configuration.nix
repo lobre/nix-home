@@ -1,6 +1,12 @@
 { config, pkgs, ... }:
 
 {
+  _module.args.secrets = import ../../secrets.nix;
+
+  networking.hostName = "laptop";
+
+  # EFI?
+
   # Sound
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -25,4 +31,12 @@
   # Use local time instead of UTC to
   # stay in sync with Windows
   time.hardwareClockInLocalTime = true;
+
+  imports = [
+    ./hardware-configuration.nix
+    ../../roles/nixos/base
+    ../../roles/nixos/x11
+  ];
+
+  system.stateVersion = "20.03";
 }
