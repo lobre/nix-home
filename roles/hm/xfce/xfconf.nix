@@ -96,8 +96,8 @@ let
 
       # windows tiling
       "/xfwm4/custom/<Alt><Super>h" = "tile_left_key";
-      "/xfwm4/custom/<Alt><Super>j" = "tile_down_key";
-      "/xfwm4/custom/<Alt><Super>k" = "tile_up_key";
+      "/xfwm4/custom/<Alt><Super>j" = "tile_down_right_key";
+      "/xfwm4/custom/<Alt><Super>k" = "tile_up_right_key";
       "/xfwm4/custom/<Alt><Super>l" = "tile_right_key";
 
       # workspaces
