@@ -13,6 +13,14 @@ NixOS and Home Manager configurations and instructions.
 
 ## Secrets
 
+After having configured your GPG keys, you can clone your `gopass` store.
+
+```
+gopass clone git@github.com:<name>/<repo>.git
+```
+
+You will then be able to gather secrets from your store.
+
 ```
 gopass show nix/secrets > secrets.nix
 ```
