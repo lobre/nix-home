@@ -12,6 +12,10 @@ let
 in
 
 {
+  programs.home-manager.enable = true;
+
+  nixpkgs.config = { allowUnfree = true; };
+
   programs.bash.profileExtra = ''
       # Add bin in PATH if not already existing
       [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
@@ -62,4 +66,3 @@ in
     ./git.nix
   ];
 }
-

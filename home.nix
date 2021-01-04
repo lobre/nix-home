@@ -11,10 +11,6 @@ in
 {
   _module.args.secrets = import ./secrets.nix;
 
-  programs.home-manager.enable = true;
-
-  nixpkgs.config = { allowUnfree = true; };
-
   home.packages = [
     nixGL
   ];
