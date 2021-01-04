@@ -95,28 +95,24 @@ let
       "/xfwm4/custom/<Super>r" = "resize_window_key";
 
       # windows tiling
-      "/xfwm4/custom/<Super>h" = "tile_left_key";
-      "/xfwm4/custom/<Super>j" = "tile_down_key";
-      "/xfwm4/custom/<Super>k" = "tile_up_key";
-      "/xfwm4/custom/<Super>l" = "tile_right_key";
-      "/xfwm4/custom/<Alt><Super>h" = "tile_up_left_key";
-      "/xfwm4/custom/<Alt><Super>j" = "tile_down_right_key";
-      "/xfwm4/custom/<Alt><Super>k" = "tile_down_left_key";
-      "/xfwm4/custom/<Alt><Super>l" = "tile_up_right_key";
+      "/xfwm4/custom/<Alt><Super>h" = "tile_left_key";
+      "/xfwm4/custom/<Alt><Super>j" = "tile_down_key";
+      "/xfwm4/custom/<Alt><Super>k" = "tile_up_key";
+      "/xfwm4/custom/<Alt><Super>l" = "tile_right_key";
 
       # workspaces
       "/xfwm4/custom/<Super>plus" = "workspace_1_key";
       "/xfwm4/custom/<Super>minus" = "workspace_2_key";
       "/xfwm4/custom/<Super>slash" = "workspace_3_key";
       "/xfwm4/custom/<Super>asterisk" = "workspace_4_key";
-      "/xfwm4/custom/<Super>n" = "next_workspace_key";
-      "/xfwm4/custom/<Super>p" = "prev_workspace_key";
+      "/xfwm4/custom/<Super>l" = "next_workspace_key";
+      "/xfwm4/custom/<Super>h" = "prev_workspace_key";
       "/xfwm4/custom/<Shift><Super>7" = "move_window_workspace_1_key";
       "/xfwm4/custom/<Shift><Super>8" = "move_window_workspace_2_key";
       "/xfwm4/custom/<Shift><Super>9" = "move_window_workspace_3_key";
       "/xfwm4/custom/<Shift><Super>0" = "move_window_workspace_4_key";
-      "/xfwm4/custom/<Shift><Super>n" = "move_window_next_workspace_key";
-      "/xfwm4/custom/<Shift><Super>p" = "move_window_prev_workspace_key";
+      "/xfwm4/custom/<Shift><Super>l" = "move_window_next_workspace_key";
+      "/xfwm4/custom/<Shift><Super>h" = "move_window_prev_workspace_key";
     };
 
     "xfce4-panel" = {
