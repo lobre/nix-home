@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 
 dir=$(realpath $(dirname "$0"))
+if grep '^NAME' /etc/os-release | grep NixOS >/dev/null; then
+    dir=$dir/machines/$(hostname)
+fi
+
 mode=$1
 
 function switch_home() {
@@ -29,6 +33,7 @@ function switch_system() {
     echo "switching system configuration..."
     exec env NIXOS_CONFIG="$conf" nixos-rebuild switch "$@"
 }
+
 
 case "$mode" in
 "home")
