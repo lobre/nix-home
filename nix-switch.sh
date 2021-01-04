@@ -14,7 +14,8 @@ function switch_home() {
         exit 1
     fi
 
-    echo "switching home configuration..."
+    echo "switching home configuration from..."
+    echo "using: $conf"
     exec home-manager switch -f "$conf" -b bak "$@"
 }
 
@@ -31,6 +32,7 @@ function switch_system() {
     fi
 
     echo "switching system configuration..."
+    echo "using: $conf"
     exec env NIXOS_CONFIG="$conf" nixos-rebuild switch "$@"
 }
 

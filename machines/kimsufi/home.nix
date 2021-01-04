@@ -7,5 +7,5 @@
     ../../roles/hm/base
   ];
 
-  home.stateVersion = "20.09";
+  home.stateVersion = "19.09";
 }
