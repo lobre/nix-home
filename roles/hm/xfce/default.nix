@@ -10,6 +10,7 @@
     libnotify
     pavucontrol
     peek
+    pinta
     remmina
     slack
     spotify
