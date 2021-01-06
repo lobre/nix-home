@@ -184,6 +184,11 @@ let
       # clock
       "/plugins/plugin-14" = "clock";
     };
+
+    "xfce4-notifyd" = {
+      "/notification-log" = true; # log notifications
+      "/log-level" = 0; # only during do not disturb mode
+    };
   };
 
   configFile = pkgs.writeText "xfconf.json" (builtins.toJSON config);
