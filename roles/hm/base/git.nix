@@ -3,11 +3,11 @@
 {
   programs.git = {
     enable = true;
-    userEmail = secrets.git.email;
-    userName = secrets.git.name;
+    userEmail = secrets.email;
+    userName = secrets.name;
 
     signing = {
-      key = secrets.git.key;
+      key = secrets.gpg.fingerprint;
       signByDefault = true;
     };
 

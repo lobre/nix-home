@@ -8,11 +8,10 @@
   # For bios (replace with disk where grub installed)
   boot.loader.grub.device = "/dev/sda";
 
-  services.sshd.enable = true;
-
   imports = [
     ./hardware-configuration.nix
     ../../roles/nixos/base
+    ../../roles/nixos/server
   ];
 
   system.stateVersion = "20.03";

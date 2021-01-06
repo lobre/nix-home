@@ -73,7 +73,7 @@ in
     # List of keys exposed to the agent.
     # This should in the keygrip format. Find out using:
     # gpg --list-secret-keys --with-keygrip
-    sshKeys = secrets.ssh.keygrips;
+    sshKeys = [ secrets.ssh.keygrip ];
   };
 
   programs.ssh = {
