@@ -15,6 +15,7 @@
     slack
     spotify
     teams
+    vlc
 
     arc-theme
     papirus-icon-theme
