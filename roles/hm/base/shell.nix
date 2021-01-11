@@ -37,6 +37,9 @@ in
   programs.bash = {
     enable = true;
 
+    historySize = -1;
+    historyFileSize = -1;
+
     sessionVariables = sessionVariables;
     shellAliases = shellAliases;
     initExtra = initExtra;
