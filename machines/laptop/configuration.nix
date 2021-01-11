@@ -5,7 +5,8 @@
 
   networking.hostName = "laptop";
 
-  # EFI?
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
 
   # Sound
   sound.enable = true;
@@ -31,6 +32,10 @@
   # Use local time instead of UTC to
   # stay in sync with Windows
   time.hardwareClockInLocalTime = true;
+
+  # Yubikey
+  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.pcscd.enable = true;
 
   imports = [
     ./hardware-configuration.nix
