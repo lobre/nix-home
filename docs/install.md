@@ -40,7 +40,7 @@ vim /tmp/nix-home/machines/<my-machine>/configuration.nix
 Then, you need to generate the hardware configuration that you should include in your `configuration.nix`.
 
 ```
-nixos-generate-config --dir /tmp/nix-home/machines/<my-machine>
+nixos-generate-config --root /mnt --show-hardware-config > /tmp/nix-home/machines/<my-machine>/hardware-configuration.nix
 ```
 
 When this is done, you can commit and push your changes.
