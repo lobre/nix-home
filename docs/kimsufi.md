@@ -122,4 +122,4 @@ You can also re-enable monitoring.
 
 ## After installation
 
-To easily manage your NixOS configurations from userspace, make sure to follow what's writter on [this page](after-install.md).
+To easily manage your NixOS configurations from userspace, make sure to follow what's written on [this page](userspace-configurations.md).
