@@ -19,7 +19,7 @@ gopass clone https://github.com:<name>/<repo>.git
 You will then be able to gather secrets from your store.
 
 ```
-gopass show nix/secrets > /tmp/nix-home/secrets.nix
+gopass show nix/secrets > ~/lab/github.com/lobre/nix-home/secrets.nix
 ```
 
 At this point, if you are on a NixOS system, you can test to re-apply your system configurations to see if everything still works as expected.
@@ -70,7 +70,7 @@ Make sure to commit and push that new file.
 Simply use the custom script.
 
 ```
-./nix-switch.sh home
+~/lab/github.com/lobre/nix-home/nix-switch.sh home
 ```
 
 To note that this script will then become available in your path as simply `nix-switch`. So you will be able to launch it from anywhere.
