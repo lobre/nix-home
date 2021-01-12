@@ -2,7 +2,7 @@
 
 ## Repository and gopass store
 
-After having installed NixOS, or if you want to install your Nix configurations on an Ubuntu system, you will need to clone this project to `~/lab/github.com/lobre/nix-home`.
+After having installed NixOS, or if you want to install your Nix configurations on an Ubuntu system, you will need to clone this project.
 
 ```
 git clone https://github.com/lobre/nix-home ~/lab/github.com/lobre/nix-home
