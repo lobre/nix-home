@@ -10,32 +10,40 @@ We need `git` installed and then, we clone the repository in `/mnt/etc/nixos`, w
 
 ```
 nix-env -iA nixos.git # or nix-env -iA nixpkgs.git
-git clone https://github.com/lobre/nix-home /mnt/etc/nixos
+git clone https://github.com/lobre/nix-home /tmp/nix-home
 ```
 
-## Create configuration.nix
+## Secrets
 
-In the repository, `configuration.nix` and `hardware-configuration.nix` are excluded in the `.gitignore`. So these files don’t exist yet.
-
-In this step, we will create `configuration.nix` starting from the skeleton `configuration.skel.nix` available at the root of the repository.
+Before installing, you need to gather secrets. As we are in a NixOS iso installer, we won’t be able to setup our GPG keys using the Yubikey because this needs some specific udev rules. So you need to find another way to retrieve the `secrets.nix` file. Make sure to have it at the root of the repository.
 
 ```
-cp /mnt/etc/nixos/{configuration.skel,configuration}.nix
+ls -l /tmp/nix-home/secrets.nix
 ```
 
-Then, you can start to edit this file, uncomment and fill in the missing configurations.
+The next step will depend if you want to install a new machine. If you don’t you can skip it.
 
-## Generate hardware-configuration.nix
+## Create a new machine
 
-NixOS installer is able to detect our configuration and generate a `hardware-configuration.nix` for us.
-
-Use the following command to execute the generation. Note that as `configuration.nix` already exists, it won’t get overriden.
+For each machine, we have a corresponding folder in the repository under `/machines`. Choose a name for this new one and create a new folder with that name.
 
 ```
-nixos-generate-config --root /mnt
+mkdir /tmp/nix-home/machines/<my-machine>
 ```
 
-You can throw a look at the generated hardware configuration in `/mnt/etc/nixos/hardware-configuration.nix`.
+Then, you need to create a `configuration.nix` file in that new folder with the NixOS configuration. You can take example on another machine. Just make sure to match the machine hostname with the folder name that you have created.
+
+```
+vim /tmp/nix-home/machines/<my-machine>/configuration.nix
+```
+
+Then, you need to generate the hardware configuration that you should include in your `configuration.nix`.
+
+```
+nixos-generate-config --dir /tmp/nix-home/machines/<my-machine>
+```
+
+When this is done, you can commit and push your changes.
 
 ## Installation
 
@@ -44,6 +52,6 @@ Once ready, simply launch the installation command and reboot once it is finishe
 Note that we decide to not set the root password as our configuration will create a user with root permissions.
 
 ```
-nixos-install --no-root-passwd
+env NIXOS_CONFIG=/tmp/nix-home/machines/<my-machine>/configuration.nix nixos-install --no-root-passwd
 reboot
 ```
