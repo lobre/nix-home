@@ -9,25 +9,11 @@ NixOS and Home Manager configurations and instructions.
 - Check [this page](docs/gpg.md) to setup your GPG keys.
 - Check [this page](docs/laptop.md) to know how to install NixOS on your laptop.
 - Check [this page](docs/kimsufi.md) to know how to install NixOS on your Kimsufi server.
-- Check [this page](docs/home-manager.md) for using home-manager to apply user configurations.
-
-## Secrets
-
-After having configured your GPG keys, you can clone your `gopass` store.
-
-```
-gopass clone git@github.com:<name>/<repo>.git
-```
-
-You will then be able to gather secrets from your store.
-
-```
-gopass show nix/secrets > secrets.nix
-```
+- Check [this page](docs/userspace-configurations.md) to apply userspace configurations.
 
 ## Non NixOS setup
 
-If you want to apply the user configurations without having NixOS as the operating system, you can also follow the [home-manager documentation](docs/home-manager.md).
+If you want to apply the user configurations without having NixOS as the operating system, you can also follow the [userspace configurations documentation](docs/userspace-configurations.md).
 
 Note that if you want to update your system, you should prefer the following command.
 

@@ -207,4 +207,4 @@ mount $BOOT /mnt/boot
 
 To finish the installation, refer to [this page](install.md).
 
-Once installed, make sure to apply what is written on [this page](after-install.md).
+Once installed, make sure to apply what is written on [this page](userspace-configurations.md).
