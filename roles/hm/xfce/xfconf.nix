@@ -124,6 +124,7 @@ let
       "/panels/panel-1/position" = "p=6;x=0;y=0";
       "/panels/panel-1/position-locked" = true;
       "/panels/panel-1/size" = 26;
+      "/panels/panel-1/output-name" = "Primary";
       "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ];
 
       # bottom panel (let dynamically add plugins)
@@ -131,6 +132,7 @@ let
       "/panels/panel-2/position" = "p=10;x=0;y=0";
       "/panels/panel-2/position-locked" = true;
       "/panels/panel-2/size" = 48;
+      "/panels/panel-2/output-name" = "Primary";
 
       # menu
       "/plugins/plugin-1" = "whiskermenu";
