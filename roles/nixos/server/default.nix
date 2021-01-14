@@ -12,10 +12,13 @@
 
       entrypoints = {
         web.address = ":80";
-        websecure.address = ":443";
+        websecure = {
+          address = ":443";
+          http.tls.certResolver = "letsencrypt";
+        };
       };
 
-      certificatesResolvers.lets-encrypt.acme = {
+      certificatesResolvers.letsencrypt.acme = {
         email = secrets.email;
         storage = "acme.json";
         tlsChallenge = true;
@@ -29,6 +32,11 @@
     };
 
     dynamicConfigOptions = {
+      http.routers.traefik = {
+        rule = "Host(`traefik.example.in`)";
+        entryPoints = [ "websecure" ];
+        service = "api@internal";
+      };
     };
   };
 }
