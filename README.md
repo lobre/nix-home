@@ -11,6 +11,14 @@ NixOS and Home Manager configurations and instructions.
 - Check [this page](docs/kimsufi.md) to know how to install NixOS on your Kimsufi server.
 - Check [this page](docs/userspace-configurations.md) to apply userspace configurations.
 
+## Server
+
+For Plex to be first configured, you need to create an SSH tunnel.
+
+```
+ssh user@ip.address.of.server -L 8888:localhost:32400
+```
+
 ## Non NixOS setup
 
 If you want to apply the user configurations without having NixOS as the operating system, you can also follow the [userspace configurations documentation](docs/userspace-configurations.md).
