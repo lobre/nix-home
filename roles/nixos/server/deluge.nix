@@ -1,5 +1,12 @@
 { config, pkgs, secrets, ... }:
 
+let 
+  authFile = pkgs.writeText "deluge-auth" ''
+    localclient:${secrets.deluge.password}:10
+    ${secrets.deluge.user}:${secrets.deluge.password}:10
+  '';
+in
+
 {
   services = {
     traefik.dynamicConfigOptions.http = {
@@ -21,8 +28,18 @@
 
     deluge = {
       enable = true;
-      user = "lobre";
+      web.enable = true;
       declarative = true;
+      openFirewall = true;
+      user = "lobre";
+      authFile = authFile;
+
+      config = {
+        allow_remote = true;
+        download_location = "/home/lobre/Downloads/";
+        stop_seed_at_ratio = true;
+        stop_seed_ratio = 2;
+      };
     };
   };
 }
