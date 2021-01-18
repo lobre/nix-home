@@ -175,6 +175,7 @@ let
 
       # clipboard
       "/plugins/plugin-11" = "xfce4-clipman-plugin";
+      "/plugins/clipman/settings/max-texts-in-history" = 1000;
 
       # screenshot
       "/plugins/plugin-12" = "screenshooter";
