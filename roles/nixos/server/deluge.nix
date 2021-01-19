@@ -39,6 +39,7 @@ in
         download_location = "/home/lobre/Downloads/";
         stop_seed_at_ratio = true;
         stop_seed_ratio = 2;
+        enabled_plugins = [ "Label" ];
       };
     };
   };
