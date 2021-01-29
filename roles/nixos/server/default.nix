@@ -1,7 +1,8 @@
 { config, pkgs, secrets, ... }:
 
 {
-  networking.firewall.allowedTCPPorts = [ 22 80 443 ];
+  # 8080 to allow quickly spinning a server for development
+  networking.firewall.allowedTCPPorts = [ 22 80 443 8080 ];
 
   services = {
     sshd.enable = true;
