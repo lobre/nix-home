@@ -7,9 +7,6 @@
     plugins = [ pkgs.vimPlugins.vim-go ];
 
     extraConfig = ''
-      set nowritebackup
-      set noswapfile
-
       " Explorer settings
       let g:netrw_liststyle=3
       let g:netrw_winsize = 25
@@ -20,9 +17,6 @@
           set grepprg=rg\ --vimgrep\ --no-heading
           set grepformat=%f:%l:%c:%m,%f:%l:%m
       endif
-
-      set dir=/tmp
-      set backupdir=/tmp
 
       set scrolloff=3    " 3 lines displayed around cursor for scroll
 
