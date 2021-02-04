@@ -7,6 +7,7 @@
     vimAlias = true;
 
     plugins = with pkgs.vimPlugins; [
+      vim-nix
       { 
         plugin = vim-go;
         config = ''
