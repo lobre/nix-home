@@ -7,21 +7,8 @@
     plugins = [ pkgs.vimPlugins.vim-go ];
 
     extraConfig = ''
-      set noswapfile
-      set nowritebackup
-
-      " Explorer settings
-      let g:netrw_liststyle=3
-      let g:netrw_winsize = 25
-      let g:netrw_localrmdir='rm -r'
-
-      " Search with rg if available
-      if executable('rg')
-          set grepprg=rg\ --vimgrep\ --no-heading
-          set grepformat=%f:%l:%c:%m,%f:%l:%m
-      endif
-
-      set scrolloff=3    " 3 lines displayed around cursor for scroll
+      " 3 lines displayed around cursor for scroll
+      set scrolloff=3
 
       " No delay when exiting visual mode
       set timeoutlen=1000 ttimeoutlen=0
@@ -89,6 +76,41 @@
       " Autoread file if changes
       set autoread
       set updatetime=500
+
+      " Explorer settings
+      let g:netrw_liststyle=3
+      let g:netrw_winsize = 25
+      let g:netrw_localrmdir='rm -r'
+
+      " Search with rg if available
+      if executable('rg')
+          set grepprg=rg\ --vimgrep\ --no-heading
+          set grepformat=%f:%l:%c:%m,%f:%l:%m
+      endif
+
+      " Backup current file before write and delete old afterwards
+      set backup
+      set backupdir=~/.vim/backup/
+      if isdirectory($HOME . '/.vim/backup') == 0
+          :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
+      endif
+
+      " Swapfiles for buffers
+      set swapfile
+      set directory=~/.vim/swap//
+      if isdirectory($HOME . '/.vim/swap') == 0
+          :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
+      endif
+
+      " Preserve undos after exiting and restarting
+      set undofile
+      set undodir=~/.vim/undo//
+      if isdirectory($HOME . '/.vim/undo') == 0
+          :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
+      endif
+
+      " viminfo stores the the state of your previous editing session
+      set viminfo+=n~/.vim/viminfo
 
       " Vim-go settings
       let g:go_fmt_command = "goimports"
