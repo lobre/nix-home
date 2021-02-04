@@ -62,6 +62,7 @@ in
     ./gpg.nix
     ./tmux.nix
     ./go.nix
+    ./elm.nix
     ./vim.nix
     ./git.nix
   ];
