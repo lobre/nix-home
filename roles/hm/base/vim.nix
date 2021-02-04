@@ -1,67 +1,52 @@
 { pkgs, ... }:
 
 {
-  programs.vim = {
+  programs.neovim = {
     enable = true;
 
-    plugins = [ pkgs.vimPlugins.vim-go ];
+    vimAlias = true;
+
+    plugins = with pkgs.vimPlugins; [
+      { 
+        plugin = vim-go;
+        config = ''
+          let g:go_fmt_command = "goimports"
+        '';
+      }
+    ];
+
+    # extra packages available to nvim
+    extraPackages = [];
 
     extraConfig = ''
-      " 3 lines displayed around cursor for scroll
-      set scrolloff=3
-
-      " No delay when exiting visual mode
-      set timeoutlen=1000 ttimeoutlen=0
-
       set showbreak=↪\
       set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
       set ignorecase     " Case insensitive
       set wildignorecase " Autocomplete case insensitive
       set smartcase      " Enable case sensitivity if search contains upper letter
-      set hidden         " Enable caching on buffer switch
-      set hlsearch       " Highlight search results
-
-      " Autocompletion
-      set wildmenu
-      set wildmode=list:longest,full
-
-      set background=dark
-
-      set novisualbell   " Prevent bell
-      set noerrorbells   " Prevent bell
+      set hidden         " No need to save a buffer before switching
+      set smartindent    " Smart autoindenting when starting new line
 
       " Default tabs count parameters
       set tabstop=2
       set shiftwidth=2
       set expandtab
 
-      " Split on the right
-      set splitright
-      set splitbelow
-
-      " Enable file types and indents
-      filetype on
-      filetype plugin on
-      filetype indent on
-      set autoindent
-      set smartindent
-
-      " Improve completion
-      set completeopt=longest,menuone
-
-      " Enable syntax color
-      syntax on
-
-      " Common behavior for backspace
-      set backspace=indent,eol,start
-
-      " Disable modifyOtherKeys because xfce-terminal
-      " sets TERM to xterm and that causes problems
-      set t_TI= t_TE=
+      " Language specific indentation settings
+      autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
+      autocmd FileType sh setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 
       " Save with sudo
       command! W w !sudo tee % > /dev/null
+
+      " Explorer settings
+      let g:netrw_liststyle=3
+      let g:netrw_winsize = 25
+      let g:netrw_localrmdir='rm -r'
+
+      " Trigger autoread when files changes on disk
+      autocmd FocusGained * checktime
 
       " Reset some colors
       highlight SignColumn ctermbg=none
@@ -72,59 +57,6 @@
       highlight TabLineFill cterm=bold,reverse
       highlight TabLineSel cterm=bold,reverse
       highlight TabLine ctermbg=none ctermfg=none cterm=reverse
-
-      " Autoread file if changes
-      set autoread
-      set updatetime=500
-
-      " Explorer settings
-      let g:netrw_liststyle=3
-      let g:netrw_winsize = 25
-      let g:netrw_localrmdir='rm -r'
-
-      " Search with rg if available
-      if executable('rg')
-          set grepprg=rg\ --vimgrep\ --no-heading
-          set grepformat=%f:%l:%c:%m,%f:%l:%m
-      endif
-
-      " Backup current file before write and delete old afterwards
-      set backup
-      set backupdir=~/.vim/backup/
-      if isdirectory($HOME . '/.vim/backup') == 0
-          :silent !mkdir -p ~/.vim/backup >/dev/null 2>&1
-      endif
-
-      " Swapfiles for buffers
-      set swapfile
-      set directory=~/.vim/swap//
-      if isdirectory($HOME . '/.vim/swap') == 0
-          :silent !mkdir -p ~/.vim/swap >/dev/null 2>&1
-      endif
-
-      " Preserve undos after exiting and restarting
-      set undofile
-      set undodir=~/.vim/undo//
-      if isdirectory($HOME . '/.vim/undo') == 0
-          :silent !mkdir -p ~/.vim/undo > /dev/null 2>&1
-      endif
-
-      " viminfo stores the the state of your previous editing session
-      set viminfo+=n~/.vim/viminfo
-
-      " Vim-go settings
-      let g:go_fmt_command = "goimports"
-
-      if has("autocmd")
-          " Trigger autoread when files changes on disk
-          autocmd FocusGained, BufEnter, CursorHold, CursorHoldI * if mode() != 'c' | checktime | endif
-          autocmd FileChangedShellPost *
-            \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
-
-          " Language specific indentation settings
-          autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
-          autocmd FileType sh setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
-      endif
     '';
   };
 }
