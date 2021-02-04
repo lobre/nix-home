@@ -10,10 +10,7 @@ let
   shellAliases = {
     "ls"     = "ls --color";
     "ll"     = "ls -lh";
-    ".."     = "cd ..";
-    "..."    = "cd ../..";
     "extip"  = "wget http://ipinfo.io/ip -qO -";
-    "copy"   = "${pkgs.xclip}/bin/xclip -selection clipboard";
     "rg"     = "rg --no-ignore-vcs --smart-case";
   };
 

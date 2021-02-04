@@ -16,6 +16,7 @@
     spotify
     teams
     vlc
+    xclip
 
     arc-theme
     papirus-icon-theme
