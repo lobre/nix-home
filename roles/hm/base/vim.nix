@@ -42,6 +42,12 @@
       autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
       autocmd FileType sh setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
 
+      " Search with rg if available
+      if executable('rg')
+          set grepprg=rg\ --vimgrep\ --no-heading
+          set grepformat=%f:%l:%c:%m,%f:%l:%m
+      endif
+
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
