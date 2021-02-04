@@ -28,6 +28,7 @@
       set smartcase      " Enable case sensitivity if search contains upper letter
       set hidden         " No need to save a buffer before switching
       set smartindent    " Smart autoindenting when starting new line
+      set mouse=a        " Enable mouse mode
 
       " Split as expected
       set splitright
