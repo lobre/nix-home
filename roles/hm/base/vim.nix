@@ -29,6 +29,10 @@
       set hidden         " No need to save a buffer before switching
       set smartindent    " Smart autoindenting when starting new line
 
+      " Split as expected
+      set splitright
+      set splitbelow
+
       " Default tabs count parameters
       set tabstop=2
       set shiftwidth=2
