@@ -8,6 +8,7 @@
 
     plugins = with pkgs.vimPlugins; [
       vim-nix
+      vim-elm-syntax # to remove when integrated to neovim
       { 
         plugin = vim-go;
         config = ''
