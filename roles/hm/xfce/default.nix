@@ -4,9 +4,9 @@
   xdg.enable = true;
 
   home.packages = with pkgs; [
+    brave
     filezilla
     gnome3.meld
-    google-chrome
     libnotify
     pavucontrol
     peek
