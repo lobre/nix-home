@@ -11,7 +11,6 @@ let
     "ls"     = "ls --color";
     "ll"     = "ls -lh";
     "extip"  = "wget http://ipinfo.io/ip -qO -";
-    "rg"     = "rg --no-ignore-vcs --smart-case";
   };
 
   initExtra = ''
