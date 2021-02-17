@@ -13,7 +13,7 @@ Then, make sure to follow this [documentation page to import your GPG keys](gpg.
 Now, you can clone your `gopass` store.
 
 ```
-gopass clone https://github.com:<name>/<repo>.git
+gopass clone https://github.com/Ty<name>/<repo>.git
 ```
 
 You will then be able to gather secrets from your store.
