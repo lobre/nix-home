@@ -64,6 +64,7 @@ let
       "/general/easy_click" = "Super"; # key used to grab and move windows
       "/general/snap_to_windows" = true;
       "/general/activate_action" = "switch";
+      "/general/wrap_cycle" = false; # don't cycle to first workspace after last
     };
 
     "xfce4-keyboard-shortcuts" = {
