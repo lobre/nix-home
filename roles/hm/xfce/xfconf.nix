@@ -65,6 +65,8 @@ let
       "/general/snap_to_windows" = true;
       "/general/activate_action" = "switch";
       "/general/wrap_cycle" = false; # don't cycle to first workspace after last
+      "/general/cycle_draw_frame" = false; # no blue frame when cycling with alt-tab
+      "/general/cycle_preview" = false; # no thumbnails when cycling with alt-tab
     };
 
     "xfce4-keyboard-shortcuts" = {

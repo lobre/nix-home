@@ -67,9 +67,9 @@
       highlight Todo ctermbg=none ctermfg=red
       highlight Pmenu ctermbg=white
       highlight PmenuSel ctermbg=gray ctermfg=black
-      highlight TabLineFill cterm=bold,reverse
-      highlight TabLineSel cterm=bold,reverse
-      highlight TabLine ctermbg=none ctermfg=none cterm=reverse
+      highlight TabLineFill cterm=bold
+      highlight TabLineSel cterm=bold
+      highlight TabLine ctermbg=none ctermfg=none cterm=none
     '';
   };
 }
