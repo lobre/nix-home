@@ -53,6 +53,7 @@ in
     unzip
     wget 
     yarn
+    zig
   ];
 
   xdg.enable = true;
@@ -62,7 +63,6 @@ in
     ./gpg.nix
     ./tmux.nix
     ./go.nix
-    ./elm.nix
     ./vim.nix
     ./git.nix
   ];
