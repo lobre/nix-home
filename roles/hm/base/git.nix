@@ -33,7 +33,7 @@
         askpass = "";
       };
       credential = {
-        helper = "!gopass-git-credentials $@";
+        helper = "gopass";
       };
       merge = {
         tool = "meld";

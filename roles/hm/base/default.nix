@@ -33,6 +33,7 @@ in
     dos2unix
     fd
     file
+    git-credential-gopass
     gopass
     htop 
     httpie
