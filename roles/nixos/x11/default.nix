@@ -51,7 +51,9 @@
     xfce.xfce4-genmon-plugin
     xfce.xfce4-mailwatch-plugin
     xfce.xfce4-netload-plugin
-    xfce.xfce4-notes-plugin
+    # not building after update to 1.9.0 because missing gtk-3
+    # waiting for major xfce 4.16 update to see if fixed
+    #xfce.xfce4-notes-plugin
     xfce.xfce4-sensors-plugin
     xfce.xfce4-systemload-plugin
     xfce.xfce4-timer-plugin

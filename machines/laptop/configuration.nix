@@ -1,7 +1,20 @@
 { config, pkgs, ... }:
 
+let
+  # script to launch a program with enabled nvidia card
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec -a "$0" "$@"
+  '';
+in
+
 {
   _module.args.secrets = import ../../secrets.nix;
+
+  environment.systemPackages = [ nvidia-offload ];
 
   networking.hostName = "laptop";
 
@@ -15,9 +28,11 @@
   # Touchpad support
   services.xserver.libinput = {
     enable = true;
-    naturalScrolling = true;
-    # to only affect touchpad and not all input devices
-    additionalOptions = ''MatchIsTouchpad "on"'';
+    touchpad = {
+      naturalScrolling = true;
+      # to only affect touchpad and not all input devices
+      additionalOptions = ''MatchIsTouchpad "on"'';
+    };
   };
 
   # Brightness
@@ -27,10 +42,16 @@
   services.tlp.enable = true;
 
   # Video drivers
-  hardware.bumblebee.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.prime = {
+    offload.enable = true;
+    # Bus IDs of NVIDIA and Intel GPUs.
+    # Use lspci and transform as explained in https://nixos.wiki/wiki/Nvidia
+    intelBusId = "PCI:0:2:0";
+    nvidiaBusId = "PCI:2:0:0";
+  };
 
-  # Use local time instead of UTC to
-  # stay in sync with Windows
+  # Use local time instead of UTC to stay in sync with Windows
   time.hardwareClockInLocalTime = true;
 
   # Yubikey

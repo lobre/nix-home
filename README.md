@@ -11,6 +11,15 @@ NixOS and Home Manager configurations and instructions.
 - Check [this page](docs/kimsufi.md) to know how to install NixOS on your Kimsufi server.
 - Check [this page](docs/userspace-configurations.md) to apply userspace configurations.
 
+## Current channel
+
+I am currently using unstable channel because I need those following packages.
+- xfce 4.16 
+- neovim 0.5 
+- zig latest version 
+
+Note to self: when they will be available in 21.05, I can switch back to stable.
+
 ## Server
 
 For Plex to be first configured, you need to create an SSH tunnel.
