@@ -179,6 +179,7 @@ let
 
       # clipboard
       "/plugins/plugin-11" = "xfce4-clipman-plugin";
+      "/plugins/clipman/settings/save-on-quit" = true;
       "/plugins/clipman/settings/max-texts-in-history" = 1000;
       "/plugins/clipman/settings/add-primary-clipboard" = false;
 
