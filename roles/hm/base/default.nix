@@ -35,6 +35,7 @@ in
     file
     git-credential-gopass
     gopass
+    gopass-jsonapi
     htop 
     httpie
     jq
