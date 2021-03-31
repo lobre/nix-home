@@ -8,6 +8,7 @@
     filezilla
     gnome3.meld
     libnotify
+    libreoffice
     pavucontrol
     peek
     pinta
