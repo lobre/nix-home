@@ -11,7 +11,7 @@
   services.xserver = {
     enable = true;
     layout = "fr";
-    xkbVariant = "bepo";
+    xkbVariant = "bepo_afnor";
 
     desktopManager.xfce = {
       enable = true;
