@@ -33,6 +33,7 @@ in
   # general settings
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
+    FontUseSystem=TRUE
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
     MiscBellUrgent=FALSE
@@ -62,11 +63,7 @@ in
     MiscShowUnsafePasteDialog=FALSE
     ScrollingBar=TERMINAL_SCROLLBAR_NONE
     ScrollingUnlimited=TRUE
-    FontUseSystem=TRUE
     ShortcutsNoMnemonics=TRUE
     TitleMode=TERMINAL_TITLE_REPLACE
-    ColorForeground=${foreground}
-    ColorBackground=${background}
-    ColorPalette=${palette}
   '';
 }

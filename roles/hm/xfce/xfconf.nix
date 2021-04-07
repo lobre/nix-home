@@ -54,12 +54,11 @@ let
     };
 
     "xsettings" = {
-      "/Net/ThemeName" = "Arc-Darker";
-      "/Net/IconThemeName" = "ePapirus";
+      "/Net/ThemeName" = "Adwaita";
+      "/Net/IconThemeName" = "Adwaita";
     };
-    
+
     "xfwm4" = {
-      "/general/theme" = "Arc-Darker";
       "/general/workspace_count" = 4;
       "/general/easy_click" = "Super"; # key used to grab and move windows
       "/general/snap_to_windows" = true;
@@ -75,7 +74,6 @@ let
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
       "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
-      "/commands/custom/<Super>g" = "xfce4-screenshooter --region --clipboard";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
 
       # allow custom wm keybindings
@@ -105,33 +103,27 @@ let
       "/xfwm4/custom/<Alt><Super>l" = "tile_right_key";
 
       # workspaces
-      "/xfwm4/custom/<Super>plus" = "workspace_1_key";
-      "/xfwm4/custom/<Super>minus" = "workspace_2_key";
-      "/xfwm4/custom/<Super>slash" = "workspace_3_key";
-      "/xfwm4/custom/<Super>asterisk" = "workspace_4_key";
       "/xfwm4/custom/<Super>l" = "next_workspace_key";
       "/xfwm4/custom/<Super>h" = "prev_workspace_key";
-      "/xfwm4/custom/<Shift><Super>7" = "move_window_workspace_1_key";
-      "/xfwm4/custom/<Shift><Super>8" = "move_window_workspace_2_key";
-      "/xfwm4/custom/<Shift><Super>9" = "move_window_workspace_3_key";
-      "/xfwm4/custom/<Shift><Super>0" = "move_window_workspace_4_key";
       "/xfwm4/custom/<Shift><Super>l" = "move_window_next_workspace_key";
       "/xfwm4/custom/<Shift><Super>h" = "move_window_prev_workspace_key";
     };
 
     "xfce4-panel" = {
       "/panels" = [ 1 2 ];
+      "/panels/dark-mode" = true;
 
       # top panel
-      "/panels/panel-1/icon-size" = 16;
+      "/panels/panel-1/icon-size" = 0;
       "/panels/panel-1/length" = 100;
       "/panels/panel-1/position" = "p=6;x=0;y=0";
       "/panels/panel-1/position-locked" = true;
       "/panels/panel-1/size" = 26;
       "/panels/panel-1/output-name" = "Primary";
-      "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ];
+      "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 ];
 
       # bottom panel (let dynamically add plugins)
+      "/panels/panel-2/icon-size" = 0;
       "/panels/panel-2/autohide-behavior" = 1;
       "/panels/panel-2/position" = "p=10;x=0;y=0";
       "/panels/panel-2/position-locked" = true;
@@ -160,7 +152,7 @@ let
 
       # systray 
       "/plugins/plugin-6" = "systray";
-      "/plugins/plugin-6/show-frame" = false;
+      "/plugins/plugin-6/icon-size" = 0; # adjust size automatically
       "/plugins/plugin-6/square-icons" = true;
 
       # audio
@@ -171,32 +163,30 @@ let
       # notifications
       "/plugins/plugin-8" = "notification-plugin";
 
-      # battery
-      "/plugins/plugin-9" = "battery";
-
-      # disk
-      "/plugins/plugin-10" = "fsguard";
-
       # clipboard
-      "/plugins/plugin-11" = "xfce4-clipman-plugin";
+      "/plugins/plugin-9" = "xfce4-clipman-plugin";
       "/plugins/clipman/settings/save-on-quit" = true;
       "/plugins/clipman/settings/max-texts-in-history" = 1000;
       "/plugins/clipman/settings/add-primary-clipboard" = false;
 
       # screenshot
-      "/plugins/plugin-12" = "screenshooter";
+      "/plugins/plugin-10" = "screenshooter";
 
       # sep
-      "/plugins/plugin-13" = "separator";
-      "/plugins/plugin-13/style" = 0;
+      "/plugins/plugin-11" = "separator";
+      "/plugins/plugin-11/style" = 0;
 
       # clock
-      "/plugins/plugin-14" = "clock";
+      "/plugins/plugin-12" = "clock";
     };
 
     "xfce4-notifyd" = {
       "/notification-log" = true; # log notifications
       "/log-level" = 0; # only during do not disturb mode
+    };
+
+    "xfce4-power-manager" = {
+      "/xfce4-power-manager/show-tray-icon" = true;
     };
   };
 

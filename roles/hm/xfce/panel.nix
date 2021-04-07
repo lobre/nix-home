@@ -52,43 +52,8 @@
     search-actions=0
   '';
 
-  # battery plugin
-  xdg.configFile."xfce4/panel/battery-9.rc".text = ''
-    display_label=false
-    display_icon=true
-    display_power=false
-    display_percentage=false
-    display_bar=false
-    display_time=false
-    tooltip_display_percentage=true
-    tooltip_display_time=false
-    low_percentage=10
-    critical_percentage=5
-    action_on_low=1
-    action_on_critical=1
-    hide_when_full=1
-    colorA=rgb(136,136,255)
-    colorH=rgb(0,255,0)
-    colorL=rgb(255,255,0)
-    colorC=rgb(255,0,0)
-    command_on_low=
-    command_on_critical=
-  '';
-  
-  # disk space plugin
-  xdg.configFile."xfce4/panel/fsguard-10.rc".text = ''
-    yellow=8
-    red=2
-    lab_size_visible=false
-    progress_bar_visible=false
-    hide_button=false
-    label=
-    label_visible=false
-    mnt=/
-  '';
-
   # screenshot plugin
-  xdg.configFile."xfce4/panel/screenshooter-12.rc".text = ''
+  xdg.configFile."xfce4/panel/screenshooter-10.rc".text = ''
     app=none
     last_user=
     screenshot_dir=
