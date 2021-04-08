@@ -39,6 +39,7 @@
   # additional xfce packages
   environment.systemPackages = with pkgs; [
     lightlocker
+    xfce.gigolo
     xfce.orage
     xfce.xfburn
     xfce.xfce4-battery-plugin
@@ -50,6 +51,7 @@
     xfce.xfce4-fsguard-plugin
     xfce.xfce4-genmon-plugin
     xfce.xfce4-mailwatch-plugin
+    xfce.xfce4-mpc-plugin
     xfce.xfce4-netload-plugin
     xfce.xfce4-notes-plugin
     xfce.xfce4-sensors-plugin
