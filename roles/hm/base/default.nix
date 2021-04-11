@@ -25,7 +25,6 @@ in
     # custom script to easily switch configuration
     nixSwitch
 
-    binutils-unwrapped
     ctags
     curl
     docker
@@ -33,6 +32,7 @@ in
     dos2unix
     fd
     file
+    gcc
     git-credential-gopass
     gopass
     gopass-jsonapi
