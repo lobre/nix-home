@@ -8,10 +8,13 @@ let
   };
 
   shellAliases = {
-    "ls"     = "ls --color";
-    "ll"     = "ls -lh";
-    "extip"  = "wget http://ipinfo.io/ip -qO -";
+    "ls" = "ls --color";
   };
+
+  ansiBrightGreen = ''\[\033[1;32m\]'';
+  ansiBrightBlue = ''\[\033[1;34m\]'';
+  ansiYellow = ''\[\033[0;33m\]'';
+  ansiReset = ''\[\033[0m\]'';
 
   initExtra = ''
     # Completion is not yet added my home manager
@@ -23,9 +26,10 @@ let
        . $HOME/.bashrc.local
     fi
 
-    # Simple prompt with git branch and without user
+    # Returns branch name if currently in git repo
     git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'; }
-    PS1="\[\033[01;32m\]\[\033[0m\033[0;32m\]\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\[\033[33m\]\$(git_branch)\[\033[00m\]\$ "
+
+    PS1="${ansiBrightGreen}\h${ansiReset}:${ansiBrightBlue}\W${ansiYellow}\$(git_branch)${ansiReset}\$ "
   '';
 in
 
