@@ -26,10 +26,24 @@ let
        . $HOME/.bashrc.local
     fi
 
-    # Returns branch name if currently in git repo
-    git_branch() { git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'; }
+    # Load git prompt utilities
+    . ${config.programs.git.package}/share/git/contrib/completion/git-prompt.sh
 
-    PS1="${ansiBrightGreen}\h${ansiReset}:${ansiBrightBlue}\W${ansiYellow}\$(git_branch)${ansiReset}\$ "
+    # Git prompt configs, see https://github.com/git/git/blob/master/contrib/completion/git-prompt.sh
+    GIT_PS1_SHOWDIRTYSTATE=1
+    GIT_PS1_SHOWSTASHSTATE=1
+    GIT_PS1_SHOWUNTRACKEDFILES=1
+    GIT_PS1_SHOWUPSTREAM="auto"
+    GIT_PS1_STATESEPARATOR="|"
+
+    PS1='${ansiBrightGreen}\h${ansiReset}:${ansiBrightBlue}\W${ansiYellow}$(__git_ps1 "(%s)")${ansiReset}\$ '
+
+    # Set terminal title with xterm esc sequence
+    case "$TERM" in
+    xterm*)
+        PS1="\[\e]0;\h: \W\a\]$PS1"
+        ;;
+    esac
   '';
 in
 

@@ -29,6 +29,7 @@
       set smartcase      " Enable case sensitivity if search contains upper letter
       set hidden         " No need to save a buffer before switching
       set smartindent    " Smart autoindenting when starting new line
+      set title          " Update the title of the window 
       set mouse=a        " Enable mouse mode
 
       " Split as expected
