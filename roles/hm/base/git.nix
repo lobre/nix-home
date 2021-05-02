@@ -22,6 +22,9 @@
     ];
 
     extraConfig = {
+      init = {
+        defaultBranch = "main";
+      };
       push = {
         default = "current";
       };
