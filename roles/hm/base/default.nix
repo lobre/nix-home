@@ -60,12 +60,14 @@ in
 
   xdg.enable = true;
 
+  services.dropbox.enable = true;
+
   imports = [
-    ./shell.nix
-    ./gpg.nix
-    ./tmux.nix
-    ./go.nix
-    ./vim.nix
     ./git.nix
+    ./go.nix
+    ./gpg.nix
+    ./shell.nix
+    ./tmux.nix
+    ./vim.nix
   ];
 }
