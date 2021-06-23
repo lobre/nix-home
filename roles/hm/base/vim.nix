@@ -23,8 +23,6 @@
       nodePackages.bash-language-server
       nodePackages.dockerfile-language-server-nodejs
       nodePackages.vim-language-server
-      nodePackages.vscode-css-languageserver-bin
-      nodePackages.vscode-html-languageserver-bin
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
       rnix-lsp # nix language server
@@ -72,7 +70,7 @@
           end
 
           -- Configure servers
-          local servers = { "gopls", "bashls", "dockerls", "vimls", "cssls", "html", "jsonls", "yamlls", "rnix", "zls" }
+          local servers = { "gopls", "bashls", "dockerls", "vimls", "jsonls", "yamlls", "rnix", "zls" }
           for _, server in ipairs(servers) do
             lspconfig[server].setup { on_attach = on_attach }
           end
