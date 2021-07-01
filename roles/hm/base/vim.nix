@@ -50,14 +50,14 @@
             map('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
             map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
             map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+            map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
             map('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
             map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
             map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+            map('n', 'gca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
-            vim.cmd("command! LspRename lua vim.lsp.buf.rename()")
-            vim.cmd("command! LspCodeAction lua vim.lsp.buf.code_action()")
             vim.cmd("command! LspSymbol lua vim.lsp.buf.document_symbol()")
             vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
             vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
