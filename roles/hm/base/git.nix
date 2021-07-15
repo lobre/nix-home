@@ -34,6 +34,7 @@
       core = {
         editor = "vim";
         askpass = "";
+        pager = "less -+FX"; # allow mouse scroll
       };
       credential = {
         helper = "gopass";
