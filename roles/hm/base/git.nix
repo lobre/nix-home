@@ -7,7 +7,7 @@
     userName = secrets.name;
 
     signing = {
-      key = secrets.gpg.fingerprint;
+      key = null; # signing key will depend on commit’s author
       signByDefault = true;
     };
 
