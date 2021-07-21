@@ -24,6 +24,7 @@
     ./xfconf.nix
     ./terminal.nix
     ./panel.nix
+    ./oni.nix
   ];
 }
 
