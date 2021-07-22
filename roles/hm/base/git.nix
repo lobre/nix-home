@@ -43,7 +43,7 @@
         tool = "meld";
       };
       mergetool = {
-        cmd = ''cmd = meld --auto-merge "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED" --label "MERGE"'';
+        cmd = ''meld --auto-merge "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED" --label "MERGE"'';
         trustExitCode = false;
         prompt = false;
         keepBackup = false;
