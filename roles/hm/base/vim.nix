@@ -128,6 +128,9 @@
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
+      " Clear current highlighted search
+      nnoremap <C-L> :nohlsearch<CR>
+
       " Exit terminal with Esc
       tnoremap <Esc> <C-\><C-n>
 
