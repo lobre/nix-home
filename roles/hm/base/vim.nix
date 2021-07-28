@@ -32,6 +32,7 @@
     plugins = with pkgs.vimPlugins; [
       vim-nix
       zig-vim
+      completion-nvim
       { 
         plugin = nvim-lspconfig;
         config = ''
@@ -39,10 +40,10 @@
           local lspconfig = require('lspconfig')
 
           local on_attach = function(client, bufnr)
+            require('completion').on_attach()
+
             local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
             local function opt(...) vim.api.nvim_buf_set_option(bufnr, ...) end
-
-            opt('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
             -- Mappings
             local opts = { noremap=true, silent=true }
@@ -105,6 +106,9 @@
 
       " Don’t automatically select first item in completion
       set completeopt=menuone,noinsert,noselect
+
+      " Avoid showing message extra message when using completion
+      set shortmess+=c
 
       " Split as expected
       set splitright
