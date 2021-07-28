@@ -90,6 +90,12 @@
           EOF
         '';
       }
+      {
+        plugin = emmet-vim;
+        config = ''
+          autocmd FileType html imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+        '';
+      }
     ];
 
     extraConfig = ''
