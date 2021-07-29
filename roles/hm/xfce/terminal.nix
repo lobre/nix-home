@@ -1,24 +1,24 @@
 let
-  black="#15171C";
-  red="#BF616A";
-  green="#A3BE8C";
-  yellow="#EBCB8B";
-  blue="#81A1C1";
-  magenta="#B48EAD";
-  cyan="#89D0BA";
-  white="#E5E9F0";
+  black="#243137";
+  red="#fc3841";
+  green="#5cf19e";
+  yellow="#fed032";
+  blue="#37b6ff";
+  magenta="#fc226e";
+  cyan="#59ffd1";
+  white="#ffffff";
 
-  brightBlack="#434A5A";
-  brightRed="#B3555E";
-  brightGreen="#93AE7C";
-  brightYellow="#DBBB7B";
-  brightBlue="#7191B1";
-  brightMagenta="#A6809F";
-  brightCyan="#7DBBA8";
-  brightWhite="#D1D5DC";
+  brightBlack="#84A6B8";
+  brightRed="#fc746d";
+  brightGreen="#adf7be";
+  brightYellow="#fee16c";
+  brightBlue="#70cfff";
+  brightMagenta="#fc669b";
+  brightCyan="#9affe6";
+  brightWhite="#ffffff";
 
-  background="#0C0D10";
-  foreground="#D8DEE8";
+  background="#1d262a";
+  foreground="#e7ebed";
 
   palette = "${black};${red};${green};${yellow};${blue};${magenta};${cyan};${white};${brightBlack};${brightRed};${brightGreen};${brightYellow};${brightBlue};${brightMagenta};${brightCyan};${brightWhite}";
 in 
@@ -33,7 +33,7 @@ in
   # general settings
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
-    FontUseSystem=TRUE
+    FontName=Operator Mono weight=330 12
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
     MiscBellUrgent=FALSE
