@@ -33,6 +33,7 @@
       vim-nix
       zig-vim
       completion-nvim
+      playground # treesitter playground
       { 
         plugin = nvim-lspconfig;
         config = ''

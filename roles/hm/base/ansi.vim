@@ -83,7 +83,7 @@ hi String          ctermfg=11
 hi Keyword         ctermfg=2
 hi Todo            ctermfg=15  ctermbg=NONE     cterm=bold,underline
 hi Function        ctermfg=4
-hi Identifier      ctermfg=7   cterm=italic
+hi Identifier      ctermfg=7   cterm=NONE
 hi Statement       ctermfg=2   cterm=bold
 hi Constant        ctermfg=13
 hi Number          ctermfg=12
