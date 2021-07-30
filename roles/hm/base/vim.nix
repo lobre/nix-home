@@ -93,7 +93,7 @@
       {
         plugin = emmet-vim;
         config = ''
-          autocmd FileType html imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+           autocmd FileType html imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
         '';
       }
     ];
@@ -109,6 +109,8 @@
       set smartindent    " Smart autoindenting when starting new line
       set title          " Update the title of the window 
       set mouse=a        " Enable mouse mode
+
+      colorscheme ansi
 
       " Don’t automatically select first item in completion
       set completeopt=menuone,noinsert,noselect
@@ -151,16 +153,9 @@
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained * checktime
-
-      " Simpler colors for some parts of the interface
-      highlight SignColumn ctermbg=none
-      highlight Error ctermbg=none ctermfg=red
-      highlight Todo ctermbg=none ctermfg=red
-      highlight Pmenu ctermbg=black ctermfg=white
-      highlight PmenuSel ctermbg=white ctermfg=black
-      highlight TabLineFill cterm=bold
-      highlight TabLineSel cterm=bold
-      highlight TabLine ctermbg=none ctermfg=none cterm=none
     '';
   };
+
+  # Colorscheme
+  xdg.configFile."nvim/colors/ansi.vim".source = ./ansi.vim;
 }

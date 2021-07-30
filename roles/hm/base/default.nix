@@ -52,6 +52,7 @@ in
     tcpdump
     traceroute
     tree
+    unrar
     unzip
     wget 
     yarn
