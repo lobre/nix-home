@@ -33,7 +33,7 @@
       vim-nix
       zig-vim
       completion-nvim
-      playground # treesitter playground
+      vim-commentary
       { 
         plugin = nvim-lspconfig;
         config = ''
@@ -54,15 +54,13 @@
             map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
             map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-            map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-            map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
             map('n', 'gca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+            map('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+            map('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
             vim.cmd("command! LspSymbol lua vim.lsp.buf.document_symbol()")
-            vim.cmd("command! LspDiagPrev lua vim.lsp.diagnostic.goto_prev()")
-            vim.cmd("command! LspDiagNext lua vim.lsp.diagnostic.goto_next()")
             vim.cmd("command! LspDiagList lua vim.lsp.diagnostic.set_loclist()")
 
             -- Format go files on save

@@ -30,11 +30,19 @@ in
     (gtk_accel_path "<Actions>/terminal-window/prev-tab" "<Primary><Shift>Tab")
   '';
 
+  # padding around windows
+  gtk = {
+    enable = true;
+    gtk3.extraCss = ''
+      VteTerminal, vte-terminal { padding: 20px; }
+    '';
+  };
+
   # general settings
   # /!\ Operator Mono should be installed on the system first
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
-    FontName=Operator Mono weight=330 12
+    FontName=Operator Mono SSm weight=330 10
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
     MiscBellUrgent=FALSE
