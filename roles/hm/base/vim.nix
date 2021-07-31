@@ -34,9 +34,11 @@
       zig-vim
       vim-commentary
       completion-nvim # autocompletion popup
+
       plenary-nvim # dep of telescope
       popup-nvim   # dep of telescope
       telescope-fzy-native-nvim # fastest sorter for telescope
+      nvim-web-devicons # icons for telescope (needs nerd patched font)
       {
         plugin = telescope-nvim;
         config = ''
@@ -53,6 +55,7 @@
           command! Help Telescope help_tags
         '';
       }
+
       { 
         plugin = nvim-lspconfig;
         config = ''
@@ -96,6 +99,7 @@
           EOF
         '';
       }
+
       { 
         plugin = nvim-treesitter;
         config = ''
@@ -108,6 +112,7 @@
           EOF
         '';
       }
+
       {
         plugin = emmet-vim;
         config = ''
