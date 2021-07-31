@@ -49,9 +49,9 @@
           nnoremap <C-p> <cmd>Telescope find_files<cr>
           nnoremap <C-b> <cmd>Telescope buffers<cr>
           nnoremap <C-f> <cmd>Telescope live_grep<cr>
+          nnoremap gt <cmd>Telescope tags<cr>
 
-          command! Tags Telescope tags
-          command! BufCommits Telescope git_bcommits
+          command! GitHistory Telescope git_bcommits
           command! Help Telescope help_tags
         '';
       }
