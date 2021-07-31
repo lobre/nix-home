@@ -42,7 +42,7 @@ in
   # /!\ Operator Mono should be installed on the system first
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
-    FontName=OperatorMonoSSmLig Nerd Font weight=325 10
+    FontName=OperatorMonoSSmLig Nerd Font weight=325 12
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
     MiscBellUrgent=FALSE
