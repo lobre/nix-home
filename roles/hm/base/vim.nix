@@ -73,14 +73,14 @@
             map('n', 'gr', '<cmd>Telescope lsp_references<cr>', opts)
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
             map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
-            map('n', 'gca', '<cmd>Telescope lsp_code_actions<cr>', opts)
+            map('n', 'gs', '<cmd>Telescope lsp_document_symbols<cr>', opts)
             map('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
             map('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
+            map('n', 'gca', '<cmd>Telescope lsp_code_actions<cr>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
-            vim.cmd("command! LspDiagList Telescope lsp_document_diagnostics")
-            vim.cmd("command! LspSymbols Telescope lsp_document_symbols")
+            vim.cmd("command! LspDiags Telescope lsp_document_diagnostics")
 
             -- Format go files on save
             vim.api.nvim_exec([[
