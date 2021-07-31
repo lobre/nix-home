@@ -32,8 +32,27 @@
     plugins = with pkgs.vimPlugins; [
       vim-nix
       zig-vim
-      completion-nvim
       vim-commentary
+      completion-nvim # autocompletion popup
+      plenary-nvim # dep of telescope
+      popup-nvim   # dep of telescope
+      telescope-fzy-native-nvim # fastest sorter for telescope
+      {
+        plugin = telescope-nvim;
+        config = ''
+          lua <<EOF
+            require('telescope').load_extension('fzy_native')
+          EOF
+
+          nnoremap <C-p> <cmd>Telescope find_files<cr>
+          nnoremap <C-b> <cmd>Telescope buffers<cr>
+          nnoremap <C-f> <cmd>Telescope live_grep<cr>
+
+          command! Tags Telescope tags
+          command! BufCommits Telescope git_bcommits
+          command! Help Telescope help_tags
+        '';
+      }
       { 
         plugin = nvim-lspconfig;
         config = ''
@@ -48,20 +67,20 @@
 
             -- Mappings
             local opts = { noremap=true, silent=true }
-            map('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-            map('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-            map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-            map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-            map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-            map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-            map('n', 'gca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-            map('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-            map('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+            map('n', 'gd', '<Cmd>Telescope lsp_definitions<cr>', opts)
+            map('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
+            map('n', 'gi', '<cmd>Telescope lsp_implementations<cr>', opts)
+            map('n', 'gr', '<cmd>Telescope lsp_references<cr>', opts)
+            map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
+            map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
+            map('n', 'gca', '<cmd>Telescope lsp_code_actions<cr>', opts)
+            map('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
+            map('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
-            vim.cmd("command! LspSymbol lua vim.lsp.buf.document_symbol()")
-            vim.cmd("command! LspDiagList lua vim.lsp.diagnostic.set_loclist()")
+            vim.cmd("command! LspDiagList Telescope lsp_document_diagnostics")
+            vim.cmd("command! LspSymbols Telescope lsp_document_symbols")
 
             -- Format go files on save
             vim.api.nvim_exec([[
@@ -109,6 +128,7 @@
       set title          " Update the title of the window 
       set mouse=a        " Enable mouse mode
 
+      " use custom ansi scheme
       colorscheme ansi
 
       " Don’t automatically select first item in completion
@@ -140,10 +160,13 @@
       command! W w !sudo tee % > /dev/null
 
       " Clear current highlighted search
-      nnoremap <C-L> :nohlsearch<CR>
+      nnoremap <C-l> :nohlsearch<cr>
 
       " Exit terminal with Esc
       tnoremap <Esc> <C-\><C-n>
+
+      " Jump to tag
+      nnoremap gd <C-]>
 
       " Explorer settings
       let g:netrw_liststyle=3

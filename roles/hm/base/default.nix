@@ -63,6 +63,14 @@ in
 
   services.dropbox.enable = true;
 
+  # cat clone with wings
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "ansi";
+    };
+  };
+
   imports = [
     ./git.nix
     ./go.nix
