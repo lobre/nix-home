@@ -95,6 +95,7 @@ let
       "/xfwm4/custom/<Super>d" = "show_desktop_key";
       "/xfwm4/custom/<Super>q" = "close_window_key";
       "/xfwm4/custom/<Super>r" = "resize_window_key";
+      "/xfwm4/custom/<Super>f" = "fullscreen_key";
 
       # windows tiling
       "/xfwm4/custom/<Alt><Super>h" = "tile_left_key";
