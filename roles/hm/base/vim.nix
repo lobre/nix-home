@@ -48,6 +48,7 @@
 
           nnoremap <C-p> <cmd>Telescope find_files<cr>
           nnoremap <C-b> <cmd>Telescope buffers<cr>
+          nnoremap <C-f> <cmd>Telescope live_grep<cr>
 
           command! -nargs=? Grep lua require'telescope.builtin'.live_grep{ default_text = vim.fn.expand("<args>") }<cr>
           command! -nargs=? Tags lua require'telescope.builtin'.tags{ default_text = vim.fn.expand("<args>") }<cr>
