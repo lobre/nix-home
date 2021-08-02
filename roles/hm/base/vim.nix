@@ -13,7 +13,6 @@
     enable = true;
     package = pkgs.neovim-nightly;
 
-    viAlias = true;
     vimAlias = true;
 
     # Extra packages available to nvim.
@@ -118,7 +117,7 @@
       {
         plugin = emmet-vim;
         config = ''
-           autocmd FileType html imap <expr> <tab> emmet#expandAbbrIntelligent("\<tab>")
+          let g:user_emmet_expandabbr_key = '<c-e>'
         '';
       }
     ];
@@ -126,6 +125,9 @@
     extraConfig = ''
       set showbreak=↪\
       set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+
+      " wildmode that works well with nvim popup menu
+      set wildmode=longest:full,full
 
       set ignorecase     " Case insensitive
       set wildignorecase " Autocomplete case insensitive
