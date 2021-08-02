@@ -48,11 +48,12 @@
 
           nnoremap <C-p> <cmd>Telescope find_files<cr>
           nnoremap <C-b> <cmd>Telescope buffers<cr>
-          nnoremap <C-f> <cmd>Telescope live_grep<cr>
-          nnoremap gt <cmd>Telescope tags<cr>
+
+          command! -nargs=? Grep lua require'telescope.builtin'.live_grep{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? Tags lua require'telescope.builtin'.tags{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? Help lua require'telescope.builtin'.help_tags{ default_text = vim.fn.expand("<args>") }<cr>
 
           command! GitHistory Telescope git_bcommits
-          command! Help Telescope help_tags
         '';
       }
 
@@ -70,10 +71,10 @@
 
             -- Mappings
             local opts = { noremap=true, silent=true }
-            map('n', 'gd', '<Cmd>Telescope lsp_definitions<cr>', opts)
+            map('n', 'gd', '<cmd>Telescope lsp_definitions<cr>', opts)
             map('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
             map('n', 'gi', '<cmd>Telescope lsp_implementations<cr>', opts)
-            map('n', 'gr', '<cmd>Telescope lsp_references<cr>', opts)
+            map('n', 'gr', '<cmd>Telescope.lsp_references<cr>', opts)
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
             map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
             map('n', 'gs', '<cmd>Telescope lsp_document_symbols<cr>', opts)
