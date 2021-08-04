@@ -49,7 +49,41 @@
           nnoremap <C-b> <cmd>Telescope buffers<cr>
           nnoremap <C-f> <cmd>Telescope live_grep<cr>
 
-          command! -nargs=? Grep lua require'telescope.builtin'.live_grep{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? Find lua require'telescope.builtin'.find_files{
+            \ default_text = vim.fn.expand("<args>")
+          \ }<cr>
+
+          command! -nargs=? FindAll lua require'telescope.builtin'.find_files{
+            \ default_text = vim.fn.expand("<args>"),
+            \ find_command = {
+              \ "rg",
+              \ "--files",
+              \ "--no-ignore-vcs",
+              \ "--hidden",
+              \ "--glob", "!.git"
+            \}
+          \ }<cr>
+
+          command! -nargs=? Grep lua require'telescope.builtin'.live_grep{
+            \ default_text = vim.fn.expand("<args>")
+          \ }<cr>
+
+          command! -nargs=? GrepAll lua require'telescope.builtin'.live_grep{
+            \ default_text = vim.fn.expand("<args>"),
+            \ vimgrep_arguments = {
+              \ "rg",
+              \ "--color=never",
+              \ "--no-heading",
+              \ "--with-filename",
+              \ "--line-number",
+              \ "--column",
+              \ "--smart-case",
+              \ "--no-ignore-vcs",
+              \ "--hidden",
+              \ "--glob", "!.git"
+            \}
+          \}<cr>
+
           command! -nargs=? Tags lua require'telescope.builtin'.tags{ default_text = vim.fn.expand("<args>") }<cr>
           command! -nargs=? Help lua require'telescope.builtin'.help_tags{ default_text = vim.fn.expand("<args>") }<cr>
 

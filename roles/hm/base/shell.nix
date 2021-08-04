@@ -69,7 +69,7 @@ in
     enableBashIntegration = true;
     enableZshIntegration = true;
 
-    defaultCommand = "rg --files --no-ignore-vcs --hidden";
+    defaultCommand = "rg --files --no-ignore-vcs --hidden --glob '!.git'";
     defaultOptions = [ "--bind ctrl-n:down,ctrl-p:up" "--color=bg+:-1" ];
 
     fileWidgetCommand = config.programs.fzf.defaultCommand;
