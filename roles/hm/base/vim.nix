@@ -41,9 +41,7 @@
       {
         plugin = telescope-nvim;
         config = ''
-          lua <<EOF
-            require('telescope').load_extension('fzy_native')
-          EOF
+          lua require('telescope').load_extension('fzy_native')
 
           nnoremap <C-p> <cmd>Telescope find_files<cr>
           nnoremap <C-b> <cmd>Telescope buffers<cr>
