@@ -32,6 +32,7 @@
       vim-nix
       zig-vim
       vim-commentary
+      emmet-vim
       completion-nvim # autocompletion popup
 
       plenary-nvim # dep of telescope
@@ -143,13 +144,6 @@
             }
           }
           EOF
-        '';
-      }
-
-      {
-        plugin = emmet-vim;
-        config = ''
-          let g:user_emmet_expandabbr_key = '<c-e>'
         '';
       }
     ];
