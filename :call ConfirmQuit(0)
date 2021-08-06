@@ -213,25 +213,23 @@
 
       " I often quit vim and reopen it soon after.
       " I’ll try to avoid that by adding a confirmation.
-      function! ConfirmQuit(writeFile)
+      fun! ConfirmQuit(writeFile)
         if (a:writeFile)
-          if expand('%:t') == ""
-            echo "Can't save a file with no name."
+          if expand('%') == ""
+            echohl ErrorMsg | echomsg 'E32: No file name' | echohl None
             return
           endif
-          :write
+          write
         endif
-        if (winnr('$') == 1 && tabpagenr('$') == 1)
-          if (confirm("Do you really want to quit?", "&Yes\n&No", 2) == 1)
-            :quit
-          endif
-        else
-          :quit
+        let l:confirmed = confirm('Do you really want to quit?', "&Yes\n&No", 2)
+        if l:confirmed == 1
+          quit
         endif
       endfun
-
       cnoremap <silent> q<CR>  :call ConfirmQuit(0)<CR>
       cnoremap <silent> wq<CR> :call ConfirmQuit(1)<CR>
+      cnoremap <silent> x<CR>  :call ConfirmQuit(1)<CR>
+      nnoremap <silent> ZZ     :call ConfirmQuit(1)<CR>
     '';
   };
 
