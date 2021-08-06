@@ -210,28 +210,6 @@
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained * checktime
-
-      " I often quit vim and reopen it soon after.
-      " I’ll try to avoid that by adding a confirmation.
-      function! ConfirmQuit(writeFile)
-        if (a:writeFile)
-          if expand('%:t') == ""
-            echo "Can't save a file with no name."
-            return
-          endif
-          :write
-        endif
-        if (winnr('$') == 1 && tabpagenr('$') == 1)
-          if (confirm("Do you really want to quit?", "&Yes\n&No", 2) == 1)
-            :quit
-          endif
-        else
-          :quit
-        endif
-      endfun
-
-      cnoremap <silent> q<CR>  :call ConfirmQuit(0)<CR>
-      cnoremap <silent> wq<CR> :call ConfirmQuit(1)<CR>
     '';
   };
 
