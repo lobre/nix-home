@@ -107,7 +107,7 @@
             map('n', 'gd', '<cmd>Telescope lsp_definitions<cr>', opts)
             map('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
             map('n', 'gi', '<cmd>Telescope lsp_implementations<cr>', opts)
-            map('n', 'gr', '<cmd>Telescope.lsp_references<cr>', opts)
+            map('n', 'gr', '<cmd>Telescope lsp_references<cr>', opts)
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
             map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
             map('n', 'gs', '<cmd>Telescope lsp_document_symbols<cr>', opts)
