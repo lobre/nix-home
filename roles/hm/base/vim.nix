@@ -111,8 +111,8 @@
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
             map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
             map('n', 'gs', '<cmd>Telescope lsp_document_symbols<cr>', opts)
-            map('n', 'gn', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
-            map('n', 'gp', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
+            map('n', 'gN', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
+            map('n', 'gP', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
             map('n', 'gca', '<cmd>Telescope lsp_code_actions<cr>', opts)
 
             -- Commands
