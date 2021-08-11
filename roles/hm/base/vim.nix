@@ -42,7 +42,23 @@
       {
         plugin = telescope-nvim;
         config = ''
-          lua require('telescope').load_extension('fzy_native')
+          lua <<EOF
+          local actions = require('telescope.actions')
+          require('telescope').setup {
+            defaults = {
+              mappings = {
+                i = {
+                  ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                },
+                n = {
+                  ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                },
+              }
+            }
+          }
+
+          require('telescope').load_extension('fzy_native')
+          EOF
 
           nnoremap <C-p> <cmd>Telescope find_files<cr>
           nnoremap <C-b> <cmd>Telescope buffers<cr>
