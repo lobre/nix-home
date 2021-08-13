@@ -179,6 +179,9 @@
       set title          " Update the title of the window 
       set mouse=a        " Enable mouse mode
 
+      " Number of lines to keep behond visible screen in terminal buffer 
+      set scrollback=50000
+
       " use custom ansi scheme
       colorscheme ansi
 
