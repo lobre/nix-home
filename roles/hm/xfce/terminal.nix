@@ -42,6 +42,7 @@ in
   # /!\ Operator Mono should be installed on the system first
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
+    CellHeightScale=1.300000
     FontName=OperatorMonoSSmLig Nerd Font weight=325 12
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
@@ -49,7 +50,7 @@ in
     MiscBordersDefault=TRUE
     MiscCursorBlinks=FALSE
     MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
-    MiscDefaultGeometry=110x30
+    MiscDefaultGeometry=110x20
     MiscInheritGeometry=FALSE
     MiscMenubarDefault=FALSE
     MiscMouseAutohide=FALSE
