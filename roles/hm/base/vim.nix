@@ -1,18 +1,8 @@
 { pkgs, ... }:
 
 {
-  # Use an overlay to install nvim 0.5 until it is officially shipped with nix.
-  # It brings pkgs.neovim-nightly in scope.
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-  ];
-
   programs.neovim = {
     enable = true;
-    package = pkgs.neovim-nightly;
-
     vimAlias = true;
 
     # Extra packages available to nvim.
