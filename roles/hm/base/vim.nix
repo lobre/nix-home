@@ -221,17 +221,12 @@
 
       " Terminal navigation
       tnoremap <C-w>h <C-\><C-N><C-w>h
-      tnoremap <C-w><C-h> <C-\><C-N><C-w><C-h>
       tnoremap <C-w>j <C-\><C-N><C-w>j
-      tnoremap <C-w><C-j> <C-\><C-N><C-w><C-j>
       tnoremap <C-w>k <C-\><C-N><C-w>k
-      tnoremap <C-w><C-k> <C-\><C-N><C-w><C-k>
       tnoremap <C-w>l <C-\><C-N><C-w>l
-      tnoremap <C-w><C-l> <C-\><C-N><C-w><C-l>
-      tnoremap <C-w>w <C-\><C-N><C-w>w
       tnoremap <C-w><C-w> <C-\><C-N><C-w><C-w>
 
-      " Terminal stay in insert mode
+      " Terminal stays in insert mode
       autocmd TermOpen,BufWinEnter,WinEnter term://* startinsert
 
       " Exit terminal with Esc
