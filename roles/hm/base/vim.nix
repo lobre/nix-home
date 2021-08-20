@@ -238,6 +238,9 @@
       cnoremap <C-e> <End>
       cnoremap <M-b> <S-Left>
       cnoremap <M-f> <S-Right>
+
+      " Load cfilter to filter quickfix (bundled with nvim)
+      packadd cfilter
     '';
   };
 
