@@ -241,6 +241,11 @@
 
       " Load cfilter to filter quickfix (bundled with nvim)
       packadd cfilter
+
+      " Buffers navigation
+      nnoremap <C-p> <cmd>bprev<cr> 
+      nnoremap <C-n> <cmd>bnext<cr> 
+      nnoremap <C-a> <C-^>
     '';
   };
 
