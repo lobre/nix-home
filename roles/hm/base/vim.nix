@@ -227,7 +227,9 @@
       tnoremap <C-w><C-w> <C-\><C-N><C-w><C-w>
 
       " Terminal stays in insert mode
+      " See https://github.com/neovim/neovim/issues/9483
       autocmd TermOpen,BufWinEnter,WinEnter term://* startinsert
+      autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
 
       " Exit terminal with Esc
       tnoremap <Esc> <C-\><C-n>
