@@ -50,10 +50,6 @@
           require('telescope').load_extension('fzy_native')
           EOF
 
-          nnoremap <C-p> <cmd>Telescope find_files<cr>
-          nnoremap <C-b> <cmd>Telescope buffers<cr>
-          nnoremap <C-f> <cmd>Telescope live_grep<cr>
-
           command! -nargs=? Find lua require'telescope.builtin'.find_files{
             \ default_text = vim.fn.expand("<args>")
           \ }<cr>
@@ -93,6 +89,17 @@
           command! -nargs=? Help lua require'telescope.builtin'.help_tags{ default_text = vim.fn.expand("<args>") }<cr>
 
           command! GitHistory Telescope git_bcommits
+
+          " Keybindings
+          nnoremap <Leader>p <cmd>Find<cr>
+          nnoremap <Leader>P <cmd>FindAll<cr>
+          nnoremap <Leader>f <cmd>Grep<cr>
+          nnoremap <Leader>F <cmd>GrepAll<cr>
+
+          nnoremap <Leader>t <cmd>Tags<cr>
+          nnoremap <Leader>h <cmd>Help<cr>
+          nnoremap <Leader>g <cmd>GitHistory<cr>
+          nnoremap <Leader>b <cmd>Telescope buffers<cr>
         '';
       }
 
@@ -193,6 +200,9 @@
       set shiftwidth=2
       set expandtab
 
+      " Set leader key
+      map <Space> <Leader>
+
       " Language specific indentation settings
       autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
       autocmd FileType sh setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
@@ -222,6 +232,12 @@
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained * checktime
+
+      " Emacs like keys for command line (:h emacs-keys)
+      cnoremap <C-a> <Home>
+      cnoremap <C-e> <End>
+      cnoremap <M-b> <S-Left>
+      cnoremap <M-f> <S-Right>
     '';
   };
 
