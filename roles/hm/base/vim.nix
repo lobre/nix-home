@@ -126,7 +126,7 @@
             map('n', 'gs', '<cmd>Telescope lsp_document_symbols<cr>', opts)
             map('n', 'gN', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
             map('n', 'gP', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
-            map('n', 'gca', '<cmd>Telescope lsp_code_actions<cr>', opts)
+            map('n', 'ga', '<cmd>Telescope lsp_code_actions<cr>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
