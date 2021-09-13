@@ -27,7 +27,7 @@
 
       plenary-nvim # dep of telescope
       popup-nvim   # dep of telescope
-      telescope-fzy-native-nvim # fastest sorter for telescope
+      telescope-fzf-native-nvim # fastest sorter for telescope
       nvim-web-devicons # icons for telescope (needs nerd patched font)
       {
         plugin = telescope-nvim;
@@ -47,7 +47,7 @@
             }
           }
 
-          require('telescope').load_extension('fzy_native')
+          require('telescope').load_extension('fzf')
           EOF
 
           command! -nargs=? Find lua require'telescope.builtin'.find_files{
