@@ -95,10 +95,7 @@
           nnoremap <Leader>P <cmd>FindAll<cr>
           nnoremap <Leader>f <cmd>Grep<cr>
           nnoremap <Leader>F <cmd>GrepAll<cr>
-
           nnoremap <Leader>t <cmd>Tags<cr>
-          nnoremap <Leader>h <cmd>Help<cr>
-          nnoremap <Leader>g <cmd>GitHistory<cr>
           nnoremap <Leader>b <cmd>Telescope buffers<cr>
         '';
       }
@@ -124,13 +121,12 @@
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
             map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
             map('n', 'gs', '<cmd>Telescope lsp_document_symbols<cr>', opts)
-            map('n', 'gN', '<cmd>lua vim.lsp.diagnostic.goto_next()<cr>', opts)
-            map('n', 'gP', '<cmd>lua vim.lsp.diagnostic.goto_prev()<cr>', opts)
+            map('n', 'gS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', opts)
+            map('n', 'gE', '<cmd>Telescope lsp_document_diagnostics<cr>', opts)
             map('n', 'ga', '<cmd>Telescope lsp_code_actions<cr>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
-            vim.cmd("command! LspDiags Telescope lsp_document_diagnostics")
 
             -- Format go files on save
             vim.api.nvim_exec([[
