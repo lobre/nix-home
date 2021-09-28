@@ -122,11 +122,12 @@
             map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
             map('n', 'gs', '<cmd>Telescope lsp_document_symbols<cr>', opts)
             map('n', 'gS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', opts)
-            map('n', 'gE', '<cmd>Telescope lsp_document_diagnostics<cr>', opts)
             map('n', 'ga', '<cmd>Telescope lsp_code_actions<cr>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
+            vim.cmd("command! Dnext lua vim.lsp.diagnostic.goto_next()")
+            vim.cmd("command! Dprev lua vim.lsp.diagnostic.goto_prev()")
 
             -- Format go files on save
             vim.api.nvim_exec([[
