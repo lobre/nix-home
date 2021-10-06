@@ -91,12 +91,12 @@
           command! GitHistory Telescope git_bcommits
 
           " Keybindings
-          nnoremap <Leader>p <cmd>Find<cr>
-          nnoremap <Leader>P <cmd>FindAll<cr>
-          nnoremap <Leader>f <cmd>Grep<cr>
-          nnoremap <Leader>F <cmd>GrepAll<cr>
-          nnoremap <Leader>t <cmd>Tags<cr>
-          nnoremap <Leader>b <cmd>Telescope buffers<cr>
+          nnoremap <C-p> <cmd>Find<cr>
+          nnoremap <C-b> <cmd>Telescope buffers<cr>
+          nnoremap <C-f> <cmd>Grep<cr>
+          nnoremap g<C-p> <cmd>FindAll<cr>
+          nnoremap g<C-f> <cmd>GrepAll<cr>
+          nnoremap g<C-t> <cmd>Tags<cr>
         '';
       }
 
@@ -196,9 +196,6 @@
       set tabstop=2
       set shiftwidth=2
       set expandtab
-
-      " Set leader key
-      map <Space> <Leader>
 
       " Language specific indentation settings
       autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
