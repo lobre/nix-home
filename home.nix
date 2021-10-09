@@ -14,5 +14,5 @@
     ./roles/hm/xfce
   ];
 
-  home.stateVersion = "19.09";
+  home.stateVersion = "21.11";
 }

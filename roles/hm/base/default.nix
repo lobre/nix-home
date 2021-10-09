@@ -21,6 +21,9 @@ in
       [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
   '';
 
+  home.username = secrets.username;
+  home.homeDirectory = secrets.homeDirectory;
+
   home.packages = with pkgs; [
     # custom script to easily switch configuration
     nixSwitch

@@ -64,5 +64,5 @@ in
     ../../roles/nixos/x11
   ];
 
-  system.stateVersion = "20.03";
+  system.stateVersion = "21.11";
 }
