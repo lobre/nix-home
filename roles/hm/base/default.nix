@@ -33,6 +33,7 @@ in
     docker
     docker_compose
     dos2unix
+    envsubst
     fd
     file
     gcc

@@ -19,7 +19,7 @@ gopass clone https://github.com/<name>/<repo>.git
 You will then be able to gather secrets from your store.
 
 ```
-gopass show -n nix/secrets > ~/lab/github.com/lobre/nix-home/secrets.nix
+gopass show -n nix/secrets | envsubst > ~/lab/github.com/lobre/nix-home/secrets.nix
 ```
 
 At this point, if you are on a NixOS system, you can test to re-apply your system configurations to see if everything still works as expected.
