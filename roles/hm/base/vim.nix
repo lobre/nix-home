@@ -237,7 +237,9 @@
       let g:netrw_localrmdir='rm -r'
 
       " Trigger autoread when files changes on disk
-      autocmd FocusGained * checktime
+      autocmd FocusGained,BufEnter * checktime
+      autocmd CursorHold,CursorHoldI * checktime
+      autocmd CursorMoved,CursorMovedI * checktime " this one could be slow
 
       " Emacs like keys for command line (:h emacs-keys)
       cnoremap <C-a> <Home>
