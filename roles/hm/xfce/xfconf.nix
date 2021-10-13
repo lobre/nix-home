@@ -73,9 +73,11 @@ let
       # apps
       "/commands/custom/override" = true; # allow custom commands
       "/commands/custom/<Primary><Alt>l" = "xflock4";
+      "/commands/custom/<Primary><Alt>Delete" = "xfce4-session-logout";
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
       "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
+      "/commands/custom/<Super>e" = "thunar";
 
       # allow custom wm keybindings
       "/xfwm4/custom/override" = true;
@@ -100,14 +102,18 @@ let
       "/xfwm4/custom/<Super>f" = "fullscreen_key";
 
       # windows tiling
-      "/xfwm4/custom/<Alt><Super>h" = "tile_left_key";
+      "/xfwm4/custom/<Super>h" = "tile_left_key";
+      "/xfwm4/custom/<Super>j" = "tile_down_key";
+      "/xfwm4/custom/Super>k" = "tile_up_key";
+      "/xfwm4/custom/<Super>l" = "tile_right_key";
+      "/xfwm4/custom/<Alt><Super>h" = "tile_up_left_key";
       "/xfwm4/custom/<Alt><Super>j" = "tile_down_right_key";
-      "/xfwm4/custom/<Alt><Super>k" = "tile_up_right_key";
-      "/xfwm4/custom/<Alt><Super>l" = "tile_right_key";
+      "/xfwm4/custom/<Alt>Super>k" = "tile_down_left_key";
+      "/xfwm4/custom/<Alt><Super>l" = "tile_up_right_key";
 
       # workspaces
-      "/xfwm4/custom/<Super>l" = "next_workspace_key";
-      "/xfwm4/custom/<Super>h" = "prev_workspace_key";
+      "/xfwm4/custom/<Primary><Super>l" = "next_workspace_key";
+      "/xfwm4/custom/<Primary><Super>h" = "prev_workspace_key";
       "/xfwm4/custom/<Shift><Super>l" = "move_window_next_workspace_key";
       "/xfwm4/custom/<Shift><Super>h" = "move_window_prev_workspace_key";
     };
