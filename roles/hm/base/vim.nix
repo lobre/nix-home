@@ -100,6 +100,7 @@
       }
 
       cmp-nvim-lsp
+      cmp-buffer
       {
         plugin = nvim-cmp;
         config = ''
@@ -108,7 +109,8 @@
 
           cmp.setup({
             sources = {
-              { name = 'nvim_lsp' }
+              { name = 'nvim_lsp' },
+              { name = 'buffer' }
             }
           })
           EOF
