@@ -23,7 +23,6 @@
       zig-vim
       vim-commentary
       emmet-vim
-      completion-nvim # autocompletion popup
 
       plenary-nvim # dep of telescope
       popup-nvim   # dep of telescope
@@ -100,6 +99,34 @@
         '';
       }
 
+      cmp-nvim-lsp
+      {
+        plugin = nvim-cmp;
+        config = ''
+          lua <<EOF
+          local cmp = require('cmp')
+
+          cmp.setup({
+            sources = {
+              { name = 'nvim_lsp' }
+            }
+          })
+          EOF
+        '';
+      }
+
+      {
+        plugin = lsp_signature-nvim;
+        config = ''
+          lua <<EOF
+            require('lsp_signature').setup({
+              doc_lines = 0,
+              hint_enable = false
+            })
+          EOF
+        '';
+      }
+
       { 
         plugin = nvim-lspconfig;
         config = ''
@@ -107,7 +134,7 @@
           local lspconfig = require('lspconfig')
 
           local on_attach = function(client, bufnr)
-            require('completion').on_attach()
+            require('lsp_signature').on_attach()
 
             local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
             local function opt(...) vim.api.nvim_buf_set_option(bufnr, ...) end
@@ -138,7 +165,10 @@
           -- Configure servers
           local servers = { "gopls", "bashls", "dockerls", "vimls", "jsonls", "yamlls", "rnix", "zls" }
           for _, server in ipairs(servers) do
-            lspconfig[server].setup { on_attach = on_attach }
+            lspconfig[server].setup { 
+              on_attach = on_attach,
+              capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+            }
           end
           EOF
         '';
@@ -184,9 +214,6 @@
 
       " Don’t automatically select first item in completion
       set completeopt=menuone,noinsert,noselect
-
-      " Avoid showing message extra message when using completion
-      set shortmess+=c
 
       " Split as expected
       set splitright
