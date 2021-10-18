@@ -111,7 +111,8 @@
             sources = {
               { name = 'nvim_lsp' },
               { name = 'buffer' }
-            }
+            },
+            preselect = cmp.PreselectMode.None;
           })
           EOF
         '';
