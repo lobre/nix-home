@@ -51,6 +51,7 @@ in
     perl
     pv
     ripgrep
+    rmapi
     sqlite-interactive
     strace
     tcpdump

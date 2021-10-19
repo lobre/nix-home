@@ -21,10 +21,10 @@
   ];
 
   imports = [
-    ./xfconf.nix
-    ./terminal.nix
-    ./panel.nix
     ./oni.nix
+    ./panel.nix
+    ./terminal.nix
+    ./xfconf.nix
   ];
 }
 
