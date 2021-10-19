@@ -18,6 +18,7 @@
     teams
     vlc
     xclip
+    wine
   ];
 
   imports = [
