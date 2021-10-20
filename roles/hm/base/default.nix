@@ -52,6 +52,7 @@ in
     pv
     ripgrep
     rmapi
+    slides
     sqlite-interactive
     strace
     tcpdump
