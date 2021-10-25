@@ -4,21 +4,15 @@
   programs.vscode = {
     enable = true;
     extensions = with pkgs.vscode-extensions; [
-      ms-vsliveshare.vsliveshare
       asvetliakov.vscode-neovim
       golang.go
+      ms-vsliveshare.vsliveshare
     ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
-        name = "vsc-material-theme";
-        publisher = "Equinusocio";
-        version = "33.2.2";
-        sha256 = "0a55ksf58d4fhk1vgafibxkg61rhyd6cl10wz9gwg22rykx6i8d9";
-      }
-      {
-        name = "vsc-material-theme-icons";
-        publisher = "equinusocio";
-        version = "2.2.1";
-        sha256 = "03mxvm8c9zffzykc84n2y34jzl3l7jvnsvnqwn6gk9adzfd2bh41";
+        name = "material-theme";
+        publisher = "zhuangtongfa";
+        version = "3.13.2";
+        sha256 = "1pb96xdm8342i1l4xp7wdbpfv353pjf6l0c3xkgw0lgfzvd0xshy";
       }
     ];
 
@@ -78,7 +72,29 @@
       "editor.suggestLineHeight" = 28;
       "terminal.integrated.fontSize" = 14;
       "terminal.integrated.lineHeight" = 1.5;
-      "workbench.colorTheme" = "Palenight Theme";
+      "workbench.colorTheme" = "One Dark Pro Darker";
+
+      # Colors
+      "workbench.colorCustomizations" = {
+        "editorCursor.foreground" = "#e7ebed";
+        "editorCursor.background" = "#000000";
+        "terminal.ansiBlack" = "#243137";
+        "terminal.ansiRed" = "#fc3841";
+        "terminal.ansiGreen" = "#5cf19e";
+        "terminal.ansiYellow" = "#fed032";
+        "terminal.ansiBlue" = "#37b6ff";
+        "terminal.ansiMagenta" = "#fc226e";
+        "terminal.ansiCyan" = "#59ffd1";
+        "terminal.ansiWhite" = "#ffffff";
+        "terminal.ansiBrightBlack" = "#84A6B8";
+        "terminal.ansiBrightRed" = "#fc746d";
+        "terminal.ansiBrightGreen" = "#adf7be";
+        "terminal.ansiBrightYellow" = "#fee16c";
+        "terminal.ansiBrightBlue" = "#70cfff";
+        "terminal.ansiBrightMagenta" = "#fc669b";
+        "terminal.ansiBrightCyan" = "#9affe6";
+        "terminal.ansiBrightWhite" = "#ffffff";
+      };
 
       # Neovim
       "vscode-neovim.neovimExecutablePaths.linux" = "${config.programs.neovim.package}/bin/nvim";
