@@ -9,9 +9,6 @@
     # Useful to install LSP servers.
     extraPackages = with pkgs; [ 
       gopls # go language server
-      nodePackages.bash-language-server
-      nodePackages.dockerfile-language-server-nodejs
-      nodePackages.vim-language-server
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
       rnix-lsp # nix language server
@@ -27,7 +24,6 @@
       plenary-nvim # dep of telescope
       popup-nvim   # dep of telescope
       telescope-fzf-native-nvim # fastest sorter for telescope
-      nvim-web-devicons # icons for telescope (needs nerd patched font)
       {
         plugin = telescope-nvim;
         config = ''
@@ -166,7 +162,7 @@
           end
 
           -- Configure servers
-          local servers = { "gopls", "bashls", "dockerls", "vimls", "jsonls", "yamlls", "rnix", "zls" }
+          local servers = { "gopls", "jsonls", "yamlls", "rnix", "zls" }
           for _, server in ipairs(servers) do
             lspconfig[server].setup { 
               on_attach = on_attach,
@@ -259,7 +255,9 @@
       tnoremap <Esc> <C-\><C-n>
 
       " Jump to tag
-      nnoremap gd <C-]>
+      if !exists('g:vscode')
+        nnoremap gd <C-]>
+      endif
 
       " Explorer settings
       let g:netrw_liststyle=3
