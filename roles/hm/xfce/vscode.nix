@@ -7,13 +7,7 @@
       asvetliakov.vscode-neovim
       golang.go
       ms-vsliveshare.vsliveshare
-    ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-      {
-        name = "material-theme";
-        publisher = "zhuangtongfa";
-        version = "3.13.2";
-        sha256 = "1pb96xdm8342i1l4xp7wdbpfv353pjf6l0c3xkgw0lgfzvd0xshy";
-      }
+      zhuangtongfa.material-theme
     ];
 
     userSettings = {
@@ -41,11 +35,6 @@
       # Silence the noise
       "breadcrumbs.enabled" = false;
       "editor.colorDecorators" = false;
-      "editor.gotoLocation.multipleDeclarations" = "goto";
-      "editor.gotoLocation.multipleDefinitions" = "goto";
-      "editor.gotoLocation.multipleImplementations" = "goto";
-      "editor.gotoLocation.multipleReferences" = "goto";
-      "editor.gotoLocation.multipleTypeDefinitions" = "goto";
       "editor.hideCursorInOverviewRuler" = true;
       "editor.hover.enabled" = false;
       "editor.lightbulb.enabled" = false;
@@ -71,13 +60,19 @@
       "editor.suggestFontSize" = 14;
       "editor.suggestLineHeight" = 28;
       "terminal.integrated.fontSize" = 14;
-      "terminal.integrated.lineHeight" = 1.5;
-      "workbench.colorTheme" = "One Dark Pro Darker";
+      "terminal.integrated.letterSpacing" = 1.5;
+      "terminal.integrated.lineHeight" = 1.3;
+      "workbench.colorTheme" = "One Dark Pro";
 
       # Colors
       "workbench.colorCustomizations" = {
+        "editor.background" = "#21252b";
+        "terminal.background" = "#21252b";
+        "terminal.foreground" = "#e7ebed";
+
         "editorCursor.foreground" = "#e7ebed";
         "editorCursor.background" = "#000000";
+
         "terminal.ansiBlack" = "#243137";
         "terminal.ansiRed" = "#fc3841";
         "terminal.ansiGreen" = "#5cf19e";
