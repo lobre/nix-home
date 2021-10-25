@@ -124,13 +124,10 @@
         command = "explorer.newFolder";
         when = "explorerViewletVisible && filesExplorerFocus && !inputFocus";
       }
-
-      # Bring normal search back
-      {
-        key = "ctrl+f";
-        command = "-vscode-neovim.ctrl-f";
-        when = "editorTextFocus && neovim.ctrlKeysNormal && neovim.init && neovim.mode != 'insert'";
-      }
+      
+      # Unbind some shortcuts to use default vscode
+      { key = "ctrl+f"; command = "-vscode-neovim.ctrl-f"; } # search
+      { key = "ctrl+b"; command = "-vscode-neovim.ctrl-b"; } # toggle sidebar
     ];
   };
 }
