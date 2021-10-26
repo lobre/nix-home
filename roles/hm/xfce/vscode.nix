@@ -54,7 +54,7 @@
       # Typography
       "editor.fontFamily" = "MonoLisa";
       "editor.fontSize" = 14;
-      "editor.fontWeight" = "400";
+      "editor.fontWeight" = "500";
       "editor.fontLigatures" = "'calt' on, 'liga' on, 'ss02' on";
       "editor.lineHeight" = 30;
       "editor.suggestFontSize" = 14;
