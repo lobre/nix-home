@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     brave
+    discord
     filezilla
     gnome3.meld
     libnotify
