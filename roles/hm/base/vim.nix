@@ -23,13 +23,14 @@
       plenary-nvim # dep of telescope
       popup-nvim   # dep of telescope
       telescope-fzf-native-nvim # fastest sorter for telescope
+      nvim-web-devicons # icons for telescope (needs nerd patched font)
       {
         plugin = telescope-nvim;
         config = ''
           lua <<EOF
           local actions = require('telescope.actions')
           require('telescope').setup {
-            defaults = {
+            defaults = require('telescope.themes').get_ivy {
               mappings = {
                 i = {
                   ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
@@ -92,7 +93,7 @@
           nnoremap <C-f> <cmd>Grep<cr>
           nnoremap g<C-p> <cmd>FindAll<cr>
           nnoremap g<C-f> <cmd>GrepAll<cr>
-          nnoremap g<C-t> <cmd>Tags<cr>
+          nnoremap g<C-r> <cmd>History<cr>
         '';
       }
 
@@ -192,6 +193,9 @@
     ];
 
     extraConfig = ''
+      " Disable vim intro page
+      set shortmess+=I
+
       set showbreak=↪\
       set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
 
@@ -221,10 +225,6 @@
       " Don’t automatically select first item in completion
       set completeopt=menuone,noinsert,noselect
 
-      " Split as expected
-      set splitright
-      set splitbelow
-
       " Default tabs count parameters
       set tabstop=2
       set shiftwidth=2
@@ -244,7 +244,60 @@
       command! W w !sudo tee % > /dev/null
 
       " Clear current highlighted search
-      nnoremap <C-l> :nohlsearch<cr>
+      nnoremap <C-l> <cmd>nohlsearch<cr>
+
+      " Jump to tag
+      if !exists('g:vscode')
+        nnoremap gd <C-]>
+      endif
+
+      " Split as expected
+      set splitright
+      set splitbelow
+
+      " Explorer settings
+      let g:netrw_liststyle = 3        " show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
+      let g:netrw_winsize = 20         " size of window
+      let g:netrw_localrmdir = 'rm -r' " let delete a non-empty directory
+      let g:netrw_banner = 0           " don’t show top banner
+      let g:netrw_browse_split = 4     " always open files in previous window
+      let g:netrw_preview = 1          " enable vertical preview with p
+      let g:netrw_alto = 0             " split preview on the right
+
+      " Trigger autoread when files changes on disk
+      autocmd FocusGained,BufEnter * silent! checktime
+      autocmd CursorHold,CursorHoldI * silent! checktime
+      autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
+
+      " Load cfilter to filter quickfix (bundled with nvim)
+      packadd cfilter
+
+      " Alternate buffer
+      nnoremap <C-a> <C-^>
+
+      " Simple git blame
+      command! Blame execute "!git blame -c --date=short -L " . line(".") . ",+1 %"
+
+      " Toggle terminal
+      nnoremap g<C-t> <cmd>call ToggleTerm()<cr>
+      tnoremap g<C-t> <cmd>call ToggleTerm()<cr>
+       
+      let s:term_height = 5
+      function! ToggleTerm()
+        let name = "term://default"
+        let pane = bufwinnr(name)
+        let buf = bufexists(name)
+        if pane > 0
+          let s:term_height = winheight(pane)
+          :execute pane . "wincmd c"
+        elseif buf > 0
+          :execute s:term_height . "split | buffer " . name
+        else
+          :execute s:term_height . "split | terminal"
+          :execute "file " . name
+          set nobuflisted
+        endif
+      endfunction
 
       " Terminal navigation
       tnoremap <C-w>h <C-\><C-N><C-w>h
@@ -260,32 +313,6 @@
 
       " Exit terminal with Esc
       tnoremap <Esc> <C-\><C-n>
-
-      " Jump to tag
-      if !exists('g:vscode')
-        nnoremap gd <C-]>
-      endif
-
-      " Explorer settings
-      let g:netrw_liststyle=0        " list files without clutter
-      let g:netrw_winsize=20         " size of window
-      let g:netrw_localrmdir='rm -r' " let delete a non-empty directory
-      let g:netrw_banner=0           " don’t show top banner
-      let g:netrw_browse_split=4     " always open files in previous window
-
-      " Trigger autoread when files changes on disk
-      autocmd FocusGained,BufEnter * silent! checktime
-      autocmd CursorHold,CursorHoldI * silent! checktime
-      autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
-
-      " Load cfilter to filter quickfix (bundled with nvim)
-      packadd cfilter
-
-      " Alternate buffer
-      nnoremap <C-a> <C-^>
-
-      " Simple git blame
-      command! Blame execute "!git blame -c --date=short -L " . line(".") . ",+1 %"
     '';
   };
 

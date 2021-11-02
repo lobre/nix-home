@@ -39,11 +39,10 @@ in
   };
 
   # general settings
-  # /!\ Operator Mono should be installed on the system first
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
     CellHeightScale=1.350000
-    FontName=MonoLisa 11
+    FontName=MonoLisa Nerd Font 11
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
     MiscBellUrgent=FALSE
