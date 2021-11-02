@@ -26,7 +26,6 @@
     ./oni.nix
     ./panel.nix
     ./terminal.nix
-    ./vscode.nix
     ./xfconf.nix
   ];
 }
