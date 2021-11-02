@@ -34,7 +34,7 @@ in
   gtk = {
     enable = true;
     gtk3.extraCss = ''
-      VteTerminal, vte-terminal { padding: 20px; }
+      VteTerminal, vte-terminal { padding: 30px 35px; }
     '';
   };
 
@@ -42,7 +42,7 @@ in
   # /!\ Operator Mono should be installed on the system first
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
-    CellHeightScale=1.300000
+    CellHeightScale=1.350000
     FontName=MonoLisa 11
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
@@ -50,7 +50,7 @@ in
     MiscBordersDefault=TRUE
     MiscCursorBlinks=FALSE
     MiscCursorShape=TERMINAL_CURSOR_SHAPE_BLOCK
-    MiscDefaultGeometry=140x25
+    MiscDefaultGeometry=120x20
     MiscInheritGeometry=FALSE
     MiscMenubarDefault=FALSE
     MiscMouseAutohide=FALSE

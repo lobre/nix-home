@@ -11,7 +11,6 @@
       gopls # go language server
       nodePackages.vscode-json-languageserver
       nodePackages.yaml-language-server
-      rnix-lsp # nix language server
       zls # zig language server
     ];
 
@@ -34,6 +33,7 @@
               mappings = {
                 i = {
                   ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                  ["<esc>"] = actions.close,
                 },
                 n = {
                   ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
@@ -82,6 +82,7 @@
 
           command! -nargs=? Tags lua require'telescope.builtin'.tags{ default_text = vim.fn.expand("<args>") }<cr>
           command! -nargs=? Help lua require'telescope.builtin'.help_tags{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? History lua require'telescope.builtin'.command_history{ default_text = vim.fn.expand("<args>") }<cr>
 
           command! GitHistory Telescope git_bcommits
 
@@ -162,7 +163,7 @@
           end
 
           -- Configure servers
-          local servers = { "gopls", "jsonls", "yamlls", "rnix", "zls" }
+          local servers = { "gopls", "jsonls", "yamlls", "zls" }
           for _, server in ipairs(servers) do
             lspconfig[server].setup { 
               on_attach = on_attach,
@@ -204,6 +205,12 @@
       set smartindent    " Smart autoindenting when starting new line
       set title          " Update the title of the window 
       set mouse=a        " Enable mouse mode
+
+      " Hide statusline
+      set noshowmode
+      set noruler
+      set laststatus=1
+      set noshowcmd
 
       " Number of lines to keep behond visible screen in terminal buffer 
       set scrollback=50000
@@ -260,26 +267,25 @@
       endif
 
       " Explorer settings
-      let g:netrw_liststyle=3
-      let g:netrw_winsize = 25
-      let g:netrw_localrmdir='rm -r'
+      let g:netrw_liststyle=0        " list files without clutter
+      let g:netrw_winsize=20         " size of window
+      let g:netrw_localrmdir='rm -r' " let delete a non-empty directory
+      let g:netrw_banner=0           " don’t show top banner
+      let g:netrw_browse_split=4     " always open files in previous window
 
       " Trigger autoread when files changes on disk
-      autocmd FocusGained,BufEnter * checktime
-      autocmd CursorHold,CursorHoldI * checktime
-      autocmd CursorMoved,CursorMovedI * checktime " this one could be slow
-
-      " Emacs like keys for command line (:h emacs-keys)
-      cnoremap <C-a> <Home>
-      cnoremap <C-e> <End>
-      cnoremap <M-b> <S-Left>
-      cnoremap <M-f> <S-Right>
+      autocmd FocusGained,BufEnter * silent! checktime
+      autocmd CursorHold,CursorHoldI * silent! checktime
+      autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
 
       " Load cfilter to filter quickfix (bundled with nvim)
       packadd cfilter
 
       " Alternate buffer
       nnoremap <C-a> <C-^>
+
+      " Simple git blame
+      command! Blame execute "!git blame -c --date=short -L " . line(".") . ",+1 %"
     '';
   };
 
