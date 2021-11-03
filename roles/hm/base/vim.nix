@@ -82,6 +82,7 @@
           \}<cr>
 
           command! -nargs=? Tags lua require'telescope.builtin'.tags{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? Quickfix lua require'telescope.builtin'.quickfix{ default_text = vim.fn.expand("<args>") }<cr>
           command! -nargs=? Help lua require'telescope.builtin'.help_tags{ default_text = vim.fn.expand("<args>") }<cr>
           command! -nargs=? History lua require'telescope.builtin'.command_history{ default_text = vim.fn.expand("<args>") }<cr>
 
@@ -94,6 +95,7 @@
           nnoremap g<C-p> <cmd>FindAll<cr>
           nnoremap g<C-f> <cmd>GrepAll<cr>
           nnoremap g<C-r> <cmd>History<cr>
+          nnoremap g<C-q> <cmd>Quickfix<cr>
         '';
       }
 
