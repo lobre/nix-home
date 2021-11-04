@@ -284,24 +284,35 @@
       nnoremap g<C-t> <cmd>call ToggleTerm()<cr>
       tnoremap g<C-t> <cmd>call ToggleTerm()<cr>
        
-      let s:term_height = 5
       function! ToggleTerm()
         let name = "term://default"
-        let pane = bufwinnr(name)
+        let win = bufwinnr(name)
+        let lastwin = winnr('$')
         let buf = bufexists(name)
-        if pane > 0
-          let s:term_height = winheight(pane)
-          :execute pane . "wincmd c"
+        if win > 0
+          if lastwin == 1 && lastwin == win
+            let s:termheight = -1
+            buffer #
+          else
+            let s:termheight = winheight(win)
+            execute win . "wincmd c"
+          endif
         elseif buf > 0
-          :execute s:term_height . "split | buffer " . name
+          if s:termheight == -1
+            execute "buffer " . name
+          else
+            execute s:termheight . "split | buffer " . name
+          endif
         else
-          :execute s:term_height . "split | terminal"
-          :execute "file " . name
+          let s:termheight = 5
+          execute s:termheight . "split | terminal"
+          execute "keepalt file " . name
           set nobuflisted
         endif
       endfunction
 
       " Terminal navigation
+      tnoremap <C-w>o <cmd>only<cr>
       tnoremap <C-w>h <C-\><C-N><C-w>h
       tnoremap <C-w>j <C-\><C-N><C-w>j
       tnoremap <C-w>k <C-\><C-N><C-w>k
