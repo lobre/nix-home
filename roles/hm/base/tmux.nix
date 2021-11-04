@@ -12,7 +12,16 @@
 
     extraConfig = ''
       set -g mouse on
-      bind -T copy-mode-vi Enter send -X copy-pipe-and-cancel '${pkgs.xclip}/bin/xclip -in -selection clipboard'
+
+      bind v copy-mode
+      bind P paste-buffer
+
+      bind -T copy-mode-vi Escape send-keys -X cancel
+      bind -T copy-mode-vi v send-keys -X begin-selection
+      bind -T copy-mode-vi y send-keys -X copy-pipe-and-cancel '${pkgs.xclip}/bin/xclip -in -selection clipboard'
+
+      bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-no-clear
+      bind -T copy-mode-vi MouseDown1Pane send -X clear-selection
     '';
   };
 }
