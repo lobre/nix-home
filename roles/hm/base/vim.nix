@@ -249,9 +249,7 @@
       nnoremap <C-l> <cmd>nohlsearch<cr>
 
       " Jump to tag
-      if !exists('g:vscode')
-        nnoremap gd <C-]>
-      endif
+      nnoremap gd <C-]>
 
       " Split as expected
       set splitright
