@@ -1,8 +1,33 @@
 { pkgs, ... }:
 
+let
+  neovim = pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: rec {
+    name = "neovim-0.6.0-pre";
+    src = pkgs.fetchFromGitHub {
+      owner  = "neovim";
+      repo   = "neovim";
+      rev    = "3ba800f1538e083f8172655c6bab096cd604a0b5"; # follows master branch
+      sha256 = "05d9l23nrjhjwbfdmvpvnx9gp75adl7x1mz1li9s75pbdx61ig0g";
+    };
+  });
+
+  copilot = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "copilot";
+    version = "1.0.3";
+    src = pkgs.fetchFromGitHub {
+      owner = "github";
+      repo = "copilot.vim";
+      rev = "cd7946808fd2f0eea8946d30b25b1220f8edd09b";
+      sha256 = "1jampjvndfgbsd433p8izwrbj1b5mp1vkzfy66bbnr28s7xw582f";
+    };
+    meta.homepage = "https://github.com/github/copilot.vim/";
+  };
+in
+
 {
   programs.neovim = {
     enable = true;
+    package = neovim;
     vimAlias = true;
 
     # Extra packages available to nvim.
@@ -190,6 +215,13 @@
             }
           }
           EOF
+        '';
+      }
+
+      {
+        plugin = copilot;
+        config = ''
+          let g:copilot_enabled = 0
         '';
       }
     ];
