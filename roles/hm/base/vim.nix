@@ -133,11 +133,14 @@ in
           local cmp = require('cmp')
 
           cmp.setup({
+            preselect = cmp.PreselectMode.None,
             sources = {
               { name = 'nvim_lsp' },
               { name = 'buffer' }
             },
-            preselect = cmp.PreselectMode.None;
+            mapping = {
+              ['<C-y>'] = cmp.config.disable,
+            }
           })
           EOF
         '';
