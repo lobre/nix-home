@@ -283,6 +283,9 @@ in
       " Jump to tag
       nnoremap gd <C-]>
 
+      " Alternate buffer (C-Space is also C-@)
+      nnoremap <C-Space> <C-^>
+
       " Split as expected
       set splitright
       set splitbelow
@@ -303,9 +306,6 @@ in
 
       " Load cfilter to filter quickfix (bundled with nvim)
       packadd cfilter
-
-      " Alternate buffer
-      nnoremap <C-a> <C-^>
 
       " Simple git blame
       command! Blame execute "!git blame -c --date=short -L " . line(".") . ",+1 %"
@@ -331,11 +331,11 @@ in
           if s:termheight == -1
             execute "buffer " . name
           else
-            execute s:termheight . "split | buffer " . name
+            execute "botright" . s:termheight . "split | buffer " . name
           endif
         else
           let s:termheight = 5
-          execute s:termheight . "split | terminal"
+          execute "botright" . s:termheight . "split | terminal"
           execute "keepalt file " . name
           set nobuflisted
         endif
