@@ -28,12 +28,12 @@ in
     # custom script to easily switch configuration
     nixSwitch
 
-    ctags
     curl
     docker
     docker_compose
     dos2unix
     envsubst
+    universal-ctags
     fd
     file
     gcc
