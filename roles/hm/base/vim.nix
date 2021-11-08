@@ -289,6 +289,9 @@ in
       " Alternate buffer (C-Space is also C-@)
       nnoremap <C-Space> <C-^>
 
+      " C-c is not exactly equal to Esc as it does not trigger events
+      inoremap <C-c> <Esc>
+
       " Split as expected
       set splitright
       set splitbelow
