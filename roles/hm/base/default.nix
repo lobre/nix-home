@@ -32,11 +32,11 @@ in
     docker
     docker_compose
     dos2unix
-    envsubst
     universal-ctags
     fd
     file
     gcc
+    gettext # for envsubst
     git-credential-gopass
     gopass
     gopass-jsonapi
@@ -62,6 +62,7 @@ in
     unzip
     wget 
     yarn
+    yq-go
     zig
   ];
 
