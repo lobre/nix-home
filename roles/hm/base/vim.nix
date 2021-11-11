@@ -340,7 +340,7 @@ in
             execute "botright" . s:termheight . "split | buffer " . name
           endif
         else
-          let s:termheight = 5
+          let s:termheight = 10
           execute "botright" . s:termheight . "split | terminal"
           execute "keepalt file " . name
           set nobuflisted
