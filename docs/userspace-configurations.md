@@ -47,7 +47,13 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/release-
 nix-channel --update
 ```
 
-Then install home manager. **You may need to logout and back in for the channel to become available.**
+On NixOS you may need to log out and back in for the channel to become available. On non-NixOS you may have to export the following variable.
+
+```
+export NIX_PATH=$HOME/.nix-defexpr/channels${NIX_PATH:+:}$NIX_PATH
+```
+
+Then install home manager.
 
 ```
 nix-shell '<home-manager>' -A install
