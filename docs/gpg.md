@@ -43,6 +43,30 @@ You will be prompted to enter the passphrase, and then you should be good to go.
 
 Using a Yubikey simplifies drastically the process because you basically don’t have anything to do except plugging it when you want to use your key.
 
+## Trust
+
+Gpg has a trust database. If you see that your owner is "unknown", use the following commands to trust it.
+
+```
+gpg --edit-key user@useremail.com
+
+gpg> trust
+
+Please decide how far you trust this user to correctly verify other users' keys
+(by looking at passports, checking fingerprints from different sources, etc.)
+
+  1 = I don't know or won't say
+  2 = I do NOT trust
+  3 = I trust marginally
+  4 = I trust fully
+  5 = I trust ultimately
+  m = back to the main menu
+
+Your decision? 5
+
+gpg> save
+```
+
 ## SSH keys
 
 Instead of having a regular OpenSSH key, I decided to also rely on GPG to authenticate to SSH services. I have created a GPG subkey which has "authentication" capabilities.
