@@ -58,6 +58,11 @@ let
       "/Net/IconThemeName" = "ePapirus-Dark";
     };
 
+    "displays" = {
+      "/Notify" = true;
+      "/AutoEnableProfiles" = true;
+    };
+
     "xfwm4" = {
       "/general/theme" = "Arc-Darker";
       "/general/workspace_count" = 4;
