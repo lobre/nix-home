@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 let
   black="#243137";
   red="#fc3841";
@@ -21,6 +23,17 @@ let
   foreground="#e7ebed";
 
   palette = "${black};${red};${green};${yellow};${blue};${magenta};${cyan};${white};${brightBlack};${brightRed};${brightGreen};${brightYellow};${brightBlue};${brightMagenta};${brightCyan};${brightWhite}";
+
+  desktopItem = pkgs.makeDesktopItem {
+     name = "xfce4-terminal";
+     desktopName = "Xfce Terminal";
+     genericName = "Terminal Emulator";
+     comment = "Terminal Emulator";
+     exec = "env GTK_THEME=Arc-Dark xfce4-terminal";
+     icon = "org.xfce.terminal";
+     categories = "GTK;System;TerminalEmulator;";
+     type = "Application";
+  };
 in 
 
 {
@@ -37,6 +50,9 @@ in
       VteTerminal, vte-terminal { padding: 30px 35px; }
     '';
   };
+
+  # Force Arc-Dark for terminal for dark tabs
+  xdg.systemDirs.data = [ "${desktopItem}/share" ];
 
   # general settings
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
