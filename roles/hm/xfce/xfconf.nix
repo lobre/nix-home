@@ -54,11 +54,12 @@ let
     };
 
     "xsettings" = {
-      "/Net/ThemeName" = "Adwaita";
-      "/Net/IconThemeName" = "Adwaita";
+      "/Net/ThemeName" = "Arc-Darker";
+      "/Net/IconThemeName" = "ePapirus-Dark";
     };
 
     "xfwm4" = {
+      "/general/theme" = "Arc-Darker";
       "/general/workspace_count" = 4;
       "/general/easy_click" = "Super"; # key used to grab and move windows
       "/general/snap_to_windows" = true;

@@ -20,6 +20,9 @@
     vlc
     xclip
     wine
+
+    arc-theme
+    papirus-icon-theme
   ];
 
   imports = [
