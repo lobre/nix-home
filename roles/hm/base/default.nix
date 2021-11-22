@@ -48,6 +48,7 @@ in
     ncdu
     nodejs
     openssh
+    pandoc
     perl
     pv
     ripgrep
@@ -56,6 +57,7 @@ in
     sqlite-interactive
     strace
     tcpdump
+    texlive.combined.scheme-small
     traceroute
     tree
     unrar

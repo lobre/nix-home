@@ -20,13 +20,9 @@
     vlc
     xclip
     wine
-
-    arc-theme
-    papirus-icon-theme
   ];
 
   imports = [
-    ./oni.nix
     ./panel.nix
     ./terminal.nix
     ./xfconf.nix

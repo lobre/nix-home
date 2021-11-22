@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 let
   neovim = pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: rec {
@@ -11,8 +11,8 @@ let
     };
   });
 
-  copilot = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "copilot";
+  copilot-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "copilot.vim";
     version = "1.0.3";
     src = pkgs.fetchFromGitHub {
       owner = "github";
@@ -21,6 +21,30 @@ let
       sha256 = "1jampjvndfgbsd433p8izwrbj1b5mp1vkzfy66bbnr28s7xw582f";
     };
     meta.homepage = "https://github.com/github/copilot.vim/";
+  };
+
+  telescope-file-browser-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "telescope-file-browser.nvim";
+    version = "0.0.1";
+    src = pkgs.fetchFromGitHub {
+      owner = "nvim-telescope";
+      repo = "telescope-file-browser.nvim";
+      rev = "de0b2fe756c52c05d911b15df1b471a279ae5f34";
+      sha256 = "LBjJpM9euNC5KPZP1Q4sOQ2yB+4ZkdPhNLeLYDQchDc=";
+    };
+    meta.homepage = "https://github.com/nvim-telescope/telescope-file-browser.nvim";
+  };
+
+  telescope-rg-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
+    pname = "telescope-rg.nvim";
+    version = "0.0.1";
+    src = pkgs.fetchFromGitHub {
+      owner = "nvim-telescope";
+      repo = "telescope-rg.nvim";
+      rev = "8124094e11b54a1853c3306d78e6ca9a8d40d0cb";
+      sha256 = "LBjJpM9euNC5KPZP1Q4sOQ2yB+4ZkdPhNLeLYDQchDc=";
+    };
+    meta.homepage = "https://github.com/nvim-telescope/telescope-rg.nvim";
   };
 in
 
@@ -45,10 +69,12 @@ in
       vim-commentary
       emmet-vim
 
-      plenary-nvim # dep of telescope
-      popup-nvim   # dep of telescope
-      telescope-fzf-native-nvim # fastest sorter for telescope
-      nvim-web-devicons # icons for telescope (needs nerd patched font)
+      plenary-nvim                # dep of telescope
+      popup-nvim                  # dep of telescope
+      telescope-fzf-native-nvim   # fastest sorter for telescope
+      nvim-web-devicons           # icons for telescope (needs nerd patched font)
+      telescope-file-browser-nvim # file browser in telescope
+      telescope-rg-nvim           # search with rg flags
       {
         plugin = telescope-nvim;
         config = ''
@@ -222,7 +248,7 @@ in
       }
 
       {
-        plugin = copilot;
+        plugin = copilot-nvim;
         config = ''
           let g:copilot_enabled = 0
         '';

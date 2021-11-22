@@ -23,21 +23,9 @@ let
   foreground="#e7ebed";
 
   palette = "${black};${red};${green};${yellow};${blue};${magenta};${cyan};${white};${brightBlack};${brightRed};${brightGreen};${brightYellow};${brightBlue};${brightMagenta};${brightCyan};${brightWhite}";
-
-  wrapperWithArcDark = pkgs.writeScriptBin "xfce4-terminal" ''
-    #!${pkgs.stdenv.shell}
-    term=${pkgs.xfce.xfce4-terminal}/bin/xfce4-terminal
-    if [[ -f /usr/bin/xfce4-terminal ]]; then
-      term=/usr/bin/xfce4-terminal
-    fi
-    GTK_THEME=Arc-Dark exec $term "$@"
-  '';
 in
 
 {
-  # Force Arc-Dark gtk theme for dark tabs
-  home.packages = with pkgs; [ wrapperWithArcDark ];
-
   # keyboard shortcuts
   xdg.configFile."xfce4/terminal/accels.scm".text = ''
     (gtk_accel_path "<Actions>/terminal-window/next-tab" "<Primary>Tab")
