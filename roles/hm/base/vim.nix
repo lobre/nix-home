@@ -29,8 +29,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "nvim-telescope";
       repo = "telescope-file-browser.nvim";
-      rev = "de0b2fe756c52c05d911b15df1b471a279ae5f34";
-      sha256 = "LBjJpM9euNC5KPZP1Q4sOQ2yB+4ZkdPhNLeLYDQchDc=";
+      rev = "c89f6730a3ff40b368b34ba4eaa3dd9f8cf7f537";
+      sha256 = "ff/L/xaHu9mp8zRgnWNIFJSR3HwsRZh/JpPMOd8zmvE=";
     };
     meta.homepage = "https://github.com/nvim-telescope/telescope-file-browser.nvim";
   };
@@ -95,6 +95,7 @@ in
           }
 
           require('telescope').load_extension('fzf')
+          require("telescope").load_extension('file_browser')
           EOF
 
           command! -nargs=? Find lua require'telescope.builtin'.find_files{
@@ -235,7 +236,7 @@ in
         plugin = nvim-treesitter;
         config = ''
           lua <<EOF
-          require'nvim-treesitter.configs'.setup {
+          require('nvim-treesitter.configs').setup {
             highlight = {
               enable = true
             },
