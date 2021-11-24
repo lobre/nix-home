@@ -98,11 +98,11 @@ in
           require("telescope").load_extension('file_browser')
           EOF
 
-          command! -nargs=? Find lua require'telescope.builtin'.find_files{
+          command! -nargs=? Find lua require('telescope.builtin').find_files{
             \ default_text = vim.fn.expand("<args>")
           \ }<cr>
 
-          command! -nargs=? FindAll lua require'telescope.builtin'.find_files{
+          command! -nargs=? FindAll lua require('telescope.builtin').find_files{
             \ default_text = vim.fn.expand("<args>"),
             \ find_command = {
               \ "rg",
@@ -113,11 +113,11 @@ in
             \}
           \ }<cr>
 
-          command! -nargs=? Grep lua require'telescope.builtin'.live_grep{
+          command! -nargs=? Grep lua require('telescope.builtin').live_grep{
             \ default_text = vim.fn.expand("<args>")
           \ }<cr>
 
-          command! -nargs=? GrepAll lua require'telescope.builtin'.live_grep{
+          command! -nargs=? GrepAll lua require('telescope.builtin').live_grep{
             \ default_text = vim.fn.expand("<args>"),
             \ vimgrep_arguments = {
               \ "rg",
@@ -133,10 +133,13 @@ in
             \}
           \}<cr>
 
-          command! -nargs=? Tags lua require'telescope.builtin'.tags{ default_text = vim.fn.expand("<args>") }<cr>
-          command! -nargs=? Quickfix lua require'telescope.builtin'.quickfix{ default_text = vim.fn.expand("<args>") }<cr>
-          command! -nargs=? Help lua require'telescope.builtin'.help_tags{ default_text = vim.fn.expand("<args>") }<cr>
-          command! -nargs=? History lua require'telescope.builtin'.command_history{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? Tags lua require('telescope.builtin').tags{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? Quickfix lua require('telescope.builtin').quickfix{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? Help lua require('telescope.builtin').help_tags{ default_text = vim.fn.expand("<args>") }<cr>
+          command! -nargs=? History lua require('telescope.builtin').command_history{ default_text = vim.fn.expand("<args>") }<cr>
+
+          command! -nargs=? GrepRaw lua require('telescope').extensions.live_grep_raw.live_grep_raw({ default_text = vim.fn.expand("<args>") })<cr>
+          command! -nargs=? Browser lua require('telescope').extensions.file_browser.file_browser({ default_text = vim.fn.expand("<args>") })<cr>
 
           command! GitHistory Telescope git_bcommits
 
