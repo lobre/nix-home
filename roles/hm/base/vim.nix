@@ -29,8 +29,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "nvim-telescope";
       repo = "telescope-file-browser.nvim";
-      rev = "c89f6730a3ff40b368b34ba4eaa3dd9f8cf7f537";
-      sha256 = "ff/L/xaHu9mp8zRgnWNIFJSR3HwsRZh/JpPMOd8zmvE=";
+      rev = "2ccd862124053ed1c492f464be1e5fbfb74a2241";
+      sha256 = "i9NmvCQnzHsKUDUrTetJDHGq1fmXToNSbC50e44LBz4=";
     };
     meta.homepage = "https://github.com/nvim-telescope/telescope-file-browser.nvim";
   };
