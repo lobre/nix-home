@@ -322,10 +322,6 @@ in
       " C-c is not exactly equal to Esc as it does not trigger events
       inoremap <C-c> <Esc>
 
-      " Split as expected
-      set splitright
-      set splitbelow
-
       " Explorer settings
       let g:netrw_liststyle = 3        " show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
       let g:netrw_winsize = 20         " size of window
