@@ -13,12 +13,12 @@ let
 
   copilot-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "copilot.vim";
-    version = "1.0.3";
+    version = "1.0.4";
     src = pkgs.fetchFromGitHub {
       owner = "github";
       repo = "copilot.vim";
-      rev = "cd7946808fd2f0eea8946d30b25b1220f8edd09b";
-      sha256 = "1jampjvndfgbsd433p8izwrbj1b5mp1vkzfy66bbnr28s7xw582f";
+      rev = "6149088454abb0e3e4a49c76a4f3fac7f0154e5a";
+      sha256 = "Hm7nHn803ahgthxjLNi+5ra/vyDiM7ZPi2CifIfmaUM=";
     };
     meta.homepage = "https://github.com/github/copilot.vim/";
   };
