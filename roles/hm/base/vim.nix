@@ -327,9 +327,6 @@ in
       let g:netrw_winsize = 20         " size of window
       let g:netrw_localrmdir = 'rm -r' " let delete a non-empty directory
       let g:netrw_banner = 0           " don’t show top banner
-      let g:netrw_browse_split = 4     " always open files in previous window
-      let g:netrw_preview = 1          " enable vertical preview with p
-      let g:netrw_alto = 0             " split preview on the right
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
@@ -341,37 +338,6 @@ in
 
       " Simple git blame
       command! Blame execute "!git blame -c --date=short -L " . line(".") . ",+1 %"
-
-      " Toggle terminal
-      nnoremap g<C-t> <cmd>call ToggleTerm()<cr>
-      tnoremap g<C-t> <cmd>call ToggleTerm()<cr>
-       
-      function! ToggleTerm()
-        let name = "term://default"
-        let win = bufwinnr(name)
-        let lastwin = winnr('$')
-        let buf = bufexists(name)
-        if win > 0
-          if lastwin == 1 && lastwin == win
-            let s:termheight = -1
-            buffer #
-          else
-            let s:termheight = winheight(win)
-            execute win . "wincmd c"
-          endif
-        elseif buf > 0
-          if s:termheight == -1
-            execute "buffer " . name
-          else
-            execute "botright" . s:termheight . "split | buffer " . name
-          endif
-        else
-          let s:termheight = 10
-          execute "botright" . s:termheight . "split | terminal"
-          execute "keepalt file " . name
-          set nobuflisted
-        endif
-      endfunction
 
       " Terminal navigation
       tnoremap <C-w>o <cmd>only<cr>
