@@ -80,15 +80,27 @@ in
         config = ''
           lua <<EOF
           local actions = require('telescope.actions')
+          local actions_layout = require("telescope.actions.layout")
+
           require('telescope').setup {
             defaults = require('telescope.themes').get_ivy {
+              sorting_strategy = "descending",
+              layout_config = {
+                height = 10,
+                prompt_position = "bottom",
+              },
+              preview = {
+                hide_on_startup = true,
+              },
               mappings = {
                 i = {
                   ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                  ["<C-l>"] = actions_layout.toggle_preview,
                   ["<esc>"] = actions.close,
                 },
                 n = {
                   ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+                  ["<C-l>"] = actions_layout.toggle_preview,
                 },
               }
             }
