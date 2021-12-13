@@ -47,6 +47,7 @@ in
     ltrace
     ncdu
     nodejs
+    nodePackages.tailwindcss
     openssh
     pandoc
     perl
