@@ -61,6 +61,7 @@
       };
       submodule = {
         recurse = true;
+        fetchJobs = 8;
       };
     };
 
