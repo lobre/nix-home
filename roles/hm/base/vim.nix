@@ -58,7 +58,7 @@ in
     # Useful to install LSP servers.
     extraPackages = with pkgs; [ 
       gopls # go language server
-      nodePackages.vscode-json-languageserver
+      nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
       zls # zig language server
     ];
@@ -236,7 +236,7 @@ in
           end
 
           -- Configure servers
-          local servers = { "gopls", "jsonls", "yamlls", "zls" }
+          local servers = { "cssls", "eslint", "gopls", "html", "jsonls", "yamlls", "zls" }
           for _, server in ipairs(servers) do
             lspconfig[server].setup { 
               on_attach = on_attach,
