@@ -1,11 +1,19 @@
 { config, pkgs, secrets, ... }:
 
+let
+  daemonConfig = pkgs.writeText "daemon.json" (builtins.toJSON {
+    features = {
+      buildkit = true;
+    };
+  });
+in
+
 {
   # No need for predictable names as I usually only have one ethernet and one wireless interfaces
   networking.usePredictableInterfaceNames = false;
 
   virtualisation.docker.enable = true;
-  virtualisation.docker.extraOptions = "--config-file=${pkgs.writeText "daemon.json" (builtins.toJSON { features = { buildkit = true; }})}";
+  virtualisation.docker.extraOptions = "--config-file=${daemonConfig}";
 
   console = {
     font = "Lat2-Terminus16";
