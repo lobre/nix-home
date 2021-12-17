@@ -21,6 +21,8 @@ in
       [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
   '';
 
+  home.sessionVariables.DOCKER_BUILDKIT = 1;
+
   home.username = secrets.username;
   home.homeDirectory = secrets.homeDirectory;
 
