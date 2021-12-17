@@ -5,6 +5,7 @@
   networking.usePredictableInterfaceNames = false;
 
   virtualisation.docker.enable = true;
+  virtualisation.docker.extraOptions = "--config-file=${pkgs.writeText "daemon.json" (builtins.toJSON { features = { buildkit = true; }})}";
 
   console = {
     font = "Lat2-Terminus16";
