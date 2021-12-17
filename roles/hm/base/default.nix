@@ -42,6 +42,7 @@ in
     gopass-jsonapi
     htop 
     httpie
+    inotify-tools
     jq
     killall
     ltrace
