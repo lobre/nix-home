@@ -32,7 +32,7 @@ in
     docker
     docker_compose
     dos2unix
-    universal-ctags
+    entr
     fd
     file
     gcc
@@ -42,13 +42,12 @@ in
     gopass-jsonapi
     htop 
     httpie
-    inotify-tools
     jq
     killall
     ltrace
     ncdu
-    nodejs
     nodePackages.tailwindcss
+    nodejs
     openssh
     pandoc
     perl
@@ -62,6 +61,7 @@ in
     texlive.combined.scheme-small
     traceroute
     tree
+    universal-ctags
     unrar
     unzip
     wget 
