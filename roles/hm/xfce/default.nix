@@ -19,6 +19,7 @@
     teams
     vlc
     xclip
+    xdotool
     wine
   ];
 
