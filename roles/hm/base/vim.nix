@@ -226,8 +226,8 @@ in
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
-            vim.cmd("command! Dnext lua vim.lsp.diagnostic.goto_next()")
-            vim.cmd("command! Dprev lua vim.lsp.diagnostic.goto_prev()")
+            vim.cmd("command! Dnext lua vim.diagnostic.goto_next()")
+            vim.cmd("command! Dprev lua vim.diagnostic.goto_prev()")
 
             -- Format go files on save
             vim.api.nvim_exec([[
