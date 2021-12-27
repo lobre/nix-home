@@ -6,8 +6,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner  = "neovim";
       repo   = "neovim";
-      rev    = "3ba800f1538e083f8172655c6bab096cd604a0b5"; # follows master branch
-      sha256 = "05d9l23nrjhjwbfdmvpvnx9gp75adl7x1mz1li9s75pbdx61ig0g";
+      rev    = "06ca0667a1719c7e105fd7e0844ff73cc90af0e4"; # follows master branch
+      sha256 = "nKETiIMTaEvpsdyWv0KyhCv4pBdDfqVljBVFhtdtIhs=";
     };
   });
 
@@ -360,9 +360,7 @@ in
       tnoremap <C-w><C-w> <C-\><C-N><C-w><C-w>
 
       " Terminal stays in insert mode
-      " See https://github.com/neovim/neovim/issues/9483
       autocmd TermOpen,BufWinEnter,WinEnter term://* startinsert
-      autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
 
       " Exit terminal with Esc
       tnoremap <Esc> <C-\><C-n>
