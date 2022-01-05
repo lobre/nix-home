@@ -81,7 +81,6 @@ let
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Primary><Alt>Delete" = "xfce4-session-logout";
       "/commands/custom/<Super>t" = "exo-open --launch TerminalEmulator";
-      "/commands/custom/<Super><Shift>t" = "xfce4-terminal -e nvim";
       "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
       "/commands/custom/<Super>e" = "thunar";
