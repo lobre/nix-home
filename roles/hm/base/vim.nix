@@ -357,6 +357,10 @@ in
       tnoremap <C-w>j <C-\><C-N><C-w>j
       tnoremap <C-w>k <C-\><C-N><C-w>k
       tnoremap <C-w>l <C-\><C-N><C-w>l
+      tnoremap <C-w>H <C-\><C-N><C-w>H
+      tnoremap <C-w>J <C-\><C-N><C-w>J
+      tnoremap <C-w>K <C-\><C-N><C-w>K
+      tnoremap <C-w>L <C-\><C-N><C-w>L
       tnoremap <C-w><C-w> <C-\><C-N><C-w><C-w>
 
       " Terminal stays in insert mode
