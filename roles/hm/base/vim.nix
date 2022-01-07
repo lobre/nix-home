@@ -1,36 +1,14 @@
 { pkgs, lib, ... }:
 
 let
-  neovim = pkgs.neovim-unwrapped.overrideAttrs (oldAttrs: rec {
-    name = "neovim-0.6.0-pre";
-    src = pkgs.fetchFromGitHub {
-      owner  = "neovim";
-      repo   = "neovim";
-      rev    = "06ca0667a1719c7e105fd7e0844ff73cc90af0e4"; # follows master branch
-      sha256 = "nKETiIMTaEvpsdyWv0KyhCv4pBdDfqVljBVFhtdtIhs=";
-    };
-  });
-
-  copilot-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "copilot.vim";
-    version = "1.0.4";
-    src = pkgs.fetchFromGitHub {
-      owner = "github";
-      repo = "copilot.vim";
-      rev = "6149088454abb0e3e4a49c76a4f3fac7f0154e5a";
-      sha256 = "Hm7nHn803ahgthxjLNi+5ra/vyDiM7ZPi2CifIfmaUM=";
-    };
-    meta.homepage = "https://github.com/github/copilot.vim/";
-  };
-
   telescope-file-browser-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
     pname = "telescope-file-browser.nvim";
     version = "0.0.1";
     src = pkgs.fetchFromGitHub {
       owner = "nvim-telescope";
       repo = "telescope-file-browser.nvim";
-      rev = "2ccd862124053ed1c492f464be1e5fbfb74a2241";
-      sha256 = "i9NmvCQnzHsKUDUrTetJDHGq1fmXToNSbC50e44LBz4=";
+      rev = "c4674fff199a01d0c476838427572fa3ee632373";
+      sha256 = "4XOcDtdB4XWD/6rOAZVitaP/2oElyqcWvXR5kJ+2r6w=";
     };
     meta.homepage = "https://github.com/nvim-telescope/telescope-file-browser.nvim";
   };
@@ -51,7 +29,6 @@ in
 {
   programs.neovim = {
     enable = true;
-    package = neovim;
     vimAlias = true;
 
     # Extra packages available to nvim.
@@ -214,18 +191,18 @@ in
 
             -- Mappings
             local opts = { noremap=true, silent=true }
-            map('n', 'gd', '<cmd>Telescope lsp_definitions<cr>', opts)
+            map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
             map('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
-            map('n', 'gi', '<cmd>Telescope lsp_implementations<cr>', opts)
-            map('n', 'gr', '<cmd>Telescope lsp_references<cr>', opts)
+            map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
+            map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
             map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
-            map('n', 'gs', '<cmd>Telescope lsp_document_symbols<cr>', opts)
-            map('n', 'gS', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', opts)
-            map('n', 'ga', '<cmd>Telescope lsp_code_actions<cr>', opts)
+            map('n', 'gs', '<Cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
+            map('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<cr>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
+            vim.cmd("command! LspDiag lua vim.diagnostic.setloclist()")
             vim.cmd("command! Dnext lua vim.diagnostic.goto_next()")
             vim.cmd("command! Dprev lua vim.diagnostic.goto_prev()")
 
@@ -264,7 +241,7 @@ in
       }
 
       {
-        plugin = copilot-nvim;
+        plugin = copilot-vim;
         config = ''
           let g:copilot_enabled = 0
         '';
