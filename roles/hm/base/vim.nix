@@ -1,31 +1,5 @@
 { pkgs, lib, ... }:
 
-let
-  telescope-file-browser-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "telescope-file-browser.nvim";
-    version = "0.0.1";
-    src = pkgs.fetchFromGitHub {
-      owner = "nvim-telescope";
-      repo = "telescope-file-browser.nvim";
-      rev = "c4674fff199a01d0c476838427572fa3ee632373";
-      sha256 = "4XOcDtdB4XWD/6rOAZVitaP/2oElyqcWvXR5kJ+2r6w=";
-    };
-    meta.homepage = "https://github.com/nvim-telescope/telescope-file-browser.nvim";
-  };
-
-  telescope-rg-nvim = pkgs.vimUtils.buildVimPluginFrom2Nix {
-    pname = "telescope-rg.nvim";
-    version = "0.0.1";
-    src = pkgs.fetchFromGitHub {
-      owner = "nvim-telescope";
-      repo = "telescope-rg.nvim";
-      rev = "8124094e11b54a1853c3306d78e6ca9a8d40d0cb";
-      sha256 = "LBjJpM9euNC5KPZP1Q4sOQ2yB+4ZkdPhNLeLYDQchDc=";
-    };
-    meta.homepage = "https://github.com/nvim-telescope/telescope-rg.nvim";
-  };
-in
-
 {
   programs.neovim = {
     enable = true;
@@ -41,105 +15,30 @@ in
     ];
 
     plugins = with pkgs.vimPlugins; [
+      emmet-vim
+      vim-commentary
       vim-nix
       zig-vim
-      vim-commentary
-      emmet-vim
 
-      plenary-nvim                # dep of telescope
-      popup-nvim                  # dep of telescope
-      telescope-fzf-native-nvim   # fastest sorter for telescope
-      nvim-web-devicons           # icons for telescope (needs nerd patched font)
-      telescope-file-browser-nvim # file browser in telescope
-      telescope-rg-nvim           # search with rg flags
       {
-        plugin = telescope-nvim;
+        plugin = fzf-vim;
         config = ''
-          lua <<EOF
-          local actions = require('telescope.actions')
-          local actions_layout = require("telescope.actions.layout")
+          " Floating panel at the bottom
+          let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'top' } }
 
-          require('telescope').setup {
-            defaults = require('telescope.themes').get_ivy {
-              sorting_strategy = "descending",
-              layout_config = {
-                height = 10,
-                prompt_position = "bottom",
-              },
-              preview = {
-                hide_on_startup = true,
-              },
-              mappings = {
-                i = {
-                  ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                  ["<C-l>"] = actions_layout.toggle_preview,
-                  ["<esc>"] = actions.close,
-                },
-                n = {
-                  ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
-                  ["<C-l>"] = actions_layout.toggle_preview,
-                },
-              }
-            }
-          }
+          " Remove shellescape to allow passing flags to rg
+          command! -bang -nargs=* Rg
+            \ call fzf#vim#grep(
+            \   "rg --column --line-number --no-heading --color=always --smart-case ".<q-args>,
+            \   1,
+            \   fzf#vim#with_preview(),
+            \   <bang>0
+            \ )
 
-          require('telescope').load_extension('fzf')
-          require("telescope").load_extension('file_browser')
-          EOF
-
-          command! -nargs=? Find lua require('telescope.builtin').find_files{
-            \ default_text = vim.fn.expand("<args>")
-          \ }<cr>
-
-          command! -nargs=? FindAll lua require('telescope.builtin').find_files{
-            \ default_text = vim.fn.expand("<args>"),
-            \ find_command = {
-              \ "rg",
-              \ "--files",
-              \ "--no-ignore-vcs",
-              \ "--hidden",
-              \ "--glob", "!.git"
-            \}
-          \ }<cr>
-
-          command! -nargs=? Grep lua require('telescope.builtin').live_grep{
-            \ default_text = vim.fn.expand("<args>")
-          \ }<cr>
-
-          command! -nargs=? GrepAll lua require('telescope.builtin').live_grep{
-            \ default_text = vim.fn.expand("<args>"),
-            \ vimgrep_arguments = {
-              \ "rg",
-              \ "--color=never",
-              \ "--no-heading",
-              \ "--with-filename",
-              \ "--line-number",
-              \ "--column",
-              \ "--smart-case",
-              \ "--no-ignore-vcs",
-              \ "--hidden",
-              \ "--glob", "!.git"
-            \}
-          \}<cr>
-
-          command! -nargs=? Tags lua require('telescope.builtin').tags{ default_text = vim.fn.expand("<args>") }<cr>
-          command! -nargs=? Quickfix lua require('telescope.builtin').quickfix{ default_text = vim.fn.expand("<args>") }<cr>
-          command! -nargs=? Help lua require('telescope.builtin').help_tags{ default_text = vim.fn.expand("<args>") }<cr>
-          command! -nargs=? History lua require('telescope.builtin').command_history{ default_text = vim.fn.expand("<args>") }<cr>
-
-          command! -nargs=? GrepRaw lua require('telescope').extensions.live_grep_raw.live_grep_raw({ default_text = vim.fn.expand("<args>") })<cr>
-          command! -nargs=? Browser lua require('telescope').extensions.file_browser.file_browser({ default_text = vim.fn.expand("<args>") })<cr>
-
-          command! GitHistory Telescope git_bcommits
-
-          " Keybindings
-          nnoremap <C-p> <cmd>Find<cr>
-          nnoremap <C-b> <cmd>Telescope buffers<cr>
-          nnoremap <C-f> <cmd>Grep<cr>
-          nnoremap g<C-p> <cmd>FindAll<cr>
-          nnoremap g<C-f> <cmd>GrepAll<cr>
-          nnoremap g<C-r> <cmd>History<cr>
-          nnoremap g<C-q> <cmd>Quickfix<cr>
+          " Mappings
+          nnoremap <C-p> <cmd>Files<cr>
+          nnoremap <C-b> <cmd>Buffers<cr>
+          nnoremap <C-f> <cmd>Rg ""<cr>
         '';
       }
 

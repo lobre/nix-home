@@ -73,10 +73,23 @@ in
     enableBashIntegration = true;
 
     defaultCommand = "rg --files --no-ignore-vcs --hidden --glob '!.git'";
-    defaultOptions = [ "--bind ctrl-n:down,ctrl-p:up" "--color=bg+:-1" ];
+    defaultOptions = [
+      "--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down"
+      "--bind ctrl-/:toggle-preview"
+      "--preview-window hidden"
+      "--color=bg+:-1"
+    ];
 
     fileWidgetCommand = config.programs.fzf.defaultCommand;
     changeDirWidgetCommand = config.programs.fzf.defaultCommand;
+  };
+
+  # cat clone with wings
+  programs.bat = {
+    enable = true;
+    config = {
+      theme = "ansi";
+    };
   };
 }
 
