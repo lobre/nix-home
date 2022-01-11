@@ -40,20 +40,17 @@
         helper = "gopass";
       };
       merge = {
-        tool = "meld";
+        tool = "vimdiff";
       };
       mergetool = {
-        cmd = ''meld --auto-merge "$LOCAL" "$BASE" "$REMOTE" --output "$MERGED" --label "MERGE"'';
-        trustExitCode = false;
         prompt = false;
         keepBackup = false;
       };
       diff = {
-        tool = "meld";
+        tool = "vimdiff";
         submodule = "log";
       };
       difftool = {
-        cmd = ''meld "$LOCAL" "$REMOTE" --label "DIFF"'';
         prompt = false;
       };
       status = {
