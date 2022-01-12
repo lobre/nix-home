@@ -28,12 +28,20 @@
 
           " Remove shellescape to allow passing flags to rg
           command! -bang -nargs=* Rg
-            \ call fzf#vim#grep(
-            \   "rg --column --line-number --no-heading --color=always --smart-case ".<q-args>,
-            \   1,
-            \   fzf#vim#with_preview(),
-            \   <bang>0
-            \ )
+          \ call fzf#vim#grep(
+          \   "rg --column --line-number --no-heading --color=always --smart-case ".<q-args>,
+          \   1,
+          \   fzf#vim#with_preview(),
+          \   <bang>0
+          \ )
+
+          " Allow passing an argument from command line to Files
+          command! -bang -nargs=? -complete=dir Files 
+          \ call fzf#vim#files(
+          \   '.',
+          \   fzf#vim#with_preview({'options':'--query '.shellescape(<q-args>)}),
+          \   <bang>0
+          \ )
 
           " Mappings
           nnoremap <C-p> <cmd>Files<cr>
