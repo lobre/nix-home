@@ -8,10 +8,11 @@
     # Extra packages available to nvim.
     # Useful to install LSP servers.
     extraPackages = with pkgs; [ 
-      gopls # go language server
+      gopls # go lsp
+      nodePackages.intelephense # php lsp
       nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
-      zls # zig language server
+      zls # zig lsp
     ];
 
     plugins = with pkgs.vimPlugins; [
@@ -112,7 +113,7 @@
           end
 
           -- Configure servers
-          local servers = { "cssls", "eslint", "gopls", "html", "jsonls", "yamlls", "zls" }
+          local servers = { "cssls", "eslint", "gopls", "html", "intelephense", "jsonls", "yamlls", "zls" }
           for _, server in ipairs(servers) do
             lspconfig[server].setup { 
               on_attach = on_attach,
