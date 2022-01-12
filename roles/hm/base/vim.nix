@@ -143,7 +143,7 @@
       {
         plugin = copilot-vim;
         config = ''
-          let g:copilot_enabled = 0
+          let g:copilot_enabled = 1
         '';
       }
     ];
