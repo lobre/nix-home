@@ -7,7 +7,7 @@
     brave
     discord
     filezilla
-    gnome3.meld
+    meld
     libnotify
     libreoffice
     pavucontrol
