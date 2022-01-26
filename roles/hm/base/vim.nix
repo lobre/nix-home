@@ -9,6 +9,7 @@
     # Useful to install LSP servers.
     extraPackages = with pkgs; [ 
       gopls # go lsp
+      nodePackages."@tailwindcss/language-server" # tailwind lsp
       nodePackages.intelephense # php lsp
       nodePackages.vscode-langservers-extracted
       nodePackages.yaml-language-server
@@ -113,7 +114,7 @@
           end
 
           -- Configure servers
-          local servers = { "cssls", "eslint", "gopls", "html", "intelephense", "jsonls", "yamlls", "zls" }
+          local servers = { "cssls", "eslint", "gopls", "html", "intelephense", "jsonls", "tailwindcss", "yamlls", "zls" }
           for _, server in ipairs(servers) do
             lspconfig[server].setup { 
               on_attach = on_attach,
