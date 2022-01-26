@@ -40,6 +40,7 @@ in
     git-credential-gopass
     gopass
     gopass-jsonapi
+    graph-easy
     htop 
     httpie
     jq
