@@ -22,28 +22,6 @@
       vim-nix
       zig-vim
 
-      {
-        plugin = fzf-vim;
-        config = ''
-          " Floating panel at the bottom
-          let g:fzf_layout = { 'window': { 'width': 1, 'height': 0.4, 'yoffset': 1, 'border': 'top' } }
-
-          " Remove shellescape to allow passing flags to rg
-          command! -bang -nargs=* Rg
-          \ call fzf#vim#grep(
-          \   "rg --column --line-number --no-heading --color=always --smart-case ".<q-args>,
-          \   1,
-          \   fzf#vim#with_preview(),
-          \   <bang>0
-          \ )
-
-          " Mappings
-          nnoremap <C-p> <cmd>Files<cr>
-          nnoremap <C-b> <cmd>Buffers<cr>
-          nnoremap <C-f> <cmd>Rg ""<cr>
-        '';
-      }
-
       cmp-nvim-lsp
       cmp-buffer
       {
@@ -199,6 +177,10 @@
           set grepformat=%f:%l:%c:%m,%f:%l:%m
       endif
 
+      " Open quickfix upon search
+      command! -nargs=+ -complete=file Grep execute 'silent grep!' <q-args> | cw | redraw!
+      cnoreabbrev grep Grep
+
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
@@ -248,6 +230,29 @@
 
       " Exit terminal with Esc
       tnoremap <Esc> <C-\><C-n>
+
+      " Interactive fuzzy finder using external fzf
+      function! FZF()
+          if has('nvim')
+              botright new
+
+              let l:tmpfile = tempname()
+              let l:opts = { 'buf': bufnr('%'), 'tmpfile': l:tmpfile }
+              function! opts.on_exit(id, code, evt)
+                  execute 'bd! ' . self.buf
+                  execute 'silent cfile ' . self.tmpfile
+                  call delete(self.tmpfile)
+                  redraw!
+              endfunction
+
+              call termopen('fzf --multi --preview "bat {}" | awk '''{ print $1":1:0" }''' > ' . fnameescape(l:tmpfile), l:opts)
+              file FZF
+          else
+              echo "error: fzf only working in neovim"
+          endif
+      endfunction
+
+      nnoremap <C-p> <cmd>call FZF()<cr>
     '';
   };
 
