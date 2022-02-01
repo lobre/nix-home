@@ -22,40 +22,6 @@
       vim-nix
       zig-vim
 
-      cmp-nvim-lsp
-      cmp-buffer
-      {
-        plugin = nvim-cmp;
-        config = ''
-          lua <<EOF
-          local cmp = require('cmp')
-
-          cmp.setup({
-            preselect = cmp.PreselectMode.None,
-            sources = {
-              { name = 'nvim_lsp' },
-              { name = 'buffer' }
-            },
-            mapping = {
-              ['<C-y>'] = cmp.config.disable,
-            }
-          })
-          EOF
-        '';
-      }
-
-      {
-        plugin = lsp_signature-nvim;
-        config = ''
-          lua <<EOF
-            require('lsp_signature').setup({
-              doc_lines = 0,
-              hint_enable = false
-            })
-          EOF
-        '';
-      }
-
       { 
         plugin = nvim-lspconfig;
         config = ''
@@ -63,10 +29,10 @@
           local lspconfig = require('lspconfig')
 
           local on_attach = function(client, bufnr)
-            require('lsp_signature').on_attach()
-
             local function map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
             local function opt(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+            opt('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
             -- Mappings
             local opts = { noremap=true, silent=true }
@@ -75,9 +41,10 @@
             map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
             map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
-            map('n', 'gh', '<Cmd>lua vim.lsp.buf.hover()<cr>', opts)
-            map('n', 'gs', '<Cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
-            map('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+            map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
+            map('n', 'gs', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
+            map('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+            map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
 
             -- Commands
             vim.cmd("command! LspFormat lua vim.lsp.buf.formatting()")
@@ -94,10 +61,7 @@
           -- Configure servers
           local servers = { "cssls", "eslint", "gopls", "html", "intelephense", "jsonls", "tailwindcss", "yamlls", "zls" }
           for _, server in ipairs(servers) do
-            lspconfig[server].setup { 
-              on_attach = on_attach,
-              capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-            }
+            lspconfig[server].setup { on_attach = on_attach }
           end
           EOF
         '';
