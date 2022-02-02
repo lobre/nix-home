@@ -194,12 +194,14 @@
       " Interactive fuzzy finder using external fzf
       function! FZF()
           if has('nvim')
-              botright new
+              let l:prevbuf = bufnr('%')
+              enew
 
               let l:tmpfile = tempname()
-              let l:opts = { 'buf': bufnr('%'), 'tmpfile': l:tmpfile }
-              function! opts.on_exit(id, code, evt)
-                  execute 'bd! ' . self.buf
+              let l:opts = { 'buf': bufnr('%'), 'prevbuf': l:prevbuf, 'tmpfile': l:tmpfile }
+              function! l:opts.on_exit(id, code, evt)
+                  execute 'buffer ' . self.prevbuf
+                  execute 'bdelete! ' . self.buf
                   execute 'silent cfile ' . self.tmpfile
                   call delete(self.tmpfile)
                   redraw!
