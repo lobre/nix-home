@@ -212,7 +212,9 @@
           endif
       endfunction
 
-      nnoremap <C-p> <cmd>call FZF()<cr>
+      " Map fzf function
+      command! Files call FZF()
+      nnoremap <C-p> <cmd>Files<cr>
     '';
   };
 
