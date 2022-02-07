@@ -18,7 +18,6 @@
 
     plugins = with pkgs.vimPlugins; [
       emmet-vim
-      vim-commentary
       vim-nix
       zig-vim
 
