@@ -11,7 +11,8 @@
       gopls # go lsp
       nodePackages."@tailwindcss/language-server" # tailwind lsp
       nodePackages.intelephense # php lsp
-      nodePackages.vscode-langservers-extracted
+      nodePackages.typescript-language-server # typescript lsp
+      nodePackages.vscode-langservers-extracted # html, css, json, eslint lsp
       nodePackages.yaml-language-server
       zls # zig lsp
     ];
@@ -58,7 +59,7 @@
           end
 
           -- Configure servers
-          local servers = { "cssls", "eslint", "gopls", "html", "intelephense", "jsonls", "tailwindcss", "yamlls", "zls" }
+          local servers = { "cssls", "eslint", "gopls", "html", "intelephense", "jsonls", "tailwindcss", "tsserver", "yamlls", "zls" }
           for _, server in ipairs(servers) do
             lspconfig[server].setup { on_attach = on_attach }
           end
