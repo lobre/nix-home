@@ -171,7 +171,7 @@
       packadd cfilter
 
       " Simple git blame
-      command! Blame execute "!git blame -c --date=short -L " . line(".") . ",+1 %"
+      command! Blame execute '!git blame -c --date=short -L ' . line('.') . ',+1 %'
 
       " Terminal navigation
       tnoremap <C-w>o <cmd>only<cr>
@@ -194,23 +194,30 @@
       " Interactive fuzzy finder using external fzf
       function! FZF()
           if has('nvim')
-              let l:prevbuf = bufnr('%')
-              enew
-
               let l:tmpfile = tempname()
-              let l:opts = { 'buf': bufnr('%'), 'prevbuf': l:prevbuf, 'tmpfile': l:tmpfile }
-              function! l:opts.on_exit(id, code, evt)
-                  execute 'buffer ' . self.prevbuf
-                  execute 'bdelete! ' . self.buf
-                  execute 'silent lfile ' . self.tmpfile
+              let l:opts = { 'tmpfile': l:tmpfile }
+
+              function! l:opts.on_exit(id, code, event)
+                  execute 'keepalt bdelete!'
+
+                  let l:nblines = system('cat ' . self.tmpfile . ' | wc -l')
+                  if l:nblines == 1
+                      let l:file = system('head -n1 ' . self.tmpfile)
+                      execute 'edit ' . l:file
+                  elseif l:nblines > 1
+                      call system('sed -i "s/$/:1:0/" ' . self.tmpfile)
+                      execute 'silent cfile ' . self.tmpfile
+                  endif
+
                   call delete(self.tmpfile)
                   redraw!
               endfunction
 
-              call termopen('fzf --multi --preview "bat {}" | awk '''{ print $1":1:0" }''' > ' . fnameescape(l:tmpfile), l:opts)
-              file FZF
+              keepalt enew
+              call termopen('fzf --multi --preview "bat {}" > ' . fnameescape(l:tmpfile), l:opts)
+              keepalt file FZF
           else
-              echo "error: fzf only working in neovim"
+              echo 'error: fzf only working in neovim'
           endif
       endfunction
 
