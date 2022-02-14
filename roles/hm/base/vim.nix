@@ -167,8 +167,11 @@
       autocmd CursorHold,CursorHoldI * silent! checktime
       autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
 
-      " Load cfilter to filter quickfix (bundled with nvim)
+      " Allow modifications to quickfix
       packadd cfilter
+      autocmd BufReadPost quickfix set modifiable
+      autocmd filetype qf setlocal errorformat+=%f\|%l\ col\ %c\|%m
+      command! Cupdate cgetbuffer | cclose | copen
 
       " Simple git blame
       command! Blame execute '!git blame -c --date=short -L ' . line('.') . ',+1 %'
@@ -224,18 +227,6 @@
       " Map fzf function
       command! Files call FZF()
       nnoremap <C-p> <cmd>Files<cr>
-
-      " Allow deletion in quickfix
-      function! QFdelete() range
-          let l:qfl = getqflist()
-          call remove(l:qfl, a:firstline - 1, a:lastline - 1)
-          call setqflist([], 'r', {'items': l:qfl})
-          call cursor(a:firstline, 1)
-      endfunction
-
-      " Map delete in quickfix
-      autocmd FileType qf nnoremap <silent><buffer>dd :call QFdelete()<cr>
-      autocmd FileType qf vnoremap <silent><buffer>d  :call QFdelete()<cr>
     '';
   };
 
