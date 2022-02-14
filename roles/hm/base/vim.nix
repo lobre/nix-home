@@ -202,7 +202,7 @@
               function! l:opts.on_exit(id, code, evt)
                   execute 'buffer ' . self.prevbuf
                   execute 'bdelete! ' . self.buf
-                  execute 'silent cfile ' . self.tmpfile
+                  execute 'silent lfile ' . self.tmpfile
                   call delete(self.tmpfile)
                   redraw!
               endfunction
