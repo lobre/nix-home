@@ -219,7 +219,7 @@
               endfunction
 
               keepalt enew
-              call termopen('fzf --multi --preview "bat {}" > ' . fnameescape(l:tmpfile), l:opts)
+              call termopen('fzf --multi --preview "bat --color=always --style=plain {}" > ' . fnameescape(l:tmpfile), l:opts)
               keepalt file FZF
           else
               echo 'error: fzf only working in neovim'
