@@ -198,10 +198,12 @@
       function! FZF()
           if has('nvim')
               let l:tmpfile = tempname()
-              let l:opts = { 'tmpfile': l:tmpfile }
+              let l:opts = { 'tmpfile': l:tmpfile, 'prevbuf': bufnr('%') }
 
               function! l:opts.on_exit(id, code, event)
-                  execute 'keepalt bdelete!'
+                  let l:termbuf = bufnr('%')
+                  execute 'keepalt buffer ' . self.prevbuf
+                  execute 'keepalt bdelete! ' . l:termbuf
 
                   let l:nblines = system('cat ' . self.tmpfile . ' | wc -l')
                   if l:nblines == 1
