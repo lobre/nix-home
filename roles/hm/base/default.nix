@@ -32,6 +32,10 @@ in
     docker
     docker_compose
     dos2unix
+    elmPackages.elm
+    elmPackages.elm-test
+    elmPackages.elm-format
+    elmPackages.elm-live
     entr
     fd
     file
