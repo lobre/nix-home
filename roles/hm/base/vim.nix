@@ -202,7 +202,13 @@
 
               function! l:opts.on_exit(id, code, event)
                   let l:termbuf = bufnr('%')
-                  execute 'keepalt buffer ' . self.prevbuf
+
+                  if l:termbuf == self.prevbuf
+                      keepalt enew
+                  else
+                      execute 'keepalt buffer ' . self.prevbuf
+                  endif
+
                   execute 'keepalt bdelete! ' . l:termbuf
 
                   let l:nblines = system('cat ' . self.tmpfile . ' | wc -l')
