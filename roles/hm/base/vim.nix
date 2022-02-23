@@ -9,6 +9,7 @@
     # Useful to install LSP servers.
     extraPackages = with pkgs; [ 
       gopls # go lsp
+      elmPackages.elm-language-server # elm lsp
       nodePackages."@tailwindcss/language-server" # tailwind lsp
       nodePackages.intelephense # php lsp
       nodePackages.typescript-language-server # typescript lsp
@@ -54,12 +55,12 @@
 
             -- Format go files on save
             vim.api.nvim_exec([[
-              autocmd BufWritePre *.go lua vim.lsp.buf.formatting_sync(nil, 1000)
+              autocmd BufWritePre *.go,*.zig,*.elm lua vim.lsp.buf.formatting_sync(nil, 1000)
             ]], false)
           end
 
           -- Configure servers
-          local servers = { "cssls", "eslint", "gopls", "html", "intelephense", "jsonls", "tailwindcss", "tsserver", "yamlls", "zls" }
+          local servers = { "cssls", "elmls", "eslint", "gopls", "html", "intelephense", "jsonls", "tailwindcss", "tsserver", "yamlls", "zls" }
           for _, server in ipairs(servers) do
             lspconfig[server].setup { on_attach = on_attach }
           end
@@ -140,6 +141,9 @@
       " Open quickfix upon search
       command! -nargs=+ -complete=file Grep execute 'silent grep!' <q-args> | cw | redraw!
       cnoreabbrev grep Grep
+
+      " Command to quickly make a search
+      nnoremap <C-f> :Grep<space>
 
       " Save with sudo
       command! W w !sudo tee % > /dev/null
