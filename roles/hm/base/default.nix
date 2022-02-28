@@ -12,9 +12,15 @@ let
 in
 
 {
-  programs.home-manager.enable = true;
-
   nixpkgs.config = { allowUnfree = true; };
+
+  programs.home-manager.enable = true;
+  programs.direnv.enable = true;
+
+  services.dropbox.enable = true;
+  services.lorri.enable = true;
+
+  xdg.enable = true;
 
   programs.bash.profileExtra = ''
       # Add bin in PATH if not already existing
@@ -66,10 +72,6 @@ in
     yarn
     yq-go
   ];
-
-  xdg.enable = true;
-
-  services.dropbox.enable = true;
 
   imports = [
     ./git.nix
