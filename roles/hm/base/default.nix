@@ -30,12 +30,8 @@ in
 
     curl
     docker
-    docker_compose
+    docker-compose
     dos2unix
-    elmPackages.elm
-    elmPackages.elm-format
-    elmPackages.elm-review
-    elmPackages.elm-test
     entr
     fd
     file
@@ -51,8 +47,6 @@ in
     killall
     ltrace
     ncdu
-    nodePackages.tailwindcss
-    nodejs
     openssh
     pandoc
     perl
@@ -60,7 +54,6 @@ in
     ripgrep
     rmapi
     slides
-    sqlite-interactive
     strace
     tcpdump
     texlive.combined.scheme-small
@@ -72,7 +65,6 @@ in
     wget 
     yarn
     yq-go
-    zig
   ];
 
   xdg.enable = true;
@@ -81,8 +73,8 @@ in
 
   imports = [
     ./git.nix
-    ./go.nix
     ./gpg.nix
+    ./lang.nix
     ./shell.nix
     ./tmux.nix
     ./vim.nix

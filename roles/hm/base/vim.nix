@@ -15,6 +15,7 @@
       nodePackages.typescript-language-server # typescript lsp
       nodePackages.vscode-langservers-extracted # html, css, json, eslint lsp
       nodePackages.yaml-language-server
+      rust-analyzer # rust lsp (better than rls)
       zls # zig lsp
     ];
 
@@ -53,14 +54,28 @@
             vim.cmd("command! Dnext lua vim.diagnostic.goto_next()")
             vim.cmd("command! Dprev lua vim.diagnostic.goto_prev()")
 
-            -- Format go files on save
+            -- Format files on save
             vim.api.nvim_exec([[
-              autocmd BufWritePre *.go,*.zig,*.elm lua vim.lsp.buf.formatting_sync(nil, 1000)
+              autocmd BufWritePre *.elm,*.go,*.rs,*.zig lua vim.lsp.buf.formatting_sync(nil, 1000)
             ]], false)
           end
 
           -- Configure servers
-          local servers = { "cssls", "elmls", "eslint", "gopls", "html", "intelephense", "jsonls", "tailwindcss", "tsserver", "yamlls", "zls" }
+          local servers = {
+            "cssls",
+            "elmls",
+            "eslint",
+            "gopls",
+            "html",
+            "intelephense",
+            "jsonls",
+            "rust_analyzer",
+            "tailwindcss",
+            "tsserver",
+            "yamlls",
+            "zls"
+          }
+
           for _, server in ipairs(servers) do
             lspconfig[server].setup { on_attach = on_attach }
           end
