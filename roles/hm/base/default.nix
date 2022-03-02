@@ -46,9 +46,7 @@ in
     git-credential-gopass
     gopass
     gopass-jsonapi
-    graph-easy
     htop 
-    httpie
     jq
     killall
     ltrace
@@ -69,7 +67,6 @@ in
     unrar
     unzip
     wget 
-    yarn
     yq-go
   ];
 
