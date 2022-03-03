@@ -180,6 +180,9 @@
       let g:netrw_liststyle = 3        " show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
       let g:netrw_localrmdir = 'rm -r' " let delete a non-empty directory
 
+      " Quickly open explorer
+      nnoremap <C-n> <cmd>Rexplore<cr>
+
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
       autocmd CursorHold,CursorHoldI * silent! checktime
