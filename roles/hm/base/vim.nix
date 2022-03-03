@@ -176,10 +176,9 @@
       inoremap <C-c> <Esc>
 
       " Explorer settings
-      let g:netrw_liststyle = 3        " show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
-      let g:netrw_winsize = 20         " size of window
-      let g:netrw_localrmdir = 'rm -r' " let delete a non-empty directory
       let g:netrw_banner = 0           " don’t show top banner
+      let g:netrw_liststyle = 3        " show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
+      let g:netrw_localrmdir = 'rm -r' " let delete a non-empty directory
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
