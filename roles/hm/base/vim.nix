@@ -217,40 +217,41 @@
 
       " Interactive fuzzy finder using external fzf
       function! FZF()
-          if has('nvim')
-              let l:tmpfile = tempname()
-              let l:opts = { 'tmpfile': l:tmpfile, 'prevbuf': bufnr('%') }
-
-              function! l:opts.on_exit(id, code, event)
-                  let l:termbuf = bufnr('%')
-
-                  if l:termbuf == self.prevbuf
-                      keepalt enew
-                  else
-                      execute 'keepalt buffer ' . self.prevbuf
-                  endif
-
-                  execute 'keepalt bdelete! ' . l:termbuf
-
-                  let l:nblines = system('cat ' . self.tmpfile . ' | wc -l')
-                  if l:nblines == 1
-                      let l:file = system('head -n1 ' . self.tmpfile)
-                      execute 'edit ' . l:file
-                  elseif l:nblines > 1
-                      call system('sed -i "s/$/:1:0/" ' . self.tmpfile)
-                      execute 'silent cfile ' . self.tmpfile
-                  endif
-
-                  call delete(self.tmpfile)
-                  redraw!
-              endfunction
-
-              keepalt enew
-              call termopen('fzf --multi --preview "bat --color=always --style=plain {}" > ' . fnameescape(l:tmpfile), l:opts)
-              keepalt file FZF
-          else
+          if !has('nvim')
               echo 'error: fzf only working in neovim'
+              return
           endif
+
+          let l:tmpfile = tempname()
+          let l:opts = { 'tmpfile': l:tmpfile, 'prevbuf': bufnr('%') }
+
+          function! l:opts.on_exit(id, code, event)
+              let l:termbuf = bufnr('%')
+
+              if l:termbuf == self.prevbuf
+                  keepalt enew
+              else
+                  execute 'keepalt buffer ' . self.prevbuf
+              endif
+
+              execute 'keepalt bdelete! ' . l:termbuf
+
+              let l:nblines = system('cat ' . self.tmpfile . ' | wc -l')
+              if l:nblines == 1
+                  let l:file = system('head -n1 ' . self.tmpfile)
+                  execute 'edit ' . l:file
+              elseif l:nblines > 1
+                  call system('sed -i "s/$/:1:0/" ' . self.tmpfile)
+                  execute 'silent cfile ' . self.tmpfile
+              endif
+
+              call delete(self.tmpfile)
+              redraw!
+          endfunction
+
+          keepalt enew
+          call termopen('fzf --multi --preview "bat --color=always --style=plain {}" > ' . fnameescape(l:tmpfile), l:opts)
+          keepalt file FZF
       endfunction
 
       " Map fzf function
