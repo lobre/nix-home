@@ -198,7 +198,6 @@
       command! Blame execute '!git blame -c --date=short -L ' . line('.') . ',+1 %'
 
       " Terminal navigation
-      tnoremap <C-w>o <cmd>only<cr>
       tnoremap <C-w>h <C-\><C-N><C-w>h
       tnoremap <C-w>j <C-\><C-N><C-w>j
       tnoremap <C-w>k <C-\><C-N><C-w>k
@@ -208,6 +207,12 @@
       tnoremap <C-w>K <C-\><C-N><C-w>K
       tnoremap <C-w>L <C-\><C-N><C-w>L
       tnoremap <C-w><C-w> <C-\><C-N><C-w><C-w>
+
+      " Terminal other mappings
+      tnoremap <C-w>o <cmd>only<cr>
+      tnoremap <C-w><C-p> <cmd>Files<cr>
+      tnoremap <C-w>: <C-\><C-N>:
+      tnoremap <C-Space> <C-\><C-N><C-^>
 
       " Terminal stays in insert mode
       autocmd TermOpen,BufWinEnter,WinEnter term://* startinsert
