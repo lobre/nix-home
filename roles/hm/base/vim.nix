@@ -209,6 +209,7 @@
       tnoremap <C-w><C-w> <C-\><C-N><C-w><C-w>
 
       " Terminal other mappings
+      tnoremap <Esc> <C-\><C-n>
       tnoremap <C-w>o <cmd>only<cr>
       tnoremap <C-w><C-p> <cmd>Files<cr>
       tnoremap <C-w>: <C-\><C-N>:
@@ -216,9 +217,6 @@
 
       " Terminal stays in insert mode
       autocmd TermOpen,BufWinEnter,WinEnter term://* startinsert
-
-      " Exit terminal with Esc
-      tnoremap <Esc> <C-\><C-n>
 
       " Interactive fuzzy finder using external fzf
       function! FZF()
