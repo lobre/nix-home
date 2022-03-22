@@ -119,7 +119,6 @@
       set wildignorecase " Autocomplete case insensitive
       set smartcase      " Enable case sensitivity if search contains upper letter
       set hidden         " No need to save a buffer before switching
-      set smartindent    " Smart autoindenting when starting new line
       set title          " Update the title of the window 
       set mouse=a        " Enable mouse mode
 
@@ -139,13 +138,13 @@
       set completeopt=menuone,noinsert,noselect
 
       " Default tabs count parameters
-      set tabstop=2
-      set shiftwidth=2
+      set shiftwidth=4
+      set tabstop=4
       set expandtab
 
       " Language specific indentation settings
-      autocmd FileType go setlocal noexpandtab shiftwidth=4 tabstop=4 softtabstop=4
-      autocmd FileType sh setlocal expandtab shiftwidth=4 tabstop=4 softtabstop=4
+      autocmd FileType go   setlocal noexpandtab
+      autocmd FileType html setlocal shiftwidth=2 tabstop=2
 
       " Search with rg if available
       if executable('rg')
