@@ -216,6 +216,7 @@
 
       " Terminal stays in insert mode
       autocmd TermOpen,BufWinEnter,WinEnter term://* startinsert
+      autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
 
       " Interactive fuzzy finder using external fzf
       function! FZF()
