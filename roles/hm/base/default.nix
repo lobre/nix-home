@@ -46,7 +46,6 @@ in
     git-credential-gopass
     gopass
     gopass-jsonapi
-    htop 
     jq
     killall
     ltrace

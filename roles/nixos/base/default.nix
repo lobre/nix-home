@@ -28,7 +28,6 @@ in
     curl
     git
     gptfdisk
-    htop
     mkpasswd
     parted
     pciutils
