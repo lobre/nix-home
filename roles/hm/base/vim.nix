@@ -12,8 +12,7 @@
       elmPackages.elm-language-server # elm lsp
       nodePackages."@tailwindcss/language-server" # tailwind lsp
       nodePackages.intelephense # php lsp
-      nodePackages.typescript-language-server # typescript lsp
-      nodePackages.vscode-langservers-extracted # html, css, json, eslint lsp
+      nodePackages.vscode-langservers-extracted # html, css, json lsp
       nodePackages.yaml-language-server
       rust-analyzer # rust lsp (better than rls)
       zls # zig lsp
@@ -64,14 +63,12 @@
           local servers = {
             "cssls",
             "elmls",
-            "eslint",
             "gopls",
             "html",
             "intelephense",
             "jsonls",
             "rust_analyzer",
             "tailwindcss",
-            "tsserver",
             "yamlls",
             "zls"
           }
