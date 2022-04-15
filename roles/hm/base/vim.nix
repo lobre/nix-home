@@ -106,9 +106,6 @@
       " Disable vim intro page
       set shortmess+=I
 
-      set showbreak=↪\
-      set listchars=tab:→\ ,eol:↲,nbsp:␣,trail:•,extends:⟩,precedes:⟨
-
       " wildmode that works well with nvim popup menu
       set wildmode=longest:full,full
 
