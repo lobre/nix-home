@@ -5,6 +5,7 @@ let
     VISUAL = "vim";
     EDITOR = "vim";
     PAGER = "less";
+    LESS = "-R";
   };
 
   shellAliases = {

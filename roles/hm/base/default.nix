@@ -44,6 +44,7 @@ in
     gcc
     gettext # for envsubst
     git-credential-gopass
+    glow
     gopass
     gopass-jsonapi
     jq
