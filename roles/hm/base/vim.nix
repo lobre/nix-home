@@ -246,8 +246,13 @@
               redraw!
           endfunction
 
+          let l:cmd = 'fzf --multi
+              \ --preview "bat --color=always --style=plain {}"
+              \ --bind "ctrl-h:reload($FZF_DEFAULT_COMMAND --no-ignore-vcs --hidden)"
+              \ > ' . fnameescape(l:tmpfile)
+
           keepalt enew
-          call termopen('fzf --multi --preview "bat --color=always --style=plain {}" > ' . fnameescape(l:tmpfile), l:opts)
+          call termopen(l:cmd, l:opts)
           keepalt file FZF
       endfunction
 

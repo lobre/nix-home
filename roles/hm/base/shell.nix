@@ -73,7 +73,7 @@ in
     enable = true;
     enableBashIntegration = true;
 
-    defaultCommand = "rg --files --no-ignore-vcs --hidden --glob '!.git'";
+    defaultCommand = "fd --type f";
     defaultOptions = [
       "--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down"
       "--bind ctrl-/:toggle-preview"
@@ -85,7 +85,6 @@ in
     changeDirWidgetCommand = config.programs.fzf.defaultCommand;
   };
 
-  # cat clone with wings
   programs.bat = {
     enable = true;
     config = {
