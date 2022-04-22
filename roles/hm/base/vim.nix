@@ -147,8 +147,12 @@
       endif
 
       " Open quickfix upon search
-      command! -nargs=+ -complete=file Grep execute 'silent grep!' <q-args> | cw | redraw!
+      command! -nargs=+ -complete=file Grep execute 'silent grep!' <q-args> | cwindow | redraw!
       cnoreabbrev grep Grep
+
+      " Open location list upon search
+      command! -nargs=+ -complete=file LGrep execute 'silent lgrep!' <q-args> | lwindow | redraw!
+      cnoreabbrev lgrep LGrep
 
       " Command to quickly make a search
       nnoremap <C-f> :Grep<space>
