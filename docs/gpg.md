@@ -1,80 +1,46 @@
 # GPG keys
 
-To manage secrets, I use [gopass](https://github.com/gopasspw/gopass). It relies on GPG keys for identification and encryption. So before doing anything else, it is important to configure my GPG key pair.
+## Create a master GPG key
 
-## Import keys
-
-To list available keys, use the following.
+To generate a master key, use:
 
 ```
-gpg --list-secret-keys
+gpg --full-generate-key
 ```
 
-If there is no key, you should import them.
+I usually choose a `rsa4096` key which means: 
+* kind: `RSA and RSA`
+* size: `4096`
+* expiration: `10y`
 
-Public key is stored unencrypted in the gopass git repository. You can find it in the `.public-keys` directory at the root of the repository.
+## Create an SSH authentication subkey
 
-Download the public key and store it as `public.key`. Then, dearmor (text to binary) the key using this command.
-
-```
-gpg --dearmor public.key
-```
-
-This will create a `public.key.gpg`. You can then import it.
+The master key will have to be edited to add an authentication subkey.
 
 ```
-gpg --import public.key.gpg
+gpg --expert --edit-key <key>
+
+gpg> addkey
+gpg> # use the below settings
+gpg> quit
 ```
 
-Moving on to the private key. There are two ways to recover it.
+I usually choose a `ed25519` key which means: 
+* kind: `ECC (set your own capabilities)`
+* elliptic curve: `Curve 25519`
+* capabilities: only `Authenticate`
+* expiration: `10y`
 
-### Paper
-
-I usually keep a printed version as qrcodes. They should be scanned as PNG files and renamed `IMGaa.png`, `IMGab.png`, `IMGac.png`, `IMGad.png`, etc. Once you have them, here are the commands to import the key.
-
-```
-for f in IMG*.png; do zbarimg --raw $f | head -c -1 > $f.out ; done
-cat *.out | base64 -d | paperkey --pubring public.key.gpg | gpg --import
-```
-
-You will be prompted to enter the passphrase, and then you should be good to go.
-
-### Yubikey
-
-Using a Yubikey simplifies drastically the process because you basically don’t have anything to do except plugging it when you want to use your key.
-
-## Trust
-
-Gpg has a trust database. If you see that your owner is "unknown", use the following commands to trust it.
+Now if you want to export this key in the SSH format, use:
 
 ```
-gpg --edit-key user@useremail.com
-
-gpg> trust
-
-Please decide how far you trust this user to correctly verify other users' keys
-(by looking at passports, checking fingerprints from different sources, etc.)
-
-  1 = I don't know or won't say
-  2 = I do NOT trust
-  3 = I trust marginally
-  4 = I trust fully
-  5 = I trust ultimately
-  m = back to the main menu
-
-Your decision? 5
-
-gpg> save
+gpg --export-ssh-key <key>
 ```
 
-## SSH keys
-
-Instead of having a regular OpenSSH key, I decided to also rely on GPG to authenticate to SSH services. I have created a GPG subkey which has "authentication" capabilities.
-
-For that to work, the GPG agent is also replacing the regular SSH agent to handle the discovery and unlocking of keys. To export the public part of this authentication key in a regular SSH format, use the following command.
+If you want to get the keygrip to use it alongside a GPG agent, use:
 
 ```
-gpg --export-ssh-key key-id
+gpg --list-key --with-keygrip <key>
 ```
 
 You can also check that the GPG agent is correctly started.
@@ -86,10 +52,77 @@ $ echo $SSH_AUTH_SOCK
 
 And you can list loaded keys with `ssh-add -L`. The GPG agent is using keys that are declared as exposed from the `~/.gnupg/sshcontrol` file.
 
-## Create a PDF with your private key as QRcodes
+## Import or export the master key
 
-To simplify the process, I have created a little wrapper script.
+Subkeys will be included. For both formats, you will need the public key also exported for future reimports.
+
+To export the public key, use:
 
 ```
-gpg-export key-id
+gpg --export --armor <key> > key.pub
 ```
+
+And reimport it with:
+
+```
+gpg --dearmor key.pub
+gpg --import key.pub.gpg
+```
+
+### To file
+
+To export the private key to a file use:
+
+```
+gpg --export-secret-keys <key> > secret.key
+```
+
+And reimport it with:
+
+```
+gpg --import secret.key
+```
+
+### To paper
+
+To export the key to a printable format:
+
+```
+gpg --export-secret-key <key> | paperkey --output secret.txt
+```
+
+To note that comments in the file are not needed for a future reimport using `paperkey`. Also, the passphrase will be exported and so will be kept unchanged after a reimport.
+
+To reimport, type the entire content of you paper key into a `secret.txt` file and use: 
+
+```
+paperkey --pubring key.pub.gpg --secrets secret.txt | gpg --import
+```
+
+Then make sure to then delete `secret.txt`.
+
+### Trust an imported key
+
+You should trust your own master keys as ultimate.
+
+```
+gpg --edit-key <key>
+
+gpg> trust
+```
+
+## Use a Yubikey
+
+To move a key from your local keyring to your Yubikey:
+
+```
+gpg --expert --edit-key <key>
+
+gpg> keytocard
+gpg> # You might have to repeat for all your keys
+gpg> quit
+```
+
+The key should then not exist anymore in your local keyring as it has been moved to the key. To note that a key cannot be moved back from a Yubikey to a local keyring. If lost, it will have to be regenerated, or recreated from a paper/file version.
+
+When moved to a Yubikey, the passphrase is only required once at import time, and then won’t be stored on the key. Instead, the Yubikey is protected using an admin PIN.
