@@ -205,6 +205,7 @@
       " Terminal other mappings
       tnoremap <Esc> <C-\><C-n>
       tnoremap <C-w>o <cmd>only<cr>
+      tnoremap <C-w>q <C-\><C-N><C-w>q
       tnoremap <C-w><C-p> <cmd>Files<cr>
       tnoremap <C-w>: <C-\><C-N>:
       tnoremap <C-Space> <C-\><C-N><C-^>
