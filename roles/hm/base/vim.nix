@@ -208,6 +208,8 @@
       tnoremap <C-w><C-p> <cmd>Files<cr>
       tnoremap <C-w>: <C-\><C-N>:
       tnoremap <C-Space> <C-\><C-N><C-^>
+      tnoremap <C-w>v <C-\><C-N><C-w>v
+      tnoremap <C-w>s <C-\><C-N><C-w>s
 
       " Terminal stays in insert mode
       autocmd TermOpen,BufWinEnter,WinEnter term://* startinsert
