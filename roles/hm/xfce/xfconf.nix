@@ -73,6 +73,7 @@ let
       "/general/cycle_draw_frame" = true; # blue frame when cycling with alt-tab
       "/general/cycle_preview" = false; # no thumbnails when cycling with alt-tab
       "/general/cycle_tabwin_mode" = 1; # cycle through windows in a list
+      "/general/wrap_windows" = false; # don’t move window to other workspace when approaching border
     };
 
     "xfce4-keyboard-shortcuts" = {
