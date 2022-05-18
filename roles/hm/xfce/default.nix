@@ -13,6 +13,7 @@
     pavucontrol
     peek
     pinta
+    qtpass
     remmina
     slack
     spotify
@@ -22,6 +23,8 @@
     xdotool
     wine
   ];
+
+  programs.browserpass.enable = true;
 
   imports = [
     ./panel.nix

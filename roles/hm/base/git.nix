@@ -1,4 +1,4 @@
-{ secrets, ... }:
+{ pkgs, secrets, ... }:
 
 {
   programs.git = {
@@ -37,7 +37,7 @@
         pager = "less -+FX"; # allow mouse scroll
       };
       credential = {
-        helper = "gopass";
+        helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
       };
       merge = {
         tool = "vimdiff";

@@ -1,6 +1,6 @@
 # Userspace configurations
 
-## Repository and gopass store
+## Repository and pass store
 
 After having installed NixOS, or if you want to install your Nix configurations on an Ubuntu system, you will need to clone this project.
 
@@ -10,16 +10,16 @@ git clone https://github.com/lobre/nix-home ~/lab/github.com/lobre/nix-home
 
 Then, make sure to follow this [documentation page to import your GPG keys](gpg.md).
 
-Now, you can clone your `gopass` store.
+Now, you can clone your `pass` store.
 
 ```
-gopass clone https://github.com/<name>/<repo>.git
+pass clone https://github.com/<name>/<repo>.git
 ```
 
 You will then be able to gather secrets from your store.
 
 ```
-gopass show -n nix/secrets | envsubst '$HOME,$USER' > ~/lab/github.com/lobre/nix-home/secrets.nix
+pass show nix/secrets | envsubst '$HOME,$USER' > ~/lab/github.com/lobre/nix-home/secrets.nix
 ```
 
 At this point, if you are on a NixOS system, you can test to re-apply your system configurations to see if everything still works as expected.

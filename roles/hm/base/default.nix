@@ -43,16 +43,14 @@ in
     file
     gcc
     gettext # for envsubst
-    git-credential-gopass
     glow
-    gopass
-    gopass-jsonapi
     jq
     killall
     ltrace
     ncdu
     openssh
     pandoc
+    pass
     perl
     pv
     ripgrep
