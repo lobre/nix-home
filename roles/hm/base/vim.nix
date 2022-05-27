@@ -139,6 +139,7 @@
       " Language specific indentation settings
       autocmd FileType go   setlocal noexpandtab
       autocmd FileType html setlocal shiftwidth=2 tabstop=2
+      autocmd FileType json setlocal shiftwidth=2 tabstop=2
 
       " Search with rg if available
       if executable('rg')
