@@ -126,25 +126,17 @@ let
     };
 
     "xfce4-panel" = {
-      "/panels" = [ 1 2 ];
+      "/panels" = [ 1 ];
       "/panels/dark-mode" = true;
 
-      # top panel
+      # bottom panel
       "/panels/panel-1/icon-size" = 0;
       "/panels/panel-1/length" = 100;
-      "/panels/panel-1/position" = "p=6;x=0;y=0";
+      "/panels/panel-1/position" = "p=8;x=0;y=0";
       "/panels/panel-1/position-locked" = true;
       "/panels/panel-1/size" = 26;
       "/panels/panel-1/output-name" = "Primary";
       "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 ];
-
-      # bottom panel (let dynamically add plugins)
-      "/panels/panel-2/icon-size" = 0;
-      "/panels/panel-2/autohide-behavior" = 1;
-      "/panels/panel-2/position" = "p=10;x=0;y=0";
-      "/panels/panel-2/position-locked" = true;
-      "/panels/panel-2/size" = 48;
-      "/panels/panel-2/output-name" = "Primary";
 
       # menu
       "/plugins/plugin-1" = "whiskermenu";
