@@ -1,12 +1,14 @@
 { pkgs, lib, ... }:
 
 {
+  # Colorscheme
+  xdg.configFile."nvim/colors/ansi.vim".source = ./ansi.vim;
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
 
-    # Extra packages available to nvim.
-    # Useful to install LSP servers.
+    # LSP servers to make available to nvim
     extraPackages = with pkgs; [ 
       gopls # go lsp
       elmPackages.elm-language-server # elm lsp
@@ -103,38 +105,33 @@
     ];
 
     extraConfig = ''
-      " Disable vim intro page
-      set shortmess+=I
-
-      " wildmode that works well with nvim popup menu
-      set wildmode=longest:full,full
-
-      set ignorecase     " Case insensitive
-      set wildignorecase " Autocomplete case insensitive
-      set smartcase      " Enable case sensitivity if search contains upper letter
-      set hidden         " No need to save a buffer before switching
-      set title          " Update the title of the window 
-      set mouse=a        " Enable mouse mode
-
-      " Hide statusline
-      set noshowmode
-      set noruler
-      set laststatus=1
-      set noshowcmd
-
-      " Number of lines to keep behond visible screen in terminal buffer 
-      set scrollback=50000
-
-      " use custom ansi scheme
+      " Use custom minimal ansi scheme
       colorscheme ansi
 
-      " Don’t automatically select first item in completion
-      set completeopt=menuone,noinsert,noselect
+      " General options
+      set hidden            " No need to save a buffer before switching
+      set ignorecase        " Case insensitive
+      set mouse=a           " Enable mouse mode
+      set scrollback=50000  " Lines to keep in terminal buffer
+      set smartcase         " Enable case sensitivity if search contains upper letter
+      set title             " Update the title of the window 
+      set wildignorecase    " Autocomplete case insensitive
+
+      " Completion menu
+      set completeopt=menuone,noinsert,noselect  " don’t select first in completion
+      set wildmode=longest:full,full
+
+      " Mininal clutter on the interface
+      set laststatus=1  " Status line only if there are two windows
+      set noruler
+      set noshowcmd
+      set noshowmode
+      set shortmess+=I  " Disable intro page
 
       " Default tabs count parameters
+      set expandtab
       set shiftwidth=4
       set tabstop=4
-      set expandtab
 
       " Language specific indentation settings
       autocmd FileType go   setlocal noexpandtab
@@ -155,67 +152,35 @@
       command! -nargs=+ -complete=file LGrep execute 'silent lgrep!' <q-args> | lwindow | redraw!
       cnoreabbrev lgrep LGrep
 
-      " Command to quickly make a search
-      nnoremap <C-f> :Grep<space>
-
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
-      " Clear current highlighted search
-      nnoremap <C-l> <cmd>nohlsearch<cr>
+      " Simple git blame for current line
+      command! Blame execute '!git blame -c --date=short -L ' . line('.') . ',+1 %'
 
-      " Jump to tag
-      nnoremap gd <C-]>
+      " Command for fzf window
+      command! Files call FZF()
 
-      " Alternate buffer (C-Space is also C-@)
-      nnoremap <C-Space> <C-^>
-
-      " C-c is not exactly equal to Esc as it does not trigger events
-      inoremap <C-c> <Esc>
+      " Custom remaps
+      inoremap <C-c> <Esc>                " C-c does not trigger events like Esc
+      nnoremap <C-l> <cmd>nohlsearch<cr>  " Clear current highlighted search
+      nnoremap <C-p> <cmd>Files<cr>       " Activate fzf window
+      nnoremap <C-Space> <C-^>            " Alternate buffer (C-Space is also C-@)
+      nnoremap gd <C-]>                   " Jump to tag
+      tnoremap <Esc> <C-\><C-n>           " Exit insert for terminal
 
       " Explorer settings
-      let g:netrw_banner = 0           " don’t show top banner
-      let g:netrw_liststyle = 3        " show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
-      let g:netrw_localrmdir = 'rm -r' " let delete a non-empty directory
+      let g:netrw_banner = 0           " Don’t show top banner
+      let g:netrw_liststyle = 3        " Show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
+      let g:netrw_localrmdir = 'rm -r' " Let delete a non-empty directory
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
       autocmd CursorHold,CursorHoldI * silent! checktime
       autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
 
-      " Allow modifications to quickfix
+      " Filter quicklist with the included cfilter plugin
       packadd cfilter
-      autocmd BufReadPost quickfix set modifiable
-      autocmd filetype qf setlocal errorformat+=%f\|%l\ col\ %c\|%m
-      command! Cupdate cgetbuffer | cclose | copen
-
-      " Simple git blame
-      command! Blame execute '!git blame -c --date=short -L ' . line('.') . ',+1 %'
-
-      " Terminal navigation
-      tnoremap <C-w>h <C-\><C-N><C-w>h
-      tnoremap <C-w>j <C-\><C-N><C-w>j
-      tnoremap <C-w>k <C-\><C-N><C-w>k
-      tnoremap <C-w>l <C-\><C-N><C-w>l
-      tnoremap <C-w>H <C-\><C-N><C-w>H
-      tnoremap <C-w>J <C-\><C-N><C-w>J
-      tnoremap <C-w>K <C-\><C-N><C-w>K
-      tnoremap <C-w>L <C-\><C-N><C-w>L
-      tnoremap <C-w><C-w> <C-\><C-N><C-w><C-w>
-
-      " Terminal other mappings
-      tnoremap <Esc> <C-\><C-n>
-      tnoremap <C-w>o <cmd>only<cr>
-      tnoremap <C-w>q <C-\><C-N><C-w>q
-      tnoremap <C-w><C-p> <cmd>Files<cr>
-      tnoremap <C-w>: <C-\><C-N>:
-      tnoremap <C-Space> <C-\><C-N><C-^>
-      tnoremap <C-w>v <C-\><C-N><C-w>v
-      tnoremap <C-w>s <C-\><C-N><C-w>s
-
-      " Terminal stays in insert mode
-      autocmd TermOpen,BufWinEnter,WinEnter term://* startinsert
-      autocmd TermOpen * nnoremap <buffer><LeftRelease> <LeftRelease>i
 
       " Interactive fuzzy finder using external fzf
       function! FZF()
@@ -260,13 +225,6 @@
           call termopen(l:cmd, l:opts)
           keepalt file FZF
       endfunction
-
-      " Map fzf function
-      command! Files call FZF()
-      nnoremap <C-p> <cmd>Files<cr>
     '';
   };
-
-  # Colorscheme
-  xdg.configFile."nvim/colors/ansi.vim".source = ./ansi.vim;
 }
