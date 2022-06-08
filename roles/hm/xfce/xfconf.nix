@@ -70,7 +70,7 @@ let
       "/general/snap_to_windows" = true;
       "/general/activate_action" = "switch";
       "/general/wrap_cycle" = false; # don't cycle to first workspace after last
-      "/general/cycle_draw_frame" = true; # blue frame when cycling with alt-tab
+      "/general/cycle_draw_frame" = false; # no blue frame when cycling with alt-tab
       "/general/cycle_preview" = false; # no thumbnails when cycling with alt-tab
       "/general/cycle_tabwin_mode" = 1; # cycle through windows in a list
       "/general/wrap_windows" = false; # don’t move window to other workspace when approaching border
