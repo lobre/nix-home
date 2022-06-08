@@ -161,13 +161,23 @@
       " Command for fzf window
       command! Files call FZF()
 
-      " Custom remaps
-      inoremap <C-c> <Esc>                " C-c does not trigger events like Esc
-      nnoremap <C-l> <cmd>nohlsearch<cr>  " Clear current highlighted search
-      nnoremap <C-p> <cmd>Files<cr>       " Activate fzf window
-      nnoremap <C-Space> <C-^>            " Alternate buffer (C-Space is also C-@)
-      nnoremap gd <C-]>                   " Jump to tag
-      tnoremap <Esc> <C-\><C-n>           " Exit insert for terminal
+      " Open fzf window
+      nnoremap <C-p> <cmd>Files<cr>
+
+      " C-c does not trigger events like Esc
+      inoremap <C-c> <Esc>
+
+      " Clear current highlighted search
+      nnoremap <C-l> <cmd>nohlsearch<cr>
+
+      " Alternate buffer (C-Space is also C-@)
+      nnoremap <C-Space> <C-^>
+
+      " Jump to tag
+      nnoremap gd <C-]>
+
+      " Exit insert for terminal
+      tnoremap <Esc> <C-\><C-n>
 
       " Explorer settings
       let g:netrw_banner = 0           " Don’t show top banner
@@ -222,7 +232,7 @@
               \ > ' . fnameescape(l:tmpfile)
 
           keepalt enew
-          call termopen(l:cmd, l:opts)
+          call termopen(l:cmd, l:opts) | startinsert
           keepalt file FZF
       endfunction
     '';
