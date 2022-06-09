@@ -3,13 +3,13 @@
 let
   xfconfJson = pkgs.buildGoModule rec {
     pname = "xfconf-json";
-    version = "0.0.1";
+    version = "0.0.2";
 
     src = pkgs.fetchFromGitHub {
       owner = "lobre";
       repo = "xfconf-json";
       rev = "v${version}";
-      sha256 = "1iy88pb6k6vpmq73r26h21ibwkqs2698r54iyicjdg3f421p588f";
+      sha256 = "030P4MwTsO0lJewf+aNmtHLNMF9sDz8l0blshAscpYI=";
     };
 
     vendorSha256 = "1fzlslz9xr3jay9kpvrg7sj1a0c1f1m1kn5rnis49hvlr1sc00d0";
