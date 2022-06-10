@@ -27,7 +27,6 @@
   programs.browserpass.enable = true;
 
   imports = [
-    ./panel.nix
     ./terminal.nix
     ./xfconf.nix
   ];
