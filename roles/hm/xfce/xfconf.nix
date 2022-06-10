@@ -136,7 +136,7 @@ let
       "/panels/panel-1/position-locked" = true;
       "/panels/panel-1/size" = 26;
       "/panels/panel-1/output-name" = "Primary";
-      "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 ];
+      "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 ];
 
       # menu
       "/plugins/plugin-1" = "whiskermenu";
@@ -186,6 +186,9 @@ let
 
       # clock
       "/plugins/plugin-12" = "clock";
+
+      # show desktop
+      "/plugins/plugin-13" = "showdesktop";
     };
 
     "xfce4-notifyd" = {
