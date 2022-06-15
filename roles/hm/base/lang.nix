@@ -23,8 +23,8 @@ in
 
     sqlite-interactive
 
-    php74
-    php74Packages.composer
+    php81
+    php81Packages.composer
 
     cargo
     rustc

@@ -21,7 +21,6 @@
     vlc
     xclip
     xdotool
-    wine
   ];
 
   programs.browserpass.enable = true;
