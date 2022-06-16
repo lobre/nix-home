@@ -75,8 +75,9 @@ in
 
     defaultCommand = "fd --type f";
     defaultOptions = [
-      "--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down"
+      "--bind ctrl-a:toggle-all"
       "--bind ctrl-/:toggle-preview"
+      "--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down"
       "--preview-window hidden"
       "--color=bg+:-1"
     ];
