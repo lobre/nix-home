@@ -116,6 +116,7 @@
       set smartcase         " Enable case sensitivity if search contains upper letter
       set title             " Update the title of the window 
       set wildignorecase    " Autocomplete case insensitive
+      set showmatch         " Highlight matching parenthesis or bracket
 
       " Completion menu
       set completeopt=menuone,noinsert,noselect  " don’t select first in completion
@@ -178,6 +179,10 @@
 
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
+
+      " Make C-n/C-p act as Up/Down by completing command
+      cnoremap <expr> <C-p> wildmenumode() ? "\<C-p>" : "\<Up>"
+      cnoremap <expr> <C-n> wildmenumode() ? "\<C-n>" : "\<Down>"
 
       " Explorer settings
       let g:netrw_banner = 0           " Don’t show top banner
