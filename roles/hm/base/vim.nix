@@ -179,7 +179,7 @@
 
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
-      tnoremap <expr> <C-c> stridx(bufname('%'), "term://") == 0 ? "<C-\><C-n>" : "<C-c>"
+      tnoremap <C-c> <C-\><C-n>
 
       " Send SIGINT in terminal normal mode with C-c (as remapped to exit in insert mode)
       autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
