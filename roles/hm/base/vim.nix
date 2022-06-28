@@ -179,6 +179,10 @@
 
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
+      tnoremap <C-c> <C-\><C-n>
+
+      " In terminal normal mode send SIGINT with C-c (as remapped to exit in terminal)
+      autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
 
       " Make C-n/C-p act as Up/Down by completing command
       cnoremap <expr> <C-p> wildmenumode() ? "\<C-p>" : "\<Up>"
