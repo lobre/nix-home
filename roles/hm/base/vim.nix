@@ -179,14 +179,14 @@
 
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
-      tnoremap <C-c> <C-\><C-n>
+      tnoremap <expr> <C-c> stridx(bufname('%'), "term://") == 0 ? "<C-\><C-n>" : "<C-c>"
 
-      " In terminal normal mode send SIGINT with C-c (as remapped to exit in terminal)
+      " Send SIGINT in terminal normal mode with C-c (as remapped to exit in insert mode)
       autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
 
       " Make C-n/C-p act as Up/Down by completing command
-      cnoremap <expr> <C-p> wildmenumode() ? "\<C-p>" : "\<Up>"
-      cnoremap <expr> <C-n> wildmenumode() ? "\<C-n>" : "\<Down>"
+      cnoremap <expr> <C-p> wildmenumode() ? "<C-p>" : "<Up>"
+      cnoremap <expr> <C-n> wildmenumode() ? "<C-n>" : "<Down>"
 
       " Explorer settings
       let g:netrw_banner = 0           " Don’t show top banner
@@ -242,7 +242,7 @@
 
           keepalt enew
           call termopen(l:cmd, l:opts) | startinsert
-          keepalt file FZF
+          execute 'keepalt file FZF ' . bufnr('%')
       endfunction
     '';
   };
