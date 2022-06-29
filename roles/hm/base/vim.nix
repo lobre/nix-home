@@ -14,16 +14,19 @@
       elmPackages.elm-language-server # elm lsp
       nodePackages."@tailwindcss/language-server" # tailwind lsp
       nodePackages.intelephense # php lsp
-      nodePackages.vscode-langservers-extracted # html, css, json lsp
-      nodePackages.yaml-language-server
-      rust-analyzer # rust lsp (better than rls)
       zls # zig lsp
     ];
 
     plugins = with pkgs.vimPlugins; [
       emmet-vim
       vim-nix
-      zig-vim
+
+      {
+        plugin = zig-vim;
+        config = ''
+          let g:zig_fmt_autosave = 0
+        '';
+      }
 
       { 
         plugin = nvim-lspconfig;
@@ -57,23 +60,12 @@
 
             -- Format files on save
             vim.api.nvim_exec([[
-              autocmd BufWritePre *.elm,*.go,*.rs,*.zig lua vim.lsp.buf.formatting_sync(nil, 1000)
+              autocmd BufWritePre *.elm,*.go,*.zig lua vim.lsp.buf.formatting_sync(nil, 1000)
             ]], false)
           end
 
           -- Configure servers
-          local servers = {
-            "cssls",
-            "elmls",
-            "gopls",
-            "html",
-            "intelephense",
-            "jsonls",
-            "rust_analyzer",
-            "tailwindcss",
-            "yamlls",
-            "zls"
-          }
+          local servers = { "elmls", "gopls", "intelephense", "tailwindcss", "zls" }
 
           for _, server in ipairs(servers) do
             lspconfig[server].setup { on_attach = on_attach }
@@ -204,7 +196,12 @@
       " Interactive fuzzy finder using external fzf
       function! FZF()
           if !has('nvim')
-              echo 'error: fzf only working in neovim'
+              echo 'error: fzf only works in neovim'
+              return
+          endif
+
+          if !executable('fzf')
+              echo 'error: fzf is not installed'
               return
           endif
 
