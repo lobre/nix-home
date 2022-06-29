@@ -18,7 +18,6 @@ in
   programs.direnv.enable = true;
 
   services.dropbox.enable = true;
-  services.lorri.enable = true;
 
   xdg.enable = true;
 
