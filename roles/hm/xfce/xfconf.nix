@@ -69,7 +69,7 @@ let
       "/general/easy_click" = "Super"; # key used to grab and move windows
       "/general/snap_to_windows" = true;
       "/general/activate_action" = "switch";
-      "/general/wrap_cycle" = false; # don't cycle to first workspace after last
+      "/general/wrap_cycle" = true; # cycle to first workspace after last
       "/general/cycle_draw_frame" = true; # blue frame when cycling with alt-tab
       "/general/cycle_preview" = true; # thumbnails when cycling with alt-tab
       "/general/cycle_tabwin_mode" = 0; # don’t cycle through windows in a list
@@ -117,10 +117,10 @@ let
       "/xfwm4/custom/<Super>l" = "tile_right_key";
 
       # workspaces
-      "/xfwm4/custom/<Primary><Super>l" = "next_workspace_key";
-      "/xfwm4/custom/<Primary><Super>h" = "prev_workspace_key";
-      "/xfwm4/custom/<Shift><Super>l" = "move_window_next_workspace_key";
-      "/xfwm4/custom/<Shift><Super>h" = "move_window_prev_workspace_key";
+      "/xfwm4/custom/<Super>n" = "next_workspace_key";
+      "/xfwm4/custom/<Super>p" = "prev_workspace_key";
+      "/xfwm4/custom/<Shift><Super>n" = "move_window_next_workspace_key";
+      "/xfwm4/custom/<Shift><Super>p" = "move_window_prev_workspace_key";
     };
 
     "xfce4-panel" = {
