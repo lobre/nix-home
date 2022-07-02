@@ -190,7 +190,7 @@ let
     };
 
     "keyboards" = {
-      "/Default/KeyRepeat/Delay" = 400;
+      "/Default/KeyRepeat/Delay" = 500;
       "/Default/KeyRepeat/Rate" = 100; # to move windows faster
     };
 
