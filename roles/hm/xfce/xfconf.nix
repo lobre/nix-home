@@ -96,27 +96,25 @@ let
       "/xfwm4/custom/l" = "right_key";
 
       # windows
-      "/xfwm4/custom/<Alt>Tab" = "cycle_windows_key";
       "/xfwm4/custom/<Alt><Shift>Tab" = "cycle_reverse_windows_key";
+      "/xfwm4/custom/<Alt>Tab" = "cycle_windows_key";
       "/xfwm4/custom/<Super>Tab" = "switch_window_key";
-      "/xfwm4/custom/Escape" = "cancel_key";
-      "/xfwm4/custom/<Super>z" = "maximize_window_key";
-      "/xfwm4/custom/<Shift><Super>z" = "hide_window_key";
       "/xfwm4/custom/<Super>d" = "show_desktop_key";
+      "/xfwm4/custom/<Super>f" = "fill_window_key";
+      "/xfwm4/custom/<Shift><Super>f" = "fullscreen_key";
+      "/xfwm4/custom/<Super>m" = "move_window_key";
       "/xfwm4/custom/<Super>q" = "close_window_key";
       "/xfwm4/custom/<Super>r" = "resize_window_key";
-      "/xfwm4/custom/<Super>m" = "move_window_key";
-      "/xfwm4/custom/<Super>f" = "fullscreen_key";
+      "/xfwm4/custom/<Super>s" = "stick_window_key";
+      "/xfwm4/custom/<Super>z" = "maximize_window_key";
+      "/xfwm4/custom/<Shift><Super>z" = "hide_window_key";
+      "/xfwm4/custom/Escape" = "cancel_key";
 
       # windows tiling
       "/xfwm4/custom/<Super>h" = "tile_left_key";
       "/xfwm4/custom/<Super>j" = "tile_down_key";
       "/xfwm4/custom/<Super>k" = "tile_up_key";
       "/xfwm4/custom/<Super>l" = "tile_right_key";
-      "/xfwm4/custom/<Alt><Super>h" = "tile_up_left_key";
-      "/xfwm4/custom/<Alt><Super>j" = "tile_down_right_key";
-      "/xfwm4/custom/<Alt><Super>k" = "tile_down_left_key";
-      "/xfwm4/custom/<Alt><Super>l" = "tile_up_right_key";
 
       # workspaces
       "/xfwm4/custom/<Primary><Super>l" = "next_workspace_key";
@@ -189,6 +187,11 @@ let
 
       # show desktop
       "/plugins/plugin-13" = "showdesktop";
+    };
+
+    "keyboards" = {
+      "/Default/KeyRepeat/Delay" = 400;
+      "/Default/KeyRepeat/Rate" = 100; # to move windows faster
     };
 
     "xfce4-notifyd" = {
