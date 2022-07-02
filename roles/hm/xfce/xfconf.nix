@@ -81,6 +81,7 @@ let
       "/commands/custom/override" = true; # allow custom commands
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Primary><Alt>Delete" = "xfce4-session-logout";
+      "/commands/custom/<Super>b" = "exo-open --launch WebBrowser";
       "/commands/custom/<Super>t" = "exo-open --launch TerminalEmulator";
       "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
