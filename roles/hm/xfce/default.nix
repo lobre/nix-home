@@ -4,12 +4,12 @@
   xdg.enable = true;
 
   home.packages = with pkgs; [
-    brave
     discord
     filezilla
-    meld
+    firefox
     libnotify
     libreoffice
+    meld
     pavucontrol
     peek
     pinta
