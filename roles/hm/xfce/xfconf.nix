@@ -192,7 +192,7 @@ let
 
     "keyboards" = {
       "/Default/KeyRepeat/Delay" = 500;
-      "/Default/KeyRepeat/Rate" = 100; # to move windows faster
+      "/Default/KeyRepeat/Rate" = 50; # to move windows faster
     };
 
     "xfce4-notifyd" = {
