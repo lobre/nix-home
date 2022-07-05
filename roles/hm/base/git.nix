@@ -34,7 +34,6 @@
       core = {
         editor = "vim";
         askpass = "";
-        pager = "less -+FX"; # allow mouse scroll
       };
       credential = {
         helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
@@ -63,6 +62,11 @@
     };
 
     lfs.enable = true;
+
+    difftastic = {
+      enable = true;
+      background = "dark";
+    };
 
     includes = [ { path = "~/.gitconfig.local"; } ];
   };
