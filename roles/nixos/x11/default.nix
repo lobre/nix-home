@@ -38,7 +38,6 @@
 
   # additional xfce packages
   environment.systemPackages = with pkgs; [
-    lightlocker
     xfce.gigolo
     xfce.orage
     xfce.xfburn
