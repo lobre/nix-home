@@ -148,8 +148,8 @@
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
-      " Simple git blame for current line
-      command! Blame execute '!git blame -c --date=short -L ' . line('.') . ',+1 %'
+      " Check which commit last modified current line
+      command! Blame execute 'terminal git show $(git blame % -L ' . line('.') . ',+1 |' . "awk '{print $1}') %"
 
       " Command for fzf window
       command! Files call FZF()
