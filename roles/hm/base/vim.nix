@@ -106,7 +106,6 @@
       set mouse=a           " Enable mouse mode
       set scrollback=50000  " Lines to keep in terminal buffer
       set smartcase         " Enable case sensitivity if search contains upper letter
-      set title             " Update the title of the window 
       set wildignorecase    " Autocomplete case insensitive
       set showmatch         " Highlight matching parenthesis or bracket
 
