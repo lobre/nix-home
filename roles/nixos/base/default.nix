@@ -31,14 +31,11 @@ in
     mkpasswd
     parted
     pciutils
-    tailscale
     unzip
     usbutils
     vim_configurable
     wget
   ];
-
-  services.tailscale.enable = true;
 
   nix.gc = {
     automatic = true;
