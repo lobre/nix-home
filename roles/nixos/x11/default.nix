@@ -13,14 +13,7 @@
     layout = "fr";
     xkbVariant = "bepo_afnor";
 
-    desktopManager.xfce = {
-      enable = true;
-
-      thunarPlugins = with pkgs; [
-        xfce.thunar-archive-plugin
-        xfce.thunar-volman
-      ];
-    };
+    desktopManager.xfce.enable = true;
 
     displayManager.lightdm = {
       enable = true;
@@ -35,6 +28,16 @@
       ];
     };
   };
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin
+      thunar-volman
+    ];
+  };
+
+  programs.file-roller.enable = true;
 
   # additional xfce packages
   environment.systemPackages = with pkgs; [
