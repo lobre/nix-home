@@ -49,6 +49,8 @@ let
 
     "xfce4-desktop" = {
       "/backdrop/screen0/monitoreDP-1/workspace0/last-image" = "${wallpaper}/wallpaper.jpg";
+      "/backdrop/screen0/monitoreDP-1/workspace0/color-style" = 0; # solid color
+      "/backdrop/screen0/monitoreDP-1/workspace0/rgba1" = [ 0.999999 0.999999 0.999999 0.999999 ]; # 1.0 would turn into integer
       "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 4; # scaled
       "/desktop-icons/style" = 0;
     };
