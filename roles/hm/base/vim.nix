@@ -148,7 +148,7 @@
       command! W w !sudo tee % > /dev/null
 
       " Check which commit last modified current line
-      command! Blame execute 'terminal git show $(git blame % -L ' . line('.') . ',+1 |' . "awk '{print $1}') %"
+      command! Blame execute 'terminal git --no-pager show $(git blame % -L ' . line('.') . ',+1 |' . "awk '{print $1}') %"
 
       " Command for fzf window
       command! Files call FZF()
