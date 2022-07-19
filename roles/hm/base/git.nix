@@ -34,7 +34,7 @@
       core = {
         editor = "vim";
         askpass = "";
-        pager = "less -+FX"; # allow mouse scroll
+        pager = "less --mouse"; # allow mouse scroll
       };
       credential = {
         helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
