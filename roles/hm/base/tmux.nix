@@ -13,7 +13,11 @@
     extraConfig = ''
       set -g mouse on
 
-      # session name stripped otherwise
+      # split above and left as in vim
+      bind-key '"' split-window -vb
+      bind-key % split-window -hb
+
+      # session name was stripped as too small
       set -g status-left-length 50
 
       bind v copy-mode
