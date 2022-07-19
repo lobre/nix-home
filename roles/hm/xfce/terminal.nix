@@ -57,7 +57,7 @@ in
     MiscMouseAutohide=FALSE
     MiscMouseWheelZoom=TRUE
     MiscToolbarDefault=FALSE
-    MiscConfirmClose=TRUE
+    MiscConfirmClose=FALSE
     MiscCycleTabs=TRUE
     MiscTabCloseButtons=TRUE
     MiscTabCloseMiddleClick=TRUE
