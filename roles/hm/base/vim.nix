@@ -232,7 +232,7 @@
           endfunction
 
           let l:cmd = 'fzf --multi --preview "cat {}"
-              \ --bind "ctrl-h:reload($FZF_DEFAULT_COMMAND --no-ignore-vcs --hidden)"
+              \ --bind "ctrl-h:reload(fd --no-ignore-vcs --hidden)"
               \ > ' . fnameescape(l:tmpfile)
 
           keepalt enew

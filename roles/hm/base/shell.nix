@@ -73,7 +73,7 @@ in
     enable = true;
     enableBashIntegration = true;
 
-    defaultCommand = "fd --type f";
+    defaultCommand = "fd";
     defaultOptions = [
       "--bind ctrl-a:toggle-all"
       "--bind ctrl-/:toggle-preview"

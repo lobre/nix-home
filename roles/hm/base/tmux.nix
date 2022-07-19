@@ -1,37 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  tmuxSession = pkgs.writeScriptBin "tmux-session" ''
-    #!${pkgs.stdenv.shell}
-
-    path=$1
-
-    if [[ -z "$path" ]]; then
-        echo "missing path argument"; exit 1
-    fi
-
-    name=$(basename "$path" | tr . _)
-    running=$(pgrep --exact "tmux: server")
-
-    if [[ -z $running ]]; then
-        tmux new-session -s $name -c $path; exit 0
-    fi
-
-    if ! tmux has-session -t=$name 2>/dev/null; then
-        tmux new-session -ds $name -c $path
-    fi
-
-    if [[ -z "$TMUX" ]]; then
-        tmux attach -t $name
-    else
-        tmux switch-client -t $name
-    fi
-  '';
-in
-
 {
-  home.packages = [ tmuxSession ];
-
   programs.tmux = {
     enable = true;
     terminal = "screen-256color";
