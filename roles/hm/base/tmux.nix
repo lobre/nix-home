@@ -4,32 +4,27 @@ let
   tmuxSession = pkgs.writeScriptBin "tmux-session" ''
     #!${pkgs.stdenv.shell}
 
-    if [[ $# -eq 1 ]]; then
-        selected=$1
+    path=$1
+
+    if [[ -z "$path" ]]; then
+        echo "missing path argument"; exit 1
+    fi
+
+    name=$(basename "$path" | tr . _)
+    running=$(pgrep --exact "tmux: server")
+
+    if [[ -z $running ]]; then
+        tmux new-session -s $name -c $path; exit 0
+    fi
+
+    if ! tmux has-session -t=$name 2>/dev/null; then
+        tmux new-session -ds $name -c $path
+    fi
+
+    if [[ -z "$TMUX" ]]; then
+        tmux attach -t $name
     else
-        selected=$(fd . ~ --type d | fzf)
-    fi
-
-    if [[ -z $selected ]]; then
-        exit 0
-    fi
-
-    selected_name=$(basename "$selected" | tr . _)
-    tmux_running=$(pgrep --exact "tmux: server")
-
-    if [[ -z $tmux_running ]]; then
-        tmux new-session -s "$selected_name" -c "$selected"
-        exit 0
-    fi
-
-    if ! tmux has-session -t="$selected_name" 2>/dev/null; then
-        tmux new-session -ds "$selected_name" -c "$selected"
-    fi
-
-    if [[ -z $TMUX ]]; then
-        tmux attach -t "$selected_name"
-    else
-        tmux switch-client -t "$selected_name"
+        tmux switch-client -t $name
     fi
   '';
 in
@@ -51,8 +46,6 @@ in
 
       # session name stripped otherwise
       set -g status-left-length 50
-
-      bind t run-shell "tmux new-window ${tmuxSession}/bin/tmux-session"
 
       bind v copy-mode
       bind P paste-buffer
