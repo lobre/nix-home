@@ -85,12 +85,5 @@ in
     fileWidgetCommand = config.programs.fzf.defaultCommand;
     changeDirWidgetCommand = config.programs.fzf.defaultCommand;
   };
-
-  programs.bat = {
-    enable = true;
-    config = {
-      theme = "ansi";
-    };
-  };
 }
 

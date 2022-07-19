@@ -231,8 +231,7 @@
               redraw!
           endfunction
 
-          let l:cmd = 'fzf --multi
-              \ --preview "bat --color=always --style=plain {}"
+          let l:cmd = 'fzf --multi --preview "cat {}"
               \ --bind "ctrl-h:reload($FZF_DEFAULT_COMMAND --no-ignore-vcs --hidden)"
               \ > ' . fnameescape(l:tmpfile)
 
