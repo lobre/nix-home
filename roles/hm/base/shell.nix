@@ -53,6 +53,22 @@
 
       PS1='${ansiBrightGreen}\h${ansiReset}:${ansiBrightBlue}\W${ansiYellow}$(__git_ps1 "(%s)")${ansiReset}\$ '
 
+      # Used as binding to find and inline a git project path found under current dir
+      fzf-git-project() {
+          local selected=$(eval "fd --type d --no-ignore-vcs --hidden '^\.git$' . -x echo '{//}'" |
+              FZF_DEFAULT_OPTS="--height 40% --bind=ctrl-z:ignore --reverse $FZF_DEFAULT_OPTS -m" $(__fzfcmd) "$@" |
+              while read -r item; do
+                  printf '%q ' "$item"  # escape special chars
+              done
+          )
+
+          READLINE_LINE="''${READLINE_LINE:0:$READLINE_POINT}$selected''${READLINE_LINE:$READLINE_POINT}"
+          READLINE_POINT=$(( READLINE_POINT + ''${#selected} ))
+      }
+
+      # Map above function to ctrl-g
+      bind -m emacs-standard -x '"\C-g": fzf-git-project'
+
       # Set terminal title with xterm esc sequence
       case "$TERM" in
       xterm*)
@@ -80,8 +96,8 @@
       "--color=bg+:-1"
     ];
 
+    changeDirWidgetCommand = "fd --type directory";
     fileWidgetCommand = config.programs.fzf.defaultCommand;
-    changeDirWidgetCommand = config.programs.fzf.defaultCommand;
   };
 }
 
