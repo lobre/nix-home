@@ -42,7 +42,12 @@
 
             -- Mappings
             local opts = { noremap=true, silent=true }
-            map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+
+            -- if no go to definition, preserve go to tag
+            if client.resolved_capabilities.goto_definition then
+              map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', opts)
+            end
+
             map('n', 'gD', '<cmd>lua vim.lsp.buf.type_definition()<cr>', opts)
             map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', opts)
             map('n', 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', opts)
