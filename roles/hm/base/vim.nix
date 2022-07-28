@@ -54,7 +54,7 @@
             map('n', 'gR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
             map('n', 'gh', '<cmd>lua vim.lsp.buf.hover()<cr>', opts)
             map('n', 'gs', '<cmd>lua vim.lsp.buf.document_symbol()<cr>', opts)
-            map('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
+            map('n', 'gca', '<cmd>lua vim.lsp.buf.code_action()<cr>', opts)
             map('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>', opts)
 
             -- Commands
