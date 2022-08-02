@@ -13,6 +13,10 @@
     extraConfig = ''
       set -g mouse on
 
+      # terminal title
+      set-option -g set-titles on
+      set-option -g set-titles-string "#S / #W"
+
       # split above and left as in vim
       bind-key '"' split-window -vb
       bind-key % split-window -hb
