@@ -158,7 +158,11 @@
 
       " Command for fzf window
       command! -bang -complete=dir -nargs=? Files call fzf#run(fzf#wrap({
-        \   'options': ['--multi', '--preview', 'cat {}'],
+        \   'source': 'fd --type file',
+        \   'options': [
+        \     '--multi', '--preview', 'cat {}',
+        \     '--bind', 'ctrl-h:reload(fd --type file --no-ignore-vcs --hidden)'
+        \    ],
         \   'dir': <q-args>
         \ }, <bang>0))
 
