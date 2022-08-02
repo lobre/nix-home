@@ -17,6 +17,9 @@
       set-option -g set-titles on
       set-option -g set-titles-string "#S / #W"
 
+      # only let tmux wait 20ms for escape
+      set-option -g escape-time 20
+
       # split above and left as in vim
       bind-key '"' split-window -vb
       bind-key % split-window -hb
