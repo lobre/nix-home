@@ -20,6 +20,7 @@
     plugins = with pkgs.vimPlugins; [
       emmet-vim
       vim-nix
+      fzfWrapper # https://github.com/junegunn/fzf/blob/master/README-VIM.md
 
       {
         plugin = zig-vim;
@@ -156,7 +157,10 @@
       command! Blame execute 'terminal git --no-pager show $(git blame % -L ' . line('.') . ',+1 |' . "awk '{print $1}') %"
 
       " Command for fzf window
-      command! Files call FZF()
+      command! -bang -complete=dir -nargs=? Files call fzf#run(fzf#wrap({
+        \   'options': ['--multi', '--preview', 'cat {}'],
+        \   'dir': <q-args>
+        \ }, <bang>0))
 
       " Open fzf window
       nnoremap <C-p> <cmd>Files<cr>
@@ -196,54 +200,6 @@
 
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
-
-      " Interactive fuzzy finder using external fzf
-      function! FZF()
-          if !has('nvim')
-              echo 'error: fzf only works in neovim'
-              return
-          endif
-
-          if !executable('fzf')
-              echo 'error: fzf is not installed'
-              return
-          endif
-
-          let l:tmpfile = tempname()
-          let l:opts = { 'tmpfile': l:tmpfile, 'prevbuf': bufnr('%') }
-
-          function! l:opts.on_exit(id, code, event)
-              let l:termbuf = bufnr('%')
-
-              if l:termbuf == self.prevbuf
-                  keepalt enew
-              else
-                  execute 'keepalt buffer ' . self.prevbuf
-              endif
-
-              execute 'keepalt bdelete! ' . l:termbuf
-
-              let l:nblines = system('cat ' . self.tmpfile . ' | wc -l')
-              if l:nblines == 1
-                  let l:file = system('head -n1 ' . self.tmpfile)
-                  execute 'edit ' . l:file
-              elseif l:nblines > 1
-                  call system('sed -i "s/$/:1:0/" ' . self.tmpfile)
-                  execute 'silent cfile ' . self.tmpfile
-              endif
-
-              call delete(self.tmpfile)
-              redraw!
-          endfunction
-
-          let l:cmd = 'fzf --multi --preview "cat {}"
-              \ --bind "ctrl-h:reload(fd --no-ignore-vcs --hidden)"
-              \ > ' . fnameescape(l:tmpfile)
-
-          keepalt enew
-          call termopen(l:cmd, l:opts) | startinsert
-          execute 'keepalt file FZF ' . bufnr('%')
-      endfunction
     '';
   };
 }

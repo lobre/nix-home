@@ -87,7 +87,7 @@
     enable = true;
     enableBashIntegration = true;
 
-    defaultCommand = "fd";
+    defaultCommand = "fd --type file";
     defaultOptions = [
       "--bind ctrl-a:toggle-all"
       "--bind ctrl-/:toggle-preview"
@@ -97,7 +97,7 @@
     ];
 
     changeDirWidgetCommand = "fd --type directory";
-    fileWidgetCommand = config.programs.fzf.defaultCommand;
+    fileWidgetCommand = "fd";
   };
 }
 
