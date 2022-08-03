@@ -7,6 +7,7 @@
     discord
     filezilla
     firefox
+    iosevka
     libnotify
     libreoffice
     meld
@@ -24,6 +25,7 @@
   ];
 
   programs.browserpass.enable = true;
+  fonts.fontconfig.enable = true;
 
   imports = [
     ./terminal.nix

@@ -44,7 +44,7 @@ in
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
     CellHeightScale=1.350000
-    FontName=MonoLisa Nerd Font 11
+    FontName=Iosevka Regular 12
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
     MiscBellUrgent=FALSE
