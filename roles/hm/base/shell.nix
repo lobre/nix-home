@@ -57,9 +57,7 @@
       fzf-git-project() {
           local selected=$(eval "fd --type directory --hidden '^\.git$' . --exec echo '{//}'" |
               FZF_DEFAULT_OPTS="--height 40% --bind=ctrl-z:ignore --reverse $FZF_DEFAULT_OPTS -m" $(__fzfcmd) "$@" |
-              while read -r item; do
-                  printf '%q ' "$item"  # escape special chars
-              done
+              while read -r item; do printf '%q ' "$item"; done
           )
 
           READLINE_LINE="''${READLINE_LINE:0:$READLINE_POINT}$selected''${READLINE_LINE:$READLINE_POINT}"
