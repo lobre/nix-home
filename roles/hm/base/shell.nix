@@ -55,7 +55,7 @@
 
       # Used as binding to find and inline a git project path found under current dir
       fzf-git-project() {
-          local selected=$(eval "fd --type d --no-ignore-vcs --hidden '^\.git$' . -x echo '{//}'" |
+          local selected=$(eval "fd --type directory --hidden '^\.git$' . --exec echo '{//}'" |
               FZF_DEFAULT_OPTS="--height 40% --bind=ctrl-z:ignore --reverse $FZF_DEFAULT_OPTS -m" $(__fzfcmd) "$@" |
               while read -r item; do
                   printf '%q ' "$item"  # escape special chars
