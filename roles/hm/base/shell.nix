@@ -53,6 +53,13 @@
 
       PS1='${ansiBrightGreen}\h${ansiReset}:${ansiBrightBlue}\W${ansiYellow}$(__git_ps1 "(%s)")${ansiReset}\$ '
 
+      # Set terminal title with xterm esc sequence
+      case "$TERM" in
+      xterm*)
+          PS1="\[\e]0;\h: \W\a\]$PS1"
+          ;;
+      esac
+
       # Used as binding to find and inline a git project path found under current dir
       fzf-git-project() {
           local selected=$(eval "fd --type directory --hidden '^\.git$' . --exec echo '{//}'" |
@@ -66,13 +73,6 @@
 
       # Map above function to ctrl-g
       bind -m emacs-standard -x '"\C-g": fzf-git-project'
-
-      # Set terminal title with xterm esc sequence
-      case "$TERM" in
-      xterm*)
-          PS1="\[\e]0;\h: \W\a\]$PS1"
-          ;;
-      esac
     '';
   };
 
