@@ -179,10 +179,6 @@
       " Send SIGINT in terminal normal mode with C-c (as remapped to exit in insert mode)
       autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
 
-      " Make C-n/C-p act as Up/Down by completing command
-      cnoremap <expr> <C-p> wildmenumode() ? "<C-p>" : "<Up>"
-      cnoremap <expr> <C-n> wildmenumode() ? "<C-n>" : "<Down>"
-
       " Explorer settings
       let g:netrw_banner = 0           " Don’t show top banner
       let g:netrw_liststyle = 3        " Show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
