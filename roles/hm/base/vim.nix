@@ -91,15 +91,6 @@
           EOF
         '';
       }
-
-      {
-        plugin = copilot-vim;
-        config = ''
-          let g:copilot_enabled = 0
-          let g:copilot_no_tab_map = 1
-          imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
-        '';
-      }
     ];
 
     extraConfig = ''
