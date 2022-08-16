@@ -7,7 +7,6 @@
     discord
     filezilla
     firefox
-    iosevka
     libnotify
     libreoffice
     meld
@@ -22,6 +21,16 @@
     vlc
     xclip
     xdotool
+
+    # font
+    (iosevka.override {
+      set = "term-slab";
+      privateBuildPlan = {
+        family = "Iosevka Term Slab";
+        spacing = "term";
+        serifs = "slab";
+      };
+    })
   ];
 
   programs.browserpass.enable = true;
