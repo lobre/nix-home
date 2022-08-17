@@ -145,7 +145,7 @@
       command! W w !sudo tee % > /dev/null
 
       " Check which commit last modified current line
-      command! Blame execute 'terminal git --no-pager show $(git blame % -L ' . line('.') . ',+1 |' . "awk '{print $1}')" . ' -- $(git blame % -L ' . line('.') . ',+1 |' . "awk '{print $2}')"
+      command! Blame execute 'terminal git --no-pager show $(git blame -f % -L ' . line('.') . ',+1 |' . "awk '{print $1}')" . ' -- $(git blame -f % -L ' . line('.') . ',+1 |' . "awk '{print $2}')"
 
       " Command for fzf window
       command! -bang -complete=dir -nargs=? Files call fzf#run(fzf#wrap({
