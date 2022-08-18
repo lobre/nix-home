@@ -64,14 +64,5 @@
     xfce.xfce4-whiskermenu-plugin
     xfce.xfce4-xkb-plugin
   ];
-
-  # Make sure ~/.profile is loaded when graphical session starts.
-  # See https://github.com/NixOS/nixpkgs/issues/5200
-  environment.loginShellInit = ''
-    if [ -e $HOME/.profile ]
-    then
-      . $HOME/.profile
-    fi
-  '';
 }
 
