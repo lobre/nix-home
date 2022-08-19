@@ -172,6 +172,10 @@
       " Jump to tag
       nnoremap gd <C-]>
 
+      " Make C-n/C-p act as Up/Down by completing command
+      cnoremap <expr> <C-p> wildmenumode() ? "<C-p>" : "<Up>"
+      cnoremap <expr> <C-n> wildmenumode() ? "<C-n>" : "<Down>"
+
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
       tnoremap <C-c> <C-\><C-n>
