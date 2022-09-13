@@ -185,7 +185,6 @@
 
       " Explorer settings
       let g:netrw_banner = 0           " Don’t show top banner
-      let g:netrw_liststyle = 3        " Show as tree (refresh has a bug https://github.com/vim/vim/issues/5964)
       let g:netrw_localrmdir = 'rm -r' " Let delete a non-empty directory
 
       " Trigger autoread when files changes on disk
