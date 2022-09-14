@@ -43,7 +43,7 @@ in
   # general settings
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
-    CellHeightScale=1.350000
+    CellHeightScale=1.200000
     FontName=Iosevka Term Slab Regular 12
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
