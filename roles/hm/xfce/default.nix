@@ -5,7 +5,6 @@
 
   home.packages = with pkgs; [
     discord
-    feh
     filezilla
     firefox
     gimp
@@ -52,7 +51,22 @@
     };
   in [ "${kritaNoGLDesktop}/share" ];
 
-  programs.browserpass.enable = true;
+  programs = {
+    browserpass.enable = true;
+
+    feh = {
+      enable = true;
+      keybindings = {
+        zoom_in = "plus";
+        zoom_out = "minus";
+        scroll_left = "h";
+        scroll_right = "l";
+        scroll_up = "k";
+        scroll_down = "j";
+      };
+    };
+  };
+
   fonts.fontconfig.enable = true;
 
   imports = [
