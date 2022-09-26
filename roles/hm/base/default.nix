@@ -38,7 +38,6 @@ in
     docker-compose
     dos2unix
     entr
-    fd
     file
     gcc
     gettext # for envsubst
@@ -52,7 +51,6 @@ in
     pass
     perl
     pv
-    ripgrep
     rmapi
     slides
     strace
