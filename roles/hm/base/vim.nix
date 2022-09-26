@@ -54,8 +54,8 @@
       " Alternate buffer (C-Space is also C-@)
       nnoremap <C-Space> <C-^>
 
-      " Jump to tag
-      nnoremap gd <C-]>
+      " Jump to tag using tjump
+      nnoremap gd g<C-]>
 
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
