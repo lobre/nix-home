@@ -38,6 +38,10 @@
       autocmd FileType html setlocal shiftwidth=2 tabstop=2
       autocmd FileType json setlocal shiftwidth=2 tabstop=2
 
+      " Formatter on save for specific languages
+      autocmd BufWritePost *.go silent execute "!gofmt -w " . expand('%')
+      autocmd BufWritePost *.zig silent execute "!zig fmt " . expand('%')
+
       " Use git grep
       set grepprg=git\ -c\ grep.fallbackToNoIndex\ --no-pager\ grep\ --no-color\ -nI
       set grepformat=%f:%l:%c:%m,%f:%l:%m,%f
@@ -76,5 +80,17 @@
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
     '';
+
+    plugins = with pkgs.vimPlugins; [
+      emmet-vim
+      vim-nix
+
+      {
+        plugin = zig-vim;
+        config = ''
+          let g:zig_fmt_autosave = 0
+        '';
+      }
+    ];
   };
 }
