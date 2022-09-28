@@ -94,12 +94,16 @@ in
 
     plugins = with pkgs.vimPlugins; [
       emmet-vim
-      vim-nix
 
       {
-        plugin = zig-vim;
+        plugin = nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
         config = ''
-          let g:zig_fmt_autosave = 0
+          lua <<EOF
+          require('nvim-treesitter.configs').setup {
+            highlight = { enable = true },
+            indent = { enable = true }
+          }
+          EOF
         '';
       }
     ];
