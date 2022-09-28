@@ -1,8 +1,5 @@
 { pkgs, lib, ... }:
 
-let
-in
-
 {
   # Colorscheme
   xdg.configFile."nvim/colors/ansi.vim".source = ./ansi.vim;
