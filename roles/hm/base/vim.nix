@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, ... }:
 
 {
   # Colorscheme
@@ -91,6 +91,8 @@
 
     plugins = with pkgs.vimPlugins; [
       emmet-vim
+      nvim-treesitter-context
+      nvim-treesitter-refactor
 
       {
         plugin = nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
@@ -98,7 +100,17 @@
           lua <<EOF
           require('nvim-treesitter.configs').setup {
             highlight = { enable = true },
-            indent = { enable = true }
+            indent = { enable = true },
+            refactor = {
+              smart_rename = {
+                enable = true,
+                keymaps = { smart_rename = "gr" }
+              },
+              navigation = {
+                enable = true,
+                keymaps = { goto_definition = "gd" }
+              }
+            }
           }
           EOF
         '';
