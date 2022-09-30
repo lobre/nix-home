@@ -53,6 +53,9 @@
           PS1="\[\e]0;\h: \W\a\]$PS1"
           ;;
       esac
+
+      # Leave ctrl-s to bash history forward (instead of terminal freeze)
+      stty -ixon
     '';
   };
 }
