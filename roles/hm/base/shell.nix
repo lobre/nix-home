@@ -24,13 +24,7 @@
         ansiBrightBlue = ''\[\033[1;34m\]'';
         ansiYellow = ''\[\033[0;33m\]'';
         ansiReset = ''\[\033[0m\]'';
-      in
-
-      # We use mkOrder so that it is included before fzf logic for completion to work.
-      # See https://github.com/nix-community/home-manager/commit/80d23ee06cff0d0bef20b9327566f7de2498f4cb
-      # Effectively, fzf relies on previously defined completion in its logic.
-      # https://github.com/junegunn/fzf/blob/edac9820b54d8db7ef667c2d79b9e526c625f59d/shell/completion.bash#L320.
-      lib.mkOrder 200 ''
+      in ''
 
       # Completion is not yet added by home manager
       # see https://github.com/nix-community/home-manager/issues/1464
@@ -59,43 +53,7 @@
           PS1="\[\e]0;\h: \W\a\]$PS1"
           ;;
       esac
-
-      # Used as binding to find and inline a git project path found under current dir
-      fzf-git-project() {
-          local selected=$(eval "fd --type directory --no-ignore-vcs --hidden '^\.git$' . --exec echo '{//}'" |
-              FZF_DEFAULT_OPTS="--height 40% --bind=ctrl-z:ignore --reverse $FZF_DEFAULT_OPTS -m" $(__fzfcmd) "$@" |
-              while read -r item; do printf '%q ' "$item"; done
-          )
-
-          READLINE_LINE="''${READLINE_LINE:0:$READLINE_POINT}$selected''${READLINE_LINE:$READLINE_POINT}"
-          READLINE_POINT=$(( READLINE_POINT + ''${#selected} ))
-      }
-
-      # Map above function to ctrl-g
-      bind -m emacs-standard -x '"\C-g": fzf-git-project'
     '';
-  };
-
-  programs.readline = {
-    enable = true;
-    extraConfig = "set completion-ignore-case on";
-  };
-
-  programs.fzf = {
-    enable = true;
-    enableBashIntegration = true;
-
-    defaultCommand = "fd --type file";
-    defaultOptions = [
-      "--bind ctrl-a:toggle-all"
-      "--bind ctrl-/:toggle-preview"
-      "--bind ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down"
-      "--preview-window hidden"
-      "--color=bg+:-1"
-    ];
-
-    changeDirWidgetCommand = "fd --type directory";
-    fileWidgetCommand = "fd";
   };
 }
 
