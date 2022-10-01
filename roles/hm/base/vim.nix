@@ -29,7 +29,6 @@
       set scrollback=50000  " Lines to keep in terminal buffer
 
       " Completion menu
-      set completeopt=menuone,noinsert,noselect  " don’t select first in completion
       set wildmode=longest:full,full
 
       " Mininal clutter on the interface
