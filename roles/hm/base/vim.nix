@@ -52,10 +52,6 @@
       autocmd BufWritePost *.go silent execute "!gofmt -w " . expand('%')
       autocmd BufWritePost *.zig silent execute "!zig fmt " . expand('%')
 
-      " Use git grep
-      set grepprg=git\ -c\ grep.fallbackToNoIndex\ --no-pager\ grep\ --no-color\ -nI
-      set grepformat=%f:%l:%c:%m,%f:%l:%m,%f
-
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
