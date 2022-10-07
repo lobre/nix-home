@@ -49,7 +49,8 @@
       autocmd FileType json setlocal shiftwidth=2 tabstop=2
 
       " Formatter on save for specific languages
-      autocmd BufWritePost *.go silent execute "!gofmt -w " . expand('%')
+      autocmd BufWritePost *.elm silent execute "!elm-format --yes " . expand('%')
+      autocmd BufWritePost *.go  silent execute "!gofmt -w " . expand('%')
       autocmd BufWritePost *.zig silent execute "!zig fmt " . expand('%')
 
       " Save with sudo
@@ -82,23 +83,11 @@
 
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
+
+      " Disable default omnicompletion with C-c from sql
+      let g:omni_sql_no_default_maps = 1
     '';
 
-    plugins = with pkgs.vimPlugins; [
-      emmet-vim
-      nvim-treesitter-context
-
-      {
-        plugin = nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars);
-        config = ''
-          lua <<EOF
-          require('nvim-treesitter.configs').setup {
-            highlight = { enable = true },
-            indent = { enable = true },
-          }
-          EOF
-        '';
-      }
-    ];
+    plugins = with pkgs.vimPlugins; [ vim-nix { plugin = zig-vim; config = "let g:zig_fmt_autosave = 0"; } ];
   };
 }
