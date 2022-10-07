@@ -18,6 +18,8 @@ in
     elmPackages.elm-review
     elmPackages.elm-test
 
+    gotools
+
     nodejs
     tailwindcss
 

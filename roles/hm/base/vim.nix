@@ -50,7 +50,7 @@
 
       " Formatter on save for specific languages
       autocmd BufWritePost *.elm silent execute "!elm-format --yes " . expand('%')
-      autocmd BufWritePost *.go  silent execute "!gofmt -w " . expand('%')
+      autocmd BufWritePost *.go  silent execute "!gofmt -w " . expand('%') . " && goimports -w " . expand('%')
       autocmd BufWritePost *.zig silent execute "!zig fmt " . expand('%')
 
       " Save with sudo
