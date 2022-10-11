@@ -48,6 +48,9 @@
       autocmd FileType html setlocal shiftwidth=2 tabstop=2
       autocmd FileType json setlocal shiftwidth=2 tabstop=2
 
+      " Documentation with K (using bash version for pager)
+      autocmd FileType go setlocal keywordprg=:!go\ doc
+
       " Formatter on save for specific languages
       autocmd BufWritePost *.elm silent execute "!elm-format --yes " . expand('%')
       autocmd BufWritePost *.go  silent execute "!goimports -w " . expand('%') . " && gofmt -w " . expand('%')
