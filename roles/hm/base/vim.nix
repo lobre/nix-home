@@ -25,7 +25,6 @@
 
       " General options
       set hidden            " No need to save a buffer before switching
-      set mouse=a           " Enable mouse mode
       set scrollback=50000  " Lines to keep in terminal buffer
       set shortmess+=I      " Disable intro page
 
@@ -41,9 +40,6 @@
       autocmd FileType go   setlocal noexpandtab
       autocmd FileType html setlocal shiftwidth=2 tabstop=2
       autocmd FileType json setlocal shiftwidth=2 tabstop=2
-
-      " Documentation with K (using bash version for pager)
-      autocmd FileType go setlocal keywordprg=:!go\ doc
 
       " Formatter on save for specific languages
       autocmd BufWritePost *.elm silent execute "!elm-format --yes " . expand('%')
