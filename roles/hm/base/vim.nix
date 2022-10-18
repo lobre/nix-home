@@ -27,16 +27,10 @@
       set hidden            " No need to save a buffer before switching
       set mouse=a           " Enable mouse mode
       set scrollback=50000  " Lines to keep in terminal buffer
+      set shortmess+=I      " Disable intro page
 
       " Completion menu
       set wildmode=longest:full,full
-
-      " Mininal clutter on the interface
-      set laststatus=1  " Status line only if there are two windows
-      set noruler
-      set noshowcmd
-      set noshowmode
-      set shortmess+=I  " Disable intro page
 
       " Default tabs count parameters
       set expandtab
