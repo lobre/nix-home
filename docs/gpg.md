@@ -126,3 +126,25 @@ gpg> quit
 The key should then not exist anymore in your local keyring as it has been moved to the key. To note that a key cannot be moved back from a Yubikey to a local keyring. If lost, it will have to be regenerated, or recreated from a paper/file version.
 
 When moved to a Yubikey, the passphrase is only required once at import time, and then won’t be stored on the key. Instead, the Yubikey is protected using an admin PIN.
+
+### Change PIN & Admin PIN
+
+Enter in card edition mode.
+
+```
+gpg --card-edit
+```
+
+Note that the `PIN retry counter : 3 0 3` numbers have the following meanings.
+* 1st number - PIN retries remaining
+* 2nd number - Reset Code retries remaining (there is no reset code by default, you have to set one if you want one, so you should see 0 here)
+* 3rd number - Admin PIN retries remaining
+
+Use the following commands to go in admin.
+
+```
+gpg/card> admin
+```
+Use `passwd` to display the choices to either change PIN or Admin PIN.
+
+Note: the default PIN is `123456` and the default admin PIN is `12345678`.
