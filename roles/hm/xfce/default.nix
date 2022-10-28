@@ -4,6 +4,7 @@
   xdg.enable = true;
 
   home.packages = with pkgs; [
+    calibre
     discord
     filezilla
     firefox
