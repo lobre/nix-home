@@ -68,6 +68,7 @@ in
   imports = [
     ./git.nix
     ./gpg.nix
+    ./kakoune.nix
     ./lang.nix
     ./shell.nix
     ./tmux.nix
