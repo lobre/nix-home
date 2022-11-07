@@ -11,6 +11,8 @@
 
       map global normal { '<a-:> <a-;> [p'
       map global normal } '<a-:> ]p'
+
+      def find -params 1 -shell-script-candidates %{ git ls-files } %{ edit %arg{1} }
     '';
   };
 }
