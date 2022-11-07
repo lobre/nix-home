@@ -9,10 +9,13 @@
 
     config = {
       colorScheme = "ansi";
-      ui.assistant = "none";
-
       indentWidth = 4;
       tabStop = 4;
+
+      ui = {
+        assistant = "none";
+        enableMouse = true;
+      };
     };
 
     extraConfig = ''
