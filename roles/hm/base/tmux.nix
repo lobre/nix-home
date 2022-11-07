@@ -3,7 +3,7 @@
 {
   programs.tmux = {
     enable = true;
-    terminal = "screen-256color";
+    terminal = "tmux-256color";
     keyMode = "vi";
     customPaneNavigationAndResize = true; # remap to use hjkl to switch windows
     disableConfirmationPrompt = true; # don't prompt when killing pane
@@ -19,7 +19,7 @@
 
       # simple status line
       set-option -g status-style bg=default
-      set-option -g status-justify centre
+      set-option -g status-justify left
       set-option -g status-left ""
       set-option -g status-right "⧉ #S"
 
