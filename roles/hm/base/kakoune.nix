@@ -2,16 +2,15 @@
 
 {
   # colorscheme
-  xdg.configFile."kak/colors/default.kak".source = ./theme.kak;
+  xdg.configFile."kak/colors/ansi.kak".source = ./ansi.kak;
 
   programs.kakoune = {
     enable = true;
+    config = {
+      colorScheme = "ansi";
+      ui.assistant = "none";
+    };
     extraConfig = ''
-      set global ui_options terminal_assistant=none
-
-      map global normal { '<a-:> <a-;> [p'
-      map global normal } '<a-:> ]p'
-
       def find -params 1 -shell-script-candidates %{ git ls-files } %{ edit %arg{1} }
     '';
   };

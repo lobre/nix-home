@@ -1,4 +1,4 @@
-# My custom ansi theme
+# Custom ansi theme
 
 # For Code
 face global value bright-blue
@@ -26,9 +26,9 @@ face global list default
 
 # builtin faces
 face global Default default,default
-face global PrimarySelection black,blue+fg
-face global SecondarySelection black,bright-blue+fg
-face global PrimaryCursor default+r
+face global PrimarySelection black,bright-blue+fg
+face global SecondarySelection default,black+g
+face global PrimaryCursor black,white+fg
 face global SecondaryCursor default+r
 face global PrimaryCursorEol black,white+fg
 face global SecondaryCursorEol black,white+fg
