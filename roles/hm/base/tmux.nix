@@ -26,10 +26,6 @@
       # only let tmux wait 20ms for escape
       set-option -g escape-time 20
 
-      # split above and left as in vim
-      bind-key '"' split-window -vb
-      bind-key % split-window -hb
-
       # session name was stripped as too small
       set -g status-left-length 50
 

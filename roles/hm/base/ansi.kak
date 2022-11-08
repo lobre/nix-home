@@ -26,8 +26,8 @@ face global list   default
 
 # builtin faces
 face global Default            default,default
-face global PrimarySelection   black,blue+fg
-face global SecondarySelection black,bright-blue+fg
+face global PrimarySelection   black,bright-blue+fg
+face global SecondarySelection black,blue+fg
 face global PrimaryCursor      default+r
 face global SecondaryCursor    default+r
 face global PrimaryCursorEol   black,white+fg
@@ -47,6 +47,6 @@ face global StatusLineInfo     bright-black,default
 face global StatusLineValue    green,default
 face global StatusCursor       black,white
 face global Prompt             yellow,default
-face global MatchingChar       default,default+b
+face global MatchingChar       default,default+u
 face global Whitespace         default,default+fd
-face global BufferPadding      blue,default
+face global BufferPadding      bright-black,default

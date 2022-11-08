@@ -11,6 +11,7 @@
       colorScheme = "ansi";
       indentWidth = 4;
       tabStop = 4;
+      showMatching = true;
 
       ui = {
         assistant = "none";
