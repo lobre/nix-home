@@ -21,6 +21,9 @@
 
     extraConfig = ''
       def find -params 1 -shell-script-candidates %{ git ls-files } %{ edit %arg{1} }
+
+      # hide changelog on startup
+      set global startup_info_version 20211108
     '';
   };
 }
