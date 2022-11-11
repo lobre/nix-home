@@ -26,6 +26,15 @@ let
     "${black};${red};${green};${yellow};${blue};${magenta};${cyan};${white};${brightBlack};${brightRed};${brightGreen};${brightYellow};${brightBlue};${brightMagenta};${brightCyan};${brightWhite}";
 
 in {
+  # theme
+  xdg.dataFile."xfce4/terminal/colorschemes/custom.theme".text = ''
+    [Scheme]
+    Name=Custom
+    ColorForeground=${foreground}
+    ColorBackground=${background}
+    ColorPalette=${palette}
+  '';
+
   # keyboard shortcuts
   xdg.configFile."xfce4/terminal/accels.scm".text = ''
     (gtk_accel_path "<Actions>/terminal-window/next-tab" "<Primary>Tab")
