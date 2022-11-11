@@ -3,9 +3,7 @@
 {
   _module.args.secrets = import ../../secrets.nix;
 
-  imports = [
-    ../../roles/hm/base
-  ];
+  imports = [ ../../roles/hm/base ];
 
   home.stateVersion = "21.11";
 }

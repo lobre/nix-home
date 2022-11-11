@@ -39,16 +39,16 @@
   ];
 
   # Create a krita desktop file to launch without Open GL for non NixOS
-  xdg.systemDirs.data = let 
+  xdg.systemDirs.data = let
     kritaNoGLDesktop = pkgs.makeDesktopItem {
-       name = "Krita No GL";
-       desktopName = "Krita No GL";
-       genericName = "Digital Painting";
-       comment = "Digital Painting";
-       exec = "env QT_XCB_GL_INTEGRATION=none krita %F";
-       icon = "krita";
-       categories = [ "Qt" "KDE" "Graphics" "2DGraphics" "RasterGraphics" ];
-       type = "Application";
+      name = "Krita No GL";
+      desktopName = "Krita No GL";
+      genericName = "Digital Painting";
+      comment = "Digital Painting";
+      exec = "env QT_XCB_GL_INTEGRATION=none krita %F";
+      icon = "krita";
+      categories = [ "Qt" "KDE" "Graphics" "2DGraphics" "RasterGraphics" ];
+      type = "Application";
     };
   in [ "${kritaNoGLDesktop}/share" ];
 
@@ -70,8 +70,5 @@
 
   fonts.fontconfig.enable = true;
 
-  imports = [
-    ./terminal.nix
-    ./xfconf.nix
-  ];
+  imports = [ ./terminal.nix ./xfconf.nix ];
 }

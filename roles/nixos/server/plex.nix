@@ -13,9 +13,7 @@
       };
 
       services = {
-        plex.loadBalancer.servers = [
-          { url = "http://127.0.0.1:32400"; }
-        ];
+        plex.loadBalancer.servers = [{ url = "http://127.0.0.1:32400"; }];
       };
     };
 

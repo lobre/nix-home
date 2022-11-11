@@ -32,11 +32,7 @@
           tlsChallenge = true;
         };
 
-        providers = {
-          docker = {
-            exposedbydefault = false;
-          };
-        };
+        providers = { docker = { exposedbydefault = false; }; };
       };
 
       dynamicConfigOptions.http.middlewares = {
@@ -49,9 +45,6 @@
     };
   };
 
-  imports = [
-    ./plex.nix
-    ./deluge.nix
-  ];
+  imports = [ ./plex.nix ./deluge.nix ];
 }
 

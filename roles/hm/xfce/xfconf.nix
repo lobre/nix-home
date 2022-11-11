@@ -15,7 +15,8 @@ let
     vendorSha256 = "1fzlslz9xr3jay9kpvrg7sj1a0c1f1m1kn5rnis49hvlr1sc00d0";
 
     meta = with lib; {
-      description = "A xfconf-query wrapper to apply configurations from a json file";
+      description =
+        "A xfconf-query wrapper to apply configurations from a json file";
       homepage = "https://github.com/lobre/xfconf-query";
       license = licenses.mit;
     };
@@ -48,9 +49,11 @@ let
     };
 
     "xfce4-desktop" = {
-      "/backdrop/screen0/monitoreDP-1/workspace0/last-image" = "${wallpaper}/wallpaper.jpg";
+      "/backdrop/screen0/monitoreDP-1/workspace0/last-image" =
+        "${wallpaper}/wallpaper.jpg";
       "/backdrop/screen0/monitoreDP-1/workspace0/color-style" = 0; # solid color
-      "/backdrop/screen0/monitoreDP-1/workspace0/rgba1" = [ 0.999999 0.999999 0.999999 0.999999 ]; # 1.0 would turn into integer
+      "/backdrop/screen0/monitoreDP-1/workspace0/rgba1" =
+        [ 0.999999 0.999999 0.999999 0.999999 ]; # 1.0 would turn into integer
       "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 4; # scaled
       "/desktop-icons/style" = 0;
     };
@@ -75,7 +78,8 @@ let
       "/general/cycle_draw_frame" = true; # blue frame when cycling with alt-tab
       "/general/cycle_preview" = true; # thumbnails when cycling with alt-tab
       "/general/cycle_tabwin_mode" = 0; # don’t cycle through windows in a list
-      "/general/wrap_windows" = false; # don’t move window to other workspace when approaching border
+      "/general/wrap_windows" =
+        false; # don’t move window to other workspace when approaching border
     };
 
     "xfce4-keyboard-shortcuts" = {
@@ -202,22 +206,20 @@ let
       "/log-level" = 0; # only during do not disturb mode
     };
 
-    "xfce4-power-manager" = {
-      "/xfce4-power-manager/show-tray-icon" = true;
-    };
+    "xfce4-power-manager" = { "/xfce4-power-manager/show-tray-icon" = true; };
   };
 
   configFile = pkgs.writeText "xfconf.json" (builtins.toJSON config);
-in
 
-{
+in {
   home.packages = with pkgs; [ xfconfDump ];
 
-  home.activation.xfconfSettings = lib.hm.dag.entryAfter ["installPackages"] ''
-    if [[ -v DRY_RUN ]]; then
-      ${xfconfJson}/bin/xfconf-json -bin ${pkgs.xfce.xfconf}/bin/xfconf-query -file ${configFile} -bash
-    else
-      ${xfconfJson}/bin/xfconf-json -bin ${pkgs.xfce.xfconf}/bin/xfconf-query -file ${configFile}
-    fi
-  '';
+  home.activation.xfconfSettings =
+    lib.hm.dag.entryAfter [ "installPackages" ] ''
+      if [[ -v DRY_RUN ]]; then
+        ${xfconfJson}/bin/xfconf-json -bin ${pkgs.xfce.xfconf}/bin/xfconf-query -file ${configFile} -bash
+      else
+        ${xfconfJson}/bin/xfconf-json -bin ${pkgs.xfce.xfconf}/bin/xfconf-query -file ${configFile}
+      fi
+    '';
 }

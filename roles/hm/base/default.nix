@@ -9,9 +9,8 @@ let
     fi
     exec "/home/$user/lab/github.com/lobre/nix-home/nix-switch.sh" "$@"
   '';
-in
 
-{
+in {
   nixpkgs.config = { allowUnfree = true; };
 
   programs.home-manager.enable = true;
@@ -22,8 +21,8 @@ in
   xdg.enable = true;
 
   programs.bash.profileExtra = ''
-      # Add bin in PATH if not already existing
-      [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
+    # Add bin in PATH if not already existing
+    [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
   '';
 
   home.username = secrets.username;
@@ -61,7 +60,7 @@ in
     universal-ctags
     unrar
     unzip
-    wget 
+    wget
     yq-go
   ];
 

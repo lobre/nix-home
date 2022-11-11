@@ -18,23 +18,14 @@
     displayManager.lightdm = {
       enable = true;
 
-      greeters.gtk.indicators = [
-        "~host"
-        "~spacer"
-        "~clock"
-        "~spacer"
-        "~session"
-        "~power"
-      ];
+      greeters.gtk.indicators =
+        [ "~host" "~spacer" "~clock" "~spacer" "~session" "~power" ];
     };
   };
 
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
-      thunar-archive-plugin
-      thunar-volman
-    ];
+    plugins = with pkgs.xfce; [ thunar-archive-plugin thunar-volman ];
   };
 
   programs.file-roller.enable = true;

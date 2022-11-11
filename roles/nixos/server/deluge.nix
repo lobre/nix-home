@@ -1,13 +1,12 @@
 { config, pkgs, secrets, ... }:
 
-let 
+let
   authFile = pkgs.writeText "deluge-auth" ''
     localclient:${secrets.deluge.password}:10
     ${secrets.deluge.user}:${secrets.deluge.password}:10
   '';
-in
 
-{
+in {
   services = {
     traefik.dynamicConfigOptions.http = {
       routers = {
@@ -20,9 +19,7 @@ in
       };
 
       services = {
-        deluge.loadBalancer.servers = [
-          { url = "http://127.0.0.1:8112"; }
-        ];
+        deluge.loadBalancer.servers = [{ url = "http://127.0.0.1:8112"; }];
       };
     };
 

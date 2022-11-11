@@ -9,9 +9,8 @@ let
     export __VK_LAYER_NV_optimus=NVIDIA_only
     exec -a "$0" "$@"
   '';
-in
 
-{
+in {
   _module.args.secrets = import ../../secrets.nix;
 
   environment.systemPackages = [ nvidia-offload ];

@@ -1,31 +1,31 @@
 { pkgs, ... }:
 
 let
-  black="#243137";
-  red="#fc3841";
-  green="#5cf19e";
-  yellow="#fed032";
-  blue="#37b6ff";
-  magenta="#fc226e";
-  cyan="#59ffd1";
-  white="#ffffff";
+  black = "#243137";
+  red = "#fc3841";
+  green = "#5cf19e";
+  yellow = "#fed032";
+  blue = "#37b6ff";
+  magenta = "#fc226e";
+  cyan = "#59ffd1";
+  white = "#ffffff";
 
-  brightBlack="#84A6B8";
-  brightRed="#fc746d";
-  brightGreen="#adf7be";
-  brightYellow="#fee16c";
-  brightBlue="#70cfff";
-  brightMagenta="#fc669b";
-  brightCyan="#9affe6";
-  brightWhite="#ffffff";
+  brightBlack = "#84A6B8";
+  brightRed = "#fc746d";
+  brightGreen = "#adf7be";
+  brightYellow = "#fee16c";
+  brightBlue = "#70cfff";
+  brightMagenta = "#fc669b";
+  brightCyan = "#9affe6";
+  brightWhite = "#ffffff";
 
-  background="#1d262a";
-  foreground="#e7ebed";
+  background = "#1d262a";
+  foreground = "#e7ebed";
 
-  palette = "${black};${red};${green};${yellow};${blue};${magenta};${cyan};${white};${brightBlack};${brightRed};${brightGreen};${brightYellow};${brightBlue};${brightMagenta};${brightCyan};${brightWhite}";
-in
+  palette =
+    "${black};${red};${green};${yellow};${blue};${magenta};${cyan};${white};${brightBlack};${brightRed};${brightGreen};${brightYellow};${brightBlue};${brightMagenta};${brightCyan};${brightWhite}";
 
-{
+in {
   # keyboard shortcuts
   xdg.configFile."xfce4/terminal/accels.scm".text = ''
     (gtk_accel_path "<Actions>/terminal-window/next-tab" "<Primary>Tab")

@@ -19,8 +19,6 @@
   programs.ssh = {
     enable = true;
 
-    extraOptionOverrides = {
-      Include = "config.local";
-    };
+    extraOptionOverrides = { Include = "config.local"; };
   };
 }

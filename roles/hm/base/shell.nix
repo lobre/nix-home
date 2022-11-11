@@ -14,17 +14,14 @@
       LESS = "-R --mouse";
     };
 
-    shellAliases = {
-      "ls" = "ls --color";
-    };
+    shellAliases = { "ls" = "ls --color"; };
 
-    initExtra =
-      let
-        ansiBrightGreen = ''\[\033[1;32m\]'';
-        ansiBrightBlue = ''\[\033[1;34m\]'';
-        ansiYellow = ''\[\033[0;33m\]'';
-        ansiReset = ''\[\033[0m\]'';
-      in ''
+    initExtra = let
+      ansiBrightGreen = "\\[\\033[1;32m\\]";
+      ansiBrightBlue = "\\[\\033[1;34m\\]";
+      ansiYellow = "\\[\\033[0;33m\\]";
+      ansiReset = "\\[\\033[0m\\]";
+    in ''
 
       # Completion is not yet added by home manager
       # see https://github.com/nix-community/home-manager/issues/1464
