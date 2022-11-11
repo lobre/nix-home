@@ -9,16 +9,12 @@ let
       pkgs.nodePackages."@tailwindcss/typography"
     ];
   });
-in
 
-{
+in {
   home.packages = with pkgs; [
     elmPackages.elm
-    elmPackages.elm-format
     elmPackages.elm-review
     elmPackages.elm-test
-
-    gotools
 
     nodejs
     tailwindcss
@@ -27,10 +23,6 @@ in
 
     php81
     php81Packages.composer
-
-    cargo
-    rustc
-    rustfmt
 
     zig
   ];
@@ -44,8 +36,19 @@ in
   home.sessionVariables.GOROOT = "${pkgs.go}/share/go";
 
   programs.bash.profileExtra = ''
-      # Add go bin in PATH if not already existing
-      [[ ":$PATH:" != *":$GOPATH/bin:"* ]] && export PATH="$PATH:$GOPATH/bin"
+    # Add go bin in PATH if not already existing
+    [[ ":$PATH:" != *":$GOPATH/bin:"* ]] && export PATH="$PATH:$GOPATH/bin"
+  '';
+
+  # Zig ctags support
+  xdg.configFile."ctags/zig.ctags".text = ''
+    --langdef=Zig
+    --langmap=Zig:.zig
+    --regex-Zig=/fn +([a-zA-Z0-9_]+) *\(/\1/f,functions,function definitions/
+    --regex-Zig=/(var|const) *([a-zA-Z0-9_]+) *= *(extern|packed)? *struct/\2/s,structs,struct definitions/
+    --regex-Zig=/(var|const) *([a-zA-Z0-9_]+) *= *(extern|packed)? *enum/\2/e,enums,enum definitions/
+    --regex-Zig=/(var|const) *([a-zA-Z0-9_]+) *= *(extern|packed)? *union/\2/u,unions,union definitions/
+    --regex-Zig=/(var|const) *([a-zA-Z0-9_]+) *= *error/\2/E,errors,error definitions/
   '';
 }
 

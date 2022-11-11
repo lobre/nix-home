@@ -1,19 +1,8 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
 {
   # Colorscheme
   xdg.configFile."nvim/colors/ansi.vim".source = ./ansi.vim;
-
-  # Zig ctags support
-  xdg.configFile."ctags/zig.ctags".text = ''
-    --langdef=Zig
-    --langmap=Zig:.zig
-    --regex-Zig=/fn +([a-zA-Z0-9_]+) *\(/\1/f,functions,function definitions/
-    --regex-Zig=/(var|const) *([a-zA-Z0-9_]+) *= *(extern|packed)? *struct/\2/s,structs,struct definitions/
-    --regex-Zig=/(var|const) *([a-zA-Z0-9_]+) *= *(extern|packed)? *enum/\2/e,enums,enum definitions/
-    --regex-Zig=/(var|const) *([a-zA-Z0-9_]+) *= *(extern|packed)? *union/\2/u,unions,union definitions/
-    --regex-Zig=/(var|const) *([a-zA-Z0-9_]+) *= *error/\2/E,errors,error definitions/
-  '';
 
   programs.neovim = {
     enable = true;
@@ -42,9 +31,10 @@
       autocmd FileType json setlocal shiftwidth=2 tabstop=2
 
       " Formatter on save for specific languages
-      autocmd BufWritePost *.elm silent execute "!elm-format --yes " . expand('%')
-      autocmd BufWritePost *.go  silent execute "!goimports -w " . expand('%') . " && gofmt -w " . expand('%')
-      autocmd BufWritePost *.zig silent execute "!zig fmt " . expand('%')
+      autocmd BufWritePost *.elm silent execute "!${pkgs.elmPackages.elm-format}/bin/elm-format --yes " . expand('%')
+      autocmd BufWritePost *.go  silent execute "!${pkgs.gotools}/bin/goimports -w " . expand('%') . " && ${config.programs.go.package}/bin/gofmt -w " . expand('%')
+      autocmd BufWritePost *.nix silent execute "!${pkgs.nixfmt}/bin/nixfmt " . expand('%')
+      autocmd BufWritePost *.zig silent execute "!${pkgs.zig}/bin/zig fmt " . expand('%')
 
       " Save with sudo
       command! W w !sudo tee % > /dev/null
@@ -81,6 +71,12 @@
       let g:omni_sql_no_default_maps = 1
     '';
 
-    plugins = with pkgs.vimPlugins; [ vim-nix { plugin = zig-vim; config = "let g:zig_fmt_autosave = 0"; } ];
+    plugins = with pkgs.vimPlugins; [
+      vim-nix
+      {
+        plugin = zig-vim;
+        config = "let g:zig_fmt_autosave = 0";
+      }
+    ];
   };
 }
