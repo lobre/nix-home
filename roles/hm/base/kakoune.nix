@@ -93,10 +93,10 @@
 
       define-command whitespaces-toggle -docstring 'toggle whitespaces' %{
         try %{
-          add-highlighter window/whitespaces show-whitespaces -tab '→' -spc '·' -nbsp '␣' -lf '↲'
+          add-highlighter global/whitespaces show-whitespaces -tab '→' -spc '·' -nbsp '␣' -lf '↲'
           echo -markup "{Information}whitespaces enabled"
         } catch %{
-          remove-highlighter window/whitespaces
+          remove-highlighter global/whitespaces
           echo -markup "{Information}whitespaces disabled"
         }
       }
