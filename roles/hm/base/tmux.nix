@@ -15,11 +15,11 @@
 
       # terminal title
       set-option -g set-titles on
-      set-option -g set-titles-string "#S / #W"
+      set-option -g set-titles-string "#T"
 
       # simple status line
       set-option -g status-style bg=default
-      set-option -g status-justify left
+      set-option -g status-justify centre
       set-option -g status-left ""
       set-option -g status-right "⧉ #S"
 

@@ -33,6 +33,7 @@ face global SecondaryCursor    default+r
 face global PrimaryCursorEol   black,white+fg
 face global SecondaryCursorEol black,white+fg
 face global LineNumbers        bright-black,default
+face global LineNumbersWrapped LineNumbers
 face global LineNumberCursor   white,default
 face global MenuForeground     black,blue
 face global MenuBackground     white,black
@@ -41,7 +42,7 @@ face global Information        bright-yellow,default
 face global Error              black,red
 face global DiagnosticError    red
 face global DiagnosticWarning  yellow
-face global StatusLine         default,default
+face global StatusLine         default,black
 face global StatusLineMode     yellow,default+b
 face global StatusLineInfo     bright-black,default
 face global StatusLineValue    green,default

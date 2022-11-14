@@ -16,6 +16,7 @@
       set hidden            " No need to save a buffer before switching
       set scrollback=50000  " Lines to keep in terminal buffer
       set shortmess+=I      " Disable intro page
+      set title             " Set terminal title
 
       " Completion menu
       set wildmode=longest:full,full

@@ -15,6 +15,7 @@
       ui = {
         assistant = "none";
         enableMouse = true;
+        setTitle = true;
       };
 
       hooks = [
@@ -74,9 +75,44 @@
     extraConfig = ''
       set-option global startup_info_version 20211108
 
-      add-highlighter global/ wrap
+      define-command find -params 1 -docstring 'find a file' -shell-script-candidates %{
+        git ls-files --recurse-submodules
+      } %{
+        edit %arg{1}
+      }
 
-      define-command find -params 1 -shell-script-candidates %{ git ls-files --recurse-submodules } %{ edit %arg{1} }
+      define-command line-numbers-toggle -docstring 'toggle line numbers' %{
+        try %{
+          add-highlighter global/line-numbers number-lines -separator ' ' -hlcursor
+          echo -markup "{Information}line numbers enabled"
+        } catch %{
+          remove-highlighter global/line-numbers
+          echo -markup "{Information}line numbers disabled"
+        }
+      }
+
+      define-command whitespaces-toggle -docstring 'toggle whitespaces' %{
+        try %{
+          add-highlighter window/whitespaces show-whitespaces -tab '→' -spc '·' -nbsp '␣' -lf '↲'
+          echo -markup "{Information}whitespaces enabled"
+        } catch %{
+          remove-highlighter window/whitespaces
+          echo -markup "{Information}whitespaces disabled"
+        }
+      }
+
+      define-command wrap-toggle -docstring 'toggle soft wrap' %{
+        try %{
+          add-highlighter global/wrap wrap
+          echo -markup "{Information}soft wrap enabled"
+        } catch %{
+          remove-highlighter global/wrap
+          echo -markup "{Information}soft wrap disabled"
+        }
+      }
+
+      # enable wrapping
+      wrap-toggle
     '';
   };
 }
