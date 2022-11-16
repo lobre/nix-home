@@ -24,8 +24,8 @@
     sqlitebrowser
     teams
     vlc
-    xclip
     xdotool
+    xsel
 
     # font
     (iosevka.override {

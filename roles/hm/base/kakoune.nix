@@ -69,50 +69,58 @@
             set-option buffer indentwidth 2
           '';
         }
+        {
+          name = "WinCreate";
+          option = ".*";
+          commands = "wrap-enable";
+        }
+      ];
+
+      keyMappings = [
+        {
+          mode = "user";
+          key = "y";
+          effect = "<a-|>${pkgs.xsel}/bin/xsel --input --clipboard<ret>";
+          docstring = "yank to clipboard";
+        }
+        {
+          mode = "user";
+          key = "p";
+          effect = "<a-!>${pkgs.xsel}/bin/xsel --output --clipboard<ret>";
+          docstring = "paste after from clipboard";
+        }
+        {
+          mode = "user";
+          key = "P";
+          effect = "!${pkgs.xsel}/bin/xsel --output --clipboard<ret>";
+          docstring = "paste before from clipboard";
+        }
+        {
+          mode = "user";
+          key = "R";
+          effect = "|${pkgs.xsel}/bin/xsel --output --clipboard<ret>";
+          docstring = "replace from clipboard";
+        }
       ];
     };
 
     extraConfig = ''
-      set-option global startup_info_version 20211108
+      set global startup_info_version 20211108
 
-      define-command find -params 1 -docstring 'find a file' -shell-script-candidates %{
-        git ls-files --recurse-submodules
-      } %{
-        edit %arg{1}
-      }
+      declare-option str-list findcmd git ls-files --recurse-submodules
+      declare-option str-list line_numbers_flags -separator ' ' -hlcursor
+      declare-option str-list whitespaces_flags -tab '→' -spc '·' -nbsp '␣' -lf '↲'
 
-      define-command line-numbers-toggle -docstring 'toggle line numbers' %{
-        try %{
-          add-highlighter global/line-numbers number-lines -separator ' ' -hlcursor
-          echo -markup "{Information}line numbers enabled"
-        } catch %{
-          remove-highlighter global/line-numbers
-          echo -markup "{Information}line numbers disabled"
-        }
-      }
+      def find -params 1 -shell-script-candidates "%opt{findcmd}" "edit %arg{1}"
 
-      define-command whitespaces-toggle -docstring 'toggle whitespaces' %{
-        try %{
-          add-highlighter global/whitespaces show-whitespaces -tab '→' -spc '·' -nbsp '␣' -lf '↲'
-          echo -markup "{Information}whitespaces enabled"
-        } catch %{
-          remove-highlighter global/whitespaces
-          echo -markup "{Information}whitespaces disabled"
-        }
-      }
+      def line-numbers-enable %{ addhl -override global/line-numbers number-lines %opt{line_numbers_flags} }
+      def line-numbers-disable "global/line-numbers"
 
-      define-command wrap-toggle -docstring 'toggle soft wrap' %{
-        try %{
-          add-highlighter global/wrap wrap
-          echo -markup "{Information}soft wrap enabled"
-        } catch %{
-          remove-highlighter global/wrap
-          echo -markup "{Information}soft wrap disabled"
-        }
-      }
+      def whitespaces-enable %{ addhl -override window/whitespaces show-whitespaces %opt{whitespaces_flags} }
+      def whitespaces-disable "remove-highlighter window/whitespaces"
 
-      # enable wrapping
-      wrap-toggle
+      def wrap-enable "addhl -override window/wrap wrap"
+      def wrap-disable "remove-highlighter window/wrap"
     '';
   };
 }

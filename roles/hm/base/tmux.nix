@@ -30,7 +30,7 @@
       set -g status-left-length 50
 
       # copy to clipboard
-      set -s copy-command '${pkgs.xclip}/bin/xclip -in -selection clipboard'
+      set -s copy-command '${pkgs.xsel}/bin/xsel --input --clipboard'
 
       # better mouse selection
       bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-no-clear
