@@ -108,18 +108,18 @@
       set global startup_info_version 20211108
 
       declare-option str-list findcmd git ls-files --recurse-submodules
-      declare-option str-list line_numbers_flags -separator ' ' -hlcursor
-      declare-option str-list whitespaces_flags -tab '→' -spc '·' -nbsp '␣' -lf '↲'
+      declare-option str-list numberflags -separator ' ' -hlcursor
+      declare-option str-list listflags -tab '→' -spc '·' -nbsp '␣' -lf '↲'
 
-      def find -params 1 -shell-script-candidates "%opt{findcmd}" "edit %arg{1}"
+      def find -params 1 -shell-script-candidates "%opt{findcmd}" %{edit %arg{1}}
 
-      def line-numbers-enable %{ addhl -override global/line-numbers number-lines %opt{line_numbers_flags} }
-      def line-numbers-disable "global/line-numbers"
+      def number-enable %{ add-highlighter global/number number-lines %opt{numberflags} }
+      def number-disable "remove-highlighter global/number"
 
-      def whitespaces-enable %{ addhl -override window/whitespaces show-whitespaces %opt{whitespaces_flags} }
-      def whitespaces-disable "remove-highlighter window/whitespaces"
+      def list-enable %{ add-highlighter window/list show-whitespaces %opt{listflags} }
+      def list-disable "remove-highlighter window/list"
 
-      def wrap-enable "addhl -override window/wrap wrap"
+      def wrap-enable "add-highlighter window/wrap wrap"
       def wrap-disable "remove-highlighter window/wrap"
     '';
   };
