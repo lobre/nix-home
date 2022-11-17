@@ -106,6 +106,7 @@
 
     extraConfig = ''
       set global startup_info_version 20211108
+      set global autocomplete prompt
 
       declare-option str-list findcmd git ls-files --recurse-submodules
       declare-option str-list numberflags -separator ' ' -hlcursor

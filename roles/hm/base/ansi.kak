@@ -33,7 +33,7 @@ face global SecondaryCursor    default+r
 face global PrimaryCursorEol   black,white+fg
 face global SecondaryCursorEol black,white+fg
 face global LineNumbers        bright-black,default
-face global LineNumbersWrapped LineNumbers
+face global LineNumbersWrapped bright-black,default+d
 face global LineNumberCursor   white,default
 face global MenuForeground     black,blue
 face global MenuBackground     white,black
