@@ -23,17 +23,20 @@
           name = "BufSetOption";
           option = "filetype=go";
           commands = ''
-            set-option buffer indentwidth 0
-            set-option buffer formatcmd '${pkgs.gotools}/bin/goimports | ${config.programs.go.package}/bin/gofmt'
+            set buffer indentwidth 0
+            set buffer formatcmd '${pkgs.gotools}/bin/goimports | ${config.programs.go.package}/bin/gofmt'
             hook buffer BufWritePre .* format
+
+            set buffer ctagscmd "ctags -R --fields=+S --languages=go --exclude=testdata --exclude=*test.go --exclude=internal --exclude=cmd"
+            set buffer ctagspaths %sh{ echo ". $GOROOT/src" }
           '';
         }
         {
           name = "BufSetOption";
           option = "filetype=zig";
           commands = ''
-            set-option buffer indentwidth 4
-            set-option buffer formatcmd '${pkgs.zig}/bin/zig fmt --stdin'
+            set buffer indentwidth 4
+            set buffer formatcmd '${pkgs.zig}/bin/zig fmt --stdin'
             hook buffer BufWritePre .* format
           '';
         }
@@ -41,8 +44,8 @@
           name = "BufSetOption";
           option = "filetype=elm";
           commands = ''
-            set-option buffer indentwidth 4
-            set-option buffer formatcmd '${pkgs.elmPackages.elm-format}/bin/elm-format --stdin'
+            set buffer indentwidth 4
+            set buffer formatcmd '${pkgs.elmPackages.elm-format}/bin/elm-format --stdin'
             hook buffer BufWritePre .* format
           '';
         }
@@ -50,8 +53,8 @@
           name = "BufSetOption";
           option = "filetype=nix";
           commands = ''
-            set-option buffer indentwidth 2
-            set-option buffer formatcmd ${pkgs.nixfmt}/bin/nixfmt
+            set buffer indentwidth 2
+            set buffer formatcmd ${pkgs.nixfmt}/bin/nixfmt
             hook buffer BufWritePre .* format
           '';
         }
@@ -59,14 +62,14 @@
           name = "BufSetOption";
           option = "filetype=html";
           commands = ''
-            set-option buffer indentwidth 2
+            set buffer indentwidth 2
           '';
         }
         {
           name = "BufSetOption";
           option = "filetype=json";
           commands = ''
-            set-option buffer indentwidth 2
+            set buffer indentwidth 2
           '';
         }
         {
