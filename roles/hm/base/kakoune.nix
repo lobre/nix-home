@@ -36,11 +36,6 @@ in {
       # theme
       colorscheme ansi
 
-      # assign clients
-      set global jumpclient main
-      set global toolsclient tools
-      set global docsclient docs
-
       # default options
       set global indentwidth 4
       set global ui_options terminal_set_title=true terminal_assistant=none terminal_enable_mouse=true
