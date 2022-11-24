@@ -13,7 +13,7 @@ face global attribute     green
 face global comment       bright-black+i
 face global documentation comment
 face global meta          bright-black+b
-face global builtin       default+b
+face global builtin       +b
 
 # for markup
 face global title  yellow+b
@@ -25,29 +25,57 @@ face global bullet green
 face global list   default
 
 # builtin faces
-face global Default            default,default
+face global Default            default
 face global PrimarySelection   black,bright-blue+fg
 face global SecondarySelection black,blue+fg
-face global PrimaryCursor      default+r
-face global SecondaryCursor    default+r
+face global PrimaryCursor      +r
+face global SecondaryCursor    +r
 face global PrimaryCursorEol   black,white+fg
 face global SecondaryCursorEol black,white+fg
-face global LineNumbers        bright-black,default
-face global LineNumbersWrapped bright-black,default+d
-face global LineNumberCursor   white,default
+face global LineNumbers        bright-black
+face global LineNumbersWrapped bright-black+d
+face global LineNumberCursor   white
 face global MenuForeground     black,blue
 face global MenuBackground     white,black
 face global MenuInfo           default
-face global Information        bright-yellow,default
+face global Information        bright-yellow
 face global Error              black,red
-face global DiagnosticError    red
-face global DiagnosticWarning  yellow
-face global StatusLine         default,black
-face global StatusLineMode     yellow,default+b
-face global StatusLineInfo     bright-black,default
-face global StatusLineValue    green,default
+face global StatusLine         white,black
+face global StatusLineMode     yellow+b
+face global StatusLineInfo     bright-black
+face global StatusLineValue    green
 face global StatusCursor       black,white
-face global Prompt             yellow,default
-face global MatchingChar       default,default+u
-face global Whitespace         default,default+fd
-face global BufferPadding      bright-black,default
+face global Prompt             yellow
+face global MatchingChar       +u
+face global Whitespace         +fd
+face global BufferPadding      bright-black
+
+# kak-lsp
+face global InlayHint              +d@type
+face global InlayDiagnosticError   red
+face global InlayDiagnosticWarning yellow
+face global InlayDiagnosticInfo    blue
+face global InlayDiagnosticHint    white
+face global LineFlagError          red
+face global LineFlagWarning        yellow
+face global LineFlagInfo           blue
+face global LineFlagHint           white
+face global DiagnosticError        red+c # from default faces
+face global DiagnosticWarning      yellow+c # from default faces
+face global DiagnosticInfo         +c
+face global DiagnosticHint         +u
+
+# infobox
+face global InfoDefault               Information
+face global InfoBlock                 block
+face global InfoBlockQuote            block
+face global InfoBullet                bullet
+face global InfoHeader                header
+face global InfoLink                  link
+face global InfoLinkMono              header
+face global InfoMono                  mono
+face global InfoRule                  comment
+face global InfoDiagnosticError       InlayDiagnosticError
+face global InfoDiagnosticHint        InlayDiagnosticHint
+face global InfoDiagnosticInformation InlayDiagnosticInfo
+face global InfoDiagnosticWarning     InlayDiagnosticWarning

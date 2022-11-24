@@ -28,8 +28,7 @@
 
       " Language specific indentation settings
       autocmd FileType go   setlocal noexpandtab
-      autocmd FileType html setlocal shiftwidth=2 tabstop=2
-      autocmd FileType json setlocal shiftwidth=2 tabstop=2
+      autocmd FileType html,json,nix setlocal shiftwidth=2 tabstop=2
 
       " Formatter on save for specific languages
       autocmd BufWritePost *.elm silent execute "!${pkgs.elmPackages.elm-format}/bin/elm-format --yes " . expand('%')

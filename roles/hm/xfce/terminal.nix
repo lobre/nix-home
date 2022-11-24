@@ -33,6 +33,7 @@ in {
     ColorForeground=${foreground}
     ColorBackground=${background}
     ColorPalette=${palette}
+    ColorBoldIsBright=FALSE
   '';
 
   # keyboard shortcuts
@@ -88,5 +89,6 @@ in {
     ColorForeground=${foreground}
     ColorBackground=${background}
     ColorPalette=${palette}
+    ColorBoldIsBright=FALSE
   '';
 }
