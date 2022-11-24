@@ -18,8 +18,8 @@ face global builtin       +b
 # for markup
 face global title  yellow+b
 face global header white+b
-face global mono   default+b
-face global block  default+b
+face global mono   default
+face global block  default
 face global link   blue+u
 face global bullet green
 face global list   default
