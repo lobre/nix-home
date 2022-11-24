@@ -36,11 +36,11 @@ face global LineNumbers        bright-black
 face global LineNumbersWrapped bright-black+d
 face global LineNumberCursor   white
 face global MenuForeground     black,blue
-face global MenuBackground     white,black
+face global MenuBackground     default,black+g
 face global MenuInfo           default
-face global Information        white
+face global Information        default,black+g
 face global Error              black,red
-face global StatusLine         white,black
+face global StatusLine         default
 face global StatusLineMode     yellow+b
 face global StatusLineInfo     bright-black
 face global StatusLineValue    green

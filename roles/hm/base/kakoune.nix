@@ -36,10 +36,18 @@ in {
       # theme
       colorscheme ansi
 
+      # assign clients
+      set global jumpclient main
+      set global toolsclient tools
+      set global docsclient docs
+
       # default options
       set global indentwidth 4
       set global ui_options terminal_set_title=true terminal_assistant=none terminal_enable_mouse=true
       set global autocomplete prompt
+
+      # default x11 is xfce terminal
+      hook global KakBegin .* %{ try %{ set global termcmd 'xfce4-terminal -x sh -c' } }
 
       # show matching characters
       add-highlighter global/ show-matching
@@ -105,7 +113,7 @@ in {
 
       # mappings
       map global normal "#" ":comment-line<ret>"
-      map global user "f" '<esc>:prompt -shell-script-candidates %{ git ls-files --recurse-submodules } file: %{ edit %val{text} }<ret>' -docstring "file"
+      map global user "t" '<esc>:prompt -shell-script-candidates %{ git ls-files --recurse-submodules } file: %{ edit %val{text} }<ret>' -docstring "file"
       map global user "b" '<esc>:prompt -buffer-completion buffer: %{ buffer %val{text} }<ret>' -docstring "buffer"
 
       # clipboard mappings
