@@ -19,7 +19,7 @@ face global builtin       +b
 face global title  yellow+b
 face global header white+b
 face global mono   default+b
-face global block  magenta
+face global block  default+b
 face global link   blue+u
 face global bullet green
 face global list   default
@@ -38,7 +38,7 @@ face global LineNumberCursor   white
 face global MenuForeground     black,blue
 face global MenuBackground     white,black
 face global MenuInfo           default
-face global Information        bright-yellow
+face global Information        white
 face global Error              black,red
 face global StatusLine         white,black
 face global StatusLineMode     yellow+b
