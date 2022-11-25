@@ -107,19 +107,20 @@ in {
       }
 
       # mappings
-      map global normal "#" ":comment-line<ret>"
-      map global user "t" '<esc>:prompt -shell-script-candidates %{ git ls-files --recurse-submodules } file: %{ edit %val{text} }<ret>' -docstring "file"
-      map global user "b" '<esc>:prompt -buffer-completion buffer: %{ buffer %val{text} }<ret>' -docstring "buffer"
+      map global normal '#' ':comment-line<ret>'
+      map global user t '<esc>:prompt -shell-script-candidates %{ git ls-files --recurse-submodules } file: %{ edit %val{text} }<ret>' -docstring "file"
+      map global user b '<esc>:prompt -buffer-completion buffer: %{ buffer %val{text} }<ret>' -docstring "buffer"
 
-      # paragraph mappings
-      map global goto 'p' '<esc>[pkg' -docstring "previous paragraph"
-      map global goto 'n' '<esc>]p;g' -docstring "next paragraph"
+      # goto mappings
+      map global normal <a-g> %{:enter-user-mode -lock goto<ret>} -docstring "goto (lock)"
+      map global goto p '<esc>[pk' -docstring "previous paragraph"
+      map global goto n '<esc>]p;' -docstring "next paragraph"
 
       # clipboard mappings
-      map global user y "<a-|>${pkgs.xsel}/bin/xsel --input --clipboard<ret>"  -docstring "yank from clipboard"
-      map global user p "<a-!>${pkgs.xsel}/bin/xsel --output --clipboard<ret>" -docstring "paste after from clipboard"
-      map global user P "!${pkgs.xsel}/bin/xsel --output --clipboard<ret>"     -docstring "paste before from clipboard"
-      map global user R "|${pkgs.xsel}/bin/xsel --output --clipboard<ret>"     -docstring "replace from clipboard"
+      map global user y '<a-|>${pkgs.xsel}/bin/xsel --input --clipboard<ret>'  -docstring "yank from clipboard"
+      map global user p '<a-!>${pkgs.xsel}/bin/xsel --output --clipboard<ret>' -docstring "paste after from clipboard"
+      map global user P '!${pkgs.xsel}/bin/xsel --output --clipboard<ret>'     -docstring "paste before from clipboard"
+      map global user R '|${pkgs.xsel}/bin/xsel --output --clipboard<ret>'     -docstring "replace from clipboard"
     '';
   };
 
