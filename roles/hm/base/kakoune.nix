@@ -111,6 +111,10 @@ in {
       map global user "t" '<esc>:prompt -shell-script-candidates %{ git ls-files --recurse-submodules } file: %{ edit %val{text} }<ret>' -docstring "file"
       map global user "b" '<esc>:prompt -buffer-completion buffer: %{ buffer %val{text} }<ret>' -docstring "buffer"
 
+      # paragraph mappings
+      map global goto 'p' '<esc>[pkg' -docstring "previous paragraph"
+      map global goto 'n' '<esc>]p;g' -docstring "next paragraph"
+
       # clipboard mappings
       map global user y "<a-|>${pkgs.xsel}/bin/xsel --input --clipboard<ret>"  -docstring "yank from clipboard"
       map global user p "<a-!>${pkgs.xsel}/bin/xsel --output --clipboard<ret>" -docstring "paste after from clipboard"
