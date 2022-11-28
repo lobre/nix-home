@@ -63,11 +63,9 @@ in {
       hook global WinCreate .* "wrap-enable"
 
       # update git diff in gutter
-      hook global WinCreate .* %{
-        eval "git show-diff"
-        hook buffer BufWritePost .* "git update-diff"
-        hook buffer BufReload .* "git update-diff"
-      }
+      hook global WinSetOption filetype=.+ "git show-diff"
+      hook global BufWritePost .* "git update-diff"
+      hook global BufReload .* "git update-diff"
 
       hook global WinSetOption filetype=go %{
         set buffer indentwidth 0
