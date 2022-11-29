@@ -12,22 +12,27 @@
 
     extraConfig = ''
       set -g mouse on
+      set -g base-index 1
+      set -g status-keys emacs
 
       # terminal title
-      set-option -g set-titles on
-      set-option -g set-titles-string "#T"
+      set -g set-titles on
+      set -g set-titles-string "tmux | #W"
 
-      # simple status line
-      set-option -g status-style bg=default
-      set-option -g status-justify centre
-      set-option -g status-left ""
-      set-option -g status-right "⧉ #S"
+      # status line
+      set -g status-position top
+      set -g status-style bg=default
+      set -g status-justify centre
+      set -g status-left ""
+      set -g window-status-format "  #W  "
+      set -g window-status-current-format "#[fg=green,bold bg=black]▶#[fg=green bg=black] #W #[fg=green,bold bg=black]◀"
+      set -g status-right "#[fg=brightblack]working on #[fg=blue,bold]#S"
+
+      # toggle status line
+      bind Enter set -g status
 
       # only let tmux wait 20ms for escape
-      set-option -g escape-time 20
-
-      # session name was stripped as too small
-      set -g status-left-length 50
+      set -g escape-time 20
 
       # copy to clipboard
       set -s copy-command '${pkgs.xsel}/bin/xsel --input --clipboard'
