@@ -1,6 +1,17 @@
 { config, pkgs, ... }:
 
 let
+  kakoune = pkgs.kakoune-unwrapped.overrideAttrs (oldAttrs: rec {
+    pname = "kakoune-unwrapped";
+    version = "2022-11-29";
+    src = pkgs.fetchFromGitHub {
+      owner = "mawww";
+      repo = "kakoune";
+      rev = "cd73f2aa1783cfce1cefd056ac459d0b20db5913";
+      sha256 = "sha256-9AjptFhOfan45cfNlj9quwkWXPFnXWW67Rvv7doEibw=";
+    };
+  });
+
   kak-lsp = pkgs.rustPlatform.buildRustPackage rec {
     pname = "kak-lsp";
     version = "14.1.0";
@@ -20,10 +31,11 @@ in {
 
   programs.kakoune = {
     enable = true;
+    package = kakoune;
 
     extraConfig = ''
       # hide changelog on startup
-      set global startup_info_version 20211108
+      set global startup_info_version 20221031
 
       # enable lsp
       eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
