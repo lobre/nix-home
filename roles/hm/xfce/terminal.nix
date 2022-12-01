@@ -46,7 +46,7 @@ in {
   gtk = {
     enable = true;
     gtk3.extraCss = ''
-      VteTerminal, vte-terminal { padding: 16px; }
+      VteTerminal, vte-terminal { padding: 16px 20px; }
     '';
   };
 
