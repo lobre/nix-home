@@ -39,11 +39,6 @@ in {
 
       # enable lsp
       eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
-      set global lsp_auto_show_code_actions true
-      lsp-inlay-hints-enable       global
-      lsp-inlay-diagnostics-enable global
-      lsp-auto-signature-help-enable
-      map global user l %{:enter-user-mode lsp<ret>} -docstring "lsp mode"
 
       # theme
       colorscheme ansi
@@ -53,7 +48,7 @@ in {
       set global ui_options terminal_set_title=true terminal_assistant=none terminal_enable_mouse=true
       set global autocomplete prompt
       set global autoinfo ""
-      set global grepcmd 'grep --exclude=tags -RHn'
+      set global grepcmd 'grep --exclude=tags -RIHn'
 
       # default x11 is xfce terminal
       hook global KakBegin .* %{ try %{ set global termcmd 'xfce4-terminal -x sh -c' } }

@@ -18,6 +18,9 @@
       set shortmess+=I      " Disable intro page
       set title             " Set terminal title
 
+      " Sane grep arguments
+      set grepprg=grep\ --exclude=tags\ -RIHn
+
       " Completion menu
       set wildmode=longest:full,full
 
