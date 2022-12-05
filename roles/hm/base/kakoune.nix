@@ -81,7 +81,7 @@ in {
 
       hook global WinSetOption filetype=go %{
         set buffer indentwidth 0
-        set buffer formatcmd '${pkgs.gotools}/bin/goimports | ${config.programs.go.package}/bin/gofmt'
+        set buffer formatcmd '${config.programs.go.package}/bin/gofmt | ${pkgs.gotools}/bin/goimports | ifne -n false'
         hook buffer BufWritePre .* format
         lsp-enable-window
 
