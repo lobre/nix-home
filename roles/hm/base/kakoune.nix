@@ -47,7 +47,7 @@ in {
       set global indentwidth 4
       set global ui_options terminal_set_title=true terminal_assistant=none terminal_enable_mouse=true
       set global autocomplete prompt
-      set global autoinfo ""
+      set global autoinfo command
       set global grepcmd 'grep --exclude=tags -RIHn'
 
       # default x11 is xfce terminal
