@@ -76,6 +76,9 @@ in {
       hook global BufWritePost .* "git update-diff"
       hook global BufReload .* "git update-diff"
 
+      # include ctags entries in completions
+      hook global WinSetOption filetype=.+ "ctags-enable-autocomplete"
+
       hook global WinSetOption filetype=go %{
         set buffer indentwidth 0
         set buffer formatcmd '${pkgs.gotools}/bin/goimports | ${config.programs.go.package}/bin/gofmt'
