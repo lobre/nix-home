@@ -52,6 +52,7 @@ in {
       set global indentwidth 4
       set global ui_options terminal_set_title=true terminal_assistant=none terminal_enable_mouse=true
       set global autocomplete prompt
+      set global autoinfo ""
 
       # default x11 is xfce terminal
       hook global KakBegin .* %{ try %{ set global termcmd 'xfce4-terminal -x sh -c' } }
@@ -118,11 +119,9 @@ in {
 
       # mappings
       map global normal '#' ':comment-line<ret>'
-      map global user t '<esc>:prompt -shell-script-candidates %{ git ls-files --recurse-submodules } file: %{ edit %val{text} }<ret>' -docstring "file"
-      map global user b '<esc>:prompt -buffer-completion buffer: %{ buffer %val{text} }<ret>' -docstring "buffer"
+      map global normal <c-p> '<esc>:prompt -shell-script-candidates %{ git ls-files --recurse-submodules } file: %{ edit %val{text} }<ret>' -docstring "file"
 
       # goto mappings
-      map global normal <a-g> %{:enter-user-mode -lock goto<ret>} -docstring "goto (lock)"
       map global goto p '<esc>[pk' -docstring "previous paragraph"
       map global goto n '<esc>]p;' -docstring "next paragraph"
 
