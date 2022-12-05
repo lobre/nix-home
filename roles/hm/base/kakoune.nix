@@ -1,14 +1,14 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   kakoune = pkgs.kakoune-unwrapped.overrideAttrs (oldAttrs: rec {
     pname = "kakoune-unwrapped";
-    version = "2022-11-29";
+    version = "2022-12-02";
     src = pkgs.fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "cd73f2aa1783cfce1cefd056ac459d0b20db5913";
-      sha256 = "sha256-9AjptFhOfan45cfNlj9quwkWXPFnXWW67Rvv7doEibw=";
+      rev = "084fc5eb5af5b0185466553bb1ac62f24bd8291e";
+      sha256 = "sha256-7iqTqWnVlcj3zxVYxxn4+EgvUSMX0daizhiCuXYmjf8=";
     };
   });
 
