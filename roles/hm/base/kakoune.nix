@@ -53,6 +53,7 @@ in {
       set global ui_options terminal_set_title=true terminal_assistant=none terminal_enable_mouse=true
       set global autocomplete prompt
       set global autoinfo ""
+      set global grepcmd 'grep --exclude=tags -RHn'
 
       # default x11 is xfce terminal
       hook global KakBegin .* %{ try %{ set global termcmd 'xfce4-terminal -x sh -c' } }
