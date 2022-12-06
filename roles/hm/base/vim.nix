@@ -75,11 +75,41 @@
       let g:omni_sql_no_default_maps = 1
     '';
 
+    extraPackages = with pkgs; [ gopls ];
+
     plugins = with pkgs.vimPlugins; [
       vim-nix
       {
         plugin = zig-vim;
         config = "let g:zig_fmt_autosave = 0";
+      }
+
+      {
+        plugin = nvim-lspconfig;
+        config = ''
+          lua <<EOF
+          local on_attach = function(client, bufnr)
+            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+            local bufopts = { noremap=true, silent=true, buffer=bufnr }
+            if client.server_capabilities.definitionProvider then
+              vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+            end
+            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+            vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+            vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+            vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
+            vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
+            vim.keymap.set('n', 'gs', vim.lsp.buf.document_symbol, bufopts)
+            vim.keymap.set('n', 'gca', vim.lsp.buf.code_action, bufopts)
+            vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+          end
+
+          for _, server in ipairs({ "gopls" }) do
+            require('lspconfig')[server].setup { on_attach = on_attach }
+          end
+          EOF
+        '';
       }
     ];
   };
