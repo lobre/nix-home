@@ -72,7 +72,7 @@ in {
       hook global WinCreate .* "wrap-enable"
 
       # update git diff in gutter
-      hook global WinSetOption filetype=.+ "git show-diff"
+      hook global WinSetOption filetype=(?!grep).+ "git show-diff"
       hook global BufWritePost .* "git update-diff"
       hook global BufReload .* "git update-diff"
 
