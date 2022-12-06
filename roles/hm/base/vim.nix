@@ -18,6 +18,9 @@
       set shortmess+=I      " Disable intro page
       set title             " Set terminal title
 
+      " Recursively search for files with find
+      set path=**
+
       " Sane grep arguments
       set grepprg=grep\ --exclude=tags\ -RIHn
 
@@ -25,13 +28,11 @@
       set wildmode=longest:full,full
 
       " Default tabs count parameters
-      set expandtab
-      set shiftwidth=4
-      set tabstop=4
+      set shiftwidth=4 tabstop=4 expandtab
 
       " Language specific indentation settings
       autocmd FileType go   setlocal noexpandtab
-      autocmd FileType html,json,nix setlocal shiftwidth=2 tabstop=2
+      autocmd FileType html,json,nix,xml setlocal shiftwidth=2 tabstop=2
 
       " Formatter on save for specific languages
       autocmd BufWritePost *.elm silent execute "!${pkgs.elmPackages.elm-format}/bin/elm-format --yes " . expand('%')

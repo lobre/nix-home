@@ -108,7 +108,7 @@ in {
         hook buffer BufWritePre .* format
       }
 
-      hook global WinSetOption filetype=(html|json) "set buffer indentwidth 2"
+      hook global WinSetOption filetype=(html|json|xml) "set buffer indentwidth 2"
 
       hook global WinSetOption filetype=git-commit %{
         set-option window autowrap_column 72
