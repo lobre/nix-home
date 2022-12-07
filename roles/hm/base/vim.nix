@@ -13,24 +13,19 @@
       colorscheme ansi
 
       " General options
-      set hidden            " No need to save a buffer before switching
-      set scrollback=50000  " Lines to keep in terminal buffer
-      set shortmess+=I      " Disable intro page
-      set title             " Set terminal title
+      set hidden                     " No need to save a buffer before switching
+      set path=**                    " Recursive search for files with find
+      set scrollback=50000           " Lines to keep in terminal buffer
+      set shortmess+=I               " Disable intro page
+      set title                      " Set terminal title
+      set wildmode=longest:full,full " Completion menu
+      set completeopt-=preview       " Don’t show preview on completion
 
-      " Recursively search for files with find
-      set path=**
-
-      " Sane grep arguments
-      set grepprg=grep\ --exclude=tags\ -RIHn
-
-      " Completion menu
-      set wildmode=longest:full,full
-
-      " Default tabs count parameters
-      set shiftwidth=4 tabstop=4 expandtab
+      " Recursive search with grep
+      set grepprg=grep\ --exclude=tags\ --exclude-dir=.git\ -RIHn
 
       " Language specific indentation settings
+      set shiftwidth=4 tabstop=4 expandtab
       autocmd FileType go   setlocal noexpandtab
       autocmd FileType html,json,nix,xml setlocal shiftwidth=2 tabstop=2
 
@@ -46,18 +41,11 @@
       " Check which commit last modified current line
       command! Blame execute 'split | terminal git blame % -L ' . line('.') . ',+1'
 
-      " C-c does not trigger events like Esc
-      inoremap <C-c> <Esc>
-
       " Alternate buffer (C-Space is also C-@)
-      nnoremap <C-Space> <C-^>
+      nnoremap ga <C-^>
 
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
-      tnoremap <C-c> <C-\><C-n>
-
-      " Send SIGINT in terminal normal mode with C-c (as remapped to exit in insert mode)
-      autocmd TermOpen * nnoremap <buffer> <C-c> i<C-c>
 
       " Explorer settings
       let g:netrw_banner = 0           " Don’t show top banner
@@ -75,7 +63,7 @@
       let g:omni_sql_no_default_maps = 1
     '';
 
-    extraPackages = with pkgs; [ gopls ];
+    extraPackages = with pkgs; [ gopls zls ];
 
     plugins = with pkgs.vimPlugins; [
       vim-nix
@@ -105,7 +93,7 @@
             vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
           end
 
-          for _, server in ipairs({ "gopls" }) do
+          for _, server in ipairs({ "gopls", "zls" }) do
             require('lspconfig')[server].setup { on_attach = on_attach }
           end
           EOF
