@@ -13,13 +13,13 @@
       colorscheme ansi
 
       " General options
-      set hidden                     " No need to save a buffer before switching
+      set completeopt-=preview       " Don’t show preview on completion
+      set inccommand=nosplit         " Buffer live preview on substitute changes
       set path=**                    " Recursive search for files with find
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
       set title                      " Set terminal title
       set wildmode=longest:full,full " Completion menu
-      set completeopt-=preview       " Don’t show preview on completion
 
       " Recursive search with grep
       set grepprg=grep\ --exclude=tags\ --exclude-dir=.git\ -RIHn
