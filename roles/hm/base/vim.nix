@@ -13,6 +13,7 @@
       colorscheme ansi
 
       " General options
+      set cmdheight=0                " No dedicated command line space
       set completeopt-=preview       " Don’t show preview on completion
       set inccommand=nosplit         " Buffer live preview on substitute changes
       set laststatus=3               " Only show statusline at the bottom
