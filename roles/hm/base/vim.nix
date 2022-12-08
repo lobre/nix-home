@@ -37,7 +37,7 @@
       " Check which commit last modified current line
       command! Blame execute 'split | terminal git blame % -L ' . line('.') . ',+1'
 
-      " Alternate buffer (C-Space is also C-@)
+      " Alternate buffer
       nnoremap ga <C-^>
 
       " Exit insert for terminal
@@ -65,9 +65,6 @@
 
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
-
-      " Disable default omnicompletion with C-c from sql
-      let g:omni_sql_no_default_maps = 1
 
       " Try to include local config
       if filereadable(expand("~/.vimrc.local"))
