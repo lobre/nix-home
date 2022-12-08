@@ -15,14 +15,10 @@
       " General options
       set completeopt-=preview       " Don’t show preview on completion
       set inccommand=nosplit         " Buffer live preview on substitute changes
-      set path=**                    " Recursive search for files with find
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
       set title                      " Set terminal title
       set wildmode=longest:full,full " Completion menu
-
-      " Recursive search with grep
-      set grepprg=grep\ --exclude=tags\ --exclude-dir=.git\ -RIHn
 
       " Language specific indentation settings
       set shiftwidth=4 tabstop=4 expandtab
@@ -47,6 +43,17 @@
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
 
+      " Recursive search with grep
+      set grepprg=grep\ --exclude=tags\ --exclude-dir=.git\ -RIHn
+
+      " Custom find command
+      nnoremap <C-p> :GitFind<space>
+      command! -nargs=1 -bang -complete=customlist,s:git_files GitFind edit<bang> <args>
+      function! s:git_files(A, L, P)
+        let cmd = "git ls-files --recurse-submodules " . shellescape("*" . a:A . "*")
+        return split(system(cmd), "\n")
+      endfunction
+
       " Explorer settings
       let g:netrw_banner = 0           " Don’t show top banner
       let g:netrw_localrmdir = 'rm -r' " Let delete a non-empty directory
@@ -61,6 +68,11 @@
 
       " Disable default omnicompletion with C-c from sql
       let g:omni_sql_no_default_maps = 1
+
+      " Try to include local config
+      if filereadable(expand("~/.vimrc.local"))
+        source ~/.vimrc.local
+      endif
     '';
 
     extraPackages = with pkgs; [ gopls zls ];
