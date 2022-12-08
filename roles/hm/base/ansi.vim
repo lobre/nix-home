@@ -42,7 +42,6 @@ hi IncSearch           ctermfg=0     ctermbg=13    cterm=NONE
 hi Search              ctermfg=0     ctermbg=10
 hi StatusLine          ctermfg=7     ctermbg=0     cterm=bold
 hi StatusLineNC        ctermfg=8     ctermbg=0     cterm=bold
-hi VertSplit           ctermfg=0     ctermbg=0     cterm=NONE
 hi TabLine             ctermfg=8     ctermbg=0     cterm=NONE
 hi TabLineSel          ctermfg=7     ctermbg=0
 hi Folded              ctermfg=6     ctermbg=0     cterm=bold
@@ -73,6 +72,7 @@ hi! link Question      MoreMsg
 hi! link ModeMsg       MoreMsg
 hi! link TabLineFill   StatusLineNC
 hi! link SpecialKey    NonText
+hi! link VertSplit     Normal
 
 " Generic syntax
 hi Delimiter       ctermfg=7

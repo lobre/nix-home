@@ -15,6 +15,7 @@
       " General options
       set completeopt-=preview       " Don’t show preview on completion
       set inccommand=nosplit         " Buffer live preview on substitute changes
+      set laststatus=3               " Only show statusline at the bottom
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
       set title                      " Set terminal title
