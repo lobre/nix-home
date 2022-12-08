@@ -24,7 +24,7 @@
 
       " Language specific indentation settings
       set shiftwidth=4 tabstop=4 expandtab
-      autocmd FileType go   setlocal noexpandtab
+      autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
       autocmd FileType html,json,nix,xml setlocal shiftwidth=2 tabstop=2
 
       " Formatter on save for specific languages
