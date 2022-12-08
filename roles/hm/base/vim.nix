@@ -75,7 +75,7 @@
     extraPackages = with pkgs; [ gopls zls ];
 
     plugins = with pkgs.vimPlugins; [
-      vim-nix
+      vim-nix # https://github.com/vim/vim/pull/11646
       {
         plugin = zig-vim;
         config = "let g:zig_fmt_autosave = 0";

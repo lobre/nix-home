@@ -22,16 +22,6 @@
       ansiYellow = "\\[\\033[0;33m\\]";
       ansiReset = "\\[\\033[0m\\]";
     in ''
-
-      # Completion is not yet added by home manager
-      # see https://github.com/nix-community/home-manager/issues/1464
-      . ${pkgs.bash-completion}/share/bash-completion/bash_completion
-
-      # Include unversioned files
-      if [ -f "$HOME/.bashrc.local" ]; then
-         . $HOME/.bashrc.local
-      fi
-
       # Load git prompt utilities
       . ${config.programs.git.package}/share/git/contrib/completion/git-prompt.sh
 
@@ -53,6 +43,11 @@
 
       # Leave ctrl-s to bash history forward (instead of terminal freeze)
       stty -ixon
+
+      # Include unversioned files
+      if [ -f "$HOME/.bashrc.local" ]; then
+         . $HOME/.bashrc.local
+      fi
     '';
   };
 }
