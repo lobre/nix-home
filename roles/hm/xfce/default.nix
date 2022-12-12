@@ -28,14 +28,7 @@
     xsel
 
     # font
-    (iosevka.override {
-      set = "term-slab";
-      privateBuildPlan = {
-        family = "Iosevka Term Slab";
-        spacing = "term";
-        serifs = "slab";
-      };
-    })
+    (iosevka-bin.override { variant = "sgr-iosevka-term-slab"; })
   ];
 
   # Create a krita desktop file to launch without Open GL for non NixOS
