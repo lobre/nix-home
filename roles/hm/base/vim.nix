@@ -27,12 +27,6 @@
       autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
       autocmd FileType html,json,nix,xml setlocal shiftwidth=2 tabstop=2
 
-      " Formatter on save for specific languages
-      autocmd BufWritePost *.elm silent execute "!${pkgs.elmPackages.elm-format}/bin/elm-format --yes " . expand('%')
-      autocmd BufWritePost *.go  silent execute "!${pkgs.gotools}/bin/goimports -w " . expand('%') . " && ${config.programs.go.package}/bin/gofmt -w " . expand('%')
-      autocmd BufWritePost *.nix silent execute "!${pkgs.nixfmt}/bin/nixfmt " . expand('%')
-      autocmd BufWritePost *.zig silent execute "!${pkgs.zig}/bin/zig fmt " . expand('%')
-
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
@@ -74,7 +68,12 @@
       endif
     '';
 
-    extraPackages = with pkgs; [ gopls zls ];
+    extraPackages = with pkgs; [
+      elmPackages.elm-language-server
+      gopls
+      rnix-lsp
+      zls
+    ];
 
     plugins = with pkgs.vimPlugins; [
       vim-nix # https://github.com/vim/vim/pull/11646
@@ -90,6 +89,15 @@
           local on_attach = function(client, bufnr)
             vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
+            if client.server_capabilities.documentFormattingProvider then
+              vim.api.nvim_create_autocmd("BufWritePre", {
+                buffer = bufnr,
+                callback = function()
+                  vim.lsp.buf.format({ bufnr = bufnr })
+                end,
+              })
+            end
+
             local bufopts = { noremap=true, silent=true, buffer=bufnr }
             if client.server_capabilities.definitionProvider then
               vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
@@ -104,7 +112,7 @@
             vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
           end
 
-          for _, server in ipairs({ "gopls", "zls" }) do
+          for _, server in ipairs({ "elmls", "gopls", "rnix", "zls" }) do
             require('lspconfig')[server].setup { on_attach = on_attach }
           end
           EOF

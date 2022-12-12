@@ -25,7 +25,8 @@ let
 
     cargoSha256 = "sha256-+Sj+QSSXJAgGulMLRCWLgddVG8sIiHaB1xWPojVCgas=";
   };
-in {
+in
+{
   # colorscheme
   xdg.configFile."kak/colors/ansi.kak".source = ./ansi.kak;
 
@@ -81,31 +82,29 @@ in {
 
       hook global WinSetOption filetype=go %{
         set buffer indentwidth 0
-        set buffer formatcmd '${config.programs.go.package}/bin/gofmt | ${pkgs.gotools}/bin/goimports | ifne -n false'
-        hook buffer BufWritePre .* format
-        lsp-enable-window
-
         set buffer ctagscmd "ctags -R --fields=+S --languages=go --exclude=testdata --exclude=*test.go --exclude=internal --exclude=cmd"
         set buffer ctagspaths %sh{ echo ". $GOROOT/src" }
+
+        lsp-enable-window
+        hook buffer BufWritePre .* lsp-formatting-sync
       }
 
       hook global WinSetOption filetype=zig %{
         set buffer indentwidth 4
-        set buffer formatcmd '${pkgs.zig}/bin/zig fmt --stdin'
-        hook buffer BufWritePre .* format
         lsp-enable-window
+        hook buffer BufWritePre .* lsp-formatting-sync
       }
 
       hook global WinSetOption filetype=elm %{
         set buffer indentwidth 4
-        set buffer formatcmd '${pkgs.elmPackages.elm-format}/bin/elm-format --stdin'
-        hook buffer BufWritePre .* format
+        lsp-enable-window
+        hook buffer BufWritePre .* lsp-formatting-sync
       }
 
       hook global WinSetOption filetype=nix %{
         set buffer indentwidth 2
-        set buffer formatcmd ${pkgs.nixfmt}/bin/nixfmt
-        hook buffer BufWritePre .* format
+        lsp-enable-window
+        hook buffer BufWritePre .* lsp-formatting-sync
       }
 
       hook global WinSetOption filetype=(html|json|xml) "set buffer indentwidth 2"
@@ -133,16 +132,27 @@ in {
   };
 
   # lsp configurations
-  xdg.configFile."kak-lsp/kak-lsp.toml".text = ''
+  xdg.configFile."kak-lsp/kak-lsp.toml".text = with pkgs; ''
+    [language.elm]
+    filetypes = ["elm"]
+    roots = ["elm.json"]
+    command = "${elmPackages.elm-language-server}/bin/elm-language-server"
+    args = ["--stdio"]
+
     [language.go]
     filetypes = ["go"]
     roots = ["go.mod", ".git"]
-    command = "${pkgs.gopls}/bin/gopls"
+    command = "${gopls}/bin/gopls"
+
+    [language.nix]
+    filetypes = ["nix"]
+    roots = ["flake.nix", "shell.nix", ".git"]
+    command = "${rnix-lsp}/bin/rnix-lsp"
 
     [language.zig]
     filetypes = ["zig"]
     roots = ["build.zig"]
-    command = "${pkgs.zls}/bin/zls"
+    command = "${zls}/bin/zls"
   '';
 }
 
