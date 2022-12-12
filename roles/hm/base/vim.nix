@@ -76,7 +76,10 @@
     ];
 
     plugins = with pkgs.vimPlugins; [
-      vim-nix # https://github.com/vim/vim/pull/11646
+      # Syntax for zig and nix were added recently in vim and neovim
+      # https://github.com/neovim/neovim/commit/35767769036671d5ce562f53cae574f9c66e4bb2
+      # Waiting for the next version of neovim to have it in nixpkgs because only in master so far.
+      vim-nix
       {
         plugin = zig-vim;
         config = "let g:zig_fmt_autosave = 0";
