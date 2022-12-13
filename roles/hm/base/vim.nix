@@ -13,7 +13,7 @@
       colorscheme ansi
 
       " General options
-      set cmdheight=0                " No dedicated command line space
+      set cmdheight=0                " Number of lines reserved to commands
       set completeopt-=preview       " Don’t show preview on completion
       set inccommand=nosplit         " Buffer live preview on substitute changes
       set laststatus=3               " Only show statusline at the bottom
@@ -30,8 +30,17 @@
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
-      " Check which commit last modified current line
+      " Git blame current line
       command! Blame execute 'split | terminal git blame % -L ' . line('.') . ',+1'
+
+      " Find file in git index
+      command! -nargs=1 -bang -complete=customlist,s:git_files Find edit<bang> <args>
+      function! s:git_files(A, L, P)
+        return split(system("git ls-files --recurse-submodules " . shellescape("*" . a:A . "*")), "\n")
+      endfunction
+
+      " Recursive search with grep
+      set grepprg=grep\ --exclude=tags\ --exclude-dir=.git\ -RIHn
 
       " Alternate buffer
       nnoremap ga <C-^>
@@ -39,16 +48,13 @@
       " Exit insert for terminal
       tnoremap <Esc> <C-\><C-n>
 
-      " Recursive search with grep
-      set grepprg=grep\ --exclude=tags\ --exclude-dir=.git\ -RIHn
+      " Search and replace mappings
+      nnoremap <C-p> :Find<space>
+      nnoremap <C-f> :sil grep<space> \| cw<left><left><left><left><left>
+      nnoremap <C-h> :%s/\<<c-r><c-w>\>/<C-r><C-w>/gI<left><left><left>
 
-      " Custom find command
-      nnoremap <C-p> :GitFind<space>
-      command! -nargs=1 -bang -complete=customlist,s:git_files GitFind edit<bang> <args>
-      function! s:git_files(A, L, P)
-        let cmd = "git ls-files --recurse-submodules " . shellescape("*" . a:A . "*")
-        return split(system(cmd), "\n")
-      endfunction
+      " Filter quicklist with the included cfilter plugin
+      packadd cfilter
 
       " Explorer settings
       let g:netrw_banner = 0           " Don’t show top banner
@@ -58,9 +64,6 @@
       autocmd FocusGained,BufEnter * silent! checktime
       autocmd CursorHold,CursorHoldI * silent! checktime
       autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
-
-      " Filter quicklist with the included cfilter plugin
-      packadd cfilter
 
       " Try to include local config
       if filereadable(expand("~/.vimrc.local"))
