@@ -36,7 +36,7 @@
       " Find file in git index
       command! -nargs=1 -bang -complete=customlist,s:git_files Find edit<bang> <args>
       function! s:git_files(A, L, P)
-        return split(system("git ls-files --recurse-submodules " . shellescape("*" . a:A . "*")), "\n")
+        return split(system("git ls-files --recurse-submodules " . shellescape("*" . a:A . "*") . " 2>/dev/null"), "\n")
       endfunction
 
       " Recursive search with grep
