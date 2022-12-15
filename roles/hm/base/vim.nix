@@ -15,11 +15,14 @@
       " General options
       set cmdheight=0                " Number of lines reserved to commands
       set completeopt-=preview       " Don’t show preview on completion
+      set grepprg=internal           " Use vimgrep for grep
       set inccommand=nosplit         " Buffer live preview on substitute changes
       set laststatus=3               " Only show statusline at the bottom
+      set noruler                    " Disable ruler
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
       set title                      " Set terminal title
+      set wildignore=ctags,.git/     " Ignore files and dirs in searches
       set wildmode=longest:full,full " Completion menu
 
       " Language specific indentation settings
@@ -34,24 +37,20 @@
       command! Blame execute 'split | terminal git blame % -L ' . line('.') . ',+1'
 
       " Find file in git index
-      command! -nargs=1 -bang -complete=customlist,s:git_files Find edit<bang> <args>
+      command! -nargs=1 -bang -complete=custom,s:git_files F edit<bang> <args>
       function! s:git_files(A, L, P)
-        return split(system("git ls-files --recurse-submodules " . shellescape("*" . a:A . "*") . " 2>/dev/null"), "\n")
+        return system("git ls-files --recurse-submodules 2>/dev/null")
       endfunction
 
-      " Recursive search with grep
-      set grepprg=grep\ --exclude=tags\ --exclude-dir=.git\ -RIHn
+      " Search and replace mappings
+      nnoremap <c-p> :F<space>
+      nnoremap <c-f> :sil grep // `git ls-files --recurse-submodules` \| cw<home><s-right><s-right><right><right>
 
       " Alternate buffer
-      nnoremap ga <C-^>
+      nnoremap ga <c-^>
 
       " Exit insert for terminal
-      tnoremap <Esc> <C-\><C-n>
-
-      " Search and replace mappings
-      nnoremap <C-p> :Find<space>
-      nnoremap <C-f> :sil grep<space> \| cw<left><left><left><left><left>
-      nnoremap <C-h> :%s/\<<c-r><c-w>\>/<C-r><C-w>/gI<left><left><left>
+      tnoremap <esc> <c-\><c-n>
 
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
