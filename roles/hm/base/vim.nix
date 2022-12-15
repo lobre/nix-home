@@ -37,13 +37,13 @@
       command! Blame execute 'split | terminal git blame % -L ' . line('.') . ',+1'
 
       " Find file in git index
-      command! -nargs=1 -bang -complete=custom,s:git_files F edit<bang> <args>
+      command! -nargs=1 -bang -complete=custom,s:git_files GitEdit edit<bang> <args>
       function! s:git_files(A, L, P)
         return system("git ls-files --recurse-submodules 2>/dev/null")
       endfunction
 
       " Search and replace mappings
-      nnoremap <c-p> :F<space>
+      nnoremap <c-p> :GitEdit<space>
       nnoremap <c-f> :sil grep // `git ls-files --recurse-submodules` \| cw<home><s-right><s-right><right><right>
 
       " Alternate buffer
