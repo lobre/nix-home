@@ -13,10 +13,8 @@
       colorscheme ansi
 
       " General options
-      set cmdheight=0                " Number of lines reserved to commands
       set completeopt-=preview       " Don’t show preview on completion
       set grepprg=internal           " Use vimgrep for grep
-      set inccommand=nosplit         " Buffer live preview on substitute changes
       set laststatus=3               " Only show statusline at the bottom
       set noruler                    " Disable ruler
       set scrollback=50000           " Lines to keep in terminal buffer
