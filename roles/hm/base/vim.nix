@@ -68,14 +68,55 @@
       if filereadable(expand("~/.vimrc.local"))
         source ~/.vimrc.local
       endif
-    '';
 
-    extraPackages = with pkgs; [
-      elmPackages.elm-language-server
-      gopls
-      rnix-lsp
-      zls
-    ];
+      lua <<EOF
+      servers = {
+        go = {
+          cmd = {'${pkgs.gopls}/bin/gopls'},
+          root_dir = vim.fs.dirname(vim.fs.find({'go.mod', '.git'}, { upward = true })[1]),
+        },
+        nix = {
+          cmd = {'${pkgs.rnix-lsp}/bin/rnix-lsp'},
+          root_dir = vim.fs.dirname(vim.fs.find({'flake.nix', 'shell.nix', '.git'}, { upward = true })[1]),
+        },
+        zig = {
+          cmd = {'${pkgs.zls}/bin/zls'},
+          root_dir = vim.fs.dirname(vim.fs.find({'build.zig', '.git'}, { upward = true })[1]),
+        },
+      }
+
+      for pat, config in pairs(servers) do
+        vim.api.nvim_create_autocmd('FileType', {
+          pattern = pat,
+          callback = function()
+            vim.lsp.start(config)
+          end
+        })
+      end
+
+      vim.api.nvim_create_autocmd('LspAttach', {
+        callback = function(args)
+          local bufopts = { noremap = true, silent = true, buffer = args.buf }
+          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+          vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+          vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
+          vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
+          vim.keymap.set('n', 'gca', vim.lsp.buf.code_action, bufopts)
+          vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client.server_capabilities.documentFormattingProvider then
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format({ bufnr = args.buf })
+              end,
+            })
+          end
+        end
+      })
+      EOF
+    '';
 
     plugins = with pkgs.vimPlugins; [
       # Syntax for zig and nix were added recently in vim and neovim
@@ -85,43 +126,6 @@
       {
         plugin = zig-vim;
         config = "let g:zig_fmt_autosave = 0";
-      }
-
-      {
-        plugin = nvim-lspconfig;
-        config = ''
-          lua <<EOF
-          local on_attach = function(client, bufnr)
-            vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
-
-            if client.server_capabilities.documentFormattingProvider then
-              vim.api.nvim_create_autocmd("BufWritePre", {
-                buffer = bufnr,
-                callback = function()
-                  vim.lsp.buf.format({ bufnr = bufnr })
-                end,
-              })
-            end
-
-            local bufopts = { noremap=true, silent=true, buffer=bufnr }
-            if client.server_capabilities.definitionProvider then
-              vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-            end
-            vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-            vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-            vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-            vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
-            vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
-            vim.keymap.set('n', 'gs', vim.lsp.buf.document_symbol, bufopts)
-            vim.keymap.set('n', 'gca', vim.lsp.buf.code_action, bufopts)
-            vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-          end
-
-          for _, server in ipairs({ "elmls", "gopls", "rnix", "zls" }) do
-            require('lspconfig')[server].setup { on_attach = on_attach }
-          end
-          EOF
-        '';
       }
     ];
   };
