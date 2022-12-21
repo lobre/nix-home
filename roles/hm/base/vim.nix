@@ -13,10 +13,12 @@
       colorscheme ansi
 
       " General options
+      set cmdheight=0                " Hide command line
       set completeopt-=preview       " Don’t show preview on completion
       set grepprg=internal           " Use vimgrep for grep
-      set laststatus=3               " Only show statusline at the bottom
+      set laststatus=3               " Only show status line at the bottom
       set noruler                    " Disable ruler
+      set noshowcmd                  " Hide pending keys messages
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
       set statusline=%=%f:%l         " Simple status line

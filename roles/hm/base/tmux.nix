@@ -17,7 +17,7 @@
 
       # terminal title
       set -g set-titles on
-      set -g set-titles-string "tmux | #W"
+      set -g set-titles-string "#T"
 
       # status line
       set -g status-position bottom
