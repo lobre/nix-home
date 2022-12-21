@@ -19,6 +19,7 @@
       set noruler                    " Disable ruler
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
+      set statusline=%=%f:%l         " Simple status line
       set title                      " Set terminal title
       set wildignore=ctags,.git/     " Ignore files and dirs in searches
       set wildmode=longest:full,full " Completion menu
