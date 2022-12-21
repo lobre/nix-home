@@ -20,7 +20,7 @@
       set -g set-titles-string "tmux | #W"
 
       # status line
-      set -g status-position top
+      set -g status-position bottom
       set -g status-style bg=default
       set -g status-justify centre
       set -g status-left ""
