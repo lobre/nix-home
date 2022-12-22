@@ -26,6 +26,10 @@
       set wildignore=ctags,.git/     " Ignore files and dirs in searches
       set wildmode=longest:full,full " Completion menu
 
+      " Until https://github.com/neovim/neovim/issues/19193 is fixed
+      autocmd RecordingEnter * set cmdheight=1
+      autocmd RecordingLeave * set cmdheight=0
+
       " Language specific indentation settings
       set shiftwidth=4 tabstop=4 expandtab
       autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
