@@ -110,13 +110,10 @@
           vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 
           local client = vim.lsp.get_client_by_id(args.data.client_id)
-          local group = vim.api.nvim_create_augroup("LspFormatting", {})
           if client.server_capabilities.documentFormattingProvider then
             vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = bufnr,
-              group = group,
               callback = function()
-                vim.lsp.buf.format({ bufnr = args.buf })
+                vim.lsp.buf.format()
               end,
             })
           end
