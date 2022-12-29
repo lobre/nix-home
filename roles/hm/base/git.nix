@@ -19,26 +19,35 @@
     ignores = [ "tags" "tags.lock" "tags.temp" ];
 
     extraConfig = {
-      init = { defaultBranch = "main"; };
-      push = { default = "current"; autoSetupRemote = true; };
-      pull = { rebase = true; };
       core = {
         editor = "vim";
         askpass = "";
         pager = "less --mouse"; # allow mouse scroll
       };
-      credential = { helper = "${pkgs.pass-git-helper}/bin/pass-git-helper"; };
-      merge = { tool = "vimdiff"; };
+
+      credential.helper = "${pkgs.pass-git-helper}/bin/pass-git-helper";
+
+      init.defaultBranch = "main";
+
+      pull.rebase = true;
+      push = {
+        default = "current";
+        autoSetupRemote = true;
+      };
+
+      merge.tool = "vimdiff";
       mergetool = {
         prompt = false;
         keepBackup = false;
       };
+
+      difftool.prompt = false;
       diff = {
         tool = "vimdiff";
         submodule = "log";
       };
-      difftool = { prompt = false; };
-      status = { submoduleSummary = true; };
+
+      status.submoduleSummary = true;
       submodule = {
         recurse = true;
         fetchJobs = 8;
