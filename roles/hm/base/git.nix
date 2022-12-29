@@ -20,7 +20,7 @@
 
     extraConfig = {
       init = { defaultBranch = "main"; };
-      push = { default = "current"; };
+      push = { default = "current"; autoSetupRemote = true; };
       pull = { rebase = true; };
       core = {
         editor = "vim";
