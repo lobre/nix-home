@@ -10,7 +10,8 @@ let
     exec "/home/$user/lab/github.com/lobre/nix-home/nix-switch.sh" "$@"
   '';
 
-in {
+in
+{
   nixpkgs.config = { allowUnfree = true; };
 
   programs.home-manager.enable = true;
@@ -34,7 +35,6 @@ in {
 
     curl
     docker
-    docker-compose
     dos2unix
     entr
     file
