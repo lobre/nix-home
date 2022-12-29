@@ -75,7 +75,7 @@ let
       "/general/snap_to_windows" = true;
       "/general/activate_action" = "switch";
       "/general/wrap_cycle" = true; # cycle to first workspace after last
-      "/general/cycle_draw_frame" = true; # blue frame when cycling with alt-tab
+      "/general/cycle_draw_frame" = false; # no blue frame when cycling with alt-tab
       "/general/cycle_preview" = true; # thumbnails when cycling with alt-tab
       "/general/cycle_tabwin_mode" = 0; # don’t cycle through windows in a list
       "/general/wrap_windows" =
@@ -211,7 +211,8 @@ let
 
   configFile = pkgs.writeText "xfconf.json" (builtins.toJSON config);
 
-in {
+in
+{
   home.packages = with pkgs; [ xfconfDump ];
 
   home.activation.xfconfSettings =
