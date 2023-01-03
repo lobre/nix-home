@@ -48,7 +48,7 @@
       endfunction
 
       " Search and replace mappings
-      nnoremap <c-p> :GitEdit<space>*
+      nnoremap <c-p> :GitEdit<space>.*
       nnoremap <c-f> :sil grep // `git ls-files --recurse-submodules` \| cw<home><s-right><s-right><right><right>
 
       " Alternate buffer
