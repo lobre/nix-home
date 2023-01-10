@@ -50,6 +50,7 @@ in
     pass
     perl
     pv
+    ripgrep
     rmapi
     slides
     strace

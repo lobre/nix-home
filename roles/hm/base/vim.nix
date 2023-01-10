@@ -15,7 +15,6 @@
       " General options
       set cmdheight=0                " Hide command line
       set completeopt-=preview       " Don’t show preview on completion
-      set grepprg=internal           " Use vimgrep for grep
       set laststatus=3               " Only show status line at the bottom
       set noruler                    " Disable ruler
       set noshowcmd                  " Hide pending keys messages
@@ -25,6 +24,10 @@
       set title                      " Set terminal title
       set wildignore=ctags,.git/     " Ignore files and dirs in searches
       set wildmode=longest:full,full " Completion menu
+
+      " Faster grep
+      set grepprg=${pkgs.ripgrep}/bin/rg\ --vimgrep\ --no-heading
+      set grepformat+=%f:%l:%c:%m
 
       " Until https://github.com/neovim/neovim/issues/19193 is fixed
       autocmd RecordingEnter * set cmdheight=1
@@ -41,15 +44,11 @@
       " Git blame current line
       command! Blame execute 'split | terminal git blame % -L ' . line('.') . ',+1'
 
-      " Find file in git index
-      command! -nargs=1 -bang -complete=custom,s:git_files GitEdit edit<bang> <args>
-      function! s:git_files(A, L, P)
-        return system("git ls-files --recurse-submodules 2>/dev/null")
+      " Quickly edit file with completion
+      command! -nargs=1 -bang -complete=custom,s:files Edit edit<bang> <args>
+      function! s:files(A, L, P)
+        return system("${pkgs.ripgrep}/bin/rg --files")
       endfunction
-
-      " Search and replace mappings
-      nnoremap <c-p> :GitEdit<space>.*
-      nnoremap <c-f> :sil grep // `git ls-files --recurse-submodules` \| cw<home><s-right><s-right><right><right>
 
       " Alternate buffer
       nnoremap ga <c-^>
@@ -76,25 +75,19 @@
 
       lua <<EOF
       servers = {
-        go = {
-          cmd = {'${pkgs.gopls}/bin/gopls'},
-          root_dir = vim.fs.dirname(vim.fs.find({'go.mod', '.git'}, { upward = true })[1]),
-        },
-        nix = {
-          cmd = {'${pkgs.rnix-lsp}/bin/rnix-lsp'},
-          root_dir = vim.fs.dirname(vim.fs.find({'flake.nix', 'shell.nix', '.git'}, { upward = true })[1]),
-        },
-        zig = {
-          cmd = {'${pkgs.zls}/bin/zls'},
-          root_dir = vim.fs.dirname(vim.fs.find({'build.zig', '.git'}, { upward = true })[1]),
-        },
+        go = '${pkgs.gopls}/bin/gopls',
+        nix = '${pkgs.rnix-lsp}/bin/rnix-lsp',
+        zig = '${pkgs.zls}/bin/zls',
       }
 
-      for pat, config in pairs(servers) do
+      for pat, cmd in pairs(servers) do
         vim.api.nvim_create_autocmd('FileType', {
           pattern = pat,
           callback = function()
-            vim.lsp.start(config)
+            vim.lsp.start({
+              cmd = {cmd},
+              root_dir = vim.fn.getcwd(),
+            })
           end
         })
       end
@@ -105,8 +98,8 @@
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
           vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
           vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
-          vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
           vim.keymap.set('n', 'gca', vim.lsp.buf.code_action, bufopts)
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
           vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
 
           local client = vim.lsp.get_client_by_id(args.data.client_id)
