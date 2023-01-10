@@ -15,6 +15,7 @@
       " General options
       set cmdheight=0                " Hide command line
       set completeopt-=preview       " Don’t show preview on completion
+      set inccommand=split           " Show effect of substitute in split
       set laststatus=3               " Only show status line at the bottom
       set noruler                    " Disable ruler
       set noshowcmd                  " Hide pending keys messages
