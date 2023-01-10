@@ -38,6 +38,10 @@
       autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
       autocmd FileType html,json,nix,xml setlocal shiftwidth=2 tabstop=2
 
+      " Make programs
+      autocmd Filetype go set makeprg=go\ build
+      autocmd Filetype zig set makeprg=zig\ build
+
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
