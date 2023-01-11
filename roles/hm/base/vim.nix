@@ -50,7 +50,7 @@
       command! W w !sudo tee % > /dev/null
 
       " Git blame current line
-      command! Blame execute 'split | terminal git blame % -L ' . line('.') . ',+1'
+      command! Blame execute '2split | terminal git --no-pager blame % -L ' . line('.') . ',+1'
 
       " Quickly edit file with completion
       command! -nargs=1 -bang -complete=custom,s:files Edit edit<bang> <args>
