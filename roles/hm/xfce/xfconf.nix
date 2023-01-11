@@ -106,7 +106,7 @@ let
       "/xfwm4/custom/<Alt>Tab" = "cycle_windows_key";
       "/xfwm4/custom/<Super>Tab" = "switch_window_key";
       "/xfwm4/custom/<Super>d" = "show_desktop_key";
-      "/xfwm4/custom/<Shift>f" = "fullscreen_key";
+      "/xfwm4/custom/<Super>f" = "fullscreen_key";
       "/xfwm4/custom/<Super>m" = "move_window_key";
       "/xfwm4/custom/<Super>q" = "close_window_key";
       "/xfwm4/custom/<Super>r" = "resize_window_key";
