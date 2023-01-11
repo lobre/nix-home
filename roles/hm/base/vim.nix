@@ -29,6 +29,10 @@
       set grepprg=${pkgs.ripgrep}/bin/rg\ --vimgrep\ --no-heading
       set grepformat+=%f:%l:%c:%m
 
+      " Don’t show shell output of grep and lgrep
+      cabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep" : "grep"
+      cabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep" : "lgrep"
+
       " Until https://github.com/neovim/neovim/issues/19193 is fixed
       autocmd RecordingEnter * set cmdheight=1
       autocmd RecordingLeave * set cmdheight=0
