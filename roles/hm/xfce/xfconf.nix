@@ -87,7 +87,6 @@ let
       "/commands/custom/override" = true; # allow custom commands
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Primary><Alt>Delete" = "xfce4-session-logout";
-      "/commands/custom/<Super>b" = "exo-open --launch WebBrowser";
       "/commands/custom/<Super>t" = "exo-open --launch TerminalEmulator";
       "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
@@ -107,12 +106,10 @@ let
       "/xfwm4/custom/<Alt>Tab" = "cycle_windows_key";
       "/xfwm4/custom/<Super>Tab" = "switch_window_key";
       "/xfwm4/custom/<Super>d" = "show_desktop_key";
-      "/xfwm4/custom/<Super>f" = "fill_window_key";
-      "/xfwm4/custom/<Shift><Super>f" = "fullscreen_key";
+      "/xfwm4/custom/<Shift>f" = "fullscreen_key";
       "/xfwm4/custom/<Super>m" = "move_window_key";
       "/xfwm4/custom/<Super>q" = "close_window_key";
       "/xfwm4/custom/<Super>r" = "resize_window_key";
-      "/xfwm4/custom/<Super>s" = "stick_window_key";
       "/xfwm4/custom/<Super>z" = "maximize_window_key";
       "/xfwm4/custom/<Shift><Super>z" = "hide_window_key";
       "/xfwm4/custom/Escape" = "cancel_key";
