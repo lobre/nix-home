@@ -41,6 +41,7 @@ in
 
       staticConfigOptions = {
         accessLog = true;
+        api.dashboard = true;
 
         entrypoints = {
           web.address = ":80";
@@ -66,9 +67,20 @@ in
             port = "443";
             permanent = true;
           };
+
+          admin-auth.basicAuth = {
+            users = [ "admin:$2a$12$7fPByfeR//M6nYC/FndER.bflzGV77.i1qVMfZ.nzWWh/dj2Y8w3K" ];
+          };
         };
 
         routers = {
+          traefik = {
+            rule = "Host(`traefik.lobre.io`)";
+            entryPoints = [ "web" "websecure" ];
+            service = "api@internal";
+            middlewares = [ "redirect-to-https" "admin-auth" ];
+          };
+
           plex = {
             rule = "Host(`plex.lobre.io`)";
             entryPoints = [ "web" "websecure" ];
