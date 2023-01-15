@@ -1,4 +1,4 @@
-{ config, pkgs, secrets, ... }:
+{ config, pkgs, ... }:
 
 let
   nixSwitch = pkgs.writeScriptBin "nix-switch" ''
@@ -26,8 +26,8 @@ in
     [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
   '';
 
-  home.username = secrets.username;
-  home.homeDirectory = secrets.homeDirectory;
+  home.username = "brevetl";
+  home.homeDirectory = "/home/brevetl";
 
   home.packages = with pkgs; [
     # custom script to easily switch configuration

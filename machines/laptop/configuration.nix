@@ -10,9 +10,8 @@ let
     exec -a "$0" "$@"
   '';
 
-in {
-  _module.args.secrets = import ../../secrets.nix;
-
+in
+{
   environment.systemPackages = [ nvidia-offload ];
 
   networking.hostName = "laptop";

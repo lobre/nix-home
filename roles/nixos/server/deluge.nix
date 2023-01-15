@@ -1,17 +1,11 @@
-{ config, pkgs, secrets, ... }:
+{ config, pkgs, ... }:
 
-let
-  authFile = pkgs.writeText "deluge-auth" ''
-    localclient:${secrets.deluge.password}:10
-    ${secrets.deluge.user}:${secrets.deluge.password}:10
-  '';
-
-in {
+{
   services = {
     traefik.dynamicConfigOptions.http = {
       routers = {
         deluge = {
-          rule = "Host(`deluge.${secrets.domain}`)";
+          rule = "Host(`deluge.lobre.io`)";
           entryPoints = [ "web" "websecure" ];
           service = "deluge";
           middlewares = [ "redirect-to-https" ];
@@ -25,11 +19,14 @@ in {
 
     deluge = {
       enable = true;
+      package = pkgs.deluged; # non gtk version
       web.enable = true;
       declarative = true;
       openFirewall = true;
       user = "lobre";
-      authFile = authFile;
+
+      # automatically generate a random password in auth.stateful for the local ui
+      authFile = "${config.services.deluge.dataDir}/.config/deluge/auth.stateful";
 
       config = {
         allow_remote = true;

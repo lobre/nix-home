@@ -1,19 +1,14 @@
-{ pkgs, secrets, ... }:
+{ pkgs, ... }:
 
 {
   programs.git = {
     enable = true;
-    userEmail = secrets.email;
-    userName = secrets.name;
+    userEmail = "loric.brevet@gmail.com";
+    userName = "Loric Brevet";
 
     signing = {
       key = null; # signing key will depend on commit’s author
       signByDefault = true;
-    };
-
-    aliases = {
-      "ls" =
-        "log -i --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit";
     };
 
     ignores = [ "tags" "tags.lock" "tags.temp" ];
@@ -59,3 +54,9 @@
     includes = [{ path = "~/.gitconfig.local"; }];
   };
 }
+
+
+
+
+
+

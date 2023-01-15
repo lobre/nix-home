@@ -1,11 +1,11 @@
-{ config, pkgs, secrets, ... }:
+{ config, pkgs, ... }:
 
 {
   services = {
     traefik.dynamicConfigOptions.http = {
       routers = {
         plex = {
-          rule = "Host(`plex.${secrets.domain}`)";
+          rule = "Host(`plex.lobre.io`)";
           entryPoints = [ "web" "websecure" ];
           service = "plex";
           middlewares = [ "redirect-to-https" ];

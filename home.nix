@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  _module.args.secrets = import ./secrets.nix;
-
   # Enable settings that make home manager work better on Linux distribs other than NixOS
   targets.genericLinux.enable = true;
 

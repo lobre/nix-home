@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  _module.args.secrets = import ../../secrets.nix;
-
   networking.hostName = "kimsufi";
 
   # For bios (replace with disk where grub installed)
