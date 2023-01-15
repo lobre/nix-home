@@ -23,14 +23,15 @@
       web.enable = true;
       declarative = true;
       openFirewall = true;
-      user = "lobre";
+      user = "media";
+      group = "media";
 
       # automatically generate a random password in auth.stateful for the local ui
       authFile = "${config.services.deluge.dataDir}/.config/deluge/auth.stateful";
 
       config = {
         allow_remote = true;
-        download_location = "/home/lobre/Downloads/";
+        download_location = "/var/lib/media/Downloads/";
         stop_seed_at_ratio = true;
         stop_seed_ratio = 2;
         enabled_plugins = [ "Label" ];

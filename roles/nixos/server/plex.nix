@@ -19,7 +19,8 @@
 
     plex = {
       enable = true;
-      user = "lobre";
+      user = "media";
+      group = "media";
       openFirewall = true;
     };
   };
