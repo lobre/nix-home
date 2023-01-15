@@ -1,4 +1,4 @@
-{ config, pkgs, secrets, ... }:
+{ config, pkgs, ... }:
 
 {
   # 8080 to allow quickly spinning a server for development
@@ -27,7 +27,7 @@
         };
 
         certificatesResolvers.letsencrypt.acme = {
-          email = secrets.email;
+          email = "loric.brevet@gmail.com";
           storage = "/var/lib/traefik/acme.json";
           tlsChallenge = true;
         };

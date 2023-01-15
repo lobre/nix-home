@@ -1,10 +1,11 @@
-{ config, pkgs, secrets, ... }:
+{ config, pkgs, ... }:
 
 let
   daemonConfig = pkgs.writeText "daemon.json"
     (builtins.toJSON { features = { buildkit = true; }; });
 
-in {
+in
+{
   # No need for predictable names as I usually only have one ethernet and one wireless interfaces
   networking.usePredictableInterfaceNames = false;
 
