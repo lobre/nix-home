@@ -6,8 +6,6 @@
 
     users.lobre = {
       isNormalUser = true;
-      home = "/home/lobre";
-      createHome = true;
       description = "Loric Brevet";
       uid = 1000;
       shell = pkgs.bash;

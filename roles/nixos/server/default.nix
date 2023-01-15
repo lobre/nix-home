@@ -45,6 +45,6 @@
     };
   };
 
-  imports = [ ./plex.nix ./deluge.nix ];
+  imports = [ ./users.nix ./plex.nix ./deluge.nix ];
 }
 
