@@ -26,9 +26,6 @@ in
     [[ ":$PATH:" != *":$HOME/bin:"* ]] && export PATH="$PATH:$HOME/bin"
   '';
 
-  home.username = "brevetl";
-  home.homeDirectory = "/home/brevetl";
-
   home.packages = with pkgs; [
     # custom script to easily switch configuration
     nixSwitch
