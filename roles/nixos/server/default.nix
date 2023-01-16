@@ -29,7 +29,10 @@ in
   ];
 
   services = {
-    sshd.enable = true;
+    openssh = {
+      enable = true;
+      extraConfig = "StreamLocalBindUnlink yes"; # for gpg agent forwarding
+    };
 
     traefik = {
       enable = true;
@@ -130,6 +133,16 @@ in
         enabled_plugins = [ "Label" ];
       };
     };
+  };
+
+  users.mabre = {
+    isNormalUser = true;
+    description = "Mael Brevet";
+    shell = pkgs.bash;
+    extraGroups = [ "wheel" "networkmanager" "audio" "video" "docker" "media" ];
+
+    hashedPassword = "$y$j9T$FjBD72xuYsU.8fzA66uPT.$.z56FCUhAIup3Q7fa6UoANY1M3O.e0elJZJ4TSOIcI9";
+    openssh.authorizedKeys.keys = [ "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHFwtmR2gstd8A8T60tfZ7TLd5OQMlwflUmt7k5vZCTA openpgp:0xBD1259FB" ];
   };
 }
 
