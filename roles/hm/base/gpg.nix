@@ -8,11 +8,9 @@
     settings.no-autostart = true; # don’t autostart gpg-agent if not started
   };
 
-  # force gpg agent for ssh especially for gpg agent forwarding
+  # force gpg agent for ssh especially for gpg agent forwarding over ssh
   home.sessionVariablesExtra = ''
-    if [[ -z "$SSH_AUTH_SOCK" ]]; then
-      export SSH_AUTH_SOCK="$(${pkgs.gpgPkg}/bin/gpgconf --list-dirs agent-ssh-socket)"
-    fi
+    export SSH_AUTH_SOCK="$(${services.gpg.package}/bin/gpgconf --list-dirs agent-ssh-socket)"
   '';
 
   services.gpg-agent = {
