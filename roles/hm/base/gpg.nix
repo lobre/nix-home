@@ -10,7 +10,7 @@
 
   # force gpg agent for ssh especially for gpg agent forwarding over ssh
   home.sessionVariablesExtra = ''
-    export SSH_AUTH_SOCK="$(${services.gpg.package}/bin/gpgconf --list-dirs agent-ssh-socket)"
+    export SSH_AUTH_SOCK="$(${config.programs.gpg.package}/bin/gpgconf --list-dirs agent-ssh-socket)"
   '';
 
   services.gpg-agent = {
