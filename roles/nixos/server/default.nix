@@ -135,7 +135,7 @@ in
     };
   };
 
-  users.mabre = {
+  users.users.mabre = {
     isNormalUser = true;
     description = "Mael Brevet";
     shell = pkgs.bash;
