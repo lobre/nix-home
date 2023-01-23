@@ -70,7 +70,7 @@ hi! link WarningMsg    ErrorMsg
 hi! link MoreMsg       Title
 hi! link Question      MoreMsg
 hi! link ModeMsg       MoreMsg
-hi! link TabLineFill   StatusLineNC
+hi! link TabLineFill   TabLine
 hi! link SpecialKey    NonText
 hi! link VertSplit     Normal
 
