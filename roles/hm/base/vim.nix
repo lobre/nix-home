@@ -83,9 +83,10 @@
 
       lua <<EOF
       servers = {
-        go = '${pkgs.gopls}/bin/gopls',
-        nix = '${pkgs.rnix-lsp}/bin/rnix-lsp',
-        zig = '${pkgs.zls}/bin/zls',
+        go = {'${pkgs.gopls}/bin/gopls'},
+        nix = {'${pkgs.rnix-lsp}/bin/rnix-lsp'},
+        php = {'${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio'},
+        zig = {'${pkgs.zls}/bin/zls'},
       }
 
       for pat, cmd in pairs(servers) do
@@ -93,7 +94,7 @@
           pattern = pat,
           callback = function()
             vim.lsp.start({
-              cmd = {cmd},
+              cmd = cmd,
               root_dir = vim.fn.getcwd(),
             })
           end
