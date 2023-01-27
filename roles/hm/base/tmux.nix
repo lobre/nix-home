@@ -26,6 +26,7 @@
       set -g window-status-format " #W "
       set -g window-status-current-format "#[fg=green,bold bg=black] #W "
       set -g status-left "#[fg=blue,bold]#S "
+      set -g status-left-length 30
       set -g status-right ""
 
       # toggle status line
