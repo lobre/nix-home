@@ -75,8 +75,9 @@
       autocmd CursorHold,CursorHoldI * silent! checktime
       autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
 
-      " Define simple statusline
+      " Define simple statusline and keep it for quickfix
       set statusline=%=%f:%l
+      let g:qf_disable_statusline = 1
 
       " Push the statusline to tmux
       if has_key(environ(), 'TMUX')
