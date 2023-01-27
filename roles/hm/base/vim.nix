@@ -78,7 +78,7 @@
       " Define simple statusline
       set statusline=%=%f:%l
 
-      " Define the statusbar in tmux when inside
+      " Push the statusline to tmux
       if has_key(environ(), 'TMUX')
         set laststatus=0
         " see https://github.com/neovim/neovim/issues/18965#issuecomment-1155808469
