@@ -22,11 +22,11 @@
       # status line
       set -g status-position bottom
       set -g status-style bg=default
-      set -g status-justify centre
-      set -g status-left ""
+      set -g status-justify absolute-centre
       set -g window-status-format " #W "
       set -g window-status-current-format "#[fg=green,bold bg=black] #W "
-      set -g status-right "#[fg=brightblack]working on #[fg=blue,bold]#S"
+      set -g status-left "#[fg=blue,bold]#S "
+      set -g status-right ""
 
       # toggle status line
       bind Enter set -g status

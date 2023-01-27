@@ -20,7 +20,6 @@
       set noshowcmd                  " Hide pending keys messages
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
-      set statusline=%=%f:%l         " Simple status line
       set title                      " Set terminal title
       set wildignore=ctags,.git/     " Ignore files and dirs in searches
       set wildmode=longest:full,full " Completion menu
@@ -75,6 +74,21 @@
       autocmd FocusGained,BufEnter * silent! checktime
       autocmd CursorHold,CursorHoldI * silent! checktime
       autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
+
+      " Define simple statusline
+      set statusline=%=%f:%l
+
+      " Define the statusbar in tmux when inside
+      if has_key(environ(), 'TMUX')
+        set laststatus=0
+        " see https://github.com/neovim/neovim/issues/18965#issuecomment-1155808469
+        set statusline=%{repeat('─',winwidth('.'))}
+        hi! link StatusLineNC StatusLine
+
+        let Statusline = { -> trim(nvim_eval_statusline("%=%f:%l", {'fillchar': ' '}).str) }
+        autocmd BufEnter,FocusGained,CursorMoved * call system('tmux set status-right "' . Statusline() . '"')
+        autocmd VimLeave,VimSuspend,FocusLost * call system('tmux set status-right ""')
+      endif
 
       " Try to include local config
       if filereadable(expand("~/.vimrc.local"))
