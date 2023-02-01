@@ -21,6 +21,7 @@
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
       set title                      " Set terminal title
+      set wildcharm=<c-z>            " Allow completion with <c-z> in macros
       set wildignore=ctags,.git/     " Ignore files and dirs in searches
       set wildmode=longest:full,full " Completion menu
 
@@ -52,10 +53,13 @@
       command! Blame execute '2split | terminal git --no-pager blame % -L ' . line('.') . ',+1'
 
       " Quickly edit file with completion
-      command! -nargs=1 -bang -complete=custom,s:files E edit<bang> <args>
+      command! -nargs=1 -bang -complete=custom,s:files Edit edit<bang> <args>
       function! s:files(A, L, P)
         return system("${pkgs.ripgrep}/bin/rg --files")
       endfunction
+
+      " Mapping to open file
+      nnoremap <c-p> :Edit<space><c-z>
 
       " Alternate buffer
       nnoremap ga <c-^>
