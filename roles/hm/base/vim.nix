@@ -52,7 +52,7 @@
       command! Blame execute '2split | terminal git --no-pager blame % -L ' . line('.') . ',+1'
 
       " Quickly edit file with completion
-      command! -nargs=1 -bang -complete=custom,s:files Edit edit<bang> <args>
+      command! -nargs=1 -bang -complete=custom,s:files E edit<bang> <args>
       function! s:files(A, L, P)
         return system("${pkgs.ripgrep}/bin/rg --files")
       endfunction
