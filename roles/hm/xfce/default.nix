@@ -5,6 +5,7 @@
 
   home.packages = with pkgs; [
     calibre
+    chrysalis
     discord
     filezilla
     firefox
@@ -32,18 +33,20 @@
   ];
 
   # Create a krita desktop file to launch without Open GL for non NixOS
-  xdg.systemDirs.data = let
-    kritaNoGLDesktop = pkgs.makeDesktopItem {
-      name = "Krita No GL";
-      desktopName = "Krita No GL";
-      genericName = "Digital Painting";
-      comment = "Digital Painting";
-      exec = "env QT_XCB_GL_INTEGRATION=none krita %F";
-      icon = "krita";
-      categories = [ "Qt" "KDE" "Graphics" "2DGraphics" "RasterGraphics" ];
-      type = "Application";
-    };
-  in [ "${kritaNoGLDesktop}/share" ];
+  xdg.systemDirs.data =
+    let
+      kritaNoGLDesktop = pkgs.makeDesktopItem {
+        name = "Krita No GL";
+        desktopName = "Krita No GL";
+        genericName = "Digital Painting";
+        comment = "Digital Painting";
+        exec = "env QT_XCB_GL_INTEGRATION=none krita %F";
+        icon = "krita";
+        categories = [ "Qt" "KDE" "Graphics" "2DGraphics" "RasterGraphics" ];
+        type = "Application";
+      };
+    in
+    [ "${kritaNoGLDesktop}/share" ];
 
   programs = {
     browserpass.enable = true;

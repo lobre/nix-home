@@ -52,8 +52,11 @@ in
   # Use local time instead of UTC to stay in sync with Windows
   time.hardwareClockInLocalTime = true;
 
-  # Yubikey
-  services.udev.packages = [ pkgs.yubikey-personalization ];
+  services.udev.packages = with pkgs; [
+    chrysalis
+    yubikey-personalization
+  ];
+
   services.pcscd.enable = true;
 
   imports = [
