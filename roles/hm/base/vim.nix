@@ -80,7 +80,7 @@
       autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
 
       " Define simple statusline and keep it for quickfix
-      set statusline=%=%f:%l
+      set statusline=%=%.36t:%l
       let g:qf_disable_statusline = 1
 
       " Push the statusline to tmux
@@ -90,7 +90,7 @@
         set statusline=%{repeat('─',winwidth('.'))}
         hi! link StatusLineNC StatusLine
 
-        let Statusline = { -> trim(nvim_eval_statusline("%=%f:%l", {'fillchar': ' '}).str) }
+        let Statusline = { -> trim(nvim_eval_statusline("%=%.36t:%l", {'fillchar': ' '}).str) }
         autocmd BufEnter,FocusGained,CursorMoved * call system('tmux set status-right "' . Statusline() . '"')
         autocmd VimLeave,VimSuspend,FocusLost * call system('tmux set status-right ""')
       endif
