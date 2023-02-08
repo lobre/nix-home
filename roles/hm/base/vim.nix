@@ -53,6 +53,7 @@
       command! Blame execute '2split | terminal git --no-pager blame % -L ' . line('.') . ',+1'
 
       " Quickly edit file with completion
+      " check if better solution when fuzzy patch available https://github.com/neovim/neovim/pull/21850
       command! -nargs=1 -bang -complete=custom,s:files Edit edit<bang> <args>
       function! s:files(A, L, P)
         return system("${pkgs.ripgrep}/bin/rg --files")
