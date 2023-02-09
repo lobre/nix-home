@@ -20,10 +20,13 @@
       set noshowcmd                  " Hide pending keys messages
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
-      set title                      " Set terminal title
       set wildcharm=<c-z>            " Allow completion with <c-z> in macros
       set wildignore=ctags,.git/     " Ignore files and dirs in searches
       set wildmode=longest:full,full " Completion menu
+
+      " Don’t set terminal title until issue fixed 
+      " https://github.com/neovim/neovim/issues/18573
+      set notitle
 
       " Faster grep
       set grepprg=${pkgs.ripgrep}/bin/rg\ --vimgrep\ --no-heading
