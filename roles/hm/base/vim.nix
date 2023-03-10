@@ -1,5 +1,24 @@
 { config, pkgs, ... }:
 
+let
+  htmlSkeleton = pkgs.writeText "html-skeleton" ''
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>Page Title</title>
+    </head>
+
+    <body>
+      Page Content
+    </body>
+
+    </html>
+  '';
+in
+
 {
   # Colorscheme
   xdg.configFile."nvim/colors/ansi.vim".source = ./ansi.vim;
@@ -98,6 +117,9 @@
         autocmd BufEnter,FocusGained,CursorMoved * call system('tmux set status-right "' . Statusline() . '"')
         autocmd VimLeave,VimSuspend,FocusLost * call system('tmux set status-right ""')
       endif
+
+      " html skeleton
+      autocmd BufNewFile index.html 0read ${htmlSkeleton}
 
       " Try to include local config
       if filereadable(expand("~/.vimrc.local"))
