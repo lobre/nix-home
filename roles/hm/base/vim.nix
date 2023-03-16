@@ -148,7 +148,8 @@ in
 
       vim.api.nvim_create_autocmd('LspAttach', {
         callback = function(args)
-          local bufopts = { noremap = true, silent = true, buffer = args.buf }
+          local bufnr = args.buf
+          local bufopts = { noremap = true, silent = true, buffer = bufnr }
           vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
           vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
           vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
@@ -159,6 +160,7 @@ in
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client.server_capabilities.documentFormattingProvider then
             vim.api.nvim_create_autocmd("BufWritePre", {
+              buffer = bufnr,
               callback = function()
                 vim.lsp.buf.format()
               end,
