@@ -69,6 +69,9 @@
   # lightdm is reading this .xprofile out of the box on session login
   home.file.".xprofile".text = ''
     ${pkgs.xorg.setxkbmap}/bin/setxkbmap -option caps:escape
+
+    # temporarily enable bepo42 to get used to it
+    ${pkgs.xorg.xkbcomp}/bin/xkbcomp ~/lab/github.com/Nuclear-Squid/ergol/dist/bepo42.xkb $DISPLAY || true
   '';
 
   fonts.fontconfig.enable = true;
