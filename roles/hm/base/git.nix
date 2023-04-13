@@ -15,7 +15,7 @@
 
     extraConfig = {
       core = {
-        editor = "vim";
+        editor = "nvim";
         askpass = "";
         pager = "less --mouse"; # allow mouse scroll
       };
@@ -30,16 +30,22 @@
         autoSetupRemote = true;
       };
 
-      merge.tool = "vimdiff";
+      diff = {
+        tool = "nvimdiff";
+        submodule = "log";
+      };
+
+      difftool = {
+        prompt = false;
+        nvimdiff.cmd = "nvim -d \"$LOCAL\" \"$REMOTE\"";
+      };
+
+      merge.tool = "nvimdiff";
+
       mergetool = {
         prompt = false;
         keepBackup = false;
-      };
-
-      difftool.prompt = false;
-      diff = {
-        tool = "vimdiff";
-        submodule = "log";
+        nvimdiff.cmd = "nvim -d \"$LOCAL\" \"$REMOTE\" \"$MERGED\" -c '$wincmd w' -c 'wincmd J'";
       };
 
       status.submoduleSummary = true;

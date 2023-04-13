@@ -22,6 +22,7 @@ in
 {
   programs.neovim = {
     enable = true;
+    vimdiffAlias = true;
 
     plugins = with pkgs.vimPlugins; [ vim-noctu ];
 
@@ -43,9 +44,9 @@ in
       " https://github.com/neovim/neovim/issues/18573
       set notitle
 
-      " Faster grep
-      set grepprg=${pkgs.ripgrep}/bin/rg\ --vimgrep\ --no-heading
-      set grepformat+=%f:%l:%c:%m
+      " Grep with git grep
+      set grepprg=git\ -c\ grep.fallbackToNoIndex\ --no-pager\ grep\ --no-color\ -nI
+      set grepformat=%f:%l:%c:%m,%f:%l:%m,%f
 
       " Don’t show shell output of grep and lgrep
       cabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep" : "grep"
@@ -81,10 +82,10 @@ in
       " html skeleton
       autocmd BufNewFile index.html 0read ${htmlSkeleton}
 
-      " Quickly edit file with completion
-      command! -nargs=1 -bang -complete=custom,s:files Edit edit<bang> <args>
-      function! s:files(A, L, P)
-        return system("${pkgs.ripgrep}/bin/rg --files")
+      " Quickly edit git file with completion
+      command! -nargs=1 -bang -complete=custom,s:git_files Gedit edit<bang> <args>
+      function! s:git_files(A, L, P)
+        return system("git ls-files --recurse-submodules 2>/dev/null")
       endfunction
 
       " Blame current line and show info inline in virtual text
@@ -95,7 +96,7 @@ in
         call nvim_buf_clear_namespace(0, l:ns, 0, -1)
         if empty(l:line_marks)
           let l:format = " --pretty='%h %an, %ad • %s' --date=human"
-          let l:msg = trim(system("git -P log -s -1 -L " . line('.') . ",+1:" . expand('%') . l:format))
+          let l:msg = trim(system("git --no-pager log -s -1 -L " . line('.') . ",+1:" . expand('%') . l:format))
           call nvim_buf_set_extmark(0, l:ns, line('.')-1, 0, {'virt_text': [[ '   ' . l:msg, 'Comment' ]]})
         endif
       endfunction
