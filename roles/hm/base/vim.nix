@@ -20,28 +20,24 @@ let
 in
 
 {
-  # Colorscheme
-  xdg.configFile."nvim/colors/ansi.vim".source = ./ansi.vim;
-
   programs.neovim = {
     enable = true;
-    vimAlias = true;
+
+    plugins = with pkgs.vimPlugins; [ vim-noctu ];
 
     extraConfig = ''
-      " Use custom minimal ansi scheme
-      colorscheme ansi
+      colorscheme noctu
 
       " General options
-      set cmdheight=0                " Hide command line
       set inccommand=split           " Show effect of substitute in split
-      set laststatus=3               " Only show status line at the bottom
       set noruler                    " Disable ruler
       set noshowcmd                  " Hide pending keys messages
       set scrollback=50000           " Lines to keep in terminal buffer
       set shortmess+=I               " Disable intro page
-      set wildcharm=<c-z>            " Allow completion with <c-z> in macros
       set wildignore=ctags,.git/     " Ignore files and dirs in searches
+      set wildoptions+=fuzzy         " Use fuzzy matching in completion
       set wildmode=longest:full,full " Completion menu
+      set diffopt+=linematch:50      " Better diff mode (https://github.com/neovim/neovim/pull/14537)
 
       " Don’t set terminal title until issue fixed 
       " https://github.com/neovim/neovim/issues/18573
@@ -55,10 +51,6 @@ in
       cabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep" : "grep"
       cabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep" : "lgrep"
 
-      " Until https://github.com/neovim/neovim/issues/19193 is fixed
-      autocmd RecordingEnter * set cmdheight=1
-      autocmd RecordingLeave * set cmdheight=0
-
       " Language specific indentation settings
       set shiftwidth=4 tabstop=4 expandtab
       autocmd FileType go setlocal shiftwidth=8 tabstop=8 noexpandtab
@@ -70,22 +62,6 @@ in
 
       " Save with sudo
       command! W w !sudo tee % > /dev/null
-
-      " Git blame current line
-      command! Blame execute '2split | terminal git --no-pager blame % -L ' . line('.') . ',+1'
-
-      " Quickly edit file with completion
-      " check if better solution when fuzzy patch available https://github.com/neovim/neovim/pull/21850
-      command! -nargs=1 -bang -complete=custom,s:files Edit edit<bang> <args>
-      function! s:files(A, L, P)
-        return system("${pkgs.ripgrep}/bin/rg --files")
-      endfunction
-
-      " Mapping to open file
-      nnoremap <c-p> :Edit<space><c-z>
-
-      " Alternate buffer
-      nnoremap ga <c-^>
 
       " Exit insert for terminal
       tnoremap <esc> <c-\><c-n>
@@ -102,24 +78,27 @@ in
       autocmd CursorHold,CursorHoldI * silent! checktime
       autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
 
-      " Define simple statusline and keep it for quickfix
-      set statusline=%=%.36t:%l
-      let g:qf_disable_statusline = 1
-
-      " Push the statusline to tmux
-      if has_key(environ(), 'TMUX')
-        set laststatus=0
-        " see https://github.com/neovim/neovim/issues/18965#issuecomment-1155808469
-        set statusline=%{repeat('─',winwidth('.'))}
-        hi! link StatusLineNC StatusLine
-
-        let Statusline = { -> trim(nvim_eval_statusline("%=%.36t:%l", {'fillchar': ' '}).str) }
-        autocmd BufEnter,FocusGained,CursorMoved * call system('tmux set status-right "' . Statusline() . '"')
-        autocmd VimLeave,VimSuspend,FocusLost * call system('tmux set status-right ""')
-      endif
-
       " html skeleton
       autocmd BufNewFile index.html 0read ${htmlSkeleton}
+
+      " Quickly edit file with completion
+      command! -nargs=1 -bang -complete=custom,s:files Edit edit<bang> <args>
+      function! s:files(A, L, P)
+        return system("${pkgs.ripgrep}/bin/rg --files")
+      endfunction
+
+      " Blame current line and show info inline in virtual text
+      command! -nargs=0 Blame call Blame()
+      function! Blame()
+        let l:ns = nvim_create_namespace("blame")
+        let l:line_marks = nvim_buf_get_extmarks(0, l:ns, [line('.')-1, 0], [line('.')-1, 0], {})
+        call nvim_buf_clear_namespace(0, l:ns, 0, -1)
+        if empty(l:line_marks)
+          let l:format = " --pretty='%h %an, %ad • %s' --date=human"
+          let l:msg = trim(system("git -P log -s -1 -L " . line('.') . ",+1:" . expand('%') . l:format))
+          call nvim_buf_set_extmark(0, l:ns, line('.')-1, 0, {'virt_text': [[ '   ' . l:msg, 'Comment' ]]})
+        endif
+      endfunction
 
       " Try to include local config
       if filereadable(expand("~/.vimrc.local"))
@@ -170,16 +149,5 @@ in
       })
       EOF
     '';
-
-    plugins = with pkgs.vimPlugins; [
-      # Syntax for zig and nix were added recently in vim and neovim
-      # https://github.com/neovim/neovim/commit/35767769036671d5ce562f53cae574f9c66e4bb2
-      # Waiting for the next version of neovim to have it in nixpkgs because only in master so far.
-      vim-nix
-      {
-        plugin = zig-vim;
-        config = "let g:zig_fmt_autosave = 0";
-      }
-    ];
   };
 }
