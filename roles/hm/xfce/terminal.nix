@@ -25,7 +25,8 @@ let
   palette =
     "${black};${red};${green};${yellow};${blue};${magenta};${cyan};${white};${brightBlack};${brightRed};${brightGreen};${brightYellow};${brightBlue};${brightMagenta};${brightCyan};${brightWhite}";
 
-in {
+in
+{
   # theme
   xdg.dataFile."xfce4/terminal/colorschemes/custom.theme".text = ''
     [Scheme]
@@ -54,7 +55,7 @@ in {
   xdg.configFile."xfce4/terminal/terminalrc".text = ''
     [Configuration]
     CellHeightScale=1.200000
-    FontName=Iosevka Term Slab Regular 12
+    FontName=Iosevka Term Slab Regular 14
     MiscAlwaysShowTabs=FALSE
     MiscBell=FALSE
     MiscBellUrgent=FALSE
