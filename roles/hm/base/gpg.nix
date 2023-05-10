@@ -23,7 +23,7 @@
     # gpg --list-secret-keys --with-keygrip
     # Note that YubiKey keys are automatically loaded.
     sshKeys = [
-      "ABBF7AEA51C125D874FD367816D6D0624116B381" # amersports
+      "3345B9FEA3695058E23F58154E7B544A584CFE3E" # amersports
     ];
   };
 
