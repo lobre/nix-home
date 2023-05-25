@@ -75,14 +75,25 @@ in
       nnoremap N Nzzzv
 
       " Quickfix mappings
-      nnoremap <c-j> <cmd>cnext<cr>zz
-      nnoremap <c-k> <cmd>cprev<cr>zz
+      nnoremap <c-n> <cmd>cnext<cr>zz
+      nnoremap <c-N> <cmd>cprev<cr>zz
 
-      " ctrl-c should act as escape
+      " Ctrl-c should act as escape
       inoremap <c-c> <esc>
+
+      " Alternate file
+      nnoremap ga <c-^>
 
       " Exit insert for terminal
       tnoremap <esc> <c-\><c-n>
+
+      " Arglist mappings
+      let mapleader=" "
+      nnoremap <leader>e <cmd>0argadd<cr>
+      nnoremap <leader>j <cmd>argument 1<cr>
+      nnoremap <leader>k <cmd>argument 2<cr>
+      nnoremap <leader>l <cmd>argument 3<cr>
+      nnoremap <leader>; <cmd>argument 4<cr>
 
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
