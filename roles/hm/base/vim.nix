@@ -64,6 +64,23 @@ in
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
+      " Move lines
+      vnoremap J :m '>+1<cr>gv=gv
+      vnoremap K :m '<-2<cr>gv=gv
+
+      " Center cursor upon half page moves and search
+      nnoremap <c-d> <c-d>zz
+      nnoremap <c-u> <c-u>zz
+      nnoremap n nzzzv
+      nnoremap N Nzzzv
+
+      " Quickfix mappings
+      nnoremap <c-j> <cmd>cnext<cr>zz
+      nnoremap <c-k> <cmd>cprev<cr>zz
+
+      " ctrl-c should act as escape
+      inoremap <c-c> <esc>
+
       " Exit insert for terminal
       tnoremap <esc> <c-\><c-n>
 
