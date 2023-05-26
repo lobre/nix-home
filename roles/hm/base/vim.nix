@@ -76,27 +76,32 @@ in
       nnoremap n nzzzv
       nnoremap N Nzzzv
 
-      " Quickfix and arglist mappings
-      nnoremap <c-n> <cmd>cnext<cr>zz
-      nnoremap <c-N> <cmd>cprev<cr>zz
-      nnoremap <c-j> <cmd>next<cr>
-      nnoremap <c-k> <cmd>prev<cr>
+      " Quickfix mappings
+      nnoremap <c-j> <cmd>cnext<cr>zz
+      nnoremap <c-k> <cmd>cprev<cr>zz
 
       " Arglist workflow
-      nnoremap <leader><space> <cmd>0argadd<cr>
+      nnoremap <leader><space> <cmd>args<cr>
+      nnoremap <leader>a <cmd>0argadd<bar>first<cr>
       nnoremap <leader>j <cmd>argument 1<cr>
       nnoremap <leader>k <cmd>argument 2<cr>
       nnoremap <leader>l <cmd>argument 3<cr>
       nnoremap <leader>; <cmd>argument 4<cr>
 
-      " Ctrl-c should act as escape
-      inoremap <c-c> <esc>
+      " Quickly open files
+      nnoremap <leader>p :Gedit<space><c-z>
+      nnoremap <leader>b :buffer<space><c-z>
+      nnoremap <expr> <leader>e "<cmd>" . (exists("w:netrw_rexlocal") ? "Rexplore" : "Explore .") . "<cr>"
+
+      " Make file executable
+      nnoremap <leader>x <cmd>sil !chmod +x %<cr>
 
       " Alternate file
       nnoremap ga <c-^>
 
-      " Exit insert for terminal
+      " Escape from visual line and terminal modes
       tnoremap <esc> <c-\><c-n>
+      inoremap <c-c> <esc>
 
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
