@@ -29,6 +29,8 @@ in
     extraConfig = ''
       colorscheme noctu
 
+      let mapleader=" "
+
       " General options
       set inccommand=split           " Show effect of substitute in split
       set noruler                    " Disable ruler
@@ -74,9 +76,18 @@ in
       nnoremap n nzzzv
       nnoremap N Nzzzv
 
-      " Quickfix mappings
+      " Quickfix and arglist mappings
       nnoremap <c-n> <cmd>cnext<cr>zz
       nnoremap <c-N> <cmd>cprev<cr>zz
+      nnoremap <c-j> <cmd>next<cr>
+      nnoremap <c-k> <cmd>prev<cr>
+
+      " Arglist workflow
+      nnoremap <leader><space> <cmd>0argadd<cr>
+      nnoremap <leader>j <cmd>argument 1<cr>
+      nnoremap <leader>k <cmd>argument 2<cr>
+      nnoremap <leader>l <cmd>argument 3<cr>
+      nnoremap <leader>; <cmd>argument 4<cr>
 
       " Ctrl-c should act as escape
       inoremap <c-c> <esc>
@@ -86,14 +97,6 @@ in
 
       " Exit insert for terminal
       tnoremap <esc> <c-\><c-n>
-
-      " Arglist mappings
-      let mapleader=" "
-      nnoremap <leader>e <cmd>0argadd<cr>
-      nnoremap <leader>j <cmd>argument 1<cr>
-      nnoremap <leader>k <cmd>argument 2<cr>
-      nnoremap <leader>l <cmd>argument 3<cr>
-      nnoremap <leader>; <cmd>argument 4<cr>
 
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
