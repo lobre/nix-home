@@ -66,9 +66,11 @@ in
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
-      " Move lines
+      " Move and indent line in visual mode
       vnoremap J :m '>+1<cr>gv=gv
       vnoremap K :m '<-2<cr>gv=gv
+      vnoremap < <gv
+      vnoremap > >gv
 
       " Center cursor upon half page moves and search
       nnoremap <c-d> <c-d>zz
@@ -80,18 +82,17 @@ in
       nnoremap <c-j> <cmd>cnext<cr>zz
       nnoremap <c-k> <cmd>cprev<cr>zz
 
-      " Arglist workflow
-      nnoremap <leader><space> <cmd>args<cr>
-      nnoremap <leader>a <cmd>0argadd<bar>first<cr>
-      nnoremap <leader>j <cmd>argument 1<cr>
-      nnoremap <leader>k <cmd>argument 2<cr>
-      nnoremap <leader>l <cmd>argument 3<cr>
-      nnoremap <leader>; <cmd>argument 4<cr>
-
       " Quickly open files
-      nnoremap <leader>p :Gedit<space><c-z>
-      nnoremap <leader>b :buffer<space><c-z>
-      nnoremap <expr> <leader>e "<cmd>" . (exists("w:netrw_rexlocal") ? "Rexplore" : "Explore .") . "<cr>"
+      nnoremap <c-p> :Gedit<space><c-z>
+      nnoremap <expr> <c-n> "<cmd>" . (exists("w:netrw_rexlocal") ? "Rexplore" : "Explore .") . "<cr>"
+      nnoremap <c-f> :sil grep<space><space><bar><space>cw<left><left><left><left><left>
+      nnoremap <c-b> :b<space><c-z>
+
+      " Go to mark
+      nnoremap <leader>a `A`"
+      nnoremap <leader>s `S`"
+      nnoremap <leader>d `D`"
+      nnoremap <leader>f `F`"
 
       " Make file executable
       nnoremap <leader>x <cmd>sil !chmod +x %<cr>
