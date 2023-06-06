@@ -29,8 +29,6 @@ in
     extraConfig = ''
       colorscheme noctu
 
-      let mapleader=" "
-
       " General options
       set inccommand=split           " Show effect of substitute in split
       set noruler                    " Disable ruler
@@ -82,20 +80,12 @@ in
       nnoremap <c-j> <cmd>cnext<cr>zz
       nnoremap <c-k> <cmd>cprev<cr>zz
 
-      " Quickly open files
+      " Open and switch to files
       nnoremap <c-p> :Gedit<space><c-z>
       nnoremap <expr> <c-n> "<cmd>" . (exists("w:netrw_rexlocal") ? "Rexplore" : "Explore .") . "<cr>"
-      nnoremap <c-f> :sil grep<space><space><bar><space>cw<left><left><left><left><left>
       nnoremap <c-b> :b<space><c-z>
-
-      " Go to mark
-      nnoremap <leader>a `A`"
-      nnoremap <leader>s `S`"
-      nnoremap <leader>d `D`"
-      nnoremap <leader>f `F`"
-
-      " Make file executable
-      nnoremap <leader>x <cmd>sil !chmod +x %<cr>
+      nnoremap <c-f> :sil grep<space><space><bar><space>cw<left><left><left><left><left>
+      nnoremap <c-m> <cmd>exe 'norm `' . toupper(nr2char(getchar())) . '`"'<cr>
 
       " Alternate file
       nnoremap ga <c-^>
