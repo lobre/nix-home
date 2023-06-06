@@ -22,6 +22,7 @@ in
 {
   programs.neovim = {
     enable = true;
+    vimAlias = true;
     vimdiffAlias = true;
 
     plugins = with pkgs.vimPlugins; [ vim-noctu ];
@@ -85,7 +86,7 @@ in
       nnoremap <expr> <c-n> "<cmd>" . (exists("w:netrw_rexlocal") ? "Rexplore" : "Explore .") . "<cr>"
       nnoremap <c-b> :b<space><c-z>
       nnoremap <c-f> :sil grep<space><space><bar><space>cw<left><left><left><left><left>
-      nnoremap <c-m> <cmd>exe 'norm `' . toupper(nr2char(getchar())) . '`"'<cr>
+      nnoremap <expr> <space> "<cmd>norm `" . toupper(nr2char(getchar())) . "`\"zz<cr>"
 
       " Alternate file
       nnoremap ga <c-^>
