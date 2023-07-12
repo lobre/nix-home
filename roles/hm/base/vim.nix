@@ -31,15 +31,16 @@ in
       colorscheme noctu
 
       " General options
-      set inccommand=split           " Show effect of substitute in split
-      set noruler                    " Disable ruler
-      set noshowcmd                  " Hide pending keys messages
-      set scrollback=50000           " Lines to keep in terminal buffer
-      set shortmess+=I               " Disable intro page
-      set wildignore=ctags,.git/     " Ignore files and dirs in searches
-      set wildoptions+=fuzzy         " Use fuzzy matching in completion
-      set wildmode=longest:full,full " Completion menu
-      set diffopt+=linematch:50      " Better diff mode (https://github.com/neovim/neovim/pull/14537)
+      set completeopt=menu,menuone,noselect  " Don't select first entry in autocomplete and disable preview
+      set inccommand=split                   " Show effect of substitute in split
+      set noruler                            " Disable ruler
+      set noshowcmd                          " Hide pending keys messages
+      set scrollback=50000                   " Lines to keep in terminal buffer
+      set shortmess+=I                       " Disable intro page
+      set wildignore=ctags,.git/             " Ignore files and dirs in searches
+      set wildoptions+=fuzzy                 " Use fuzzy matching in completion
+      set wildmode=longest:full,full         " Completion menu
+      set diffopt+=linematch:50              " Better diff mode (https://github.com/neovim/neovim/pull/14537)
 
       " Don’t set terminal title until issue fixed 
       " https://github.com/neovim/neovim/issues/18573
@@ -81,19 +82,26 @@ in
       nnoremap <c-j> <cmd>cnext<cr>zz
       nnoremap <c-k> <cmd>cprev<cr>zz
 
-      " Open and switch to files
-      nnoremap <c-p> :Gedit<space><c-z>
-      nnoremap <expr> <c-n> "<cmd>" . (exists("w:netrw_rexlocal") ? "Rexplore" : "Explore .") . "<cr>"
-      nnoremap <c-b> :b<space><c-z>
-      nnoremap <c-f> :sil grep<space><space><bar><space>cw<left><left><left><left><left>
-      nnoremap <expr> <space> "<cmd>norm `" . toupper(nr2char(getchar())) . "`\"zz<cr>"
-
       " Alternate file
       nnoremap ga <c-^>
 
       " Escape from visual line and terminal modes
       tnoremap <esc> <c-\><c-n>
       inoremap <c-c> <esc>
+
+      " Autocompletion on dot
+      inoremap <expr> . empty(&omnifunc) ? '.' : '.<c-x><c-o>'
+
+      " Quickly switch to file at mark
+      nnoremap <expr> <space> "<cmd>call JumpToFile('" . toupper(getcharstr()) . "')<cr>"
+
+      " Jump to mark at last known position
+      function! JumpToFile(mark)
+        let l:file = nvim_get_mark(a:mark, {})[3]
+        if expand(l:file) != expand('%:p')
+          execute "normal! `" . a:mark . "`\"zz"
+        endif
+      endfunction
 
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
@@ -111,7 +119,7 @@ in
       autocmd BufNewFile index.html 0read ${htmlSkeleton}
 
       " Quickly edit git file with completion
-      command! -nargs=1 -bang -complete=custom,s:git_files Gedit edit<bang> <args>
+      command! -nargs=1 -bang -complete=custom,s:git_files E edit<bang> <args>
       function! s:git_files(A, L, P)
         return system("git ls-files --recurse-submodules 2>/dev/null")
       endfunction
@@ -128,6 +136,10 @@ in
           call nvim_buf_set_extmark(0, l:ns, line('.')-1, 0, {'virt_text': [[ '   ' . l:msg, 'Comment' ]]})
         endif
       endfunction
+
+      " Go back to prev position when opening file. See :h restore-cursor
+      autocmd BufRead * autocmd FileType <buffer> ++once
+        \ if &ft !~# 'commit\|rebase' && line("'\"") > 1 && line("'\"") <= line("$") | exe 'normal! g`"' | endif
 
       " Try to include local config
       if filereadable(expand("~/.vimrc.local"))
