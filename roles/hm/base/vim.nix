@@ -138,10 +138,6 @@ in
       " Never show git index in list of buffers
       autocmd BufWinEnter * if &filetype == 'gitindex' | setlocal nobuflisted | endif
 
-      " Predefined mark for git index
-      autocmd VimEnter * call setpos("'G", [GitIndex(0), 1, 0, 0])
-      autocmd VimLeavePre * delmark G | wviminfo!
-
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
       autocmd CursorHold,CursorHoldI * silent! checktime
