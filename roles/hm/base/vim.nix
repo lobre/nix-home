@@ -104,46 +104,46 @@ in
         endif
       endfunction
 
-      " Quickly jump to terminal
-      function! CreateTerm() abort
-        let l:curbufnr = nvim_get_current_buf()
-        let l:bufnr = nvim_create_buf(0, 1)
-        call nvim_set_current_buf(l:bufnr)
-        call termopen('/bin/bash')
-        call nvim_set_current_buf(l:curbufnr)
-        call nvim_buf_set_option(l:bufnr, 'filetype', 'term')
-        call setpos("'T", [l:bufnr, 1, 0, 0])
-      endfunction
+      " Open a buffer with the list of all git files
+      command! -nargs=0 -bang Gex call nvim_set_current_buf(GitIndex(<bang>0))
+      function! GitIndex(force)
+        if trim(system('git rev-parse --is-inside-work-tree')) !=# 'true'
+          return -1
+        endif
 
-      " Quickly open git file
-      function! CreateGitIndex() abort
-        if trim(system('git rev-parse --is-inside-work-tree')) ==# 'true'
+        let l:bufname = 'gitindex:' . fnamemodify(getcwd(), ':t')
+        let l:bufnr = bufnr(l:bufname)
+        let l:update = a:force
+
+        if l:bufnr == -1
           let l:bufnr = nvim_create_buf(0, 1)
-          call nvim_buf_set_name(l:bufnr, 'gitindex:' . fnamemodify(getcwd(), ':t'))
+          let l:update = 1
+          call nvim_buf_set_name(l:bufnr, l:bufname)
           call nvim_buf_set_option(l:bufnr, 'filetype', 'gitindex')
-          call nvim_buf_set_lines(l:bufnr, 0, -1, 0, systemlist('git ls-files'))
           call nvim_buf_set_keymap(l:bufnr, 'n', '<cr>', 'gf', {})
           call nvim_buf_set_keymap(l:bufnr, 'n', 't', '<c-w>gf', {})
           call nvim_buf_set_keymap(l:bufnr, 'n', 'o', '<c-w>sgf', {})
           call nvim_buf_set_keymap(l:bufnr, 'n', 'v', '<c-w>vgf', {})
-          call setpos("'G", [l:bufnr, 1, 0, 0])
         endif
+
+        if l:update == 1
+          call nvim_buf_set_lines(l:bufnr, 0, -1, 0, systemlist('git ls-files'))
+        endif
+
+        return l:bufnr
       endfunction
 
-      augroup BgBuffers
-        autocmd!
-        autocmd VimEnter,DirChanged * call CreateGitIndex() | call CreateTerm()
-        autocmd VimLeavePre * delmarks GT | wviminfo!
-        autocmd BufWinEnter * if &filetype == 'gitindex' || &filetype == 'term' | setlocal nobuflisted | endif
-      augroup END
+      " Never show git index in list of buffers
+      autocmd BufWinEnter * if &filetype == 'gitindex' | setlocal nobuflisted | endif
+
+      " Predefined mark for git index
+      autocmd VimEnter * call setpos("'G", [GitIndex(0), 1, 0, 0])
+      autocmd VimLeavePre * delmark G | wviminfo!
 
       " Trigger autoread when files changes on disk
-      augroup Focus
-        autocmd!
-        autocmd FocusGained,BufEnter * silent! checktime
-        autocmd CursorHold,CursorHoldI * silent! checktime
-        autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
-      augroup END
+      autocmd FocusGained,BufEnter * silent! checktime
+      autocmd CursorHold,CursorHoldI * silent! checktime
+      autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
 
       " html skeleton
       autocmd BufNewFile index.html 0read ${htmlSkeleton}
@@ -159,8 +159,7 @@ in
       command! -nargs=0 Blame call Blame()
       function! Blame()
         let l:format = " --pretty='%h %an, %ad • %s' --date=human"
-        let l:output = trim(system("git --no-pager log -s -1 -L " . line('.') . ",+1:" . expand('%') . l:format))
-        echomsg l:output
+        echomsg trim(system("git --no-pager log -s -1 -L " . line('.') . ",+1:" . expand('%') . l:format))
       endfunction
 
       " Go back to prev position when opening file. See :h restore-cursor
