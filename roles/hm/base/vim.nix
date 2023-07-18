@@ -37,6 +37,7 @@ in
       set noshowcmd                          " Hide pending keys messages
       set scrollback=50000                   " Lines to keep in terminal buffer
       set shortmess+=I                       " Disable intro page
+      set undofile                           " Preserve undo history across sessions
       set wildignore=ctags,.git/             " Ignore files and dirs in searches
       set wildoptions+=fuzzy                 " Use fuzzy matching in completion
       set wildmode=longest:full,full         " Completion menu
@@ -89,8 +90,8 @@ in
       tnoremap <esc> <c-\><c-n>
       inoremap <c-c> <esc>
 
-      " Autocompletion on dot
-      inoremap <expr> . empty(&omnifunc) ? '.' : '.<c-x><c-o>'
+      " Autocompletion on dot for lsp
+      inoremap <expr> . &omnifunc == 'v:lua.vim.lsp.omnifunc' ? '.<c-x><c-o>' : '.'
 
       " Quickly switch to file at mark
       nnoremap <expr> <space> "<cmd>call JumpToFile('" . toupper(getcharstr()) . "')<cr>"
@@ -103,6 +104,50 @@ in
         endif
       endfunction
 
+      " Quickly jump to terminal
+      function! CreateTerm() abort
+        let l:curbufnr = nvim_get_current_buf()
+        let l:bufnr = nvim_create_buf(0, 1)
+        call nvim_set_current_buf(l:bufnr)
+        call termopen('/bin/bash')
+        call nvim_set_current_buf(l:curbufnr)
+        call nvim_buf_set_option(l:bufnr, 'filetype', 'term')
+        call setpos("'T", [l:bufnr, 1, 0, 0])
+      endfunction
+
+      " Quickly open git file
+      function! CreateGitIndex() abort
+        if trim(system('git rev-parse --is-inside-work-tree')) ==# 'true'
+          let l:bufnr = nvim_create_buf(0, 1)
+          call nvim_buf_set_name(l:bufnr, 'gitindex:' . fnamemodify(getcwd(), ':t'))
+          call nvim_buf_set_option(l:bufnr, 'filetype', 'gitindex')
+          call nvim_buf_set_lines(l:bufnr, 0, -1, 0, systemlist('git ls-files'))
+          call nvim_buf_set_keymap(l:bufnr, 'n', '<cr>', 'gf', {})
+          call nvim_buf_set_keymap(l:bufnr, 'n', 't', '<c-w>gf', {})
+          call nvim_buf_set_keymap(l:bufnr, 'n', 'o', '<c-w>sgf', {})
+          call nvim_buf_set_keymap(l:bufnr, 'n', 'v', '<c-w>vgf', {})
+          call setpos("'G", [l:bufnr, 1, 0, 0])
+        endif
+      endfunction
+
+      augroup BgBuffers
+        autocmd!
+        autocmd VimEnter,DirChanged * call CreateGitIndex() | call CreateTerm()
+        autocmd VimLeavePre * delmarks GT | wviminfo!
+        autocmd BufWinEnter * if &filetype == 'gitindex' || &filetype == 'term' | setlocal nobuflisted | endif
+      augroup END
+
+      " Trigger autoread when files changes on disk
+      augroup Focus
+        autocmd!
+        autocmd FocusGained,BufEnter * silent! checktime
+        autocmd CursorHold,CursorHoldI * silent! checktime
+        autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
+      augroup END
+
+      " html skeleton
+      autocmd BufNewFile index.html 0read ${htmlSkeleton}
+
       " Filter quicklist with the included cfilter plugin
       packadd cfilter
 
@@ -110,31 +155,12 @@ in
       let g:netrw_banner = 0           " Don’t show top banner
       let g:netrw_localrmdir = 'rm -r' " Let delete a non-empty directory
 
-      " Trigger autoread when files changes on disk
-      autocmd FocusGained,BufEnter * silent! checktime
-      autocmd CursorHold,CursorHoldI * silent! checktime
-      autocmd CursorMoved,CursorMovedI * silent! checktime " this one could be slow
-
-      " html skeleton
-      autocmd BufNewFile index.html 0read ${htmlSkeleton}
-
-      " Quickly edit git file with completion
-      command! -nargs=1 -bang -complete=custom,s:git_files E edit<bang> <args>
-      function! s:git_files(A, L, P)
-        return system("git ls-files --recurse-submodules 2>/dev/null")
-      endfunction
-
-      " Blame current line and show info inline in virtual text
+      " Blame current line
       command! -nargs=0 Blame call Blame()
       function! Blame()
-        let l:ns = nvim_create_namespace("blame")
-        let l:line_marks = nvim_buf_get_extmarks(0, l:ns, [line('.')-1, 0], [line('.')-1, 0], {})
-        call nvim_buf_clear_namespace(0, l:ns, 0, -1)
-        if empty(l:line_marks)
-          let l:format = " --pretty='%h %an, %ad • %s' --date=human"
-          let l:msg = trim(system("git --no-pager log -s -1 -L " . line('.') . ",+1:" . expand('%') . l:format))
-          call nvim_buf_set_extmark(0, l:ns, line('.')-1, 0, {'virt_text': [[ '   ' . l:msg, 'Comment' ]]})
-        endif
+        let l:format = " --pretty='%h %an, %ad • %s' --date=human"
+        let l:output = trim(system("git --no-pager log -s -1 -L " . line('.') . ",+1:" . expand('%') . l:format))
+        echomsg l:output
       endfunction
 
       " Go back to prev position when opening file. See :h restore-cursor
