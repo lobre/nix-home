@@ -99,13 +99,15 @@ in
       " Jump to mark at last known position
       function! JumpToFile(mark)
         let l:file = nvim_get_mark(a:mark, {})[3]
-        if expand(l:file) != expand('%:p')
+        if l:file != "" && expand(l:file) != expand('%:p')
           execute "normal! `" . a:mark . "`\"zz"
         endif
       endfunction
 
       " Open a buffer with the list of all git files
       command! -nargs=0 -bang Gex call nvim_set_current_buf(GitIndex(<bang>0))
+
+      " Create git index buffer
       function! GitIndex(force)
         if trim(system('git rev-parse --is-inside-work-tree')) !=# 'true'
           return -1
