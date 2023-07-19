@@ -105,7 +105,7 @@ in
       endfunction
 
       " Open a buffer with the list of all git files
-      command! -nargs=0 -bang Gex call nvim_set_current_buf(GitIndex(<bang>0))
+      command! -nargs=0 -bang Gex sil! call nvim_set_current_buf(GitIndex(<bang>0))
 
       " Create git index buffer
       function! GitIndex(force)
@@ -113,14 +113,13 @@ in
           return -1
         endif
 
-        let l:bufname = 'gitindex:' . fnamemodify(getcwd(), ':t')
-        let l:bufnr = bufnr(l:bufname)
+        let l:bufnr = bufnr('gitindex')
         let l:update = a:force
 
         if l:bufnr == -1
           let l:bufnr = nvim_create_buf(0, 1)
           let l:update = 1
-          call nvim_buf_set_name(l:bufnr, l:bufname)
+          call nvim_buf_set_name(l:bufnr, 'gitindex')
           call nvim_buf_set_option(l:bufnr, 'filetype', 'gitindex')
           call nvim_buf_set_keymap(l:bufnr, 'n', '<cr>', 'gf', {})
           call nvim_buf_set_keymap(l:bufnr, 'n', 't', '<c-w>gf', {})
@@ -136,7 +135,7 @@ in
       endfunction
 
       " Never show git index in list of buffers
-      autocmd BufWinEnter * if &filetype == 'gitindex' | setlocal nobuflisted | endif
+      autocmd BufWinEnter * if &filetype == 'gitindex' | setlocal nobuflisted cursorline | endif
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
