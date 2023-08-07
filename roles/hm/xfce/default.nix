@@ -13,7 +13,6 @@
     libreoffice
     meld
     pavucontrol
-    peek
     pinta
     qtpass
     remmina
