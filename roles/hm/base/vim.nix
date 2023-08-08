@@ -93,6 +93,12 @@ in
       " Autocompletion on dot for lsp
       inoremap <expr> . &omnifunc == 'v:lua.vim.lsp.omnifunc' ? '.<c-x><c-o>' : '.'
 
+      " Buffers with name [something] are converted to scratch
+      autocmd BufNewFile,BufFilePost * if expand('%:t') =~# '^\[.*\]$' | setl buftype=nofile noswapfile | endif
+
+      " Display output of shell command in scratch buffer
+      cabbrev <expr> run (getcmdtype() == ':' && getcmdpos() == 4) ? "edit [Run] <bar> %!" : "run"
+
       " Quickly switch to file at mark
       nnoremap <expr> <space> "<cmd>call JumpToFile('" . toupper(getcharstr()) . "')<cr>"
 
@@ -103,39 +109,6 @@ in
           execute "normal! `" . a:mark . "`\"zz"
         endif
       endfunction
-
-      " Open a buffer with the list of all git files
-      command! -nargs=0 -bang Gex sil! call nvim_set_current_buf(GitIndex(<bang>0))
-
-      " Create git index buffer
-      function! GitIndex(force)
-        if trim(system('git rev-parse --is-inside-work-tree')) !=# 'true'
-          return -1
-        endif
-
-        let l:bufnr = bufnr('gitindex')
-        let l:update = a:force
-
-        if l:bufnr == -1
-          let l:bufnr = nvim_create_buf(0, 1)
-          let l:update = 1
-          call nvim_buf_set_name(l:bufnr, 'gitindex')
-          call nvim_buf_set_option(l:bufnr, 'filetype', 'gitindex')
-          call nvim_buf_set_keymap(l:bufnr, 'n', '<cr>', 'gf', {})
-          call nvim_buf_set_keymap(l:bufnr, 'n', 't', '<c-w>gf', {})
-          call nvim_buf_set_keymap(l:bufnr, 'n', 'o', '<c-w>sgf', {})
-          call nvim_buf_set_keymap(l:bufnr, 'n', 'v', '<c-w>vgf', {})
-        endif
-
-        if l:update == 1
-          call nvim_buf_set_lines(l:bufnr, 0, -1, 0, systemlist('git ls-files'))
-        endif
-
-        return l:bufnr
-      endfunction
-
-      " Never show git index in list of buffers
-      autocmd BufWinEnter * if &filetype == 'gitindex' | setlocal nobuflisted cursorline | endif
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
@@ -153,11 +126,9 @@ in
       let g:netrw_localrmdir = 'rm -r' " Let delete a non-empty directory
 
       " Blame current line
-      command! -nargs=0 Blame call Blame()
-      function! Blame()
-        let l:format = " --pretty='%h %an, %ad • %s' --date=human"
-        echomsg trim(system("git --no-pager log -s -1 -L " . line('.') . ",+1:" . expand('%') . l:format))
-      endfunction
+      command! Blame echomsg trim(system(
+        \ "git --no-pager log -s -1 --pretty='%h %an, %ad • %s' --date=human -L " . line('.') . ",+1:"
+        \ . expand('%')))
 
       " Go back to prev position when opening file. See :h restore-cursor
       autocmd BufRead * autocmd FileType <buffer> ++once
