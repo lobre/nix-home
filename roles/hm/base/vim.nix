@@ -35,6 +35,7 @@ in
       set inccommand=split                   " Show effect of substitute in split
       set noruler                            " Disable ruler
       set noshowcmd                          " Hide pending keys messages
+      set number relativenumber              " Show relative line numbers
       set scrollback=50000                   " Lines to keep in terminal buffer
       set shortmess+=I                       " Disable intro page
       set undofile                           " Preserve undo history across sessions
@@ -92,12 +93,6 @@ in
 
       " Autocompletion on dot for lsp
       inoremap <expr> . &omnifunc == 'v:lua.vim.lsp.omnifunc' ? '.<c-x><c-o>' : '.'
-
-      " Buffers with name [something] are converted to scratch
-      autocmd BufNewFile,BufFilePost * if expand('%:t') =~# '^\[.*\]$' | setl buftype=nofile noswapfile | endif
-
-      " Display output of shell command in scratch buffer
-      cabbrev <expr> run (getcmdtype() == ':' && getcmdpos() == 4) ? "edit [Run] <bar> %!" : "run"
 
       " Quickly switch to file at mark
       nnoremap <expr> <space> "<cmd>call JumpToFile('" . toupper(getcharstr()) . "')<cr>"
