@@ -91,6 +91,10 @@ in
       tnoremap <esc> <c-\><c-n>
       inoremap <c-c> <esc>
 
+      " Make C-n/C-p act as Up/Down by completing command
+      cnoremap <expr> <c-p> wildmenumode() ? "<c-p>" : "<up>"
+      cnoremap <expr> <c-n> wildmenumode() ? "<c-n>" : "<down>"
+
       " Autocompletion on dot for lsp
       inoremap <expr> . &omnifunc == 'v:lua.vim.lsp.omnifunc' ? '.<c-x><c-o>' : '.'
 
