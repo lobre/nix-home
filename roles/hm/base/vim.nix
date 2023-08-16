@@ -142,7 +142,7 @@ in
       servers = {
         go = {'${pkgs.gopls}/bin/gopls'},
         nix = {'${pkgs.rnix-lsp}/bin/rnix-lsp'},
-        php = {'${pkgs.nodePackages.intelephense}/bin/intelephense', '--stdio'},
+        php = {'${pkgs.phpactor}/bin/phpactor', 'language-server'},
         zig = {'${pkgs.zls}/bin/zls'},
       }
 
