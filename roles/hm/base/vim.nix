@@ -95,8 +95,9 @@ in
       cnoremap <expr> <c-p> wildmenumode() ? "<c-p>" : "<up>"
       cnoremap <expr> <c-n> wildmenumode() ? "<c-n>" : "<down>"
 
-      " Autocompletion on dot for lsp
-      inoremap <expr> . &omnifunc == 'v:lua.vim.lsp.omnifunc' ? '.<c-x><c-o>' : '.'
+      " Promote omnicompletion directly to ctrl-n/p
+      inoremap <expr> <c-n> &omnifunc ==# 'v:lua.vim.lsp.omnifunc' ? "\<c-x>\<c-o>" : "\<c-n>"
+      inoremap <expr> <c-p> &omnifunc ==# 'v:lua.vim.lsp.omnifunc' ? "\<c-x>\<c-o>" : "\<c-p>"
 
       " Quickly switch to file at mark
       nnoremap <expr> <space> "<cmd>call JumpToFile('" . toupper(getcharstr()) . "')<cr>"
