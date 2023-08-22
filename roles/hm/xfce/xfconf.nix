@@ -37,7 +37,7 @@ let
     src = ./.;
     installPhase = ''
       mkdir -p $out
-      cp wallpaper.jpg $out/wallpaper.jpg
+      cp wallpaper.png $out/wallpaper.png
     '';
   };
 
@@ -49,11 +49,11 @@ let
 
     "xfce4-desktop" = {
       "/backdrop/screen0/monitoreDP-1/workspace0/last-image" =
-        "${wallpaper}/wallpaper.jpg";
+        "${wallpaper}/wallpaper.png";
       "/backdrop/screen0/monitoreDP-1/workspace0/color-style" = 0; # solid color
       "/backdrop/screen0/monitoreDP-1/workspace0/rgba1" =
-        [ 0.999999 0.999999 0.999999 0.999999 ]; # 1.0 would turn into integer
-      "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 4; # scaled
+        [ 0.768627 0.858824 0.968627 0.999999 ]; # 1.0 would turn into integer
+      "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 1; # centered
       "/desktop-icons/style" = 0;
     };
 
