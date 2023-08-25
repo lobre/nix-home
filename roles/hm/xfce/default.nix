@@ -12,6 +12,7 @@
     libnotify
     libreoffice
     meld
+    nitrogen
     pavucontrol
     pinta
     qtpass
@@ -51,5 +52,5 @@
 
   fonts.fontconfig.enable = true;
 
-  imports = [ ./terminal.nix ./xfconf.nix ];
+  imports = [ ./terminal.nix ./xfconf.nix ./i3.nix ];
 }

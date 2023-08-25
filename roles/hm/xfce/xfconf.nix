@@ -42,17 +42,30 @@ let
   };
 
   config = {
-    "xfce4-session" = {
-      "/startup/ssh-agent/enabled" = false;
-      "/startup/gpg-agent/enabled" = false;
-    };
+    "xfce4-session" =
+      let
+        i3 = true;
+      in
+      {
+        "/startup/ssh-agent/enabled" = false;
+        "/startup/gpg-agent/enabled" = false;
+
+        "/sessions/Failsafe/Client1_Command" = if i3 then [ "${pkgs.i3}/bin/i3" ] else [ "xfwm4" ];
+
+        "/sessions/Failsafe/Client2_Priority" = if i3 then 16 else 25;
+        "/sessions/Failsafe/Client2_Command" = [ "xfce4-panel" "--disable-wm-check" ];
+
+        "/sessions/Failsafe/Client4_Priority" = if i3 then 18 else 35;
+        "/sessions/Failsafe/Client4_Command" =
+          if i3 then [ "${pkgs.nitrogen}/bin/nitrogen" "--restore" ] else [ "xfdesktop" ];
+      };
 
     "xfce4-desktop" = {
       "/backdrop/screen0/monitoreDP-1/workspace0/last-image" =
         "${wallpaper}/wallpaper.png";
       "/backdrop/screen0/monitoreDP-1/workspace0/color-style" = 0; # solid color
       "/backdrop/screen0/monitoreDP-1/workspace0/rgba1" =
-        [ 0.768627 0.858824 0.968627 0.999999 ]; # 1.0 would turn into integer
+        [ 0.600000 0.756863 0.945098 0.999999 ]; # color #99C1F1, 0.9999 instead of 1.0 to avoid integer
       "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 1; # centered
       "/desktop-icons/style" = 0;
     };
@@ -87,7 +100,7 @@ let
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Primary><Alt>Delete" = "xfce4-session-logout";
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
-      "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu";
+      "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu -p";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
       "/commands/custom/<Super>e" = "thunar";
 
@@ -130,14 +143,14 @@ let
       "/panels" = [ 1 ];
       "/panels/dark-mode" = true;
 
-      # bottom panel
+      # panel
       "/panels/panel-1/icon-size" = 0;
       "/panels/panel-1/length" = 100;
-      "/panels/panel-1/position" = "p=8;x=0;y=0";
+      "/panels/panel-1/position" = "p=6;x=0;y=18";
       "/panels/panel-1/position-locked" = true;
-      "/panels/panel-1/size" = 26;
+      "/panels/panel-1/size" = 22;
       "/panels/panel-1/output-name" = "Primary";
-      "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 13 ];
+      "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 ];
 
       # menu
       "/plugins/plugin-1" = "whiskermenu";
@@ -145,6 +158,8 @@ let
       # windows
       "/plugins/plugin-2" = "tasklist";
       "/plugins/plugin-2/grouping" = 1;
+      "/plugins/plugin-2/include-all-monitors" = true;
+      "/plugins/plugin-2/include-all-workspaces" = false;
 
       # sep
       "/plugins/plugin-3" = "separator";
@@ -187,9 +202,10 @@ let
 
       # clock
       "/plugins/plugin-12" = "clock";
-
-      # show desktop
-      "/plugins/plugin-13" = "showdesktop";
+      "/plugins/plugin-12/digital-layout" = 1;
+      "/plugins/plugin-12/digital-date-format" = "%d %B %Y";
+      "/plugins/plugin-12/digital-date-font" = "Sans 7";
+      "/plugins/plugin-12/digital-time-font" = "Sans 10";
     };
 
     "keyboards" = {
@@ -205,7 +221,9 @@ let
     "xfce4-power-manager" = { "/xfce4-power-manager/show-tray-icon" = true; };
   };
 
-  configFile = pkgs.writeText "xfconf.json" (builtins.toJSON config);
+  configFile = pkgs.writeText
+    "xfconf.json"
+    (builtins.toJSON config);
 
 in
 {
@@ -219,4 +237,15 @@ in
         ${xfconfJson}/bin/xfconf-json -bin ${pkgs.xfce.xfconf}/bin/xfconf-query -file ${configFile}
       fi
     '';
+
+  xdg.configFile."nitrogen/bg-saved.cfg".text = lib.concatMapStringsSep "\n"
+    (id:
+      ''
+        [xin_${toString id}]
+        file=${wallpaper}/wallpaper.png
+        mode=2
+        bgcolor=#99C1F1
+      ''
+    )
+    (lib.range 0 2);
 }
