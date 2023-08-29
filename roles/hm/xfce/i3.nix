@@ -119,12 +119,18 @@
     bindsym $super+Shift+r restart
 
     bar {
-        position bottom
-        tray_output none
-        i3bar_command ${pkgs.i3}/bin/i3bar --transparency
+        i3bar_command ${pkgs.i3}/bin/i3bar
+        status_command while true; do echo $(date +'%H:%M, %d %B %Y'); sleep 1; done
+        tray_output primary
     }
+
+    # set applauncher floating
+    for_window [class="Xfce4-appfinder"] floating enable
 
     # compositor to avoid graphical glitches and allow transparency
     exec --no-startup-id "${pkgs.picom}/bin/picom --fading --fade-in-step=1.0 --fade-out-step=1.0"
+
+    # sound applet
+    exec --no-startup-id "${pkgs.pasystray}/bin/pasystray"
   '';
 }

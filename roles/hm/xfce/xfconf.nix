@@ -50,13 +50,16 @@ let
       "/startup/gpg-agent/enabled" = false;
 
       "/sessions/Failsafe/Client1_Command" = if i3 then [ "${pkgs.i3}/bin/i3" ] else [ "xfwm4" ];
-
-      "/sessions/Failsafe/Client2_Priority" = if i3 then 16 else 25;
-      "/sessions/Failsafe/Client2_Command" = [ "xfce4-panel" "--disable-wm-check" ];
-
+      "/sessions/Failsafe/Client2_Command" = if i3 then [ "true" ] else [ "xfce4-panel" ];
       "/sessions/Failsafe/Client4_Priority" = if i3 then 18 else 35;
       "/sessions/Failsafe/Client4_Command" =
         if i3 then [ "${pkgs.nitrogen}/bin/nitrogen" "--restore" ] else [ "xfdesktop" ];
+    };
+
+    "xfce4-appfinder" = {
+      "/hide-window-decorations" = false;
+      "/always-center" = true;
+      "/sort-by-frecency" = true;
     };
 
     "xfce4-desktop" = {
@@ -99,7 +102,7 @@ let
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Primary><Alt>Delete" = "xfce4-session-logout";
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
-      "/commands/custom/<Super>space" = "xfce4-popup-whiskermenu -p";
+      "/commands/custom/<Super>space" = if i3 then "xfce4-appfinder" else "xfce4-popup-whiskermenu";
       "/commands/custom/<Super>v" = "xfce4-popup-clipman";
       "/commands/custom/<Super>e" = "thunar";
 
@@ -145,14 +148,11 @@ let
       # panel
       "/panels/panel-1/icon-size" = 0;
       "/panels/panel-1/length" = 100;
-      "/panels/panel-1/position" = "p=6;x=0;y=18";
+      "/panels/panel-1/position" = "p=8;x=0;y=0";
       "/panels/panel-1/position-locked" = true;
       "/panels/panel-1/size" = 22;
       "/panels/panel-1/output-name" = "Primary";
-      "/panels/panel-1/plugin-ids" = (
-        if i3 then [ 1 3 6 7 8 9 10 11 12 ]
-        else [ 1 2 3 4 5 6 7 8 9 10 11 12 13 ]
-      );
+      "/panels/panel-1/plugin-ids" = [ 1 2 3 4 5 6 7 8 9 10 11 12 ];
 
       # menu
       "/plugins/plugin-1" = "whiskermenu";
@@ -179,6 +179,7 @@ let
       # systray 
       "/plugins/plugin-6" = "systray";
       "/plugins/plugin-6/icon-size" = 0; # adjust size automatically
+      "/plugins/plugin-6/known-legacy-items" = [ "clipman" "xfce4-power-manager" ];
       "/plugins/plugin-6/square-icons" = true;
 
       # audio
@@ -189,28 +190,27 @@ let
       # notifications
       "/plugins/plugin-8" = "notification-plugin";
 
-      # clipboard
-      "/plugins/plugin-9" = "xfce4-clipman-plugin";
+      # screenshot
+      "/plugins/plugin-9" = "screenshooter";
+
+      # sep
+      "/plugins/plugin-10" = "separator";
+      "/plugins/plugin-10/style" = 0;
+
+      # clock
+      "/plugins/plugin-11" = "clock";
+      "/plugins/plugin-11/digital-layout" = 1;
+      "/plugins/plugin-11/digital-date-format" = "%d %B %Y";
+      "/plugins/plugin-11/digital-date-font" = "Sans 7";
+      "/plugins/plugin-11/digital-time-font" = "Sans 10";
+
+      # show desktop
+      "/plugins/plugin-12" = "showdesktop";
+
+      # clipboard in systray
       "/plugins/clipman/settings/save-on-quit" = true;
       "/plugins/clipman/settings/max-texts-in-history" = 1000;
       "/plugins/clipman/settings/add-primary-clipboard" = false;
-
-      # screenshot
-      "/plugins/plugin-10" = "screenshooter";
-
-      # sep
-      "/plugins/plugin-11" = "separator";
-      "/plugins/plugin-11/style" = 0;
-
-      # clock
-      "/plugins/plugin-12" = "clock";
-      "/plugins/plugin-12/digital-layout" = 1;
-      "/plugins/plugin-12/digital-date-format" = "%d %B %Y";
-      "/plugins/plugin-12/digital-date-font" = "Sans 7";
-      "/plugins/plugin-12/digital-time-font" = "Sans 10";
-
-      # show desktop
-      "/plugins/plugin-13" = "showdesktop";
     };
 
     "keyboards" = {
