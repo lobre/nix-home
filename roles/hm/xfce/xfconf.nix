@@ -60,6 +60,7 @@ let
       "/hide-window-decorations" = false;
       "/always-center" = true;
       "/sort-by-frecency" = true;
+      "/remember-category" = true;
     };
 
     "xfce4-desktop" = {
