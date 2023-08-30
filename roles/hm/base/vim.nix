@@ -25,8 +25,6 @@ in
     vimAlias = true;
     vimdiffAlias = true;
 
-    plugins = with pkgs.vimPlugins; [ vim-noctu ];
-
     extraConfig = ''
       colorscheme noctu
 
@@ -138,50 +136,58 @@ in
       if filereadable(expand("~/.vimrc.local"))
         source ~/.vimrc.local
       endif
-
-      lua <<EOF
-      servers = {
-        go = {'${pkgs.gopls}/bin/gopls'},
-        nix = {'${pkgs.rnix-lsp}/bin/rnix-lsp'},
-        php = {'${pkgs.phpactor}/bin/phpactor', 'language-server'},
-        zig = {'${pkgs.zls}/bin/zls'},
-      }
-
-      for pat, cmd in pairs(servers) do
-        vim.api.nvim_create_autocmd('FileType', {
-          pattern = pat,
-          callback = function()
-            vim.lsp.start({
-              cmd = cmd,
-              root_dir = vim.fn.getcwd(),
-            })
-          end
-        })
-      end
-
-      vim.api.nvim_create_autocmd('LspAttach', {
-        callback = function(args)
-          local bufnr = args.buf
-          local bufopts = { noremap = true, silent = true, buffer = bufnr }
-          vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-          vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-          vim.keymap.set('n', 'gR', vim.lsp.buf.rename, bufopts)
-          vim.keymap.set('n', 'gca', vim.lsp.buf.code_action, bufopts)
-          vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-          vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-
-          local client = vim.lsp.get_client_by_id(args.data.client_id)
-          if client.server_capabilities.documentFormattingProvider then
-            vim.api.nvim_create_autocmd("BufWritePre", {
-              buffer = bufnr,
-              callback = function()
-                vim.lsp.buf.format()
-              end,
-            })
-          end
-        end
-      })
-      EOF
     '';
+
+    # lsp servers
+    extraPackages = with pkgs; [ gopls nil phpactor zls ];
+
+    plugins = with pkgs.vimPlugins; [
+      vim-noctu
+
+      {
+        plugin = nvim-lspconfig;
+        config = ''
+          lua <<EOF
+          local lspconfig = require('lspconfig')
+          lspconfig.gopls.setup {}
+          lspconfig.nil_ls.setup {
+            settings = {
+              ['nil'] = {
+                formatting = {
+                  command = { "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" },
+                },
+              },
+            },
+          }
+          lspconfig.phpactor.setup {}
+          lspconfig.zls.setup {}
+
+          vim.api.nvim_create_autocmd('LspAttach', {
+            callback = function(args)
+              vim.bo[args.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+              local opts = { buffer = args.buf }
+              vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+              vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+              vim.keymap.set('n', 'gR', vim.lsp.buf.rename, opts)
+              vim.keymap.set('n', 'gca', vim.lsp.buf.code_action, opts)
+              vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+              vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, opts)
+
+              local client = vim.lsp.get_client_by_id(args.data.client_id)
+              if client.server_capabilities.documentFormattingProvider then
+                vim.api.nvim_create_autocmd("BufWritePre", {
+                  buffer = bufnr,
+                  callback = function()
+                    vim.lsp.buf.format()
+                  end,
+                })
+              end
+            end
+          })
+          EOF
+        '';
+      }
+    ];
   };
 }
