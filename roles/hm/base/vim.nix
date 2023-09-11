@@ -140,6 +140,7 @@ in
           vim.g.mapleader = " "
           local mark = require("harpoon.mark")
           local ui = require("harpoon.ui")
+          local term = require("harpoon.term")
 
           vim.keymap.set("n", "<leader>m", mark.add_file)
           vim.keymap.set("n", "<leader>e", ui.toggle_quick_menu)
@@ -148,6 +149,9 @@ in
           vim.keymap.set("n", "<leader>s", function() ui.nav_file(2) end)
           vim.keymap.set("n", "<leader>d", function() ui.nav_file(3) end)
           vim.keymap.set("n", "<leader>f", function() ui.nav_file(4) end)
+
+          vim.keymap.set("n", "<leader>t", function() term.gotoTerminal(1) end)
+          vim.keymap.set("n", "<leader>g", function() term.gotoTerminal(2) end)
           EOF
         '';
       }
