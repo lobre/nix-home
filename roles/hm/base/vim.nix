@@ -28,9 +28,6 @@ in
     extraConfig = ''
       colorscheme noctu
 
-      " Space as leader
-      let mapleader=" "
-
       " General options
       set completeopt=menu,menuone,noselect  " Don't select first entry in autocomplete and disable preview
       set inccommand=split                   " Show effect of substitute in split
@@ -140,6 +137,7 @@ in
         plugin = harpoon;
         config = ''
           lua <<EOF
+          vim.g.mapleader = " "
           local mark = require("harpoon.mark")
           local ui = require("harpoon.ui")
 
