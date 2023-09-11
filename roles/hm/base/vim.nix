@@ -28,6 +28,9 @@ in
     extraConfig = ''
       colorscheme noctu
 
+      " Space as leader
+      let mapleader=" "
+
       " General options
       set completeopt=menu,menuone,noselect  " Don't select first entry in autocomplete and disable preview
       set inccommand=split                   " Show effect of substitute in split
@@ -97,17 +100,6 @@ in
       inoremap <expr> <c-n> &omnifunc ==# 'v:lua.vim.lsp.omnifunc' ? "\<c-x>\<c-o>" : "\<c-n>"
       inoremap <expr> <c-p> &omnifunc ==# 'v:lua.vim.lsp.omnifunc' ? "\<c-x>\<c-o>" : "\<c-p>"
 
-      " Quickly switch to file at mark
-      nnoremap <expr> <space> "<cmd>call JumpToFile('" . toupper(getcharstr()) . "')<cr>"
-
-      " Jump to mark at last known position
-      function! JumpToFile(mark)
-        let l:file = nvim_get_mark(a:mark, {})[3]
-        if l:file != "" && expand(l:file) != expand('%:p')
-          execute "normal! `" . a:mark . "`\"zz"
-        endif
-      endfunction
-
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
       autocmd CursorHold,CursorHoldI * silent! checktime
@@ -143,6 +135,24 @@ in
 
     plugins = with pkgs.vimPlugins; [
       vim-noctu
+
+      {
+        plugin = harpoon;
+        config = ''
+          lua <<EOF
+          local mark = require("harpoon.mark")
+          local ui = require("harpoon.ui")
+
+          vim.keymap.set("n", "<leader>m", mark.add_file)
+          vim.keymap.set("n", "<leader>e", ui.toggle_quick_menu)
+
+          vim.keymap.set("n", "<leader>a", function() ui.nav_file(1) end)
+          vim.keymap.set("n", "<leader>s", function() ui.nav_file(2) end)
+          vim.keymap.set("n", "<leader>d", function() ui.nav_file(3) end)
+          vim.keymap.set("n", "<leader>f", function() ui.nav_file(4) end)
+          EOF
+        '';
+      }
 
       {
         plugin = nvim-lspconfig;

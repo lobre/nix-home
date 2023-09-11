@@ -15,22 +15,17 @@
       set -g base-index 1
       set -g status-keys emacs
 
+      # prefix
+      unbind C-b
+      set-option -g prefix C-a
+      bind-key C-a send-prefix
+
       # terminal title
       set -g set-titles on
       set -g set-titles-string "#T"
 
       # status line
-      set -g status-position bottom
-      set -g status-style bg=default
-      set -g status-justify absolute-centre
-      set -g window-status-format " #W "
-      set -g window-status-current-format "#[fg=green,bold bg=black] #W "
-      set -g status-left "#[fg=blue,bold]#S "
-      set -g status-left-length 30
-      set -g status-right ""
-
-      # toggle status line
-      bind Enter set -g status
+      set -g status-style 'bg=black fg=brightgreen'
 
       # only let tmux wait 20ms for escape
       set -g escape-time 20
