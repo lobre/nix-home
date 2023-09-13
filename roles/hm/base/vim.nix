@@ -24,10 +24,9 @@ in
     enable = true;
     vimAlias = true;
     vimdiffAlias = true;
+    defaultEditor = true;
 
     extraConfig = ''
-      colorscheme noctu
-
       " General options
       set completeopt=menu,menuone,noselect  " Don't select first entry in autocomplete and disable preview
       set inccommand=split                   " Show effect of substitute in split
@@ -66,9 +65,7 @@ in
       " Save with sudo
       command! W w !sudo tee % > /dev/null
 
-      " Move and indent line in visual mode
-      vnoremap J :m '>+1<cr>gv=gv
-      vnoremap K :m '<-2<cr>gv=gv
+      " Indent line in visual mode
       vnoremap < <gv
       vnoremap > >gv
 
@@ -131,7 +128,14 @@ in
     extraPackages = with pkgs; [ gopls nil phpactor zls ];
 
     plugins = with pkgs.vimPlugins; [
-      vim-noctu
+      {
+        plugin = vim-noctu;
+        config = ''
+          colorscheme noctu
+          highlight StatusLine cterm=NONE
+          highlight StatusLineNC cterm=NONE
+        '';
+      }
 
       {
         plugin = harpoon;

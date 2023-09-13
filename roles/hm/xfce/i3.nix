@@ -11,6 +11,11 @@
 
     font pango:monospace 8
 
+    # borders
+    default_border pixel 2
+    default_floating_border normal
+    hide_edge_borders smart
+
     # kill window
     bindsym $super+q kill
     bindsym --release button2 kill

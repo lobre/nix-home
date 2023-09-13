@@ -25,7 +25,7 @@
       set -g set-titles-string "#T"
 
       # status line
-      set -g status-style 'bg=black fg=brightgreen'
+      set -g status-style 'bg=black fg=colour8'
 
       # only let tmux wait 20ms for escape
       set -g escape-time 20

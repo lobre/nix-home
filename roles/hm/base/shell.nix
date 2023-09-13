@@ -8,8 +8,6 @@
     historyFileSize = -1;
 
     sessionVariables = {
-      VISUAL = "nvim";
-      EDITOR = "nvim";
       PAGER = "less";
       LESS = "-R --mouse";
     };
