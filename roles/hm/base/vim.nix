@@ -30,7 +30,6 @@ in
       " General options
       set completeopt=menu,menuone,noselect  " Don't select first entry in autocomplete and disable preview
       set inccommand=split                   " Show effect of substitute in split
-      set noruler                            " Disable ruler
       set noshowcmd                          " Hide pending keys messages
       set number relativenumber              " Show relative line numbers
       set scrollback=50000                   " Lines to keep in terminal buffer
@@ -41,17 +40,13 @@ in
       set wildmode=longest:full,full         " Completion menu
       set diffopt+=linematch:50              " Better diff mode (https://github.com/neovim/neovim/pull/14537)
 
-      " Don’t set terminal title until issue fixed 
-      " https://github.com/neovim/neovim/issues/18573
-      set notitle
-
       " Grep with git grep
       set grepprg=git\ -c\ grep.fallbackToNoIndex\ --no-pager\ grep\ --no-color\ -nI
       set grepformat=%f:%l:%c:%m,%f:%l:%m,%f
 
-      " Don’t show shell output of grep and lgrep
-      cabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep" : "grep"
-      cabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep" : "lgrep"
+      " Better grep commands
+      cnoreabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep<space><bar><space>cw" . repeat('<left>', 5) : "grep"
+      cnoreabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep<space><bar><space>cw" . repeat('<left>', 5) : "lgrep"
 
       " Language specific indentation settings
       set shiftwidth=4 tabstop=4 expandtab
@@ -75,9 +70,18 @@ in
       nnoremap n nzzzv
       nnoremap N Nzzzv
 
-      " Quickfix mappings
-      nnoremap <c-j> <cmd>cnext<cr>zz
-      nnoremap <c-k> <cmd>cprev<cr>zz
+      " Quickfix and arglist mappings
+      nnoremap <expr> <c-j> empty(filter(getwininfo(), 'v:val.quickfix')) ? '<cmd>next<bar>args<cr>zz' : '<cmd>cnext<cr>zz'
+      nnoremap <expr> <c-k> empty(filter(getwininfo(), 'v:val.quickfix')) ? '<cmd>prev<bar>args<cr>zz' : '<cmd>cprev<cr>zz'
+
+      " Arglist mappings
+      let mapleader = " "
+      nnoremap <leader><space> :args<cr>
+      nnoremap <leader>a :argadd % \| argdedupe \| sil! next \| args<cr>
+      nnoremap <leader>A :-1argadd % \| argdedupe \| sil! prev \| args<cr>
+      nnoremap <leader>j :argument 1 \| args<cr>
+      nnoremap <leader>k :argument 2 \| args<cr>
+      nnoremap <leader>l :argument 3 \| args<cr>
 
       " Alternate file
       nnoremap ga <c-^>
@@ -134,29 +138,6 @@ in
           colorscheme noctu
           highlight StatusLine cterm=NONE
           highlight StatusLineNC cterm=NONE
-        '';
-      }
-
-      {
-        plugin = harpoon;
-        config = ''
-          lua <<EOF
-          vim.g.mapleader = " "
-          local mark = require("harpoon.mark")
-          local ui = require("harpoon.ui")
-          local term = require("harpoon.term")
-
-          vim.keymap.set("n", "<leader>m", mark.add_file)
-          vim.keymap.set("n", "<leader>e", ui.toggle_quick_menu)
-
-          vim.keymap.set("n", "<leader>a", function() ui.nav_file(1) end)
-          vim.keymap.set("n", "<leader>s", function() ui.nav_file(2) end)
-          vim.keymap.set("n", "<leader>d", function() ui.nav_file(3) end)
-          vim.keymap.set("n", "<leader>f", function() ui.nav_file(4) end)
-
-          vim.keymap.set("n", "<leader>t", function() term.gotoTerminal(1) end)
-          vim.keymap.set("n", "<leader>g", function() term.gotoTerminal(2) end)
-          EOF
         '';
       }
 

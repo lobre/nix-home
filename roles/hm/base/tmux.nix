@@ -26,6 +26,7 @@
 
       # status line
       set -g status-style 'bg=black fg=colour8'
+      set -g status-left-length 30
 
       # only let tmux wait 20ms for escape
       set -g escape-time 20
