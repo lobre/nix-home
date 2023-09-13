@@ -11,7 +11,7 @@
       signByDefault = true;
     };
 
-    ignores = [ "tags" "tags.lock" "tags.temp" ];
+    ignores = [ "tags" "tags.lock" "tags.temp" "nvim.shada" ];
 
     extraConfig = {
       core = {

@@ -45,8 +45,8 @@ in
       set grepformat=%f:%l:%c:%m,%f:%l:%m,%f
 
       " Better grep commands
-      cnoreabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep<space><bar><space>cw" . repeat('<left>', 5) : "grep"
-      cnoreabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep<space><bar><space>cw" . repeat('<left>', 5) : "lgrep"
+      cnoreabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep" : "grep"
+      cnoreabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep" : "lgrep"
 
       " Language specific indentation settings
       set shiftwidth=4 tabstop=4 expandtab
@@ -70,18 +70,12 @@ in
       nnoremap n nzzzv
       nnoremap N Nzzzv
 
-      " Quickfix and arglist mappings
-      nnoremap <expr> <c-j> empty(filter(getwininfo(), 'v:val.quickfix')) ? '<cmd>next<bar>args<cr>zz' : '<cmd>cnext<cr>zz'
-      nnoremap <expr> <c-k> empty(filter(getwininfo(), 'v:val.quickfix')) ? '<cmd>prev<bar>args<cr>zz' : '<cmd>cprev<cr>zz'
+      " Quickfix mappings
+      nnoremap <c-j> <cmd>cnext<cr>zz
+      nnoremap <c-k> <cmd>cprev<cr>zz
 
-      " Arglist mappings
-      let mapleader = " "
-      nnoremap <leader><space> :args<cr>
-      nnoremap <leader>a :argadd % \| argdedupe \| sil! next \| args<cr>
-      nnoremap <leader>A :-1argadd % \| argdedupe \| sil! prev \| args<cr>
-      nnoremap <leader>j :argument 1 \| args<cr>
-      nnoremap <leader>k :argument 2 \| args<cr>
-      nnoremap <leader>l :argument 3 \| args<cr>
+      " Go to last position in file for mark
+      nnoremap <expr> <space> "<cmd>norm `" . toupper(nr2char(getchar())) . "`\"zz<cr>"
 
       " Alternate file
       nnoremap ga <c-^>
@@ -117,6 +111,9 @@ in
       command! Blame echomsg trim(system(
         \ "git --no-pager log -s -1 --pretty='%h %an, %ad • %s' --date=human -L " . line('.') . ",+1:"
         \ . expand('%')))
+
+      " Use local shada file if available in project
+      let &shadafile = findfile('nvim.shada', '.;')
 
       " Go back to prev position when opening file. See :h restore-cursor
       autocmd BufRead * autocmd FileType <buffer> ++once
