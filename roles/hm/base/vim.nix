@@ -88,9 +88,9 @@ in
       cnoremap <expr> <c-p> wildmenumode() ? "<c-p>" : "<up>"
       cnoremap <expr> <c-n> wildmenumode() ? "<c-n>" : "<down>"
 
-      " Promote omnicompletion directly to ctrl-n/p
-      inoremap <expr> <c-n> &omnifunc ==# 'v:lua.vim.lsp.omnifunc' ? "\<c-x>\<c-o>" : "\<c-n>"
-      inoremap <expr> <c-p> &omnifunc ==# 'v:lua.vim.lsp.omnifunc' ? "\<c-x>\<c-o>" : "\<c-p>"
+      " Simple autocompletion for omni lsp
+      autocmd InsertCharPre * if !pumvisible() && &omnifunc ==# 'v:lua.vim.lsp.omnifunc'
+        \ && (v:char =~# '[a-zA-Z.]') | call feedkeys("\<c-x>\<c-o>", "n") | endif
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime
