@@ -3,22 +3,19 @@
 {
   programs.tmux = {
     enable = true;
-    terminal = "tmux-256color";
-    keyMode = "vi";
+
+    clock24 = true; # 24h format
     customPaneNavigationAndResize = true; # remap to use hjkl to switch windows
     disableConfirmationPrompt = true; # don't prompt when killing pane
     historyLimit = 10000;
-    clock24 = true; # 24h format
+    keyMode = "vi";
+    mouse = true;
+    shortcut = "a";
+    terminal = "tmux-256color";
 
     extraConfig = ''
-      set -g mouse on
       set -g base-index 1
       set -g status-keys emacs
-
-      # prefix
-      unbind C-b
-      set-option -g prefix C-a
-      bind-key C-a send-prefix
 
       # terminal title
       set -g set-titles on

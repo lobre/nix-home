@@ -23,6 +23,10 @@
       set global autoinfo command
       set global grepcmd 'grep --exclude=tags --exclude-dir=.git -RIHn'
 
+      # find command
+      define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
+      complete-command find shell-script-candidates %{ find * -type f -not -path '*/\.git/*' }
+
       # show matching characters, line numbers and wrap text
       add-highlighter global/ show-matching
       add-highlighter global/ number-lines -relative -separator ' '

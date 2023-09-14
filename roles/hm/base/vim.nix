@@ -44,6 +44,12 @@ in
       set grepprg=git\ -c\ grep.fallbackToNoIndex\ --no-pager\ grep\ --no-color\ -nI
       set grepformat=%f:%l:%c:%m,%f:%l:%m,%f
 
+      " Find file rapidly
+      command! -nargs=1 -bang -complete=custom,s:files Find edit<bang> <args>
+      function! s:files(A, L, P)
+        return system("find * -type f -not -path '*/\.git/*'")
+      endfunction
+
       " Better grep commands
       cnoreabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep" : "grep"
       cnoreabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep" : "lgrep"
