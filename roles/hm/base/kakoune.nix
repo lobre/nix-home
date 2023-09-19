@@ -6,6 +6,7 @@
 
   programs.kakoune = {
     enable = true;
+    plugins = with pkgs.kakounePlugins; [ kakoune-state-save ];
 
     extraConfig = ''
       # hide changelog on startup
@@ -13,6 +14,11 @@
 
       # enable lsp
       eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
+      lsp-auto-signature-help-enable
+      lsp-inlay-code-lenses-enable global
+      lsp-inlay-hints-enable       global
+      lsp-inlay-diagnostics-enable global
+      set global lsp_auto_show_code_actions true
 
       # theme
       colorscheme ansi
@@ -21,11 +27,24 @@
       set global indentwidth 4
       set global ui_options terminal_set_title=false terminal_assistant=none terminal_enable_mouse=true
       set global autoinfo command
-      set global grepcmd 'grep --exclude=tags --exclude-dir=.git -RIHn'
+      set global grepcmd 'grep --exclude-dir=.git -RIHn'
 
       # find command
       define-command find -docstring "find files" -params 1 %{ edit %arg{1} }
       complete-command find shell-script-candidates %{ find * -type f -not -path '*/\.git/*' }
+
+      # mappings
+      map global normal '#' ': comment-line<ret>'
+      map global normal <c-n> ': grep-next-match<ret>'
+      map global normal <c-p> ': grep-previous-match<ret>'
+
+      # create dir
+      define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+
+      # assign clients
+      set global jumpclient main
+      set global toolsclient tools
+      set global docsclient docs
 
       # show matching characters, line numbers and wrap text
       add-highlighter global/ show-matching
@@ -63,10 +82,17 @@
         autowrap-enable
       }
 
-      # update system clipboard when c register modified
-      hook global RegisterModified 'c' %{ nop %sh{
-        printf %s "$kak_main_reg_c" | xsel --input --clipboard
-      }}
+      hook global KakBegin .* %{
+        state-save-reg-load colon
+        state-save-reg-load pipe
+        state-save-reg-load slash
+      }
+
+      hook global KakEnd .* %{
+        state-save-reg-save colon
+        state-save-reg-save pipe
+        state-save-reg-save slash
+      }
     '';
   };
 

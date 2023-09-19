@@ -40,10 +40,6 @@ in
       set wildmode=longest:full,full         " Completion menu
       set diffopt+=linematch:50              " Better diff mode (https://github.com/neovim/neovim/pull/14537)
 
-      " Grep with git grep
-      set grepprg=git\ -c\ grep.fallbackToNoIndex\ --no-pager\ grep\ --no-color\ -nI
-      set grepformat=%f:%l:%c:%m,%f:%l:%m,%f
-
       " Find file rapidly
       command! -nargs=1 -bang -complete=custom,s:files Find edit<bang> <args>
       function! s:files(A, L, P)
@@ -51,6 +47,7 @@ in
       endfunction
 
       " Better grep commands
+      set grepprg=grep\ --exclude-dir=.git\ -RIHn\ $*
       cnoreabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep" : "grep"
       cnoreabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep" : "lgrep"
 
@@ -95,8 +92,7 @@ in
       cnoremap <expr> <c-n> wildmenumode() ? "<c-n>" : "<down>"
 
       " Simple autocompletion for omni lsp
-      autocmd InsertCharPre * if !pumvisible() && &omnifunc ==# 'v:lua.vim.lsp.omnifunc'
-        \ && (v:char =~# '[a-zA-Z.]') | call feedkeys("\<c-x>\<c-o>", "n") | endif
+      inoremap <expr> . &omnifunc == 'v:lua.vim.lsp.omnifunc' ? '.<c-x><c-o>' : '.'
 
       " Trigger autoread when files changes on disk
       autocmd FocusGained,BufEnter * silent! checktime

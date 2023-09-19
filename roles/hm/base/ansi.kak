@@ -38,7 +38,7 @@ face global LineNumberCursor   white
 face global MenuForeground     black,blue
 face global MenuBackground     default,black+g
 face global MenuInfo           default
-face global Information        default+g
+face global Information        default,black+g
 face global Error              white,red
 face global StatusLine         default
 face global StatusLineMode     yellow+b
@@ -64,10 +64,6 @@ face global DiagnosticError        red+c # from default faces
 face global DiagnosticWarning      yellow+c # from default faces
 face global DiagnosticInfo         +c
 face global DiagnosticHint         +u
-
-# set background during lsp completions popups
-hook global InsertCompletionShow .* %{ face global Information default,black+g }
-hook global InsertCompletionHide .* %{ face global Information default+g }
 
 # infobox
 face global InfoDefault               Information

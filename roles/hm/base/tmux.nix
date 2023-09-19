@@ -28,6 +28,12 @@
       # only let tmux wait 20ms for escape
       set -g escape-time 20
 
+      # list sessions by last modified
+      bind -T prefix s choose-tree -sOtime
+
+      # go to last session
+      bind-key -T prefix g switch-client -l
+
       # copy to clipboard
       set -s copy-command '${pkgs.xsel}/bin/xsel --input --clipboard'
 
