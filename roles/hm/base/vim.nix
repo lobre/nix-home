@@ -45,11 +45,12 @@ in
       function! s:files(A, L, P)
         return system("find * -type f -not -path '*/\.git/*'")
       endfunction
+      cnoreabbrev <expr> fd (getcmdtype() == ':' && getcmdpos() == 3) ? "Find" : "fd"
 
       " Better grep commands
       set grepprg=grep\ --exclude-dir=.git\ -RIHn\ $*
-      cnoreabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep" : "grep"
-      cnoreabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep" : "lgrep"
+      cnoreabbrev <expr> grep (getcmdtype() == ':' && getcmdpos() == 5) ? "sil grep<space><bar><space>cw" . repeat('<left>', 5) : "grep"
+      cnoreabbrev <expr> lgrep (getcmdtype() == ':' && getcmdpos() == 6) ? "sil lgrep<space><bar><space>cw" . repeat('<left>', 5) : "lgrep"
 
       " Language specific indentation settings
       set shiftwidth=4 tabstop=4 expandtab

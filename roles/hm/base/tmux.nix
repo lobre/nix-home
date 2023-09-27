@@ -14,7 +14,7 @@
     terminal = "tmux-256color";
 
     extraConfig = ''
-      set -g base-index 1
+      set -g base-index 7
       set -g status-keys emacs
 
       # terminal title
@@ -32,7 +32,7 @@
       bind -T prefix s choose-tree -sOtime
 
       # go to last session
-      bind-key -T prefix g switch-client -l
+      bind-key -T prefix \# switch-client -l
 
       # copy to clipboard
       set -s copy-command '${pkgs.xsel}/bin/xsel --input --clipboard'

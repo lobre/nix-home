@@ -68,7 +68,7 @@ let
         "${wallpaper}/wallpaper.png";
       "/backdrop/screen0/monitoreDP-1/workspace0/color-style" = 0; # solid color
       "/backdrop/screen0/monitoreDP-1/workspace0/rgba1" =
-        [ 0.600000 0.756863 0.945098 0.999999 ]; # color #99C1F1, 0.9999 instead of 1.0 to avoid integer
+        [ 0.141176 0.192157 0.215686 0.999999 ]; # color #99C1F1, 0.9999 instead of 1.0 to avoid integer
       "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 1; # centered
       "/desktop-icons/style" = 0;
     };
@@ -250,7 +250,7 @@ in
         [xin_${toString id}]
         file=${wallpaper}/wallpaper.png
         mode=2
-        bgcolor=#99C1F1
+        bgcolor=#243137
       ''
     )
     (lib.range 0 2);

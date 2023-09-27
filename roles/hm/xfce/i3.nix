@@ -47,7 +47,7 @@
     # change orientation or grouping mode of windows
     bindsym $super+i split h
     bindsym $super+o layout toggle split
-    bindsym $super+g layout toggle tabbed stacked
+    bindsym $super+g layout toggle stacked tabbed
 
     # scratchpad
     bindsym $super+Tab scratchpad show
