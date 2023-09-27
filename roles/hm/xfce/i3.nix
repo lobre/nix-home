@@ -125,7 +125,7 @@
 
     bar {
         i3bar_command ${pkgs.i3}/bin/i3bar
-        status_command while true; do echo $(date +'%H:%M, %d %B %Y'); sleep 1; done
+        status_command while true; do echo $(date +'%H:%M, %a %d %B %Y'); sleep 1; done
         tray_output primary
     }
 
