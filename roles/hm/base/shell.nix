@@ -1,6 +1,14 @@
-{ config, lib, pkgs, ... }:
+{ config, ... }:
 
 {
+  programs.readline = {
+    enable = true;
+    bindings = {
+      "\\C-p" = "history-search-backward";
+      "\\C-n" = "history-search-forward";
+    };
+  };
+
   programs.bash = {
     enable = true;
 

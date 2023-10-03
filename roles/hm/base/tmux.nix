@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   programs.tmux = {
@@ -10,12 +10,16 @@
     historyLimit = 10000;
     keyMode = "vi";
     mouse = true;
-    shortcut = "a";
     terminal = "tmux-256color";
 
     extraConfig = ''
-      set -g base-index 7
+      set -g base-index 1
       set -g status-keys emacs
+
+      # prefix
+      unbind C-b
+      set -g prefix C-Space
+      bind C-Space last-window
 
       # terminal title
       set -g set-titles on
