@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   # colorscheme
@@ -106,7 +106,15 @@
     [language.nix]
     filetypes = ["nix"]
     roots = ["flake.nix", "shell.nix", ".git"]
-    command = "${rnix-lsp}/bin/rnix-lsp"
+    command = "${nil}/bin/nil"
+    [language.nix.settings.nil.formatting]
+    command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ]
+
+    [language.php]
+    filetypes = ["php"]
+    roots = ["composer.json", ".git"]
+    command = "${phpactor}/bin/phpactor"
+    args = ["language-server"]
 
     [language.zig]
     filetypes = ["zig"]
