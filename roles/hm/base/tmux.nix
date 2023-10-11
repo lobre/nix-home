@@ -16,6 +16,11 @@
       set -g base-index 1
       set -g status-keys emacs
 
+      # force to create non-login shells
+      # otherwise ~/.bashrc not read and
+      # tweaks for LD_PRELOAD not applied.
+      set -g default-shell "/bin/bash"
+
       # prefix
       unbind C-b
       set -g prefix C-Space
