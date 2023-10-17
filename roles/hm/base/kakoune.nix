@@ -14,6 +14,7 @@
 
       # enable lsp
       eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
+      map global insert <tab> %{<a-;>:try lsp-snippets-select-next-placeholders catch %{ execute-keys -with-hooks <lt>tab> }<ret>}
       lsp-auto-signature-help-enable
       lsp-inlay-code-lenses-enable global
       lsp-inlay-hints-enable       global
@@ -34,7 +35,6 @@
       complete-command find shell-script-candidates %{ find * -type f -not -path '*/\.git/*' }
 
       # mappings
-      map global normal '#' ': comment-line<ret>'
       map global normal <c-n> ': grep-next-match<ret>'
       map global normal <c-p> ': grep-previous-match<ret>'
 
@@ -46,9 +46,8 @@
       set global toolsclient tools
       set global docsclient docs
 
-      # show matching characters, line numbers and wrap text
+      # highlighters
       add-highlighter global/ show-matching
-      add-highlighter global/ number-lines -relative -separator ' '
       add-highlighter global/ wrap
 
       # update git diff in gutter
@@ -98,6 +97,8 @@
 
   # lsp configurations
   xdg.configFile."kak-lsp/kak-lsp.toml".text = with pkgs; ''
+    snippet_support = true
+
     [language.go]
     filetypes = ["go"]
     roots = ["go.mod", ".git"]
