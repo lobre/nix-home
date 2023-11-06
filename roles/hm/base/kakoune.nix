@@ -3,9 +3,11 @@
 {
   # colorscheme
   xdg.configFile."kak/colors/ansi.kak".source = ./ansi.kak;
+  xdg.configFile."kak/colors/off.kak".source = ./off.kak;
 
   programs.kakoune = {
     enable = true;
+    defaultEditor = true;
     plugins = with pkgs.kakounePlugins; [ kakoune-state-save ];
 
     extraConfig = ''
@@ -22,7 +24,7 @@
       set global lsp_auto_show_code_actions true
 
       # theme
-      colorscheme ansi
+      colorscheme off
 
       # default options
       set global indentwidth 4
@@ -51,7 +53,7 @@
       add-highlighter global/ wrap
 
       # update git diff in gutter
-      hook global WinSetOption filetype=(?!grep).+ "git show-diff"
+      hook global WinCreate .* %{ evaluate-commands %sh{ [ $kak_buffile != $kak_bufname ] && echo "git show-diff" }}
       hook global BufWritePost .* "git update-diff"
       hook global BufReload .* "git update-diff"
 

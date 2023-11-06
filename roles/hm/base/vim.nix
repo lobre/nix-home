@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   htmlSkeleton = pkgs.writeText "html-skeleton" ''
@@ -24,7 +24,6 @@ in
     enable = true;
     vimAlias = true;
     vimdiffAlias = true;
-    defaultEditor = true;
 
     extraConfig = ''
       " General options
