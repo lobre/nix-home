@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 let
   nixSwitch = pkgs.writeScriptBin "nix-switch" ''
@@ -47,6 +47,7 @@ in
     pass
     perl
     pv
+    rlwrap
     rmapi
     slides
     strace
@@ -69,5 +70,6 @@ in
     ./shell.nix
     ./tmux.nix
     ./vim.nix
+    ./vis.nix
   ];
 }
