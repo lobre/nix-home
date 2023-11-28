@@ -10,10 +10,10 @@ let
     version = "2023-10-17";
 
     src = fetchFromGitHub {
-      rev = "045ef7a102e86f85ea71864c6a12ecb90250f935";
-      sha256 = "sha256-rN8efCM+grE4U6z0HpRj+7gD0kh2H7CFPn9NBc7PN9M=";
+      rev = "8acdb79e8d620e46fc6b44b68152d4347c8b12b7";
+      sha256 = "sha256-PUgb7bbz4I8VR2zwdyFgdJEX+omxnNQGfxbSJ1ZLmaE=";
       repo = "vis";
-      owner = "martanne";
+      owner = "rnpnr";
     };
 
     nativeBuildInputs = [ pkg-config makeWrapper ];
@@ -42,7 +42,7 @@ in
     require('vis')
 
     vis.events.subscribe(vis.events.INIT, function()
-        vis:command("set theme mine")
+        vis:command("set theme mydef")
     end)
 
     vis.events.subscribe(vis.events.WIN_OPEN, function(win)

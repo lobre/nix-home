@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 
 let
   htmlSkeleton = pkgs.writeText "html-skeleton" ''
@@ -17,9 +17,38 @@ let
 
     </html>
   '';
+
+  viConf = ''
+    set autoindent
+    set extended
+    set noflash
+    set iclower
+    set nolock
+    set path=.
+    set showmode
+    set ruler
+    set searchincr
+    set showmatch
+    set windowname
+    set wrapscan
+    "set number
+
+    set shiftwidth=4
+    set tabstop=4
+    set wrapmargin=4
+
+    set filec=\	
+    set cedit=
+  '';
 in
 
 {
+  # nvi conf (cannot be read if not owned)
+  home.file.".nexrc.in" = {
+    text = viConf;
+    onChange = "cp ${config.home.homeDirectory}/.nexrc.in ${config.home.homeDirectory}/.nexrc";
+  };
+
   programs.neovim = {
     enable = true;
     vimAlias = true;
