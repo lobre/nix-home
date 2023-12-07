@@ -22,36 +22,23 @@ in
     defaultEditor = true;
 
     extraConfig = ''
-      # hide changelog on startup
       set global startup_info_version 20241204
 
-      # enable lsp
       eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
       hook global WinSetOption filetype=(go|zig|php|nix) %{
         lsp-enable-window
         hook buffer BufWritePre .* lsp-formatting-sync
       }
 
-      # default options
       colorscheme off
       set global indentwidth 4
       set global ui_options terminal_set_title=false terminal_assistant=none terminal_enable_mouse=true
       set global autoinfo command
-
-      # highlighters
-      add-highlighter global/ show-matching
       add-highlighter global/ wrap
 
-      # update git diff in gutter
-      hook global WinCreate .* %{ evaluate-commands %sh{ [ $kak_buffile != $kak_bufname ] && echo "git show-diff" }}
-      hook global BufWritePost .* "git update-diff"
-      hook global BufReload .* "git update-diff"
-
-      # indentation
       hook global WinSetOption filetype=go "set buffer indentwidth 0"
-      hook global WinSetOption filetype=nix "set buffer indentwidth 2"
+      hook global WinSetOption filetype=(html|json|nix|xml) "set buffer indentwidth 2"
       hook global WinSetOption filetype=zig "set buffer indentwidth 4"
-      hook global WinSetOption filetype=(html|json|xml) "set buffer indentwidth 2"
 
       hook global WinSetOption filetype=git-commit %{
         set-option window autowrap_column 72
