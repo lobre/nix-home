@@ -38,7 +38,8 @@ face global LineNumberCursor   white
 face global MenuForeground     black,blue
 face global MenuBackground     default,black+g
 face global MenuInfo           default
-face global Information        default,black+g
+face global Information        default+g
+face global InlineInformation  default,black+g
 face global Error              white,red
 face global StatusLine         default
 face global StatusLineMode     yellow+b
