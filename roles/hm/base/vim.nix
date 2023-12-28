@@ -1,6 +1,27 @@
 { pkgs, config, ... }:
 
 let
+  neatvi = pkgs.stdenv.mkDerivation {
+    pname = "neatvi";
+    version = "2023-12-28";
+
+    src = pkgs.fetchFromGitHub {
+      rev = "8fb161f1886fd14483ee5ef0577e81d1f3ab4b4a";
+      sha256 = "sha256-cXveAJRRBdBbcz0o5CD2UW8l6h8078C/dIwAV4UmbAw=";
+      repo = "neatvi";
+      owner = "aligrudi";
+    };
+
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+
+    installPhase = ''
+      mkdir -p "$out/bin"
+      cp vi "$out/bin/vi"
+      chmod 0755 "$out/bin/vi"
+      wrapProgram $out/bin/vi --set EXINIT "set nohl | set writeany | set autoindent"
+    '';
+  };
+
   htmlSkeleton = pkgs.writeText "html-skeleton" ''
     <!DOCTYPE html>
     <html lang="en">
@@ -48,6 +69,9 @@ in
     text = viConf;
     onChange = "cp ${config.home.homeDirectory}/.nexrc.in ${config.home.homeDirectory}/.nexrc";
   };
+
+  # neatvi
+  home.packages = with pkgs; [ neatvi ];
 
   programs.neovim = {
     enable = true;
