@@ -15,7 +15,7 @@ let
       sha256 = "030P4MwTsO0lJewf+aNmtHLNMF9sDz8l0blshAscpYI=";
     };
 
-    vendorSha256 = "1fzlslz9xr3jay9kpvrg7sj1a0c1f1m1kn5rnis49hvlr1sc00d0";
+    vendorHash = "sha256-oAHAdMh0w0R0tLnYGWpwgQEVpD4v7zuTV3Lknj7V9Ls=";
 
     meta = with lib; {
       description =

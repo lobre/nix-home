@@ -4,11 +4,12 @@ let
   kakoune = pkgs.kakoune-unwrapped.overrideAttrs (oldAttrs: {
     pname = "kakoune-unwrapped";
     version = "2023-12-04";
+    patches = [ ];
     src = pkgs.fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "7f49395cf931b2af8a75ffb5319a8aa8c395ed8d";
-      sha256 = "sha256-4m8aFsS/842J4fdnZQ/Sq/9OY7xOwr+H1TM2kllPgA0=";
+      rev = "83fb65aef5729167b47c6ec22a57e5bd6ac5a9ae";
+      sha256 = "sha256-yJ30mdMC36sbMkeIOkE5HypPz3PGPexsrWWdx1K6Bkk=";
     };
   });
 in
@@ -36,9 +37,14 @@ in
       set global autoinfo command
       add-highlighter global/ wrap
 
+      define-command split -params .. %{ with-option windowing_placement vertical new "%arg{@}" }
+      complete-command split command
+      define-command vsplit -params .. %{ with-option windowing_placement horizontal new "%arg{@}" }
+      complete-command vsplit command
+
       hook global WinSetOption filetype=go "set buffer indentwidth 0"
       hook global WinSetOption filetype=(html|json|nix|xml) "set buffer indentwidth 2"
-      hook global WinSetOption filetype=zig "set buffer indentwidth 4"
+      hook global WinSetOption filetype=(c|zig) "set buffer indentwidth 4"
 
       hook global WinSetOption filetype=git-commit %{
         set-option window autowrap_column 72
