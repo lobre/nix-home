@@ -17,7 +17,7 @@
     hide_edge_borders smart
 
     # kill window
-    bindsym $super+q kill
+    bindsym $super+Shift+q kill
     bindsym --release button2 kill
     bindsym --whole-window $super+button2 kill
 
@@ -27,31 +27,44 @@
     bindsym $super+k focus up
     bindsym $super+l focus right
 
+    bindsym $super+Left focus left
+    bindsym $super+Down focus down
+    bindsym $super+Up focus up
+    bindsym $super+Right focus right
+
     # move focused window
     bindsym $super+Shift+h move left
     bindsym $super+Shift+j move down
     bindsym $super+Shift+k move up
     bindsym $super+Shift+l move right
 
+    bindsym $super+Shift+Left move left
+    bindsym $super+Shift+Down move down
+    bindsym $super+Shift+Up move up
+    bindsym $super+Shift+Right move right
+
     # enter fullscreen
     bindsym $super+f fullscreen toggle
 
-    # toogle floating and switch between floating and tiling
-    bindsym $super+Shift+Return floating toggle
-    bindsym $super+Shift+space focus mode_toggle
+    # toogle and swap between floating and tiling
+    bindsym $super+Shift+space floating toggle
+    bindsym $super+space focus mode_toggle
 
-    # focus the parent or child container
-    bindsym $super+p focus parent
-    bindsym $super+c focus child
+    # focus the parent container
+    bindsym $super+a focus parent
 
     # change orientation or grouping mode of windows
-    bindsym $super+i split h
-    bindsym $super+o layout toggle split
-    bindsym $super+g layout toggle stacked tabbed
+    bindsym $super+b splith
+    bindsym $super+v splitv
+
+    # switch container between styles
+    bindsym $super+s layout stacking
+    bindsym $super+w layout tabbed
+    bindsym $super+e layout toggle split
 
     # scratchpad
-    bindsym $super+Tab scratchpad show
-    bindsym $super+BackSpace move scratchpad
+    bindsym $super+minus scratchpad show
+    bindsym $super+Shift+minus move scratchpad
 
     # Define names for default workspaces for which we configure key bindings later on.
     # We use variables to avoid repeating the names in multiple places.
@@ -78,8 +91,11 @@
     bindsym $super+9 workspace number $ws9
     bindsym $super+0 workspace number $ws10
 
-    bindsym $alt+Tab workspace next_on_output
-    bindsym $alt+Shift+Tab workspace prev_on_output
+    bindsym $super+y workspace number $ws6
+    bindsym $super+u workspace number $ws7
+    bindsym $super+i workspace number $ws8
+    bindsym $super+o workspace number $ws9
+    bindsym $super+p workspace number $ws10
 
     # move focused container to workspace
     bindsym $super+Shift+1 move container to workspace number $ws1
@@ -93,12 +109,23 @@
     bindsym $super+Shift+9 move container to workspace number $ws9
     bindsym $super+Shift+0 move container to workspace number $ws10
 
+    bindsym $super+Shift+y move container to workspace number $ws6
+    bindsym $super+Shift+u move container to workspace number $ws7
+    bindsym $super+Shift+i move container to workspace number $ws8
+    bindsym $super+Shift+o move container to workspace number $ws9
+    bindsym $super+Shift+p move container to workspace number $ws10
+
     # move workspace to monitor
     mode "monitor" {
         bindsym h move workspace to output left
         bindsym j move workspace to output down
         bindsym k move workspace to output up
         bindsym l move workspace to output right
+
+        bindsym Left move workspace to output left
+        bindsym Down move workspace to output down
+        bindsym Up move workspace to output up
+        bindsym Right move workspace to output right
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -113,15 +140,19 @@
         bindsym k resize shrink height 10 px or 10 ppt
         bindsym l resize grow width 10 px or 10 ppt
 
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
         bindsym Return mode "default"
         bindsym Escape mode "default"
     }
 
     bindsym $super+r mode "resize"
 
-    # restart i3 or reload the configuration file
+    # reload the configuration file
     bindsym $super+Shift+c reload
-    bindsym $super+Shift+r restart
 
     bar {
         i3bar_command ${pkgs.i3}/bin/i3bar

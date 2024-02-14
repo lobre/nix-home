@@ -17,13 +17,14 @@
     enable = true;
     enableSshSupport = true;
     enableExtraSocket = true; # useful for agent forwarding
+    pinentryFlavor = "qt";
 
     # List of keys exposed to the agent.
     # This should in the keygrip format. Find out using:
     # gpg --list-secret-keys --with-keygrip
     # Note that YubiKey keys are automatically loaded.
     sshKeys = [
-      "3345B9FEA3695058E23F58154E7B544A584CFE3E" # amersports
+      "EC64D455E11F19AA6851F7D0F7A628E9E518BDC2" # amersports
     ];
   };
 

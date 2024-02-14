@@ -6,8 +6,8 @@ let
     version = "2023-12-28";
 
     src = pkgs.fetchFromGitHub {
-      rev = "2d57a3b1d627c87da3b0c4fc7467e0d4d59d1753";
-      sha256 = "sha256-Ph/s5r6gdB6rN4421+7wJSxzzaHLchef/e7mJ4mH6QQ=";
+      rev = "0f43e2d868d3c7e79b54e550d95c2eee2fcfbcc2";
+      sha256 = "sha256-G/vSfcraqwzfE4a/Wu3J0q9WB4a+Y8SxG8gDOFmfZCw=";
       repo = "neatvi";
       owner = "aligrudi";
     };

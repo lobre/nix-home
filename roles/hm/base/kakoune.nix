@@ -3,13 +3,13 @@
 let
   kakoune = pkgs.kakoune-unwrapped.overrideAttrs (oldAttrs: {
     pname = "kakoune-unwrapped";
-    version = "2023-12-04";
+    version = "2024-02-05";
     patches = [ ];
     src = pkgs.fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "83fb65aef5729167b47c6ec22a57e5bd6ac5a9ae";
-      sha256 = "sha256-yJ30mdMC36sbMkeIOkE5HypPz3PGPexsrWWdx1K6Bkk=";
+      rev = "c97add7f5a181f459b2f349069507093be2bc738";
+      sha256 = "sha256-dpoE2anoN504kLtcTLfZjRj6pvdzjZbn11P7iA4MZ4Q=";
     };
   });
 in
