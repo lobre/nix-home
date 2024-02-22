@@ -33,8 +33,8 @@
       unbind C-b
       set -g prefix C-Space
 
-      # list sessions by last modified
-      bind s choose-tree -sOtime
+      # list sessions zoomed and by last modified
+      bind s choose-tree -Z -sOtime
 
       # vim remaps
       bind C-Space switch-client -l
