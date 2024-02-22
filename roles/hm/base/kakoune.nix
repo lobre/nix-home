@@ -42,6 +42,8 @@ in
       define-command vsplit -params .. %{ with-option windowing_placement horizontal new "%arg{@}" }
       complete-command vsplit command
 
+      map global normal <ret> '_|sh<ret>'
+
       hook global WinSetOption filetype=go "set buffer indentwidth 0"
       hook global WinSetOption filetype=(html|json|nix|xml) "set buffer indentwidth 2"
       hook global WinSetOption filetype=(c|zig) "set buffer indentwidth 4"
