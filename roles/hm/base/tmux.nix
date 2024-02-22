@@ -32,17 +32,17 @@
       # prefix
       unbind C-b
       set -g prefix C-Space
-      bind C-Space last-window
 
       # list sessions by last modified
       bind s choose-tree -sOtime
 
       # vim remaps
-      bind ^ switch-client -l
-      bind k select-pane -U
-      bind j select-pane -D
-      bind h select-pane -L
-      bind l select-pane -R
+      bind C-Space switch-client -l
+      bind C-k select-pane -U
+      bind C-j select-pane -D
+      bind C-h select-pane -L
+      bind C-l select-pane -R
+      bind ^ last-window
 
       # resize
       bind -r H resize-pane -L 5
