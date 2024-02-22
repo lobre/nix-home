@@ -91,12 +91,6 @@
     bindsym $super+9 workspace number $ws9
     bindsym $super+0 workspace number $ws10
 
-    bindsym $super+y workspace number $ws6
-    bindsym $super+u workspace number $ws7
-    bindsym $super+i workspace number $ws8
-    bindsym $super+o workspace number $ws9
-    bindsym $super+p workspace number $ws10
-
     # move focused container to workspace
     bindsym $super+Shift+1 move container to workspace number $ws1
     bindsym $super+Shift+2 move container to workspace number $ws2
@@ -108,12 +102,6 @@
     bindsym $super+Shift+8 move container to workspace number $ws8
     bindsym $super+Shift+9 move container to workspace number $ws9
     bindsym $super+Shift+0 move container to workspace number $ws10
-
-    bindsym $super+Shift+y move container to workspace number $ws6
-    bindsym $super+Shift+u move container to workspace number $ws7
-    bindsym $super+Shift+i move container to workspace number $ws8
-    bindsym $super+Shift+o move container to workspace number $ws9
-    bindsym $super+Shift+p move container to workspace number $ws10
 
     # move workspace to monitor
     mode "monitor" {
