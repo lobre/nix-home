@@ -47,8 +47,8 @@
     bindsym $super+f fullscreen toggle
 
     # toogle and swap between floating and tiling
-    bindsym $super+Shift+space floating toggle
-    bindsym $super+space focus mode_toggle
+    bindsym $super+Shift+t floating toggle
+    bindsym $super+t focus mode_toggle
 
     # focus the parent container
     bindsym $super+a focus parent
