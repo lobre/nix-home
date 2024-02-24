@@ -53,7 +53,7 @@
     # focus the parent container
     bindsym $super+a focus parent
 
-    # change orientation or grouping mode of windows
+    # split horizontally or vertically
     bindsym $super+b splith
     bindsym $super+v splitv
 
@@ -61,10 +61,6 @@
     bindsym $super+s layout stacking
     bindsym $super+w layout tabbed
     bindsym $super+e layout toggle split
-
-    # scratchpad
-    bindsym $super+minus scratchpad show
-    bindsym $super+Shift+minus move scratchpad
 
     # Define names for default workspaces for which we configure key bindings later on.
     # We use variables to avoid repeating the names in multiple places.

@@ -104,7 +104,7 @@ let
       "/commands/custom/<Primary><Alt>Delete" = "xfce4-session-logout";
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
       "/commands/custom/<Super>d" = if i3 then "xfce4-appfinder" else "xfce4-popup-whiskermenu";
-      "/commands/custom/<Super>v" = "xfce4-popup-clipman";
+      "/commands/custom/<Super>c" = "xfce4-popup-clipman";
 
       # allow custom wm keybindings
       "/xfwm4/custom/override" = true;
