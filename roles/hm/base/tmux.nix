@@ -38,11 +38,15 @@
 
       # vim remaps
       bind C-Space switch-client -l
+      bind ^ last-window
+      bind k select-pane -U
+      bind j select-pane -D
+      bind h select-pane -L
+      bind l select-pane -R
       bind C-k select-pane -U
       bind C-j select-pane -D
       bind C-h select-pane -L
       bind C-l select-pane -R
-      bind ^ last-window
 
       # resize
       bind -r H resize-pane -L 5
