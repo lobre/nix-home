@@ -8,8 +8,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "c97add7f5a181f459b2f349069507093be2bc738";
-      sha256 = "sha256-dpoE2anoN504kLtcTLfZjRj6pvdzjZbn11P7iA4MZ4Q=";
+      rev = "e34735a35041c19cc80d24cab6237abd447b8924";
+      sha256 = "sha256-Q2hhS6IZ9r5hDPva1R9wVU+dgJYW75Ax1HXpewDju88=";
     };
   });
 in
@@ -36,21 +36,35 @@ in
       set global ui_options terminal_set_title=false terminal_assistant=none terminal_enable_mouse=true
       set global autoinfo command
       add-highlighter global/ wrap
+      add-highlighter global/ show-whitespaces -only-trailing -lf " " -indent ""
 
       define-command split -params .. %{ with-option windowing_placement vertical new "%arg{@}" }
-      complete-command split command
       define-command vsplit -params .. %{ with-option windowing_placement horizontal new "%arg{@}" }
+
+      complete-command split command
       complete-command vsplit command
+
+      define-command yank %{ exec "<a-|>xsel -bi<ret>" }
+      define-command paste %{ set-register dquote %sh{ xsel -b } }
+
+      define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+
+      map global normal <ret> ':repl-send-text %sh{ echo $kak_selection; printf \\n }<ret>'
 
       hook global WinSetOption filetype=go "set buffer indentwidth 0"
       hook global WinSetOption filetype=(html|json|nix|xml) "set buffer indentwidth 2"
       hook global WinSetOption filetype=(c|zig) "set buffer indentwidth 4"
+
+      # try to implement git update-diff
+      hook global WinCreate ^[^*]+$ %{ }
 
       hook global WinSetOption filetype=git-commit %{
         set-option window autowrap_column 72
         set-option window autowrap_format_paragraph true
         autowrap-enable
       }
+
+      evaluate-commands %sh{ [ -f $kak_config/local.kak ] && echo "source $kak_config/local.kak" }
     '';
   };
 

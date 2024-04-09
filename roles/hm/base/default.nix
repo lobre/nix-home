@@ -49,6 +49,7 @@ in
     pv
     rlwrap
     rmapi
+    shellcheck
     slides
     strace
     tcpdump

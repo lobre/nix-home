@@ -4,6 +4,7 @@
   programs.tmux = {
     enable = true;
 
+    sensibleOnTop = false; # do not automatically execute this plugin
     clock24 = true; # 24h format
     disableConfirmationPrompt = true; # don't prompt when killing pane
     historyLimit = 10000;
@@ -35,6 +36,9 @@
 
       # list sessions zoomed and by last modified
       bind s choose-tree -Z -sOtime
+
+      # search sessions
+      bind f command-prompt -T target -p (session) { switch-client -t "%%" }
 
       # vim remaps
       bind C-Space switch-client -l

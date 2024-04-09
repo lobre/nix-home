@@ -17,7 +17,7 @@
     enable = true;
     enableSshSupport = true;
     enableExtraSocket = true; # useful for agent forwarding
-    pinentryFlavor = "qt";
+    pinentryPackage = pkgs.pinentry-gtk2;
 
     # List of keys exposed to the agent.
     # This should in the keygrip format. Find out using:

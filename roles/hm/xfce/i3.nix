@@ -4,6 +4,7 @@
   xdg.configFile."i3/config".text = ''
     # variables
     set $alt Mod1
+    set $altgr Group2
     set $super Mod4
 
     # Use mouse and super to drag floating windows
@@ -62,6 +63,10 @@
     bindsym $super+w layout tabbed
     bindsym $super+e layout toggle split
 
+    # scratchpad
+    bindsym $super+$altgr+Shift+minus move scratchpad
+    bindsym $super+$altgr+minus scratchpad show
+
     # Define names for default workspaces for which we configure key bindings later on.
     # We use variables to avoid repeating the names in multiple places.
     set $ws1 "1"
@@ -74,6 +79,9 @@
     set $ws8 "8"
     set $ws9 "9"
     set $ws10 "10"
+
+    # last workspace back and forth
+    bindsym $super+Tab workspace back_and_forth
 
     # switch to workspace
     bindsym $super+1 workspace number $ws1
