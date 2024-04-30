@@ -26,12 +26,12 @@ face global list   default
 
 # builtin faces
 face global Default            default
-face global PrimarySelection   black,bright-blue+fg
+face global PrimarySelection   black,blue+fg
 face global SecondarySelection black,blue+fg
-face global PrimaryCursor      +r
-face global SecondaryCursor    +r
-face global PrimaryCursorEol   black,white+fg
-face global SecondaryCursorEol black,white+fg
+face global PrimaryCursor      white+Fr
+face global SecondaryCursor    black,blue+fg
+face global PrimaryCursorEol   white+Fr
+face global SecondaryCursorEol black,blue+fg
 face global LineNumbers        bright-black
 face global LineNumbersWrapped bright-black+d
 face global LineNumberCursor   white
@@ -50,6 +50,16 @@ face global Prompt             yellow
 face global MatchingChar       +u
 face global Whitespace         +fd
 face global BufferPadding      bright-black
+
+hook global ModeChange (push|pop):.*:insert %{
+    set-face window PrimaryCursor black,yellow+fg
+    set-face window PrimaryCursorEol black,yellow+fg
+}
+
+hook global ModeChange (push|pop):insert:.* %{
+    unset-face window PrimaryCursor
+    unset-face window PrimaryCursorEol
+}
 
 # kak-lsp
 face global InlayHint              +d@type
