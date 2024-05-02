@@ -27,11 +27,11 @@ face global list   default
 # builtin faces
 face global Default            default
 face global PrimarySelection   black,blue+fg
-face global SecondarySelection black,blue+fg
+face global SecondarySelection black,bright-blue+fg
 face global PrimaryCursor      white+Fr
-face global SecondaryCursor    black,blue+fg
+face global SecondaryCursor    black,bright-blue+fg
 face global PrimaryCursorEol   white+Fr
-face global SecondaryCursorEol black,blue+fg
+face global SecondaryCursorEol black,bright-blue+fg
 face global LineNumbers        bright-black
 face global LineNumbersWrapped bright-black+d
 face global LineNumberCursor   white
