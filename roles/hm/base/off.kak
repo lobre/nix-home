@@ -28,9 +28,9 @@ face global list   default
 face global Default            default
 face global PrimarySelection   black,blue+fg
 face global SecondarySelection black,bright-blue+fg
-face global PrimaryCursor      white+Fr
+face global PrimaryCursor      black,white
 face global SecondaryCursor    black,bright-blue+fg
-face global PrimaryCursorEol   white+Fr
+face global PrimaryCursorEol   black,white
 face global SecondaryCursorEol black,bright-blue+fg
 face global LineNumbers        bright-black
 face global LineNumbersWrapped bright-black+d
@@ -52,8 +52,8 @@ face global Whitespace         +fd
 face global BufferPadding      bright-black
 
 hook global ModeChange (push|pop):.*:insert %{
-    set-face window PrimaryCursor black,yellow+fg
-    set-face window PrimaryCursorEol black,yellow+fg
+    set-face window PrimaryCursor black,yellow
+    set-face window PrimaryCursorEol black,yellow
 }
 
 hook global ModeChange (push|pop):insert:.* %{
