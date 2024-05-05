@@ -70,7 +70,7 @@ in
       hook global WinSetOption filetype=go %{
         set buffer indentwidth 0
         set buffer makecmd 'go build'
-        set buffer lintcmd 'run() { ${pkgs.go-tools}/bin/staticcheck .; } && run'
+        set buffer lintcmd 'run() { ${pkgs.go-tools}/bin/staticcheck . 2>&1 | grep "$kak_bufname"; } && run'
         set buffer formatcmd '${pkgs.go}/bin/gofmt | ${pkgs.gotools}/bin/goimports | ifne -n false'
       }
 
