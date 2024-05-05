@@ -26,56 +26,69 @@ in
       set global startup_info_version 20241204
 
       eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
-      hook global WinSetOption filetype=(go|zig|php|nix) %{
+      hook global WinSetOption filetype=(zig|php|nix) %{
         lsp-enable-window
         hook buffer BufWritePre .* lsp-formatting-sync
       }
 
       colorscheme off
+
       set global indentwidth 4
       set global ui_options terminal_set_title=false terminal_assistant=none terminal_enable_mouse=true
       set global autoinfo command
+      set global autocomplete prompt
+
       add-highlighter global/ wrap
       add-highlighter global/ show-whitespaces -only-trailing -lf " " -indent ""
 
-      define-command split -params .. %{ with-option windowing_placement vertical new "%arg{@}" }
-      define-command vsplit -params .. %{ with-option windowing_placement horizontal new "%arg{@}" }
+      def split-horizontal -params .. %{ with-option windowing_placement vertical new "%arg{@}" }
+      def split-vertical -params .. %{ with-option windowing_placement horizontal new "%arg{@}" }
 
-      complete-command split command
-      complete-command vsplit command
+      complete-command split-horizontal command
+      complete-command split-vertical command
 
-      define-command yank %{ exec "<a-|>xsel -bi<ret>" }
-      define-command paste %{ set-register dquote %sh{ xsel -b } }
+      def assign-jumpclient %{ set global jumpclient %val{client} }
+      def assign-toolsclient %{ set global toolsclient %val{client} }
+      def assign-docsclient %{ set global docsclient %val{client} }
 
-      define-command mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+      def yank %{ exec "<a-|>xsel -bi<ret>" }
+      def paste %{ set-register dquote %sh{ xsel -b } }
+      def mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
 
-      map global normal <ret> ':repl-send-text %sh{ echo $kak_selection; printf \\n }<ret>'
+      hook global RawKey <c-mouse:press:right:.*> %{ try "exec gf" }
+      hook global RawKey <c-scroll:[^-].*> %{ try "exec 3vk<c-i>" }
+      hook global RawKey <c-scroll:-.*> %{ try "exec 3vj<c-o>" }
 
-      hook global WinSetOption filetype=go "set buffer indentwidth 0"
+      hook global NormalKey "n|<a-n>" %{ exec -draft vv }
+
+      # TODO: try to implement git update-diff
+      hook global WinCreate ^[^*]+$ %{ }
+
       hook global WinSetOption filetype=(html|json|nix|xml) "set buffer indentwidth 2"
       hook global WinSetOption filetype=(c|zig) "set buffer indentwidth 4"
 
-      # try to implement git update-diff
-      hook global WinCreate ^[^*]+$ %{ }
-
-      hook global WinSetOption filetype=git-commit %{
-        set-option window autowrap_column 72
-        set-option window autowrap_format_paragraph true
-        autowrap-enable
+      hook global WinSetOption filetype=go %{
+        set buffer indentwidth 0
+        set buffer makecmd 'go build'
+        set buffer lintcmd 'run() { ${pkgs.go-tools}/bin/staticcheck .; } && run'
+        set buffer formatcmd '${pkgs.go}/bin/gofmt | ${pkgs.gotools}/bin/goimports | ifne -n false'
       }
 
-      evaluate-commands %sh{ [ -f $kak_config/local.kak ] && echo "source $kak_config/local.kak" }
+      hook global WinSetOption filetype=go %{
+          hook buffer BufWritePost "\Q%val{buffile}" %{ eval format; lint }
+      }
+
+      hook global WinSetOption filetype=git-commit %{
+        set window autowrap_column 72
+        set window autowrap_format_paragraph true
+        autowrap-enable
+      }
     '';
   };
 
   # lsp configurations
   xdg.configFile."kak-lsp/kak-lsp.toml".text = with pkgs; ''
     snippet_support = true
-
-    [language.go]
-    filetypes = ["go"]
-    roots = ["go.mod", ".git"]
-    command = "${gopls}/bin/gopls"
 
     [language.nix]
     filetypes = ["nix"]

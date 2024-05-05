@@ -53,8 +53,8 @@
       bind C-l select-pane -R
 
       # resize
-      bind -r H resize-pane -L 5
-      bind -r J resize-pane -D 5
+      bind -r H resize-pane -L 10
+      bind -r J resize-pane -D 10
       bind -r K resize-pane -U 5
       bind -r L resize-pane -R 5
 
