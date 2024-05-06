@@ -41,8 +41,8 @@
       bind f command-prompt -T target -p (session) { switch-client -t "%%" }
 
       # vim remaps
-      bind C-Space switch-client -l
-      bind ^ last-window
+      bind C-Space last-window
+      bind ^ switch-client -l
       bind k select-pane -U
       bind j select-pane -D
       bind h select-pane -L

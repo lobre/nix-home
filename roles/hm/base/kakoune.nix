@@ -26,9 +26,10 @@ in
       set global startup_info_version 20241204
 
       eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
-      hook global WinSetOption filetype=(zig|php|nix) %{
+      hook global WinSetOption filetype=(go|zig|php|nix) %{
         lsp-enable-window
-        hook buffer BufWritePre .* lsp-formatting-sync
+        lsp-inlay-diagnostics-enable window
+        hook window BufWritePre .* lsp-formatting-sync
       }
 
       colorscheme off
@@ -36,7 +37,6 @@ in
       set global indentwidth 4
       set global ui_options terminal_set_title=false terminal_assistant=none terminal_enable_mouse=true
       set global autoinfo command
-      set global autocomplete prompt
 
       add-highlighter global/ wrap
       add-highlighter global/ show-whitespaces -only-trailing -lf " " -indent ""
@@ -64,19 +64,9 @@ in
       # TODO: try to implement git update-diff
       hook global WinCreate ^[^*]+$ %{ }
 
+      hook global WinSetOption filetype=(go) "set buffer indentwidth 0"
       hook global WinSetOption filetype=(html|json|nix|xml) "set buffer indentwidth 2"
       hook global WinSetOption filetype=(c|zig) "set buffer indentwidth 4"
-
-      hook global WinSetOption filetype=go %{
-        set buffer indentwidth 0
-        set buffer makecmd 'go build'
-        set buffer lintcmd 'run() { ${pkgs.go-tools}/bin/staticcheck . 2>&1 | grep "$kak_bufname"; } && run'
-        set buffer formatcmd '${pkgs.go}/bin/gofmt | ${pkgs.gotools}/bin/goimports | ifne -n false'
-      }
-
-      hook global WinSetOption filetype=go %{
-          hook buffer BufWritePost "\Q%val{buffile}" %{ eval format; lint }
-      }
 
       hook global WinSetOption filetype=git-commit %{
         set window autowrap_column 72
@@ -89,6 +79,11 @@ in
   # lsp configurations
   xdg.configFile."kak-lsp/kak-lsp.toml".text = with pkgs; ''
     snippet_support = true
+
+    [language.go]
+    filetypes = ["go"]
+    roots = ["go.mod", ".git"]
+    command = "${gopls}/bin/gopls"
 
     [language.nix]
     filetypes = ["nix"]
