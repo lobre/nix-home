@@ -10,7 +10,7 @@
     # Use mouse and super to drag floating windows
     floating_modifier $super
 
-    font pango:monospace 8
+    font pango:Iosevka Term Slab Regular 9
 
     # borders
     default_border pixel 2
@@ -150,6 +150,7 @@
         i3bar_command ${pkgs.i3}/bin/i3bar
         status_command while true; do echo $(date +'%H:%M, %a %d %B %Y'); sleep 1; done
         tray_output primary
+        font pango:Iosevka Term Slab Regular 9
     }
 
     # set applauncher floating
