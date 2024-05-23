@@ -27,8 +27,12 @@
       set -g set-titles-string "#T"
 
       # status line
-      set -g status-style 'bg=black fg=colour8'
-      set -g status-left-length 30
+      set -g status-left ""
+      set -g status-right " [#{session_name}]"
+      set -g status-right-length 30
+      set -g status-justify right
+      set -g status-position top
+      set -g status-style "bg=default fg=colour8"
 
       # prefix
       unbind C-b
@@ -36,27 +40,6 @@
 
       # list sessions zoomed and by last modified
       bind s choose-tree -Z -sOtime
-
-      # search sessions
-      bind f command-prompt -T target -p (session) { switch-client -t "%%" }
-
-      # vim remaps
-      bind C-Space last-window
-      bind ^ switch-client -l
-      bind k select-pane -U
-      bind j select-pane -D
-      bind h select-pane -L
-      bind l select-pane -R
-      bind C-k select-pane -U
-      bind C-j select-pane -D
-      bind C-h select-pane -L
-      bind C-l select-pane -R
-
-      # resize
-      bind -r H resize-pane -L 10
-      bind -r J resize-pane -D 10
-      bind -r K resize-pane -U 5
-      bind -r L resize-pane -R 5
 
       # copy to clipboard
       set -s copy-command '${pkgs.xsel}/bin/xsel --input --clipboard'
