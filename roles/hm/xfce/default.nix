@@ -52,5 +52,19 @@
 
   fonts.fontconfig.enable = true;
 
-  imports = [ ./terminal.nix ./xfconf.nix ./i3.nix ];
+  # terminal shortcuts
+  xdg.configFile."xfce4/terminal/accels.scm".text = ''
+    (gtk_accel_path "<Actions>/terminal-window/next-tab" "<Primary>Tab")
+    (gtk_accel_path "<Actions>/terminal-window/prev-tab" "<Primary><Shift>Tab")
+  '';
+
+  # padding around terminal windows
+  gtk = {
+    enable = true;
+    gtk3.extraCss = ''
+      VteTerminal, vte-terminal { padding: 16px 20px; }
+    '';
+  };
+
+  imports = [ ./xfconf.nix ./i3.nix ];
 }

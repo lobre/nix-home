@@ -34,16 +34,6 @@ let
     done
   '';
 
-  wallpaper = pkgs.stdenv.mkDerivation {
-    pname = "wallpaper";
-    version = "0.0.1";
-    src = ./.;
-    installPhase = ''
-      mkdir -p $out
-      cp wallpaper.png $out/wallpaper.png
-    '';
-  };
-
   config = {
     "xfce4-session" = {
       "/startup/ssh-agent/enabled" = false;
@@ -64,12 +54,6 @@ let
     };
 
     "xfce4-desktop" = {
-      "/backdrop/screen0/monitoreDP-1/workspace0/last-image" =
-        "${wallpaper}/wallpaper.png";
-      "/backdrop/screen0/monitoreDP-1/workspace0/color-style" = 0; # solid color
-      "/backdrop/screen0/monitoreDP-1/workspace0/rgba1" =
-        [ 0.141176 0.192157 0.215686 0.999999 ]; # color #99C1F1, 0.9999 instead of 1.0 to avoid integer
-      "/backdrop/screen0/monitoreDP-1/workspace0/image-style" = 1; # centered
       "/desktop-icons/style" = 0;
     };
 
@@ -224,6 +208,50 @@ let
     };
 
     "xfce4-power-manager" = { "/xfce4-power-manager/show-tray-icon" = true; };
+
+    "xfce4-terminal" =
+      let
+        black = "#243137";
+        red = "#fc3841";
+        green = "#5cf19e";
+        yellow = "#fed032";
+        blue = "#37b6ff";
+        magenta = "#fc226e";
+        cyan = "#59ffd1";
+        white = "#ffffff";
+
+        brightBlack = "#84A6B8";
+        brightRed = "#fc746d";
+        brightGreen = "#adf7be";
+        brightYellow = "#fee16c";
+        brightBlue = "#70cfff";
+        brightMagenta = "#fc669b";
+        brightCyan = "#9affe6";
+        brightWhite = "#ffffff";
+
+        background = "#1d262a";
+        foreground = "#e7ebed";
+
+        palette =
+          "${black};${red};${green};${yellow};${blue};${magenta};${cyan};${white};${brightBlack};${brightRed};${brightGreen};${brightYellow};${brightBlue};${brightMagenta};${brightCyan};${brightWhite}";
+      in
+      {
+        "/cell-height-scale" = 1.1000;
+        "/color-background" = "${background}";
+        "/color-bold-is-bright" = false;
+        "/color-foreground" = "${foreground}";
+        "/color-palette" = "${palette}";
+        "/font-name" = "Iosevka Term Slab Regular 14";
+        "/misc-always-show-tabs" = false;
+        "/misc-confirm-close" = false;
+        "/misc-default-geometry" = "110x20";
+        "/misc-menubar-default" = false;
+        "/misc-show-unsafe-paste-dialog" = false;
+        "/misc-slim-tabs" = true;
+        "/scrolling-bar" = "TERMINAL_SCROLLBAR_NONE";
+        "/scrolling-unlimited" = true;
+        "/title-mode" = "TERMINAL_TITLE_REPLACE";
+      };
   };
 
   configFile = pkgs.writeText
@@ -232,7 +260,7 @@ let
 
 in
 {
-  home.packages = with pkgs; [ xfconfDump ];
+  home.packages = [ xfconfDump ];
 
   home.activation.xfconfSettings =
     lib.hm.dag.entryAfter [ "installPackages" ] ''
@@ -242,15 +270,4 @@ in
         ${xfconfJson}/bin/xfconf-json -bin ${pkgs.xfce.xfconf}/bin/xfconf-query -file ${configFile}
       fi
     '';
-
-  xdg.configFile."nitrogen/bg-saved.cfg".text = lib.concatMapStringsSep "\n"
-    (id:
-      ''
-        [xin_${toString id}]
-        file=${wallpaper}/wallpaper.png
-        mode=2
-        bgcolor=#243137
-      ''
-    )
-    (lib.range 0 2);
 }
