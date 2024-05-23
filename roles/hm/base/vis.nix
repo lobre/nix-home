@@ -7,11 +7,11 @@ let
 
   vis = stdenv.mkDerivation {
     pname = "vis";
-    version = "2023-10-17";
+    version = "2024-05-12";
 
     src = fetchFromGitHub {
-      rev = "8acdb79e8d620e46fc6b44b68152d4347c8b12b7";
-      sha256 = "sha256-PUgb7bbz4I8VR2zwdyFgdJEX+omxnNQGfxbSJ1ZLmaE=";
+      rev = "777b11c4ebdf752fde6f134f942aa20464d9c8b5";
+      sha256 = "sha256-OfUt6qRc1/Myx6NtvlVNS67eR+4BOH0e5QdYRr+twmw=";
       repo = "vis";
       owner = "rnpnr";
     };
