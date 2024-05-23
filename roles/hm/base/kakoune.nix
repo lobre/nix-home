@@ -4,7 +4,9 @@ let
   kakoune = pkgs.kakoune-unwrapped.overrideAttrs (oldAttrs: {
     pname = "kakoune-unwrapped";
     version = "2024-02-05";
+
     patches = [ ];
+
     src = pkgs.fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
@@ -12,6 +14,20 @@ let
       sha256 = "sha256-Q2hhS6IZ9r5hDPva1R9wVU+dgJYW75Ax1HXpewDju88=";
     };
   });
+
+  kak-lsp = pkgs.rustPlatform.buildRustPackage rec {
+    pname = "kak-lsp";
+    version = "2024-05-13";
+
+    src = pkgs.fetchFromGitHub {
+      owner = pname;
+      repo = pname;
+      rev = "55299017570dce3ac39d2084fbd417348418d9c6";
+      sha256 = "sha256-emPzZ87+9vKURKybfLoRg/jQxNfMfboRekSU1v/SzF4=";
+    };
+
+    cargoSha256 = "sha256-l6s2NtXowyjNEaUcZKMjk1FSZa7EZGX5qmLboLMNZLI=";
+  };
 in
 
 {
@@ -25,7 +41,7 @@ in
     extraConfig = ''
       set global startup_info_version 20241204
 
-      eval %sh{${pkgs.kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
+      eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
       hook global WinSetOption filetype=(go|zig|php|nix) %{
         lsp-enable-window
         lsp-inlay-diagnostics-enable window
@@ -37,9 +53,11 @@ in
       set global indentwidth 4
       set global ui_options terminal_set_title=false terminal_assistant=none terminal_enable_mouse=true
       set global autoinfo command
+      set global autocomplete prompt
 
       add-highlighter global/ wrap
       add-highlighter global/ show-whitespaces -only-trailing -lf " " -indent ""
+      add-highlighter global/ number-lines -hlcursor -separator " " -relative
 
       def split-horizontal -params .. %{ with-option windowing_placement vertical new "%arg{@}" }
       def split-vertical -params .. %{ with-option windowing_placement horizontal new "%arg{@}" }
@@ -61,8 +79,13 @@ in
 
       hook global NormalKey "n|<a-n>" %{ exec -draft vv }
 
-      # TODO: try to implement git update-diff
-      hook global WinCreate ^[^*]+$ %{ }
+      hook global BufOpenFile ^[^*]+$ %{ evaluate-commands %sh{
+        if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+          for hook in WinCreate BufReload BufWritePost; do
+            echo "hook buffer $hook %val{buffile} 'git show-diff'"
+          done
+        fi
+      }}
 
       hook global WinSetOption filetype=(go) "set buffer indentwidth 0"
       hook global WinSetOption filetype=(html|json|nix|xml) "set buffer indentwidth 2"
@@ -73,6 +96,8 @@ in
         set window autowrap_format_paragraph true
         autowrap-enable
       }
+
+      map global normal <space> %{:enter-user-mode lsp<ret>}
     '';
   };
 
