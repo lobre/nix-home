@@ -26,17 +26,43 @@
       set -g set-titles on
       set -g set-titles-string "#T"
 
-      # status line
       set -g status-left ""
       set -g status-right " [#{session_name}]"
       set -g status-right-length 30
       set -g status-justify right
       set -g status-position top
-      set -g status-style "bg=default fg=colour8"
+      set -g status-style "bg=default fg=brightblack"
 
-      # prefix
+      set -g message-style "bg=default fg=default"
+      set -g mode-style "bg=white fg=black"
+
+      set -g pane-border-style "bg=default fg=brightblack"
+      set -g pane-active-border-style "bg=default fg=brightblue"
+
       unbind C-b
       set -g prefix C-Space
+
+      bind C-Space last-pane
+      bind Escape switch-client -t main
+
+      # keep same path for splits
+      bind '"' split-window -c "#{pane_current_path}"
+      bind '%' split-window -c "#{pane_current_path}" -h
+
+      bind -n C-Left select-pane -L
+      bind -n C-Down select-pane -D
+      bind -n C-Up select-pane -U
+      bind -n C-Right select-pane -R
+
+      bind -T copy-mode-vi C-Left select-pane -L
+      bind -T copy-mode-vi C-Down select-pane -D
+      bind -T copy-mode-vi C-Up select-pane -U
+      bind -T copy-mode-vi C-Right select-pane -R
+
+      bind -n S-Left resize-pane -L 10
+      bind -n S-Down resize-pane -D 5
+      bind -n S-Up resize-pane -U 5
+      bind -n S-Right resize-pane -R 10
 
       # list sessions zoomed and by last modified
       bind s choose-tree -Z -sOtime

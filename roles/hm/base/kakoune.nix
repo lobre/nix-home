@@ -10,8 +10,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "e34735a35041c19cc80d24cab6237abd447b8924";
-      sha256 = "sha256-Q2hhS6IZ9r5hDPva1R9wVU+dgJYW75Ax1HXpewDju88=";
+      rev = "1c352e996c265cb0b1a6eb5478f171916ccb605f";
+      sha256 = "sha256-fDcSLbvbGEyQHDj64HPOozI1Y3gNxjcnmg2GYSk1m2s=";
     };
   });
 
@@ -52,15 +52,14 @@ in
 
       set global indentwidth 4
       set global ui_options terminal_set_title=false terminal_assistant=none terminal_enable_mouse=true
-      set global autoinfo command
+      set global autoinfo ""
       set global autocomplete prompt
 
       add-highlighter global/ wrap
       add-highlighter global/ show-whitespaces -only-trailing -lf " " -indent ""
-      add-highlighter global/ number-lines -hlcursor -separator " " -relative
 
-      def split-horizontal -params .. %{ with-option windowing_placement vertical new "%arg{@}" }
-      def split-vertical -params .. %{ with-option windowing_placement horizontal new "%arg{@}" }
+      def split-horizontal -params .. %{ set local windowing_placement vertical; new "%arg{@}" }
+      def split-vertical -params .. %{ set local windowing_placement horizontal; new "%arg{@}" }
 
       complete-command split-horizontal command
       complete-command split-vertical command
@@ -72,6 +71,7 @@ in
       def yank %{ exec "<a-|>xsel -bi<ret>" }
       def paste %{ set-register dquote %sh{ xsel -b } }
       def mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
+      def chmod %{ nop %sh{ chmod +x $kak_buffile } }
 
       hook global RawKey <c-mouse:press:right:.*> %{ try "exec gf" }
       hook global RawKey <c-scroll:[^-].*> %{ try "exec 3vk<c-i>" }

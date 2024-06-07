@@ -56,6 +56,8 @@
   xdg.configFile."xfce4/terminal/accels.scm".text = ''
     (gtk_accel_path "<Actions>/terminal-window/next-tab" "<Primary>Tab")
     (gtk_accel_path "<Actions>/terminal-window/prev-tab" "<Primary><Shift>Tab")
+    (gtk_accel_path "<Actions>/terminal-widget/shift-up" "")
+    (gtk_accel_path "<Actions>/terminal-widget/shift-down" "")
   '';
 
   # padding around terminal windows

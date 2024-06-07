@@ -10,8 +10,8 @@ let
     version = "2024-05-12";
 
     src = fetchFromGitHub {
-      rev = "777b11c4ebdf752fde6f134f942aa20464d9c8b5";
-      sha256 = "sha256-OfUt6qRc1/Myx6NtvlVNS67eR+4BOH0e5QdYRr+twmw=";
+      rev = "a7aac1044856abc4d1f133c6563fc604d7fe6295";
+      sha256 = "sha256-8QLl9Q/WBXrDSPxyvZdn0LNlqp17cwH64iVYPGas+PI=";
       repo = "vis";
       owner = "rnpnr";
     };
@@ -46,8 +46,42 @@ in
     end)
 
     vis.events.subscribe(vis.events.WIN_OPEN, function(win)
-        vis:command("set number")
-        vis:command("set relativenumbers")
+        -- vis:command("set number")
+        -- vis:command("set relativenumbers")
+    end)
+
+    vis:command_register("pick", function(argv)
+        local prompt = ""
+        if argv[1] then
+            prompt = " -q " .. argv[1]
+        end
+
+        local file = io.popen("git ls-files | pick -X" .. prompt)
+        local output = file:read()
+        file:close()
+
+        if output then
+            vis:command(string.format("e '%s'", output))
+        end
+
+        vis:feedkeys("<vis-redraw>")
+        return true;
+    end)
+
+    vis:command_register("grep", function(argv)
+        local search = argv[1]
+
+        local file = io.popen("git grep " .. search .. " | pick -X | sed 's/:.*//'")
+        local output = file:read()
+        file:close()
+
+        if output then
+            vis:command(string.format("e '%s'", output))
+            vis:feedkeys(string.format("/%s<Enter>", search))
+        end
+
+        vis:feedkeys("<vis-redraw>")
+        return true;
     end)
   '';
 }

@@ -12,6 +12,7 @@ face global operator      default
 face global attribute     default
 face global comment       bright-black+i
 face global documentation default
+
 face global meta          default
 face global builtin       default
 
@@ -26,34 +27,34 @@ face global list   default
 
 # builtin faces
 face global Default            default
-face global PrimarySelection   black,blue+fg
-face global SecondarySelection black,bright-blue+fg
-face global PrimaryCursor      black,white
-face global SecondaryCursor    black,bright-blue+fg
-face global PrimaryCursorEol   black,white
-face global SecondaryCursorEol black,bright-blue+fg
+face global PrimarySelection   black,white
+face global SecondarySelection black,white
+face global PrimaryCursor      black,cyan
+face global SecondaryCursor    black,white
+face global PrimaryCursorEol   black,cyan
+face global SecondaryCursorEol black,white
 face global LineNumbers        bright-black
 face global LineNumbersWrapped bright-black
 face global LineNumberCursor   white
-face global MenuForeground     black,blue
+face global MenuForeground     black,cyan
 face global MenuBackground     default,black+g
 face global MenuInfo           default
 face global Information        default+g
 face global InlineInformation  default,black+g
 face global Error              white,red
 face global StatusLine         default
-face global StatusLineMode     yellow+b
+face global StatusLineMode     bright-yellow+b
 face global StatusLineInfo     bright-black
 face global StatusLineValue    green
 face global StatusCursor       black,white
-face global Prompt             yellow
+face global Prompt             bright-yellow
 face global MatchingChar       +u
 face global Whitespace         +fd
 face global BufferPadding      bright-black
 
 hook global ModeChange (push|pop):.*:insert %{
-    set-face window PrimaryCursor black,yellow
-    set-face window PrimaryCursorEol black,yellow
+    set-face window PrimaryCursor black,bright-yellow
+    set-face window PrimaryCursorEol black,bright-yellow
 }
 
 hook global ModeChange (push|pop):insert:.* %{
