@@ -37,12 +37,11 @@
       set -g mode-style "bg=white fg=black"
 
       set -g pane-border-style "bg=default fg=brightblack"
-      set -g pane-active-border-style "bg=default fg=brightblue"
+      set -g pane-active-border-style "bg=default fg=brightgreen"
 
       unbind C-b
       set -g prefix C-Space
 
-      bind C-Space last-pane
       bind Escape switch-client -t main
 
       # keep same path for splits
