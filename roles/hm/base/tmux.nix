@@ -42,26 +42,9 @@
       unbind C-b
       set -g prefix C-Space
 
-      bind Escape switch-client -t main
-
       # keep same path for splits
       bind '"' split-window -c "#{pane_current_path}"
       bind '%' split-window -c "#{pane_current_path}" -h
-
-      bind -n C-Left select-pane -L
-      bind -n C-Down select-pane -D
-      bind -n C-Up select-pane -U
-      bind -n C-Right select-pane -R
-
-      bind -T copy-mode-vi C-Left select-pane -L
-      bind -T copy-mode-vi C-Down select-pane -D
-      bind -T copy-mode-vi C-Up select-pane -U
-      bind -T copy-mode-vi C-Right select-pane -R
-
-      bind -n S-Left resize-pane -L 10
-      bind -n S-Down resize-pane -D 5
-      bind -n S-Up resize-pane -U 5
-      bind -n S-Right resize-pane -R 10
 
       # list sessions zoomed and by last modified
       bind s choose-tree -Z -sOtime
@@ -72,6 +55,8 @@
       # better mouse selection
       bind -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-no-clear
       bind -T copy-mode-vi MouseDown1Pane send -X clear-selection
+
+      if-shell 'test -e ~/config/tmux/tmux.conf.local' 'source-file ~/config/tmux/tmux.conf.local'
     '';
   };
 }

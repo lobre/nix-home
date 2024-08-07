@@ -241,7 +241,7 @@ let
         "/color-bold-is-bright" = false;
         "/color-foreground" = "${foreground}";
         "/color-palette" = "${palette}";
-        "/font-name" = "Iosevka Term Slab Regular 14";
+        "/font-name" = "Iosevka Term Regular 14";
         "/misc-always-show-tabs" = false;
         "/misc-confirm-close" = false;
         "/misc-default-geometry" = "110x20";

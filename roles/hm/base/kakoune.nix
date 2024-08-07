@@ -10,8 +10,8 @@ let
     src = pkgs.fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "1c352e996c265cb0b1a6eb5478f171916ccb605f";
-      sha256 = "sha256-fDcSLbvbGEyQHDj64HPOozI1Y3gNxjcnmg2GYSk1m2s=";
+      rev = "011283e4d2579d905738ef8684972071faad1b7e";
+      sha256 = "sha256-cxBS8sfDImyfjbgvPu/FEZmqY7D/q1tMh0DGtN0jq3c=";
     };
   });
 
@@ -22,11 +22,11 @@ let
     src = pkgs.fetchFromGitHub {
       owner = pname;
       repo = pname;
-      rev = "55299017570dce3ac39d2084fbd417348418d9c6";
-      sha256 = "sha256-emPzZ87+9vKURKybfLoRg/jQxNfMfboRekSU1v/SzF4=";
+      rev = "ab9bf8078caf028ac4c005624ba94bee169f959d";
+      sha256 = "sha256-C/iJRfPxid7tUx5rAuwi8IAUUCfxQKWoj6TeFrjOp/g=";
     };
 
-    cargoSha256 = "sha256-l6s2NtXowyjNEaUcZKMjk1FSZa7EZGX5qmLboLMNZLI=";
+    cargoSha256 = "sha256-sOUOZ+HE8a8otmfCvv/01/dhzWRuDLMhT/azyKx3K2E=";
   };
 in
 
@@ -42,10 +42,12 @@ in
       set global startup_info_version 20241204
 
       eval %sh{${kak-lsp}/bin/kak-lsp --kakoune -s $kak_session}
-      hook global WinSetOption filetype=(go|zig|php|nix) %{
+      hook global WinSetOption filetype=(go|nix|php|sh|zig) %{
         lsp-enable-window
         lsp-inlay-diagnostics-enable window
-        hook window BufWritePre .* lsp-formatting-sync
+
+        hook window BufWritePre .* %{ lsp-formatting-sync }
+        hook global BufWritePre .*[.]go %{ try %{ lsp-code-actions-sync source.organizeImports } }
       }
 
       colorscheme off
@@ -53,7 +55,7 @@ in
       set global indentwidth 4
       set global ui_options terminal_set_title=false terminal_assistant=none terminal_enable_mouse=true
       set global autoinfo ""
-      set global autocomplete prompt
+      set global autocomplete prompt|insert
 
       add-highlighter global/ wrap
       add-highlighter global/ show-whitespaces -only-trailing -lf " " -indent ""
@@ -70,14 +72,12 @@ in
 
       def yank %{ exec "<a-|>xsel -bi<ret>" }
       def paste %{ set-register dquote %sh{ xsel -b } }
+
       def mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
       def chmod %{ nop %sh{ chmod +x $kak_buffile } }
 
-      hook global RawKey <c-mouse:press:right:.*> %{ try "exec gf" }
-      hook global RawKey <c-scroll:[^-].*> %{ try "exec 3vk<c-i>" }
-      hook global RawKey <c-scroll:-.*> %{ try "exec 3vj<c-o>" }
-
-      hook global NormalKey "n|<a-n>" %{ exec -draft vv }
+      # this does not work when trying to open another kak instance in same directory
+      hook global EnterDirectory .* %{ rename-session %sh{ basename $(pwd) } }
 
       hook global BufOpenFile ^[^*]+$ %{ evaluate-commands %sh{
         if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then
@@ -97,36 +97,55 @@ in
         autowrap-enable
       }
 
-      map global normal <space> %{:enter-user-mode lsp<ret>}
+      map global normal <space> %{:edit -scratch *scratch*<ret>}
+
+      define-command -params .. pin %{
+        evaluate-commands -draft -save-regs al %{
+          execute-keys 'xH"ly'
+          set-register a "%val{bufname}:%val{cursor_line}:"
+          edit -scratch *scratch*
+          set-option buffer filetype grep
+          execute-keys 'gjo#<space>' "%arg{@}" '<ret><esc>"aP"lp'
+        }
+
+        echo "pin added: %arg{@}"
+      }
     '';
   };
 
   # lsp configurations
-  xdg.configFile."kak-lsp/kak-lsp.toml".text = with pkgs; ''
+  xdg.configFile."kak-lsp/kak-lsp.toml".text = ''
     snippet_support = true
 
-    [language.go]
+    [language_server.bash-language-server]
+    filetypes = ["sh"]
+    roots = [".git"]
+    command = "${pkgs.nodePackages.bash-language-server}/bin/bash-language-server"
+    args = ["start"]
+
+    [language_server.gopls]
     filetypes = ["go"]
     roots = ["go.mod", ".git"]
-    command = "${gopls}/bin/gopls"
+    command = "${pkgs.gopls}/bin/gopls"
 
-    [language.nix]
+    [language_server.nil]
     filetypes = ["nix"]
     roots = ["flake.nix", "shell.nix", ".git"]
-    command = "${nil}/bin/nil"
-    [language.nix.settings.nil.formatting]
-    command = [ "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt" ]
+    command = "${pkgs.nil}/bin/nil"
 
-    [language.php]
+    [language_server.nil.settings.nil.formatting]
+    command = "${pkgs.nixpkgs-fmt}/bin/nixpkgs-fmt"
+
+    [language_server.phpactor]
     filetypes = ["php"]
     roots = ["composer.json", ".git"]
-    command = "${phpactor}/bin/phpactor"
+    command = "${pkgs.phpactor}/bin/phpactor"
     args = ["language-server"]
 
-    [language.zig]
+    [language_server.zls]
     filetypes = ["zig"]
     roots = ["build.zig"]
-    command = "${zls}/bin/zls"
+    command = "${pkgs.zls}/bin/zls"
   '';
 }
 

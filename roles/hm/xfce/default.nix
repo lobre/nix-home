@@ -24,7 +24,7 @@
     xsel
 
     # font
-    (iosevka-bin.override { variant = "SGr-IosevkaTermSlab"; })
+    (iosevka-bin.override { variant = "SGr-IosevkaTerm"; })
   ];
 
   programs = {
