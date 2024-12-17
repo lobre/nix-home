@@ -3,30 +3,30 @@
 let
   kakoune = pkgs.kakoune-unwrapped.overrideAttrs (oldAttrs: {
     pname = "kakoune-unwrapped";
-    version = "2024-02-05";
+    version = "2024-09-18";
 
     patches = [ ];
 
     src = pkgs.fetchFromGitHub {
       owner = "mawww";
       repo = "kakoune";
-      rev = "011283e4d2579d905738ef8684972071faad1b7e";
-      sha256 = "sha256-cxBS8sfDImyfjbgvPu/FEZmqY7D/q1tMh0DGtN0jq3c=";
+      rev = "0e225db00efb33150e98e951de9a1b5c72971b12";
+      sha256 = "sha256-JsQHorgBl51Tl4z9bLGDRv/KFswGUAWcgp+nSlyXzFQ=";
     };
   });
 
   kak-lsp = pkgs.rustPlatform.buildRustPackage rec {
     pname = "kak-lsp";
-    version = "2024-05-13";
+    version = "2024-08-09";
 
     src = pkgs.fetchFromGitHub {
       owner = pname;
       repo = pname;
-      rev = "ab9bf8078caf028ac4c005624ba94bee169f959d";
-      sha256 = "sha256-C/iJRfPxid7tUx5rAuwi8IAUUCfxQKWoj6TeFrjOp/g=";
+      rev = "ebd370f43cb6e7af634e5f8cadb99cc8c16e1efe";
+      sha256 = "sha256-wPCu/VxAMIB+zI0+eDq7lJ/rHJZfe0whYzdoiwrixCc=";
     };
 
-    cargoSha256 = "sha256-sOUOZ+HE8a8otmfCvv/01/dhzWRuDLMhT/azyKx3K2E=";
+    cargoSha256 = "sha256-nBZjaEZ2BrVb3xgz3DhZk7TM5HSfLtiTYsJ6QOxi73s=";
   };
 in
 
@@ -60,21 +60,34 @@ in
       add-highlighter global/ wrap
       add-highlighter global/ show-whitespaces -only-trailing -lf " " -indent ""
 
-      def split-horizontal -params .. %{ set local windowing_placement vertical; new "%arg{@}" }
-      def split-vertical -params .. %{ set local windowing_placement horizontal; new "%arg{@}" }
+      def split -params .. %{ set local windowing_placement vertical; new "%arg{@}" }
+      def col -params .. %{ set local windowing_placement horizontal; new "%arg{@}" }
 
-      complete-command split-horizontal command
-      complete-command split-vertical command
+      complete-command split command
+      complete-command col command
 
-      def assign-jumpclient %{ set global jumpclient %val{client} }
-      def assign-toolsclient %{ set global toolsclient %val{client} }
-      def assign-docsclient %{ set global docsclient %val{client} }
+      def -params 1 assign %{ set global "%arg{1}client" %val{client} }
+      complete-command assign shell-script-candidates %{ printf 'jump\ntools\ndocs\n' }
 
       def yank %{ exec "<a-|>xsel -bi<ret>" }
       def paste %{ set-register dquote %sh{ xsel -b } }
 
       def mkdir %{ nop %sh{ mkdir -p $(dirname $kak_buffile) } }
       def chmod %{ nop %sh{ chmod +x $kak_buffile } }
+
+      def bind -params 1 %{ map global user %arg{1} "<esc>:edit %val{bufname}<ret>" }
+
+      def -hidden yank-ref %{
+        evaluate-commands -draft %{
+          execute-keys ',;x'
+          set-register dquote "%val{bufname}:%val{cursor_line}:%val{selection}"
+        }
+      }
+
+      def -hidden goto %{ evaluate-commands %{
+        require-module jump
+        try %{ exec <a-i><a-w>gf } catch %{ jump }
+      }}
 
       # this does not work when trying to open another kak instance in same directory
       hook global EnterDirectory .* %{ rename-session %sh{ basename $(pwd) } }
@@ -97,19 +110,12 @@ in
         autowrap-enable
       }
 
-      map global normal <space> %{:edit -scratch *scratch*<ret>}
+      map -docstring 'tag' global object t 'c<lt>\w[\w-]*\h*[^<gt>]*?(?<lt>!/)<gt>,<lt>/\w[\w-]*(?<lt>!/)<gt><ret>'
 
-      define-command -params .. pin %{
-        evaluate-commands -draft -save-regs al %{
-          execute-keys 'xH"ly'
-          set-register a "%val{bufname}:%val{cursor_line}:"
-          edit -scratch *scratch*
-          set-option buffer filetype grep
-          execute-keys 'gjo#<space>' "%arg{@}" '<ret><esc>"aP"lp'
-        }
-
-        echo "pin added: %arg{@}"
-      }
+      map global normal <a-y> %{:yank-ref<ret>}
+      map global normal <ret> %{:goto<ret>}
+      map global user <space> %{<esc>:git edit<space>}
+      map global user s %{<esc>:edit -scratch *scratch*<ret>}
     '';
   };
 

@@ -49,6 +49,10 @@
             ;;
         esac
 
+        if [ -n "$PLAN9" ]; then
+            PS1='\h:\W\$ '
+        fi
+
         # Leave ctrl-s to bash history forward (instead of terminal freeze)
         stty -ixon
 

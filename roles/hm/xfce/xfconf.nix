@@ -87,7 +87,7 @@ let
       "/commands/custom/<Primary><Alt>l" = "xflock4";
       "/commands/custom/<Primary><Alt>Delete" = "xfce4-session-logout";
       "/commands/custom/<Super>Return" = "exo-open --launch TerminalEmulator";
-      "/commands/custom/<Super>d" = if i3 then "xfce4-appfinder" else "xfce4-popup-whiskermenu";
+      "/commands/custom/<Super>slash" = if i3 then "xfce4-appfinder" else "xfce4-popup-whiskermenu";
       "/commands/custom/<Super>c" = "xfce4-popup-clipman";
 
       # allow custom wm keybindings
@@ -211,7 +211,7 @@ let
 
     "xfce4-terminal" =
       let
-        black = "#243137";
+        black = "#333c41";
         red = "#fc3841";
         green = "#5cf19e";
         yellow = "#fed032";
@@ -241,7 +241,7 @@ let
         "/color-bold-is-bright" = false;
         "/color-foreground" = "${foreground}";
         "/color-palette" = "${palette}";
-        "/font-name" = "Iosevka Term Regular 14";
+        "/font-name" = "Iosevka Term Regular 12";
         "/misc-always-show-tabs" = false;
         "/misc-confirm-close" = false;
         "/misc-default-geometry" = "110x20";

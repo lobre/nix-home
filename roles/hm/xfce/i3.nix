@@ -1,5 +1,38 @@
 { pkgs, ... }:
 
+let
+  i3-breadcrumb = pkgs.writeScriptBin "i3-breadcrumb" ''
+    #!${pkgs.stdenv.shell}
+
+    ${pkgs.i3}/bin/i3-msg -t get_tree | jq -r '
+    def filter_focused:
+      if .focused == true then {type, layout, workspace_layout, window, focused}
+      elif .nodes then
+        {type, layout, workspace_layout, window, focused, nodes: (.nodes | map(filter_focused) | select(length > 0))}
+      else empty
+      end;
+
+    [.. | objects | select(.type == "workspace") | filter_focused | .. | objects |
+      if .type == "workspace" then
+        "W[" + .layout + "/" + .workspace_layout + "]"
+      elif .window != null then
+        "WIN"
+      else
+        "C[" + .layout + "]"
+      end
+    ] | reverse | join(" 🞉 ")'
+  '';
+
+  i3-status = pkgs.writeScriptBin "i3-status" ''
+    #!${pkgs.stdenv.shell}
+
+    while true; do
+      printf "%s | %s\n" "$(${i3-breadcrumb}/bin/i3-breadcrumb)" "$(date +'%H:%M, %a %d %B %Y')"
+      sleep 0.5
+    done
+  '';
+in
+
 {
   xdg.configFile."i3/config".text = ''
     # variables
@@ -18,34 +51,24 @@
     hide_edge_borders smart
 
     # kill window
-    bindsym $super+Shift+q kill
+    bindsym $super+x kill
     bindsym --release button2 kill
     bindsym --whole-window $super+button2 kill
 
     # change focus
-    bindsym $super+h focus left
-    bindsym $super+j focus down
-    bindsym $super+k focus up
-    bindsym $super+l focus right
-
     bindsym $super+Left focus left
     bindsym $super+Down focus down
     bindsym $super+Up focus up
     bindsym $super+Right focus right
 
     # move focused window
-    bindsym $super+Shift+h move left
-    bindsym $super+Shift+j move down
-    bindsym $super+Shift+k move up
-    bindsym $super+Shift+l move right
-
     bindsym $super+Shift+Left move left
     bindsym $super+Shift+Down move down
     bindsym $super+Shift+Up move up
     bindsym $super+Shift+Right move right
 
     # enter fullscreen
-    bindsym $super+f fullscreen toggle
+    bindsym $super+z fullscreen toggle
 
     # toogle and swap between floating and tiling
     bindsym $super+Shift+t floating toggle
@@ -53,15 +76,18 @@
 
     # focus the parent container
     bindsym $super+a focus parent
+    bindsym $super+Shift+a focus child
 
-    # split horizontally or vertically
-    bindsym $super+b splith
-    bindsym $super+v splitv
+    # default workspace layout
+    workspace_layout tabbed
+
+    # split vertically
+    bindsym $super+s splith
+    bindsym $super+Shift+s splitv
 
     # switch container between styles
-    bindsym $super+s layout stacking
-    bindsym $super+w layout tabbed
-    bindsym $super+e layout toggle split
+    bindsym $super+d layout toggle tabbed stacking splitv splith
+    bindsym $super+f layout toggle splith splitv stacking tabbed
 
     # scratchpad
     bindsym $super+$altgr+Shift+minus move scratchpad
@@ -109,11 +135,6 @@
 
     # move workspace to monitor
     mode "monitor" {
-        bindsym h move workspace to output left
-        bindsym j move workspace to output down
-        bindsym k move workspace to output up
-        bindsym l move workspace to output right
-
         bindsym Left move workspace to output left
         bindsym Down move workspace to output down
         bindsym Up move workspace to output up
@@ -127,11 +148,6 @@
 
     # resize window
     mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-
         bindsym Left resize shrink width 10 px or 10 ppt
         bindsym Down resize grow height 10 px or 10 ppt
         bindsym Up resize shrink height 10 px or 10 ppt
@@ -148,7 +164,7 @@
 
     bar {
         i3bar_command ${pkgs.i3}/bin/i3bar
-        status_command while true; do echo $(date +'%H:%M, %a %d %B %Y'); sleep 1; done
+        status_command exec ${i3-status}/bin/i3-status
         tray_output primary
         font pango:Iosevka Term Regular 9
     }

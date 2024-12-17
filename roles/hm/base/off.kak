@@ -27,16 +27,16 @@ face global list   default
 
 # builtin faces
 face global Default            default
-face global PrimarySelection   black,bright-blue
-face global SecondarySelection black,white
-face global PrimaryCursor      black,blue
-face global SecondaryCursor    black,white
-face global PrimaryCursorEol   black,blue
+face global PrimarySelection   white,black
+face global SecondarySelection white,black
+face global PrimaryCursor      black,white
+face global SecondaryCursor    white,black
+face global PrimaryCursorEol   black,white
 face global SecondaryCursorEol black,white
 face global LineNumbers        bright-black
 face global LineNumbersWrapped bright-black
 face global LineNumberCursor   white
-face global MenuForeground     black,blue
+face global MenuForeground     black,white
 face global MenuBackground     default,black+g
 face global MenuInfo           default
 face global Information        default+g

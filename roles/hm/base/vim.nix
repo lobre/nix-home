@@ -1,27 +1,6 @@
 { pkgs, config, ... }:
 
 let
-  neatvi = pkgs.stdenv.mkDerivation {
-    pname = "neatvi";
-    version = "2023-12-28";
-
-    src = pkgs.fetchFromGitHub {
-      rev = "0f43e2d868d3c7e79b54e550d95c2eee2fcfbcc2";
-      sha256 = "sha256-G/vSfcraqwzfE4a/Wu3J0q9WB4a+Y8SxG8gDOFmfZCw=";
-      repo = "neatvi";
-      owner = "aligrudi";
-    };
-
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-
-    installPhase = ''
-      mkdir -p "$out/bin"
-      cp vi "$out/bin/vi"
-      chmod 0755 "$out/bin/vi"
-      wrapProgram $out/bin/vi --set EXINIT "set nohl | set writeany | set autoindent"
-    '';
-  };
-
   htmlSkeleton = pkgs.writeText "html-skeleton" ''
     <!DOCTYPE html>
     <html lang="en">
@@ -41,26 +20,36 @@ let
 
   viConf = ''
     set autoindent
+    set bserase
     set extended
     set noflash
-    set iclower
+    set noiclower
     set nolock
     set path=.
     set showmode
     set ruler
     set searchincr
     set showmatch
+    set tildeop
     set windowname
     set wrapscan
-    "set number
+    set nonumber
 
     set shiftwidth=4
     set tabstop=4
     set wrapmargin=4
 
     set filec=\	
-    set cedit=
+    set cedit=
+
+    map    ::!git ls-files 7c ${pkgs.pick}/bin/pick >> %:edit %GIEdit :bg
   '';
+
+  openvi = pkgs.openvi.overrideAttrs (oldAttrs: rec {
+    postInstall = oldAttrs.postInstall or "" + ''
+      ln -s $out/bin/ovi $out/bin/vi
+    '';
+  });
 in
 
 {
@@ -70,8 +59,7 @@ in
     onChange = "cp ${config.home.homeDirectory}/.nexrc.in ${config.home.homeDirectory}/.nexrc";
   };
 
-  # neatvi
-  home.packages = with pkgs; [ neatvi ];
+  home.packages = [ openvi ];
 
   programs.neovim = {
     enable = true;

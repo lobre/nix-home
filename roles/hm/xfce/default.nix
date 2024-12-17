@@ -1,9 +1,16 @@
 { pkgs, ... }:
 
+let
+  acme = pkgs.writeShellScriptBin "acme" ''
+    exec 9 acme -a -b -f /mnt/font/Iosevka-Term/12a/font "$@" >/dev/null 2>&1 &
+  '';
+in
+
 {
   xdg.enable = true;
 
   home.packages = with pkgs; [
+    acme
     calibre
     chrysalis
     discord
@@ -15,6 +22,7 @@
     nitrogen
     pavucontrol
     pinta
+    plan9port
     qtpass
     remmina
     spotify
