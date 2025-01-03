@@ -19,12 +19,8 @@ in
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Sound
-  sound.enable = true;
-  hardware.pulseaudio.enable = true;
-
   # Touchpad support
-  services.xserver.libinput = {
+  services.libinput = {
     enable = true;
     touchpad = {
       naturalScrolling = true;
@@ -41,12 +37,15 @@ in
 
   # Video drivers
   services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.prime = {
-    offload.enable = true;
-    # Bus IDs of NVIDIA and Intel GPUs.
-    # Use lspci and transform as explained in https://nixos.wiki/wiki/Nvidia
-    intelBusId = "PCI:0:2:0";
-    nvidiaBusId = "PCI:2:0:0";
+  hardware.nvidia = {
+    open = false;
+    prime = {
+      offload.enable = true;
+      # Bus IDs of NVIDIA and Intel GPUs.
+      # Use lspci and transform as explained in https://nixos.wiki/wiki/Nvidia
+      intelBusId = "PCI:0:2:0";
+      nvidiaBusId = "PCI:2:0:0";
+    };
   };
 
   # Use local time instead of UTC to stay in sync with Windows
